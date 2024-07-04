@@ -1,0 +1,20 @@
+package com.wilsonpedro.novelbr.enums;
+
+public enum Gender {
+
+	ADVENTURE,
+	DYSTOPIA,
+	FANTASY,
+	HISTORICAL,
+	HORROR,
+	LGBTQ,
+	MAGICAL_REALISM,
+	MYSTERY,
+	NEW_ADULT,
+	ROMANCE,
+	SCIENCE_FICTION,
+	THRILLER,
+	WESTERN,
+	YOUNG_ADULT
+	
+}
