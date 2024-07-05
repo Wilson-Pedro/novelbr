@@ -12,7 +12,7 @@ import jakarta.persistence.InheritanceType;
 
 @Entity(name = "TBL_USER")
 @Inheritance(strategy = InheritanceType.JOINED)
-public abstract class User implements Serializable{
+public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -29,11 +29,18 @@ public abstract class User implements Serializable{
 	}
 
 	public User(Long id, String pseudonym, String email, String password) {
-		super();
 		this.id = id;
 		this.pseudonym = pseudonym;
 		this.email = email;
 		this.password = password;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getPseudonym() {
