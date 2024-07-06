@@ -1,13 +1,13 @@
 package com.wilsonpedro.novelbr.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wilsonpedro.novelbr.entities.User;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
 
 @Service
@@ -25,13 +25,13 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public Optional<User> findById(Long id) {
-		return userRepository.findById(id);
+	public User findById(Long id) {
+		return userRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 	}
 
 	@Transactional
 	public User update(User user, Long id) {
-		User userFinded = findById(id).get();
+		User userFinded = findById(id);
 		userFinded.setPseudonym(user.getPseudonym());
 		userFinded.setEmail(user.getEmail());
 		userFinded.setPassword(user.getPassword());
@@ -40,7 +40,7 @@ public class UserService {
 
 	@Transactional
 	public void delete(Long id) {
-		userRepository.delete(findById(id).get());
+		userRepository.delete(findById(id));
 		
 	}
 }

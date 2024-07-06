@@ -1,13 +1,13 @@
 package com.wilsonpedro.novelbr.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wilsonpedro.novelbr.entities.Chapter;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 
 @Service
@@ -25,13 +25,13 @@ public class ChapterService {
 		return chapterRepository.findAll();
 	}
 
-	public Optional<Chapter> findById(Long id) {
-		return chapterRepository.findById(id);
+	public Chapter findById(Long id) {
+		return chapterRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 	}
 
 	@Transactional
 	public Chapter update(Chapter chapter, Long id) {
-		Chapter chapterFinded = findById(id).get();
+		Chapter chapterFinded = findById(id);
 		chapterFinded.setChapterTilte(chapter.getChapterTilte());
 		chapterFinded.setChapterNumber(chapter.getChapterNumber());
 		chapterFinded.setText(chapter.getText());
@@ -41,7 +41,7 @@ public class ChapterService {
 
 	@Transactional
 	public void delete(Long id) {
-		chapterRepository.delete(findById(id).get());
+		chapterRepository.delete(findById(id));
 		
 	}
 }

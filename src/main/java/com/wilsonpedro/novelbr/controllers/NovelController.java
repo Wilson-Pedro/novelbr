@@ -1,7 +1,6 @@
 package com.wilsonpedro.novelbr.controllers;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,12 +36,7 @@ public class NovelController {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<Novel> findAll(@PathVariable Long id) {
-		Optional<Novel> userFinded = novelService.findById(id);
-		if(userFinded.isEmpty()) {
-			return ResponseEntity.notFound().build();
-		}
-		
-		return ResponseEntity.ok(userFinded.get());
+		return ResponseEntity.ok(novelService.findById(id));
 	}
 	
 	@PutMapping("/{id}")
