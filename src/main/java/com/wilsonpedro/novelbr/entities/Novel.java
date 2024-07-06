@@ -22,11 +22,14 @@ public class Novel implements Serializable{
 	
 	private String synopsis;
 	
+	private String author;
+	
 	private List<String> genders = new ArrayList<>();
 	
 	private List<String> chapters = new ArrayList<>();
 	
-	private String author;
+	public Novel() {
+	}
 
 	public Novel(Long id, String title, String synopsis, String author) {
 		this.id = id;
@@ -58,6 +61,15 @@ public class Novel implements Serializable{
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
+	
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
 
 	public List<String> getGenders() {
 		return genders;
@@ -73,14 +85,6 @@ public class Novel implements Serializable{
 
 	public void setChapters(List<String> chapters) {
 		this.chapters = chapters;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
-		this.author = author;
 	}
 
 	@Override

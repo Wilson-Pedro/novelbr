@@ -15,29 +15,29 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wilsonpedro.novelbr.entities.User;
-import com.wilsonpedro.novelbr.services.UserService;
+import com.wilsonpedro.novelbr.entities.Chapter;
+import com.wilsonpedro.novelbr.services.ChapterService;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+@RequestMapping("/chapters")
+public class ChapterController {
 	
 	@Autowired
-	private UserService userService;
+	private ChapterService chapterService;
 	
 	@PostMapping("/")
-	public ResponseEntity<User> save(@RequestBody User user) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+	public ResponseEntity<Chapter> save(@RequestBody Chapter chapter) {
+		return ResponseEntity.status(HttpStatus.CREATED).body(chapterService.save(chapter));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+	public ResponseEntity<List<Chapter>> findAll() {
+		return ResponseEntity.status(HttpStatus.OK).body(chapterService.findAll());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findAll(@PathVariable Long id) {
-		Optional<User> userFinded = userService.findById(id);
+	public ResponseEntity<Chapter> findAll(@PathVariable Long id) {
+		Optional<Chapter> userFinded = chapterService.findById(id);
 		if(userFinded.isEmpty()) {
 			return ResponseEntity.notFound().build();
 		}
@@ -46,14 +46,13 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> update(@RequestBody User user, @PathVariable Long id) {
-		return ResponseEntity.ok(userService.update(user, id));
+	public ResponseEntity<Chapter> update(@RequestBody Chapter chapter, @PathVariable Long id) {
+		return ResponseEntity.ok(chapterService.update(chapter, id));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<User> delete(@PathVariable Long id) {
-		userService.delete(id);
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		chapterService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
 }
