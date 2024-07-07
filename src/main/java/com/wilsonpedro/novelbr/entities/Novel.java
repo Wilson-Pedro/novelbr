@@ -1,14 +1,20 @@
 package com.wilsonpedro.novelbr.entities;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "TBL_NOVEL")
 public class Novel implements Serializable{
@@ -22,16 +28,20 @@ public class Novel implements Serializable{
 	
 	private String synopsis;
 	
-	private String author;
+	@ManyToOne
+	@JoinColumn(name = "author_id")
+	private Author author;
 	
-	private List<String> genders = new ArrayList<>();
+	private Set<String> genders = new HashSet<>();
 	
-	private List<String> chapters = new ArrayList<>();
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+	@OneToMany(mappedBy="novel", fetch=FetchType.LAZY)
+	private Set<Chapter> chapters = new HashSet<>();
 	
 	public Novel() {
 	}
 
-	public Novel(Long id, String title, String synopsis, String author) {
+	public Novel(Long id, String title, String synopsis, Author author) {
 		this.id = id;
 		this.title = title;
 		this.synopsis = synopsis;
@@ -61,29 +71,28 @@ public class Novel implements Serializable{
 	public void setSynopsis(String synopsis) {
 		this.synopsis = synopsis;
 	}
-	
-	public String getAuthor() {
+
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 
-
-	public List<String> getGenders() {
+	public Set<String> getGenders() {
 		return genders;
 	}
 
-	public void setGenders(List<String> genders) {
+	public void setGenders(Set<String> genders) {
 		this.genders = genders;
 	}
 
-	public List<String> getChapters() {
+	public Set<Chapter> getChapters() {
 		return chapters;
 	}
 
-	public void setChapters(List<String> chapters) {
+	public void setChapters(Set<Chapter> chapters) {
 		this.chapters = chapters;
 	}
 

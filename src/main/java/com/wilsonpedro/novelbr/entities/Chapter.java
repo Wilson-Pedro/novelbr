@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name= "TBL_CHAPTER")
 public class Chapter implements Serializable{
@@ -22,12 +24,14 @@ public class Chapter implements Serializable{
 	
 	private String text;
 	
-	private String novel;
+	@ManyToOne
+	@JoinColumn(name = "novel_id")
+	private Novel novel;
 	
 	public Chapter() {
 	}
 
-	public Chapter(Long id, String chapterTilte, Integer chapterNumber, String text, String novel) {
+	public Chapter(Long id, String chapterTilte, Integer chapterNumber, String text, Novel novel) {
 		this.id = id;
 		this.chapterTilte = chapterTilte;
 		this.chapterNumber = chapterNumber;
@@ -67,11 +71,11 @@ public class Chapter implements Serializable{
 		this.text = text;
 	}
 
-	public String getNovel() {
+	public Novel getNovel() {
 		return novel;
 	}
 
-	public void setNovel(String novel) {
+	public void setNovel(Novel novel) {
 		this.novel = novel;
 	}
 
