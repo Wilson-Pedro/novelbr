@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wilsonpedro.novelbr.dto.UserDTO;
 import com.wilsonpedro.novelbr.entities.User;
 import com.wilsonpedro.novelbr.services.UserService;
 
@@ -25,27 +26,31 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/")
-	public ResponseEntity<User> save(@RequestBody User user) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(userService.save(user));
+	public ResponseEntity<UserDTO> save(@RequestBody UserDTO userDTO) {
+		userService.save(new User(userDTO));
+		return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<User>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
+	public ResponseEntity<List<UserDTO>> findAll() {
+		List<User> list = userService.findAll();
+		List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).toList();
+		return ResponseEntity.status(HttpStatus.OK).body(listDto);
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<User> findAll(@PathVariable Long id) {
-		return ResponseEntity.ok(userService.findById(id));
+	public ResponseEntity<UserDTO> findAll(@PathVariable Long id) {
+		return ResponseEntity.ok(new UserDTO(userService.findById(id)));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<User> update(@RequestBody User user, @PathVariable Long id) {
-		return ResponseEntity.ok(userService.update(user, id));
+	public ResponseEntity<UserDTO> update(@RequestBody UserDTO userDTO, @PathVariable Long id) {
+		User userUpdated = userService.update(new User(userDTO), id);
+		return ResponseEntity.ok(new UserDTO(userUpdated));
 	}
 	
 	@DeleteMapping("/{id}")
-	public ResponseEntity<User> delete(@PathVariable Long id) {
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		userService.delete(id);
 		return ResponseEntity.noContent().build();
 	}

@@ -3,6 +3,8 @@ package com.wilsonpedro.novelbr.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.wilsonpedro.novelbr.dto.UserDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -33,6 +35,12 @@ public class User implements Serializable{
 		this.pseudonym = pseudonym;
 		this.email = email;
 		this.password = password;
+	}
+	
+	public User(UserDTO userDTO) {
+		this.pseudonym = userDTO.getPseudonym();
+		this.email = userDTO.getEmail();
+		this.password = userDTO.getPassword();
 	}
 
 	public Long getId() {
