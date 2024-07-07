@@ -3,6 +3,8 @@ package com.wilsonpedro.novelbr.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.wilsonpedro.novelbr.dto.ChapterDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,6 +39,12 @@ public class Chapter implements Serializable{
 		this.chapterNumber = chapterNumber;
 		this.text = text;
 		this.novel = novel;
+	}
+	
+	public Chapter(ChapterDTO chapterRequestDTO) {
+		this.chapterTilte = chapterRequestDTO.getChapterTilte();
+		this.chapterNumber = chapterRequestDTO.getChapterNumber();
+		this.text = chapterRequestDTO.getText();
 	}
 
 	public Long getId() {

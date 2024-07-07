@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wilsonpedro.novelbr.dto.ChapterDTO;
 import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.services.ChapterService;
 
@@ -25,23 +26,27 @@ public class ChapterController {
 	private ChapterService chapterService;
 	
 	@PostMapping("/")
-	public ResponseEntity<Chapter> save(@RequestBody Chapter chapter) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(chapterService.save(chapter));
+	public ResponseEntity<ChapterDTO> save(@RequestBody ChapterDTO chapterRequestDTO) {
+		Chapter chapterSaved = chapterService.save(chapterRequestDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new ChapterDTO(chapterSaved));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Chapter>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(chapterService.findAll());
+	public ResponseEntity<List<ChapterDTO>> findAll() {
+		List<Chapter> list = chapterService.findAll();
+		return ResponseEntity.status(HttpStatus.OK).body(
+				list.stream().map(x -> new ChapterDTO(x)).toList());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Chapter> findAll(@PathVariable Long id) {
-		return ResponseEntity.ok(chapterService.findById(id));
+	public ResponseEntity<ChapterDTO> findAll(@PathVariable Long id) {
+		return ResponseEntity.ok(new ChapterDTO(chapterService.findById(id)));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Chapter> update(@RequestBody Chapter chapter, @PathVariable Long id) {
-		return ResponseEntity.ok(chapterService.update(chapter, id));
+	public ResponseEntity<ChapterDTO> update(@RequestBody ChapterDTO chapterDTO, @PathVariable Long id) {
+		Chapter chapterUpdated = chapterService.update(chapterDTO, id);
+		return ResponseEntity.ok(new ChapterDTO(chapterUpdated));
 	}
 	
 	@DeleteMapping("/{id}")
