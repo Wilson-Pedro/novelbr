@@ -5,5 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.wilsonpedro.novelbr.entities.User;
 
 public interface UserRepository extends JpaRepository<User, Long>{
+	
+	boolean existsByPseudonym(String pseudonym);
+	
+	boolean existsByEmail(String email);
 
 }

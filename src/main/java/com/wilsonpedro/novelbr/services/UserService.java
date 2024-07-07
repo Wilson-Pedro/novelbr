@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.wilsonpedro.novelbr.entities.User;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsException;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
 
 @Service
@@ -18,6 +20,7 @@ public class UserService {
 	
 	@Transactional
 	public User save(User user) {
+		validateUser(user);
 		return userRepository.save(user);
 	}
 
@@ -42,5 +45,13 @@ public class UserService {
 	public void delete(Long id) {
 		userRepository.delete(findById(id));
 		
+	}
+	
+	public void validateUser(User user) {
+		if(userRepository.existsByEmail(user.getEmail())) {
+			throw new EmailExistsException();
+		} else if(userRepository.existsByPseudonym(user.getPseudonym())) {
+			throw new PseudonymExistsException();
+		}
 	}
 }
