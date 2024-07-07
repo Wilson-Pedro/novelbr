@@ -6,6 +6,8 @@ import com.wilsonpedro.novelbr.entities.Chapter;
 
 public class ChapterDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
+	
+	private Long id;
 
 	private String chapterTilte;
 	
@@ -18,7 +20,8 @@ public class ChapterDTO implements Serializable{
 	public ChapterDTO() {
 	}
 	
-	public ChapterDTO(String chapterTilte, Integer chapterNumber, String text, Long novelId) {
+	public ChapterDTO(Long id, String chapterTilte, Integer chapterNumber, String text, Long novelId) {
+		this.id = id;
 		this.chapterTilte = chapterTilte;
 		this.chapterNumber = chapterNumber;
 		this.text = text;
@@ -26,10 +29,19 @@ public class ChapterDTO implements Serializable{
 	}
 	
 	public ChapterDTO(Chapter chapter) {
+		this.id = chapter.getId();
 		this.chapterTilte = chapter.getChapterTilte();
 		this.chapterNumber = chapter.getChapterNumber();
 		this.text = chapter.getText();
 		this.novelId = chapter.getNovel().getId();
+	}
+	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getChapterTilte() {

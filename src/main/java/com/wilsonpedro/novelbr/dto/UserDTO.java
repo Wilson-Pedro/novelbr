@@ -7,6 +7,8 @@ import com.wilsonpedro.novelbr.entities.User;
 public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	private Long id;
+	
 	private String pseudonym;
 	
 	private String email;
@@ -16,16 +18,26 @@ public class UserDTO implements Serializable{
 	public UserDTO() {
 	}
 
-	public UserDTO(String pseudonym, String email, String password) {
+	public UserDTO(Long id, String pseudonym, String email, String password) {
+		this.id = id;
 		this.pseudonym = pseudonym;
 		this.email = email;
 		this.password = password;
 	}
 	
 	public UserDTO(User user) {
+		this.id = user.getId();
 		this.pseudonym = user.getPseudonym();
 		this.email = user.getEmail();
 		this.password = user.getPassword();
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getPseudonym() {

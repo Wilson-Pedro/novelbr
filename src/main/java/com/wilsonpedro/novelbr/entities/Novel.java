@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.wilsonpedro.novelbr.dto.NovelDTO;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -46,6 +47,11 @@ public class Novel implements Serializable{
 		this.title = title;
 		this.synopsis = synopsis;
 		this.author = author;
+	}
+	
+	public Novel(NovelDTO novelDTO) {
+		this.title = novelDTO.getTitle();
+		this.synopsis = novelDTO.getSynopsis();
 	}
 
 	public Long getId() {

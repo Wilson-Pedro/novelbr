@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.services.NovelService;
 
@@ -25,23 +26,26 @@ public class NovelController {
 	private NovelService novelService;
 	
 	@PostMapping("/")
-	public ResponseEntity<Novel> save(@RequestBody Novel novel) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(novelService.save(novel));
+	public ResponseEntity<NovelDTO> save(@RequestBody NovelDTO novelDTO) {
+		Novel novelSaved = novelService.save(novelDTO);
+		return ResponseEntity.status(HttpStatus.CREATED).body(new NovelDTO(novelSaved));
 	}
 	
 	@GetMapping
-	public ResponseEntity<List<Novel>> findAll() {
-		return ResponseEntity.status(HttpStatus.OK).body(novelService.findAll());
+	public ResponseEntity<List<NovelDTO>> findAll() {
+		List<Novel> list = novelService.findAll();
+		return ResponseEntity.ok(list.stream().map(x -> new NovelDTO(x)).toList());
 	}
 	
 	@GetMapping("/{id}")
-	public ResponseEntity<Novel> findAll(@PathVariable Long id) {
-		return ResponseEntity.ok(novelService.findById(id));
+	public ResponseEntity<NovelDTO> findAll(@PathVariable Long id) {
+		return ResponseEntity.ok(new NovelDTO(novelService.findById(id)));
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<Novel> update(@RequestBody Novel novel, @PathVariable Long id) {
-		return ResponseEntity.ok(novelService.update(novel, id));
+	public ResponseEntity<NovelDTO> update(@RequestBody NovelDTO novelDTO, @PathVariable Long id) {
+		Novel novelUpdated = novelService.update(novelDTO, id);
+		return ResponseEntity.ok(new NovelDTO(novelUpdated));
 	}
 	
 	@DeleteMapping("/{id}")
