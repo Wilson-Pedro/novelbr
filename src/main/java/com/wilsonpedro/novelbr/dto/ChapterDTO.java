@@ -4,17 +4,23 @@ import java.io.Serializable;
 
 import com.wilsonpedro.novelbr.entities.Chapter;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class ChapterDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 
+	@NotBlank
 	private String chapterTilte;
 	
+	@NotNull
 	private Integer chapterNumber;
 	
 	private String text;
 	
+	@NotNull
 	private Long novelId;
 	
 	public ChapterDTO() {

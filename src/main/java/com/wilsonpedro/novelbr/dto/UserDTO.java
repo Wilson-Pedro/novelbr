@@ -4,15 +4,22 @@ import java.io.Serializable;
 
 import com.wilsonpedro.novelbr.entities.User;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 public class UserDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 	
+	@NotBlank
 	private String pseudonym;
 	
+	@NotBlank
+	@Email
 	private String email;
 	
+	@NotBlank
 	private String password;
 	
 	public UserDTO() {

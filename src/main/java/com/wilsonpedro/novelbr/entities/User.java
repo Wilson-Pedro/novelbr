@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity(name = "TBL_USER")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -21,10 +23,14 @@ public class User implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	private String pseudonym;
 	
+	@NotBlank
+	@Email
 	private String email;
 	
+	@NotBlank
 	private String password;
 	
 	public User() {

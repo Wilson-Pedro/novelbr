@@ -18,6 +18,8 @@ import com.wilsonpedro.novelbr.dto.ChapterDTO;
 import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.services.ChapterService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/chapters")
 public class ChapterController {
@@ -26,7 +28,7 @@ public class ChapterController {
 	private ChapterService chapterService;
 	
 	@PostMapping("/")
-	public ResponseEntity<ChapterDTO> save(@RequestBody ChapterDTO chapterRequestDTO) {
+	public ResponseEntity<ChapterDTO> save(@Valid @RequestBody ChapterDTO chapterRequestDTO) {
 		Chapter chapterSaved = chapterService.save(chapterRequestDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new ChapterDTO(chapterSaved));
 	}
@@ -44,7 +46,7 @@ public class ChapterController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<ChapterDTO> update(@RequestBody ChapterDTO chapterDTO, @PathVariable Long id) {
+	public ResponseEntity<ChapterDTO> update(@Valid @RequestBody ChapterDTO chapterDTO, @PathVariable Long id) {
 		Chapter chapterUpdated = chapterService.update(chapterDTO, id);
 		return ResponseEntity.ok(new ChapterDTO(chapterUpdated));
 	}

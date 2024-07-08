@@ -18,6 +18,8 @@ import com.wilsonpedro.novelbr.dto.UserDTO;
 import com.wilsonpedro.novelbr.entities.User;
 import com.wilsonpedro.novelbr.services.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -26,7 +28,7 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/")
-	public ResponseEntity<UserDTO> save(@RequestBody UserDTO userDTO) {
+	public ResponseEntity<UserDTO> save(@Valid @RequestBody UserDTO userDTO) {
 		userService.save(new User(userDTO));
 		return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
 	}
@@ -44,7 +46,7 @@ public class UserController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<UserDTO> update(@RequestBody UserDTO userDTO, @PathVariable Long id) {
+	public ResponseEntity<UserDTO> update(@Valid @RequestBody UserDTO userDTO, @PathVariable Long id) {
 		User userUpdated = userService.update(new User(userDTO), id);
 		return ResponseEntity.ok(new UserDTO(userUpdated));
 	}

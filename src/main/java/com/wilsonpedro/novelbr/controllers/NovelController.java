@@ -18,6 +18,8 @@ import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.services.NovelService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/novels")
 public class NovelController {
@@ -26,7 +28,7 @@ public class NovelController {
 	private NovelService novelService;
 	
 	@PostMapping("/")
-	public ResponseEntity<NovelDTO> save(@RequestBody NovelDTO novelDTO) {
+	public ResponseEntity<NovelDTO> save(@Valid @RequestBody NovelDTO novelDTO) {
 		Novel novelSaved = novelService.save(novelDTO);
 		return ResponseEntity.status(HttpStatus.CREATED).body(new NovelDTO(novelSaved));
 	}
@@ -43,7 +45,7 @@ public class NovelController {
 	}
 	
 	@PutMapping("/{id}")
-	public ResponseEntity<NovelDTO> update(@RequestBody NovelDTO novelDTO, @PathVariable Long id) {
+	public ResponseEntity<NovelDTO> update(@Valid @RequestBody NovelDTO novelDTO, @PathVariable Long id) {
 		Novel novelUpdated = novelService.update(novelDTO, id);
 		return ResponseEntity.ok(new NovelDTO(novelUpdated));
 	}

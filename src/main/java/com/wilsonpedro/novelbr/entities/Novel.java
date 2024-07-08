@@ -16,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity(name = "TBL_NOVEL")
 public class Novel implements Serializable{
@@ -25,8 +26,10 @@ public class Novel implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	private String title;
 	
+	@NotBlank
 	private String synopsis;
 	
 	@ManyToOne

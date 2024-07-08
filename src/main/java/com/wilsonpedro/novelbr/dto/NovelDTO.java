@@ -4,15 +4,21 @@ import java.io.Serializable;
 
 import com.wilsonpedro.novelbr.entities.Novel;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class NovelDTO implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
 
+	@NotBlank
 	private String title;
 	
+	@NotBlank
 	private String synopsis;
 	
+	@NotNull
 	private Long authorId;
 	
 	public NovelDTO() {

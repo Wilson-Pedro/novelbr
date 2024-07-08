@@ -11,6 +11,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity(name= "TBL_CHAPTER")
 public class Chapter implements Serializable{
@@ -20,8 +22,10 @@ public class Chapter implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@NotBlank
 	private String chapterTilte;
 	
+	@NotNull
 	private Integer chapterNumber;
 	
 	private String text;

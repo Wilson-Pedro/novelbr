@@ -1,14 +1,20 @@
 package com.wilsonpedro.novelbr.exceptionhandler.problam;
 
+import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-public class Problam {
+public class Problam implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	private String title;
 	
 	private Integer statusCode;
 	
 	private OffsetDateTime time;
+	
+	private List<Field> fields = new ArrayList<>();
 	
 	public Problam() {
 	}
@@ -41,5 +47,13 @@ public class Problam {
 
 	public void setTime(OffsetDateTime time) {
 		this.time = time;
+	}
+
+	public List<Field> getFields() {
+		return fields;
+	}
+
+	public void setFields(List<Field> fields) {
+		this.fields = fields;
 	}
 }
