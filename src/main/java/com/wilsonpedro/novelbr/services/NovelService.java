@@ -23,6 +23,7 @@ public class NovelService {
 	
 	@Transactional
 	public Novel save(Novel novel) {
+		novelRepository.deleteAllById(null);
 		return novelRepository.save(novel);
 	}
 	

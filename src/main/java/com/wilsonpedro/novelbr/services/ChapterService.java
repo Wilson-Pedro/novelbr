@@ -56,6 +56,5 @@ public class ChapterService {
 	@Transactional
 	public void delete(Long id) {
 		chapterRepository.delete(findById(id));
-		
 	}
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -35,14 +36,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 			HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 		
-		List<Field> fields = new ArrayList<>();
-		
-		for(ObjectError error: ex.getBindingResult().getAllErrors()) {
-			String name = ((FieldError)error).getField();
-			String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
-			
-			fields.add(new Field(name, message));
-		}
+		List<Field> fields = errorFields(ex, messageSource);
 		
 		Problam problam = new Problam();
 		problam.setTitle("One or more field are invalids. Please fill them  in correctly!");
@@ -90,5 +84,31 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		problam.setTime(OffsetDateTime.now());
 		
 		return ResponseEntity.status(status).body(problam);
+	}
+	
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseEntity<Problam> dataIntegrityViolationException() {
+		
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		Problam problam = new Problam();
+		problam.setTitle("You cannot delete this Entity because it is related to another Entity.");
+		problam.setStatusCode(status.value());
+		problam.setTime(OffsetDateTime.now());
+		
+		return ResponseEntity.status(status).body(problam);
+	}
+	
+	private List<Field> errorFields(MethodArgumentNotValidException ex, MessageSource messageSource) {
+		List<Field> fields = new ArrayList<>();
+		
+		for(ObjectError error: ex.getBindingResult().getAllErrors()) {
+			String name = ((FieldError)error).getField();
+			String message = messageSource.getMessage(error, LocaleContextHolder.getLocale());
+			
+			fields.add(new Field(name, message));
+		}
+		
+		return fields;
 	}
 }
