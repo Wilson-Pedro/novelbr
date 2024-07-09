@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wilsonpedro.novelbr.dto.NovelDTO;
+import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.services.NovelService;
 
@@ -53,6 +54,12 @@ public class NovelController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		novelService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@DeleteMapping("/deleteAllByAuthor")
+	public ResponseEntity<Void> deleteAllByNovel(@RequestBody ResquestIdDTO resquestIdDTO) {
+		novelService.deleteAllByNovel(resquestIdDTO.getRequestId());
 		return ResponseEntity.noContent().build();
 	}
 }

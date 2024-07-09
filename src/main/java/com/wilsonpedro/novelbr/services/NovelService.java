@@ -56,6 +56,11 @@ public class NovelService {
 	@Transactional
 	public void delete(Long id) {
 		novelRepository.delete(findById(id));
-		
+	}
+	
+	@Transactional
+	public void deleteAllByNovel(Long requestId) {
+		Author author = (Author) userService.findById(requestId);
+		novelRepository.deleteAllByAuthor(author);
 	}
 }

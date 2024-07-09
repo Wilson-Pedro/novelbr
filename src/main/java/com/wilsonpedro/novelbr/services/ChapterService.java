@@ -57,4 +57,10 @@ public class ChapterService {
 	public void delete(Long id) {
 		chapterRepository.delete(findById(id));
 	}
+	
+	@Transactional
+	public void deleteAllByNovel(Long requestId) {
+		Novel novel = novelService.findById(requestId);
+		chapterRepository.deleteAllByNovel(novel);
+	}
 }

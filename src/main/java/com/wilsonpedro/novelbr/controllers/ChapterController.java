@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.wilsonpedro.novelbr.dto.ChapterDTO;
+import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.services.ChapterService;
 
@@ -54,6 +55,12 @@ public class ChapterController {
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		chapterService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+	
+	@DeleteMapping("/deleteAllByNovel")
+	public ResponseEntity<Void> deleteAllByNovel(@RequestBody ResquestIdDTO resquestIdDTO) {
+		chapterService.deleteAllByNovel(resquestIdDTO.getRequestId());
 		return ResponseEntity.noContent().build();
 	}
 }
