@@ -3,7 +3,8 @@ package com.wilsonpedro.novelbr.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +37,13 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<List<UserDTO>> findAll() {
 		List<User> list = userService.findAll();
-		List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).toList();
-		return ResponseEntity.status(HttpStatus.OK).body(listDto);
+		return ResponseEntity.ok(list.stream().map(x -> new UserDTO(x)).toList());
+	}
+
+	@GetMapping("/pages")
+	public ResponseEntity<Page<UserDTO>> page(Pageable pageable) {
+		Page<User> page = userService.findAll(pageable);
+		return ResponseEntity.ok(page.map(UserDTO::new));
 	}
 	
 	@GetMapping("/{id}")
