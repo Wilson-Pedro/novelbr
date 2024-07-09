@@ -29,8 +29,8 @@ public class UserController {
 	
 	@PostMapping("/")
 	public ResponseEntity<UserDTO> save(@Valid @RequestBody UserDTO userDTO) {
-		userService.save(new User(userDTO));
-		return ResponseEntity.status(HttpStatus.CREATED).body(userDTO);
+		User userSaved = userService.save(new User(userDTO));
+		return ResponseEntity.ok(new UserDTO(userSaved));
 	}
 	
 	@GetMapping

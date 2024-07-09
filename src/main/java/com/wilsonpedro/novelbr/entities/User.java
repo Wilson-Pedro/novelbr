@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.wilsonpedro.novelbr.dto.UserDTO;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,10 +25,12 @@ public class User implements Serializable{
 	private Long id;
 	
 	@NotBlank
+	@Column(unique = true)
 	private String pseudonym;
 	
 	@NotBlank
 	@Email
+	@Column(unique = true)
 	private String email;
 	
 	@NotBlank
@@ -44,6 +47,7 @@ public class User implements Serializable{
 	}
 	
 	public User(UserDTO userDTO) {
+		this.id = userDTO.getId();
 		this.pseudonym = userDTO.getPseudonym();
 		this.email = userDTO.getEmail();
 		this.password = userDTO.getPassword();

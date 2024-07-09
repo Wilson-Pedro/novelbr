@@ -5,6 +5,7 @@ import java.util.Objects;
 
 import com.wilsonpedro.novelbr.dto.ChapterDTO;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,6 +29,7 @@ public class Chapter implements Serializable{
 	@NotNull
 	private Integer chapterNumber;
 	
+	@Column(columnDefinition = "TEXT")
 	private String text;
 	
 	@ManyToOne

@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import com.wilsonpedro.novelbr.entities.User;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
@@ -13,10 +14,12 @@ public class UserDTO implements Serializable{
 	private Long id;
 	
 	@NotBlank
+	@Column(unique = true)
 	private String pseudonym;
 	
 	@NotBlank
 	@Email
+	@Column(unique = true)
 	private String email;
 	
 	@NotBlank
@@ -26,7 +29,6 @@ public class UserDTO implements Serializable{
 	}
 
 	public UserDTO(Long id, String pseudonym, String email, String password) {
-		this.id = id;
 		this.pseudonym = pseudonym;
 		this.email = email;
 		this.password = password;
