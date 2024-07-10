@@ -29,9 +29,9 @@ public class ChapterService {
 	}
 	
 	@Transactional
-	public Chapter save(ChapterDTO chapterRequestDTO) {
-		Novel novel = novelService.findById(chapterRequestDTO.getNovelId());
-		Chapter chapterSaved = new Chapter(chapterRequestDTO);
+	public Chapter save(ChapterDTO chaptertDTO) {
+		Novel novel = novelService.findById(chaptertDTO.getNovelId());
+		Chapter chapterSaved = new Chapter(chaptertDTO);
 		chapterSaved.setNovel(novel);
 		return chapterRepository.save(chapterSaved);
 	}

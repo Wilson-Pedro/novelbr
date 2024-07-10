@@ -75,7 +75,7 @@ class NovelServiceTest {
 	}
 	
 	@Test
-	void findAll() {
+	void pages() {
 		userRepository.save(author);
 		novelRepository.save(new Novel(null, "Againts the Gods1", "The Gods...", author));
 		novelRepository.save(new Novel(null, "Againts the Gods2", "The Gods...", author));
@@ -90,7 +90,7 @@ class NovelServiceTest {
 	}
 	
 	@Test
-	void Pages() {
+	void findAll() {
 		userRepository.save(author);
 		novelRepository.save(novel);
 		
