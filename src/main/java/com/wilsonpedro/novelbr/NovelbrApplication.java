@@ -35,7 +35,7 @@ public class NovelbrApplication implements CommandLineRunner{
 		
 		Author author1 = new Author(null, "little fox", "littlefox@gmail.com", "1234");
 
-		Novel novel1 = new Novel(null, "Agaings the Gods", "The Gods...", author1);
+		Novel novel1 = new Novel(null, "Againts the Gods", "The Gods...", author1);
 		
 		Chapter cpt1 = new Chapter(null, "Begins", 1, "In Those Days, the Gods...", novel1);
 		Chapter cpt2 = new Chapter(null, "Angry", 2, "After returning...", novel1);
