@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wilsonpedro.novelbr.dto.NovelDTO;
+import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
@@ -141,5 +144,28 @@ class NovelControllerTest {
 				.andExpect(status().isNoContent());
 		
 		assertEquals(0, novelRepository.count());
+	}
+	
+	@Test
+	void deleteAllByAuthorId() throws Exception{
+		Author author2 = new Author(null, "Cronos 2", "cronos2@gmail.com", "123");
+		
+		userRepository.saveAll(List.of(author, author2));
+		
+		novelRepository.save(new Novel(null, "Againts the Gods1", "The Gods...", author2));
+		novelRepository.save(new Novel(null, "Againts the Gods2", "The Gods...", author));
+		novelRepository.save(new Novel(null, "Againts the Gods3", "The Gods...", author));
+		
+		assertEquals(3, novelRepository.count());
+		Long authorId = userRepository.findAll().get(0).getId();
+		
+		String jsonRequest = objectMapper.writeValueAsString(new ResquestIdDTO(authorId));
+		
+		mockMvc.perform(MockMvcRequestBuilders.delete("/novels/deleteAllByAuthor")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonRequest))
+				.andExpect(status().isNoContent());
+		
+		assertEquals(1, novelRepository.count());
 	}
 }

@@ -65,8 +65,8 @@ public class ChapterService {
 	}
 	
 	@Transactional
-	public void deleteAllByNovel(Long requestId) {
-		Novel novel = novelService.findById(requestId);
+	public void deleteAllByNovel(Long novelId) {
+		Novel novel = novelService.findById(novelId);
 		chapterRepository.deleteAllByNovel(novel);
 	}
 }

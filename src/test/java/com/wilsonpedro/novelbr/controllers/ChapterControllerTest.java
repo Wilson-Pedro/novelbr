@@ -8,6 +8,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wilsonpedro.novelbr.dto.ChapterDTO;
+import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.entities.Novel;
@@ -151,5 +154,31 @@ class ChapterControllerTest {
 				.andExpect(status().isNoContent());
 		
 		assertEquals(0, chapterRepository.count());
+	}
+	
+	@Test
+	void deleteAllByNovelId() throws Exception{
+		Author author2 = new Author(null, "Cronos 2", "cronos2@gmail.com", "123");
+		Novel novel2 = new Novel(null, "Againts the Gods 2", "In Those Days...", author2);
+		
+		userRepository.saveAll(List.of(author, author2));
+		novelRepository.saveAll(List.of(novel, novel2));
+		
+		chapterRepository.save(new Chapter(null, "Begins", 1, "In Those Days, the Dogs...", novel2));
+		chapterRepository.save(new Chapter(null, "Begins", 2, "In Those Days, the Cats...", novel));
+		chapterRepository.save(new Chapter(null, "Begins", 3, "In Those Days, the Frogs...", novel));
+		
+		assertEquals(3, chapterRepository.count());
+		
+		Long novelId = userRepository.findAll().get(0).getId();
+		
+		String jsonRequest = objectMapper.writeValueAsString(new ResquestIdDTO(novelId));
+		
+		mockMvc.perform(MockMvcRequestBuilders.delete("/chapters/deleteAllByNovel")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonRequest))
+				.andExpect(status().isNoContent());
+		
+		assertEquals(1, chapterRepository.count());
 	}
 }

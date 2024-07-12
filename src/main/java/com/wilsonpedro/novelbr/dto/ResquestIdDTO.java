@@ -9,6 +9,10 @@ public class ResquestIdDTO implements Serializable{
 	
 	public ResquestIdDTO() {
 	}
+	
+	public ResquestIdDTO(Long requestId) {
+		this.requestId = requestId;
+	}
 
 	public Long getRequestId() {
 		return requestId;

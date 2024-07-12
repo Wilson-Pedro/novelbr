@@ -136,4 +136,24 @@ class ChapterServiceTest {
 		
 		assertEquals(0, chapterRepository.count());
 	}
+	
+	@Test
+	void deleteAllByNovelId() {
+		Author author2 = new Author(null, "Cronos 2", "cronos2@gmail.com", "123");
+		Novel novel2 = new Novel(null, "Againts the Gods 2", "In Those Days...", author2);
+		
+		userRepository.saveAll(List.of(author, author2));
+		novelRepository.saveAll(List.of(novel, novel2));
+		
+		chapterRepository.save(new Chapter(null, "Begins", 1, "In Those Days, the Dogs...", novel2));
+		chapterRepository.save(new Chapter(null, "Begins", 2, "In Those Days, the Cats...", novel));
+		chapterRepository.save(new Chapter(null, "Begins", 3, "In Those Days, the Frogs...", novel));
+		
+		assertEquals(3, chapterRepository.count());
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		chapterService.deleteAllByNovel(novelId);
+		
+		assertEquals(1, chapterRepository.count());
+	}
 }
