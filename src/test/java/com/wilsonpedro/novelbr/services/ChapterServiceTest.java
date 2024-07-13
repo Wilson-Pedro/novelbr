@@ -47,9 +47,25 @@ class ChapterServiceTest {
 		novelRepository.deleteAll();
 		userRepository.deleteAll();
 	}
+	
+	@Test
+	void saveCase01() {
+		assertEquals(0, chapterRepository.count());
+		
+		userRepository.save(author);
+		novelRepository.save(novel);
+		Chapter chapterSaved = chapterService.save(chapter);
+		
+		assertNotNull(chapterSaved.getId());
+		assertEquals("Begins", chapterSaved.getChapterTilte());
+		assertEquals(1, chapterSaved.getChapterNumber());
+		assertEquals("In Those Days, the Gods...", chapterSaved.getText());
+		
+		assertEquals(1, chapterRepository.count());
+	}
 
 	@Test
-	void save() {
+	void saveCase02() {
 		assertEquals(0, chapterRepository.count());
 		
 		userRepository.save(author);
