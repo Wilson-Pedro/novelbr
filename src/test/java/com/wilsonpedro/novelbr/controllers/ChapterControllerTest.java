@@ -159,9 +159,9 @@ class ChapterControllerTest {
 	@Test
 	void deleteAllByNovelId() throws Exception{
 		Author author2 = new Author(null, "Cronos 2", "cronos2@gmail.com", "123");
-		Novel novel2 = new Novel(null, "Againts the Gods 2", "In Those Days...", author2);
-		
 		userRepository.saveAll(List.of(author, author2));
+		
+		Novel novel2 = new Novel(null, "Againts the Gods 2", "In Those Days...", author2);
 		novelRepository.saveAll(List.of(novel, novel2));
 		
 		chapterRepository.save(new Chapter(null, "Begins", 1, "In Those Days, the Dogs...", novel2));
@@ -170,7 +170,7 @@ class ChapterControllerTest {
 		
 		assertEquals(3, chapterRepository.count());
 		
-		Long novelId = userRepository.findAll().get(0).getId();
+		Long novelId = novelRepository.findAll().get(0).getId();
 		
 		String jsonRequest = objectMapper.writeValueAsString(new ResquestIdDTO(novelId));
 		
