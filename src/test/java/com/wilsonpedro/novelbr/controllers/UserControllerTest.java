@@ -18,7 +18,9 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.wilsonpedro.novelbr.dto.UserDTO;
 import com.wilsonpedro.novelbr.entities.User;
+import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
@@ -42,7 +44,7 @@ class UserControllerTest {
 	@Autowired
 	ObjectMapper objectMapper;
 	
-	User user = new User(null, "Cronos", "cronos@gmail.com", "123");
+	User user = new User(null, "Cronos", UserType.AUTHOR, "cronos@gmail.com", "123");
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -55,7 +57,7 @@ class UserControllerTest {
 	void save() throws Exception{
 		assertEquals(0, userRepository.count());
 		
-		String jsonRequest = objectMapper.writeValueAsString(user);
+		String jsonRequest = objectMapper.writeValueAsString(new UserDTO(user));
 		
 		mockMvc.perform(post("/users/")
 				.contentType(MediaType.APPLICATION_JSON)
@@ -70,9 +72,9 @@ class UserControllerTest {
 	
 	@Test
 	void pages() throws Exception{
-		userRepository.save(new User(null, "Cronos 1", "cronos1@gmail.com", "123"));
-		userRepository.save(new User(null, "Cronos 2", "cronos2@gmail.com", "123"));
-		userRepository.save(new User(null, "Cronos 3", "cronos3@gmail.com", "123"));
+		userRepository.save(new User(null, "Cronos 1", UserType.AUTHOR, "cronos1@gmail.com", "123"));
+		userRepository.save(new User(null, "Cronos 2", UserType.AUTHOR, "cronos2@gmail.com", "123"));
+		userRepository.save(new User(null, "Cronos 3", UserType.AUTHOR, "cronos3@gmail.com", "123"));
 		
 		mockMvc.perform(get("/users/pages")
 				.param("page", "0")
@@ -108,7 +110,7 @@ class UserControllerTest {
 		user.setPseudonym("Cronos 2");
 		
 		Long id = userRepository.findAll().get(0).getId();
-		String jsonRequest = objectMapper.writeValueAsString(user);
+		String jsonRequest = objectMapper.writeValueAsString(new UserDTO(user));
 		
 		mockMvc.perform(put("/users/{id}", id)
 				.contentType(MediaType.APPLICATION_JSON)

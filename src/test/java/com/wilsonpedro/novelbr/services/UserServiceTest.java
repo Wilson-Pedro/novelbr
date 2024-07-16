@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import com.wilsonpedro.novelbr.entities.User;
+import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
@@ -34,7 +35,7 @@ class UserServiceTest {
 	@Autowired
 	UserService userService;
 	
-	User user = new User(null, "Cronos", "cronos@gmail.com", "123");
+	User user = new User(null, "Cronos", UserType.AUTHOR, "cronos@gmail.com", "123");
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -59,9 +60,9 @@ class UserServiceTest {
 	
 	@Test
 	void findAll() {
-		userRepository.save(new User(null, "Cronos1", "cronos1@gmail.com", "123"));
-		userRepository.save(new User(null, "Cronos2", "cronos2@gmail.com", "123"));
-		userRepository.save(new User(null, "Cronos3", "cronos3@gmail.com", "123"));
+		userRepository.save(new User(null, "Cronos1", UserType.AUTHOR, "cronos1@gmail.com", "123"));
+		userRepository.save(new User(null, "Cronos2", UserType.AUTHOR, "cronos2@gmail.com", "123"));
+		userRepository.save(new User(null, "Cronos3", UserType.AUTHOR, "cronos3@gmail.com", "123"));
 		
 		Pageable pageable = PageRequest.of(0, 2);
 		Page<User> pages = userService.findAll(pageable);

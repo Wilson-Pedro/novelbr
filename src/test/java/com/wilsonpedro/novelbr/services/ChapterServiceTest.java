@@ -18,6 +18,7 @@ import com.wilsonpedro.novelbr.dto.ChapterDTO;
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.entities.Novel;
+import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
@@ -37,7 +38,7 @@ class ChapterServiceTest {
 	@Autowired
 	ChapterService chapterService;
 	
-	Author author = new Author(null, "Cronos", "cronos@gmail.com", "123");
+	Author author = new Author(null, "Cronos", UserType.AUTHOR, "cronos@gmail.com", "123");
 	Novel novel = new Novel(null, "Againts the Gods", "The Gods...", author);
 	Chapter chapter = new Chapter(null, "Begins", 1, "In Those Days, the Gods...", novel);
 
@@ -155,7 +156,7 @@ class ChapterServiceTest {
 	
 	@Test
 	void deleteAllByNovelId() {
-		Author author2 = new Author(null, "Cronos 2", "cronos2@gmail.com", "123");
+		Author author2 = new Author(null, "Cronos 2", UserType.AUTHOR, "cronos2@gmail.com", "123");
 		Novel novel2 = new Novel(null, "Againts the Gods 2", "In Those Days...", author2);
 		
 		userRepository.saveAll(List.of(author, author2));

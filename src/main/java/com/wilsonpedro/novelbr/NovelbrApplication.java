@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.entities.Novel;
+import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
@@ -33,7 +34,7 @@ public class NovelbrApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Author author1 = new Author(null, "little fox", "littlefox@gmail.com", "1234");
+		Author author1 = new Author(null, "little fox", UserType.AUTHOR, "littlefox@gmail.com", "1234");
 
 		Novel novel1 = new Novel(null, "Againts the Gods", "The Gods...", author1);
 		

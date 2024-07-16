@@ -24,6 +24,7 @@ import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Novel;
+import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
@@ -47,7 +48,7 @@ class NovelControllerTest {
 	@Autowired
 	ObjectMapper objectMapper;
 	
-	Author author = new Author(null, "Cronos", "cronos@gmail.com", "123");
+	Author author = new Author(null, "Cronos", UserType.AUTHOR, "cronos@gmail.com", "123");
 	Novel novel = new Novel(null, "Againts the Gods", "The Gods...", author);
 
 	@BeforeEach
@@ -148,7 +149,7 @@ class NovelControllerTest {
 	
 	@Test
 	void deleteAllByAuthorId() throws Exception{
-		Author author2 = new Author(null, "Cronos 2", "cronos2@gmail.com", "123");
+		Author author2 = new Author(null, "Cronos 2", UserType.AUTHOR, "cronos2@gmail.com", "123");
 		
 		userRepository.saveAll(List.of(author, author2));
 		

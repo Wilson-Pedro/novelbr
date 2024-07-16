@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.wilsonpedro.novelbr.entities.User;
+import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsException;
@@ -31,7 +32,7 @@ class UserExceptions {
 	@Autowired
 	UserService userService;
 	
-	User user = new User(null, "Cronos", "cronos@gmail.com", "123");
+	User user = new User(null, "Cronos", UserType.AUTHOR, "cronos@gmail.com", "123");
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -52,7 +53,7 @@ class UserExceptions {
 		
 		
 		assertThrows(EmailExistsException.class, 
-				() -> userService.save(new User(null, "Cronos 2", "cronos@gmail.com", "123")));
+				() -> userService.save(new User(null, "Cronos 2", UserType.AUTHOR, "cronos@gmail.com", "123")));
 	}
 
 	@Test
@@ -61,6 +62,6 @@ class UserExceptions {
 		
 		
 		assertThrows(PseudonymExistsException.class, 
-				() -> userService.save(new User(null, "Cronos", "cronos2@gmail.com", "123")));
+				() -> userService.save(new User(null, "Cronos", UserType.AUTHOR, "cronos2@gmail.com", "123")));
 	}
 }

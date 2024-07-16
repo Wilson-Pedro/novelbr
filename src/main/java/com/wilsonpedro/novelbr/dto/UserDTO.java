@@ -18,6 +18,9 @@ public class UserDTO implements Serializable{
 	private String pseudonym;
 	
 	@NotBlank
+	private String userType;
+	
+	@NotBlank
 	@Email
 	@Column(unique = true)
 	private String email;
@@ -28,8 +31,9 @@ public class UserDTO implements Serializable{
 	public UserDTO() {
 	}
 
-	public UserDTO(Long id, String pseudonym, String email, String password) {
+	public UserDTO(Long id, String pseudonym, String userType, String email, String password) {
 		this.pseudonym = pseudonym;
+		this.userType = userType;
 		this.email = email;
 		this.password = password;
 	}
@@ -37,6 +41,7 @@ public class UserDTO implements Serializable{
 	public UserDTO(User user) {
 		this.id = user.getId();
 		this.pseudonym = user.getPseudonym();
+		this.userType = user.getUserType().getDescription();
 		this.email = user.getEmail();
 		this.password = user.getPassword();
 	}
@@ -55,6 +60,14 @@ public class UserDTO implements Serializable{
 
 	public void setPseudonym(String pseudonym) {
 		this.pseudonym = pseudonym;
+	}
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
 	}
 
 	public String getEmail() {

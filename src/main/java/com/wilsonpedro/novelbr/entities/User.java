@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import com.wilsonpedro.novelbr.dto.UserDTO;
+import com.wilsonpedro.novelbr.enums.UserType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -14,6 +15,7 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity(name = "TBL_USER")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -28,6 +30,9 @@ public class User implements Serializable{
 	@Column(unique = true)
 	private String pseudonym;
 	
+	@NotNull
+	private UserType userType;
+	
 	@NotBlank
 	@Email
 	@Column(unique = true)
@@ -39,9 +44,10 @@ public class User implements Serializable{
 	public User() {
 	}
 
-	public User(Long id, String pseudonym, String email, String password) {
+	public User(Long id, String pseudonym, UserType userType, String email, String password) {
 		this.id = id;
 		this.pseudonym = pseudonym;
+		this.userType = userType;
 		this.email = email;
 		this.password = password;
 	}
@@ -49,6 +55,7 @@ public class User implements Serializable{
 	public User(UserDTO userDTO) {
 		this.id = userDTO.getId();
 		this.pseudonym = userDTO.getPseudonym();
+		this.userType = UserType.toUserType(userDTO.getUserType());
 		this.email = userDTO.getEmail();
 		this.password = userDTO.getPassword();
 	}
@@ -69,6 +76,14 @@ public class User implements Serializable{
 		this.pseudonym = pseudonym;
 	}
 
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -83,6 +98,14 @@ public class User implements Serializable{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public boolean isAuthor() {
+		return userType.equals(UserType.AUTHOR);
+	}
+	
+	public boolean isAReader() {
+		return userType.equals(UserType.READER);
 	}
 
 	@Override

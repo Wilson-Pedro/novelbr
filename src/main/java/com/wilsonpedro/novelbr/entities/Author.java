@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.wilsonpedro.novelbr.enums.UserType;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,8 +24,8 @@ public class Author extends User{
 		super();
 	}
 
-	public Author(Long id, String pseudonym, String email, String password) {
-		super(id, pseudonym, email, password);
+	public Author(Long id, String pseudonym, UserType userType, String email, String password) {
+		super(id, pseudonym, userType, email, password);
 	}
 
 	public Set<Novel> getNovels() {
