@@ -12,7 +12,6 @@ import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.entities.User;
-import com.wilsonpedro.novelbr.entities.User;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.ReaderCastException;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
@@ -45,7 +44,7 @@ public class NovelService {
 		return novelSaved;
 	}
 
-	private void validadeAuthor(Long id) {
+	public void validadeAuthor(Long id) {
 		User user = userService.findById(id);
 		if(user.isAReader()) throw new ReaderCastException();
 	}

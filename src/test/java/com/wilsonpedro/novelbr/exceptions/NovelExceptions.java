@@ -11,6 +11,7 @@ import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.ReaderCastException;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
@@ -47,4 +48,12 @@ class NovelExceptions {
 		assertThrows(EntityNotFoundException.class, () -> novelService.findById(70L));
 	}
 	
+	@Test
+	void readerCastException() {
+		author.setUserType(UserType.READER);
+		userRepository.save(author);
+		
+		assertThrows(ReaderCastException.class, 
+				() -> novelService.validadeAuthor(author.getId()));
+	}
 }
