@@ -8,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.User;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
@@ -23,9 +24,10 @@ public class UserService {
 	@Transactional
 	public User save(User user) {
 		validateUser(user);
-		return userRepository.save(user);
+		var userSaved = preparedUserToSave(user);
+		return userRepository.save(userSaved);
 	}
-	
+
 	public Page<User> findAll(Pageable pageable) {
 		return userRepository.findAll(pageable);
 	}
@@ -59,5 +61,12 @@ public class UserService {
 		} else if(userRepository.existsByPseudonym(user.getPseudonym())) {
 			throw new PseudonymExistsException();
 		}
+	}
+	
+	private User preparedUserToSave(User user) {
+		if(user.isAuthor()) {
+			user = new Author(user);
+		}
+		return user;
 	}
 }

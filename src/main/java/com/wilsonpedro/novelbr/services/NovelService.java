@@ -11,7 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.Novel;
+import com.wilsonpedro.novelbr.entities.User;
+import com.wilsonpedro.novelbr.entities.User;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.ReaderCastException;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 
 @Service
@@ -30,12 +33,23 @@ public class NovelService {
 	
 	@Transactional
 	public Novel save(NovelDTO novelDTO) {
-		Novel novelSaved = new Novel(novelDTO);
-		Author author = (Author) userService.findById(novelDTO.getAuthorId());
-		novelSaved.setAuthor(author);
+		Novel novelSaved = preparedNovelToSave(novelDTO);
 		return novelRepository.save(novelSaved);
 	}
 	
+	private Novel preparedNovelToSave(NovelDTO novelDTO) {
+		validadeAuthor(novelDTO.getAuthorId());
+		Novel novelSaved = new Novel(novelDTO);
+		Author author = (Author) userService.findById(novelDTO.getAuthorId());
+		novelSaved.setAuthor(author);
+		return novelSaved;
+	}
+
+	private void validadeAuthor(Long id) {
+		User user = userService.findById(id);
+		if(user.isAReader()) throw new ReaderCastException();
+	}
+
 	public Page<Novel> findAll(Pageable pageable) {
 		return novelRepository.findAll(pageable);
 	}

@@ -50,8 +50,7 @@ class UserExceptions {
 	@Test
 	void emailExistsException() {
 		userRepository.save(user);
-		
-		
+
 		assertThrows(EmailExistsException.class, 
 				() -> userService.save(new User(null, "Cronos 2", UserType.AUTHOR, "cronos@gmail.com", "123")));
 	}
@@ -59,8 +58,6 @@ class UserExceptions {
 	@Test
 	void pseudonymExistsException() {
 		userRepository.save(user);
-		
-		
 		assertThrows(PseudonymExistsException.class, 
 				() -> userService.save(new User(null, "Cronos", UserType.AUTHOR, "cronos2@gmail.com", "123")));
 	}

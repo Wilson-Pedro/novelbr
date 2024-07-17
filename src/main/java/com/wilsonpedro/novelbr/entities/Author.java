@@ -27,6 +27,13 @@ public class Author extends User{
 	public Author(Long id, String pseudonym, UserType userType, String email, String password) {
 		super(id, pseudonym, userType, email, password);
 	}
+	
+	public Author(User user) {
+		setPseudonym(user.getPseudonym());
+		setUserType(user.getUserType());
+		setEmail(user.getEmail());
+		setPassword(user.getPassword());
+	}
 
 	public Set<Novel> getNovels() {
 		return novels;

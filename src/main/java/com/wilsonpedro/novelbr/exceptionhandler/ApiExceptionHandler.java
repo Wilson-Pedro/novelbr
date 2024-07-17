@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsException;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.ReaderCastException;
 import com.wilsonpedro.novelbr.exceptionhandler.problam.Field;
 import com.wilsonpedro.novelbr.exceptionhandler.problam.Problam;
 
@@ -93,6 +94,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		Problam problam = new Problam();
 		problam.setTitle("You cannot delete this Entity because it is related to another Entity.");
+		problam.setStatusCode(status.value());
+		problam.setTime(OffsetDateTime.now());
+		
+		return ResponseEntity.status(status).body(problam);
+	}
+	
+	@ExceptionHandler(ReaderCastException.class)
+	public ResponseEntity<Problam> readerCastException() {
+		
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		Problam problam = new Problam();
+		problam.setTitle("You cannot save the novel with reader id.");
 		problam.setStatusCode(status.value());
 		problam.setTime(OffsetDateTime.now());
 		
