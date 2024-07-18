@@ -3,8 +3,8 @@ package com.wilsonpedro.novelbr.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,9 +13,10 @@ import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
+import com.wilsonpedro.novelbr.services.interfaces.ChapterServiceInt;
 
 @Service
-public class ChapterService {
+public class ChapterService implements ChapterServiceInt{
 
 	@Autowired
 	private ChapterRepository chapterRepository;

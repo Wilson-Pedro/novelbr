@@ -15,9 +15,10 @@ import com.wilsonpedro.novelbr.entities.User;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.ReaderCastException;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
+import com.wilsonpedro.novelbr.services.interfaces.NovelServiceInt;
 
 @Service
-public class NovelService {
+public class NovelService implements NovelServiceInt{
 
 	@Autowired
 	private NovelRepository novelRepository;
