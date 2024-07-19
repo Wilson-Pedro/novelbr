@@ -13,10 +13,11 @@ import com.wilsonpedro.novelbr.entities.Chapter;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
-import com.wilsonpedro.novelbr.services.interfaces.ChapterServiceInt;
+import com.wilsonpedro.novelbr.services.interfaces.ChapterService;
+import com.wilsonpedro.novelbr.services.interfaces.NovelService;
 
 @Service
-public class ChapterService implements ChapterServiceInt{
+public class ChapterServicelmpl implements ChapterService {
 
 	@Autowired
 	private ChapterRepository chapterRepository;

@@ -15,7 +15,7 @@ import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsExcept
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
-import com.wilsonpedro.novelbr.services.UserService;
+import com.wilsonpedro.novelbr.services.interfaces.UserService;
 
 @SpringBootTest
 class UserExceptions {

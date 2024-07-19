@@ -15,7 +15,7 @@ import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundExcepti
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
-import com.wilsonpedro.novelbr.services.ChapterService;
+import com.wilsonpedro.novelbr.services.interfaces.ChapterService;
 
 @SpringBootTest
 class ChapterExceptions {

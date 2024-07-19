@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.wilsonpedro.novelbr.dto.ChapterDTO;
 import com.wilsonpedro.novelbr.entities.Chapter;
 
-public interface ChapterServiceInt {
+public interface ChapterService {
 
 	Chapter save(ChapterDTO chaptertDTO);
 	

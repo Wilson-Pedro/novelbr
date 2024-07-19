@@ -15,12 +15,12 @@ import com.wilsonpedro.novelbr.controllers.apis.NovelAPI;
 import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Novel;
-import com.wilsonpedro.novelbr.services.NovelService;
+import com.wilsonpedro.novelbr.services.interfaces.NovelService;
 
 import jakarta.validation.Valid;
 
 @RestController
-public class NovelController implements NovelAPI{
+public class NovelController implements NovelAPI {
 	
 	@Autowired
 	private NovelService novelService;

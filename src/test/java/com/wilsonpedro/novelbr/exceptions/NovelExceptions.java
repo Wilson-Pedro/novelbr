@@ -15,7 +15,8 @@ import com.wilsonpedro.novelbr.exceptionhandler.exceptions.ReaderCastException;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
-import com.wilsonpedro.novelbr.services.NovelService;
+import com.wilsonpedro.novelbr.services.NovelServiceImpl;
+import com.wilsonpedro.novelbr.services.interfaces.NovelService;
 
 @SpringBootTest
 class NovelExceptions {
@@ -31,6 +32,9 @@ class NovelExceptions {
 	
 	@Autowired
 	NovelService novelService;
+	
+	@Autowired
+	NovelServiceImpl novelServiceImpl;
 	
 	Author author = new Author(null, "Cronos", UserType.AUTHOR, "cronos@gmail.com", "123");
 	Novel novel = new Novel(null, "Againts the Gods", "The Gods...", author);
@@ -54,6 +58,6 @@ class NovelExceptions {
 		userRepository.save(author);
 		
 		assertThrows(ReaderCastException.class, 
-				() -> novelService.validadeAuthor(author.getId()));
+				() -> novelServiceImpl.validadeAuthor(author.getId()));
 	}
 }

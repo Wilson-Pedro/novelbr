@@ -14,10 +14,10 @@ import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsException;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
-import com.wilsonpedro.novelbr.services.interfaces.UserServiceInt;
+import com.wilsonpedro.novelbr.services.interfaces.UserService;
 
 @Service
-public class UserService implements UserServiceInt{
+public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepository userRepository;

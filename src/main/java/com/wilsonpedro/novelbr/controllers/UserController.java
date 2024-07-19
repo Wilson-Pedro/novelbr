@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wilsonpedro.novelbr.controllers.apis.UserAPI;
 import com.wilsonpedro.novelbr.dto.UserDTO;
 import com.wilsonpedro.novelbr.entities.User;
-import com.wilsonpedro.novelbr.services.UserService;
+import com.wilsonpedro.novelbr.services.interfaces.UserService;
 
 import jakarta.validation.Valid;
 
 @RestController
-public class UserController implements UserAPI{
+public class UserController implements UserAPI {
 	
 	@Autowired
 	private UserService userService;

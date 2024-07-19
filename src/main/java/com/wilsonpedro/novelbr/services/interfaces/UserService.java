@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 
 import com.wilsonpedro.novelbr.entities.User;
 
-public interface UserServiceInt {
+public interface UserService {
 
 	User save(User user);
 	

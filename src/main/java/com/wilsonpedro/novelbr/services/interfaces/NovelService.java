@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.entities.Novel;
 
-public interface NovelServiceInt {
+public interface NovelService {
 
 	Novel save(Novel novel);
 	

@@ -19,6 +19,7 @@ import com.wilsonpedro.novelbr.enums.UserType;
 import com.wilsonpedro.novelbr.repositories.ChapterRepository;
 import com.wilsonpedro.novelbr.repositories.NovelRepository;
 import com.wilsonpedro.novelbr.repositories.UserRepository;
+import com.wilsonpedro.novelbr.services.interfaces.UserService;
 
 @SpringBootTest
 class UserServiceTest {

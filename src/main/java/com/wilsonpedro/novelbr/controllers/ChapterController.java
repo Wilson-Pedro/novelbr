@@ -15,12 +15,12 @@ import com.wilsonpedro.novelbr.controllers.apis.ChapterAPI;
 import com.wilsonpedro.novelbr.dto.ChapterDTO;
 import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Chapter;
-import com.wilsonpedro.novelbr.services.ChapterService;
+import com.wilsonpedro.novelbr.services.interfaces.ChapterService;
 
 import jakarta.validation.Valid;
 
 @RestController
-public class ChapterController implements ChapterAPI{
+public class ChapterController implements ChapterAPI {
 	
 	@Autowired
 	private ChapterService chapterService;
