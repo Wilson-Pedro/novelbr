@@ -2,7 +2,6 @@ package com.wilsonpedro.novelbr.entities;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -17,8 +16,16 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotBlank;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity(name = "TBL_NOVEL")
+@Getter
+@Setter
+@NoArgsConstructor
+@EqualsAndHashCode
 public class Novel implements Serializable{
 	private static final long serialVersionUID = 1L;
 
@@ -41,9 +48,6 @@ public class Novel implements Serializable{
 	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	@OneToMany(mappedBy="novel", fetch=FetchType.LAZY)
 	private Set<Chapter> chapters = new HashSet<>();
-	
-	public Novel() {
-	}
 
 	public Novel(Long id, String title, String synopsis, Author author) {
 		this.id = id;
@@ -55,72 +59,5 @@ public class Novel implements Serializable{
 	public Novel(NovelDTO novelDTO) {
 		this.title = novelDTO.getTitle();
 		this.synopsis = novelDTO.getSynopsis();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getSynopsis() {
-		return synopsis;
-	}
-
-	public void setSynopsis(String synopsis) {
-		this.synopsis = synopsis;
-	}
-
-	public Author getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(Author author) {
-		this.author = author;
-	}
-
-	public Set<String> getGenders() {
-		return genders;
-	}
-
-	public void setGenders(Set<String> genders) {
-		this.genders = genders;
-	}
-
-	public Set<Chapter> getChapters() {
-		return chapters;
-	}
-
-	public void setChapters(Set<Chapter> chapters) {
-		this.chapters = chapters;
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(author, chapters, genders, id, synopsis, title);
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Novel other = (Novel) obj;
-		return Objects.equals(author, other.author) && Objects.equals(chapters, other.chapters)
-				&& Objects.equals(genders, other.genders) && Objects.equals(id, other.id)
-				&& Objects.equals(synopsis, other.synopsis) && Objects.equals(title, other.title);
 	}
 }

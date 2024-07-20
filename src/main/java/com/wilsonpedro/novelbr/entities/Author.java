@@ -10,9 +10,13 @@ import com.wilsonpedro.novelbr.enums.UserType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity(name = "TBL_AUTHOR")
 @JsonTypeName("author")
+@Getter
+@Setter
 public class Author extends User{
 	private static final long serialVersionUID = 1L;
 	
@@ -33,13 +37,5 @@ public class Author extends User{
 		setUserType(user.getUserType());
 		setEmail(user.getEmail());
 		setPassword(user.getPassword());
-	}
-
-	public Set<Novel> getNovels() {
-		return novels;
-	}
-
-	public void setNovels(Set<Novel> novels) {
-		this.novels = novels;
 	}
 }
