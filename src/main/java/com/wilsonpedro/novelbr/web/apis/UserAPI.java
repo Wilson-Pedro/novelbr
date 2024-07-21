@@ -1,4 +1,4 @@
-package com.wilsonpedro.novelbr.controllers.apis;
+package com.wilsonpedro.novelbr.web.apis;
 
 import java.util.List;
 
@@ -13,32 +13,28 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.wilsonpedro.novelbr.dto.NovelDTO;
-import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
+import com.wilsonpedro.novelbr.dto.UserDTO;
 
 import jakarta.validation.Valid;
 
-@RequestMapping("/novels")
-public interface NovelAPI {
+@RequestMapping("/users")
+public interface UserAPI {
 
 	@PostMapping(produces = "application/json", path="/")
-	ResponseEntity<NovelDTO> save(@Valid @RequestBody NovelDTO novelDTO);
+	ResponseEntity<UserDTO> save(@Valid @RequestBody UserDTO userDTO);
 	
-	@GetMapping(produces = "application/json", path="")
-	ResponseEntity<List<NovelDTO>> findAll();
+	@GetMapping(produces = "application/json")
+	ResponseEntity<List<UserDTO>> findAll();
 	
 	@GetMapping(produces = "application/json", path="/pages")
-	ResponseEntity<Page<NovelDTO>> page(Pageable pageable);
+	ResponseEntity<Page<UserDTO>> pages(Pageable pageable);
 	
 	@GetMapping(produces = "application/json", path="/{id}")
-	ResponseEntity<NovelDTO> findById(@PathVariable Long id);
+	ResponseEntity<UserDTO> findById(@PathVariable Long id);
 	
 	@PutMapping(produces = "application/json", path="/{id}")
-	ResponseEntity<NovelDTO> update(@Valid @RequestBody NovelDTO novelDTO, @PathVariable Long id);
+	ResponseEntity<UserDTO> update(@Valid @RequestBody UserDTO userDTO, @PathVariable Long id);
 	
 	@DeleteMapping(produces = "application/json", path="/{id}")
 	ResponseEntity<Void> delete(@PathVariable Long id);
-	
-	@DeleteMapping(produces = "application/json", path="/deleteAllByAuthor")
-	ResponseEntity<Void> deleteAllByNovel(@RequestBody ResquestIdDTO resquestIdDTO);
 }

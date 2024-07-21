@@ -1,4 +1,4 @@
-package com.wilsonpedro.novelbr.controllers.apis;
+package com.wilsonpedro.novelbr.web.apis;
 
 import java.util.List;
 

@@ -4,8 +4,8 @@ import java.util.stream.Stream;
 
 public enum UserType {
 
-	AUTHOR(1, "Author"),
-	READER(2, "Reader");
+	AUTHOR(1, "author"),
+	READER(2, "reader");
 		
 	private Integer cod;
 	
@@ -34,7 +34,7 @@ public enum UserType {
 	
 	public static UserType toUserType(String description) {
 		return Stream.of(UserType.values())
-				.filter(x -> x.getDescription().equals(description))
+				.filter(x -> x.getDescription().equals(description.toLowerCase()))
 				.findFirst()
 				.orElseThrow(() -> 
 				new IllegalArgumentException("Tipo de Usuário Inválido: " + description));

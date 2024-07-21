@@ -32,6 +32,14 @@ public class UserDTO implements Serializable{
 	}
 
 	public UserDTO(Long id, String pseudonym, String userType, String email, String password) {
+		this.id = id;
+		this.pseudonym = pseudonym;
+		this.userType = userType;
+		this.email = email;
+		this.password = password;
+	}
+	
+	public UserDTO(String pseudonym, String userType, String email, String password) {
 		this.pseudonym = pseudonym;
 		this.userType = userType;
 		this.email = email;
