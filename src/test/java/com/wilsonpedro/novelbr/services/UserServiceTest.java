@@ -115,4 +115,19 @@ class UserServiceTest {
 		
 		assertEquals(0, userRepository.count());
 	}
+	
+	@Test
+	void toAuthor() {
+		user.reader();
+		userRepository.save(user);
+		
+		assertEquals(UserType.READER, user.getUserType());
+		Long id = userRepository.findAll().get(0).getId();
+		
+		userService.toAuthor(id);
+		
+		User user = userRepository.findById(id).get();
+		
+		assertEquals(UserType.AUTHOR, user.getUserType());
+	}
 }

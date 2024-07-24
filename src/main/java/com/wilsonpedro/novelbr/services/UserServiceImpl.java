@@ -70,4 +70,11 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+
+	@Override
+	public void toAuthor(Long id) {
+		User user = findById(id);
+		user.author();
+		userRepository.save(user);
+	}
 }

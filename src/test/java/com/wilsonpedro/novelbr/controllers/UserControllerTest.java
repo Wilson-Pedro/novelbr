@@ -3,6 +3,7 @@ package com.wilsonpedro.novelbr.controllers;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -154,7 +155,7 @@ class UserControllerTest {
 	}
 	
 	@Test
-	void delete() throws Exception{
+	void delete() throws Exception {
 		register(userLogin);
 		String token = getToken(new AuthenticationDTO(userLogin.getPseudonym(), userLogin.getPassword()));
 		
@@ -168,6 +169,25 @@ class UserControllerTest {
 				.andExpect(status().isNoContent());
 		
 		assertEquals(1, userRepository.count());
+	}
+	
+	@Test
+	void toAuthor() throws Exception {
+		userLogin.reader();
+		register(userLogin);
+		String token = getToken(new AuthenticationDTO(userLogin.getPseudonym(), userLogin.getPassword()));
+		
+		user.reader();
+		userRepository.save(user);
+		
+		Long id = userRepository.findAll().get(1).getId();
+		
+		mockMvc.perform(patch("/users/{id}/toAuthor", id)
+				.header("Authorization", "Bearer " + token))
+				.andExpect(status().isOk());
+		
+		var user = userRepository.findById(id).get();
+		assertEquals(UserType.AUTHOR, user.getUserType());
 	}
 	
 	private void register(User user) {

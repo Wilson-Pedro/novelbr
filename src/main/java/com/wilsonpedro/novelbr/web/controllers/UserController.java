@@ -59,4 +59,10 @@ public class UserController implements UserAPI {
 		return ResponseEntity.noContent().build();
 	}
 
+	@Override
+	public ResponseEntity<Void> toAuthor(Long id) {
+		userService.toAuthor(id);
+		return ResponseEntity.ok().build();
+	}
+
 }

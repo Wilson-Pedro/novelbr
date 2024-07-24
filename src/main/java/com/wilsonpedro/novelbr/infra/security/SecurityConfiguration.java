@@ -37,6 +37,7 @@ public class SecurityConfiguration {
 						.requestMatchers(HttpMethod.GET, "/users/pages").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.PUT, "/users/{id}").hasAnyRole("ADMIN", "AUTHOR", "READER")
 						.requestMatchers(HttpMethod.DELETE, "/users/{id}").hasRole("ADMIN")
+						.requestMatchers(HttpMethod.DELETE, "/users/{id}/toAuthor").hasRole("READER")
 						// NOVEL
 						.requestMatchers(HttpMethod.POST, "/novels/").hasRole("ADMIN")
 						.requestMatchers(HttpMethod.GET, "/novels").hasRole("READER")

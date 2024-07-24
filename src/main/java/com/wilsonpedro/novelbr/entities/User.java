@@ -88,15 +88,11 @@ public class User implements Serializable, UserDetails{
 		return pseudonym;
 	}
 	
-	public void admin() {
-		this.userType = UserType.ADMIN;
+	public void reader() {
+		this.userType = UserType.READER;
 	}
 
 	public void author() {
 		this.userType = UserType.AUTHOR;
-	}
-	
-	public void reader() {
-		this.userType = UserType.READER;
 	}
 }
