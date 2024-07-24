@@ -1,6 +1,12 @@
 package com.wilsonpedro.novelbr.entities;
 
 import java.io.Serializable;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.wilsonpedro.novelbr.dto.UserDTO;
 import com.wilsonpedro.novelbr.enums.UserType;
@@ -28,7 +34,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class User implements Serializable{
+public class User implements Serializable, UserDetails{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -64,5 +70,33 @@ public class User implements Serializable{
 	
 	public boolean isAReader() {
 		return userType.equals(UserType.READER);
+	}
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+		if(this.userType == UserType.ADMIN) {
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_AUTHOR"), new SimpleGrantedAuthority("ROLE_READER"));
+		} else if(this.userType == UserType.AUTHOR) {
+			return List.of(new SimpleGrantedAuthority("ROLE_AUTHOR"), new SimpleGrantedAuthority("ROLE_READER"));
+		} else {
+			return List.of(new SimpleGrantedAuthority("ROLE_READER"));
+		}
+	}
+
+	@Override
+	public String getUsername() {
+		return pseudonym;
+	}
+	
+	public void admin() {
+		this.userType = UserType.ADMIN;
+	}
+
+	public void author() {
+		this.userType = UserType.AUTHOR;
+	}
+	
+	public void reader() {
+		this.userType = UserType.READER;
 	}
 }

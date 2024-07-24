@@ -1,4 +1,4 @@
-package com.wilsonpedro.novelbr.controllers;
+package com.wilsonpedro.novelbr.web.controllers;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.wilsonpedro.novelbr.controllers.apis.NovelAPI;
 import com.wilsonpedro.novelbr.dto.NovelDTO;
 import com.wilsonpedro.novelbr.dto.ResquestIdDTO;
 import com.wilsonpedro.novelbr.entities.Novel;
 import com.wilsonpedro.novelbr.services.interfaces.NovelService;
+import com.wilsonpedro.novelbr.web.apis.NovelAPI;
 
 import jakarta.validation.Valid;
 
