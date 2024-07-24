@@ -183,7 +183,7 @@ class NovelControllerTest {
 		
 		assertEquals(0, novelRepository.count());
 	}
-//	
+	
 	@Test
 	void deleteAllByAuthorId() throws Exception {
 		register(userLogin);
