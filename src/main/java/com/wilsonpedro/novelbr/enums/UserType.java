@@ -5,7 +5,8 @@ import java.util.stream.Stream;
 public enum UserType {
 
 	AUTHOR(1, "author"),
-	READER(2, "reader");
+	READER(2, "reader"),
+	ADMIN(3, "admin");
 		
 	private Integer cod;
 	

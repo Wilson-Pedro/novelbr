@@ -74,13 +74,29 @@ public class User implements Serializable, UserDetails{
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		if(this.userType == UserType.AUTHOR) 
+		if(this.userType == UserType.ADMIN) {
+			return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_AUTHOR"), new SimpleGrantedAuthority("ROLE_READER"));
+		} else if(this.userType == UserType.AUTHOR) {
 			return List.of(new SimpleGrantedAuthority("ROLE_AUTHOR"), new SimpleGrantedAuthority("ROLE_READER"));
-		else return List.of(new SimpleGrantedAuthority("ROLE_READER"));
+		} else {
+			return List.of(new SimpleGrantedAuthority("ROLE_READER"));
+		}
 	}
 
 	@Override
 	public String getUsername() {
 		return pseudonym;
+	}
+	
+	public void admin() {
+		this.userType = UserType.ADMIN;
+	}
+
+	public void author() {
+		this.userType = UserType.AUTHOR;
+	}
+	
+	public void reader() {
+		this.userType = UserType.READER;
 	}
 }
