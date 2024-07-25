@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.wilsonpedro.novelbr.entities.Author;
 import com.wilsonpedro.novelbr.entities.User;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.AdminUserTypeException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsException;
@@ -61,6 +62,8 @@ public class UserServiceImpl implements UserService {
 			throw new EmailExistsException();
 		} else if(userRepository.existsByPseudonym(user.getPseudonym())) {
 			throw new PseudonymExistsException();
+		} else if(user.isAdmin()) {
+			throw new AdminUserTypeException();
 		}
 	}
 	

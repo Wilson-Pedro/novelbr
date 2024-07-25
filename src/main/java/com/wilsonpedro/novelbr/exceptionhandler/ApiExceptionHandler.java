@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.AdminUserTypeException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsException;
@@ -107,6 +108,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 		
 		Problam problam = new Problam();
 		problam.setTitle("You cannot save the novel with reader id.");
+		problam.setStatusCode(status.value());
+		problam.setTime(OffsetDateTime.now());
+		
+		return ResponseEntity.status(status).body(problam);
+	}
+	
+	@ExceptionHandler(AdminUserTypeException.class)
+	public ResponseEntity<Problam> uuserTypeException() {
+		
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		Problam problam = new Problam();
+		problam.setTitle("You cannot register like admin.");
 		problam.setStatusCode(status.value());
 		problam.setTime(OffsetDateTime.now());
 		

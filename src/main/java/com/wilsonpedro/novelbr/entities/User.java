@@ -63,14 +63,6 @@ public class User implements Serializable, UserDetails{
 		this.email = userDTO.getEmail();
 		this.password = userDTO.getPassword();
 	}
-	
-	public boolean isAuthor() {
-		return userType.equals(UserType.AUTHOR);
-	}
-	
-	public boolean isAReader() {
-		return userType.equals(UserType.READER);
-	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -86,6 +78,18 @@ public class User implements Serializable, UserDetails{
 	@Override
 	public String getUsername() {
 		return pseudonym;
+	}
+	
+	public boolean isAuthor() {
+		return userType.equals(UserType.AUTHOR);
+	}
+	
+	public boolean isAReader() {
+		return userType.equals(UserType.READER);
+	}
+	
+	public boolean isAdmin() {
+		return userType.equals(UserType.ADMIN);
 	}
 	
 	public void reader() {

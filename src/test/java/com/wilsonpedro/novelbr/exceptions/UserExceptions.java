@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.wilsonpedro.novelbr.entities.User;
 import com.wilsonpedro.novelbr.enums.UserType;
+import com.wilsonpedro.novelbr.exceptionhandler.exceptions.AdminUserTypeException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EmailExistsException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.EntityNotFoundException;
 import com.wilsonpedro.novelbr.exceptionhandler.exceptions.PseudonymExistsException;
@@ -60,5 +61,11 @@ class UserExceptions {
 		userRepository.save(user);
 		assertThrows(PseudonymExistsException.class, 
 				() -> userService.save(new User(null, "Cronos", UserType.AUTHOR, "cronos2@gmail.com", "123")));
+	}
+	
+	@Test
+	void adminUserTypeException() {
+		user.setUserType(UserType.ADMIN);
+		assertThrows(AdminUserTypeException.class, () -> userService.save(user));
 	}
 }
