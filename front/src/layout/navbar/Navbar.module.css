@@ -1,0 +1,43 @@
+.navContainer {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgb(233, 158, 18);
+    width: 100%;
+    padding: 2.5%;
+}
+
+.title {
+    display: flex;
+    justify-content: start;
+    width: 17%;
+}
+
+.title h1 {
+    font-weight: bold;
+    color: rgb(41, 27, 2);
+    font-family: 'Arial';
+    cursor: pointer;
+    font-size: 150%;
+}
+
+.search {
+    /* margin-left: 40%; */
+}
+
+.navContainer nav {
+    display: flex;
+    width: 10%;
+    justify-content: space-between;
+}
+
+.navContainer nav p {
+    color: rgb(41, 27, 2);
+    font-size: 110%;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 30%;
+}
+
+.navContainer nav p:hover {
+    color: rgb(172, 123, 39);
+}
