@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Navbar.module.css';
+import Search from './../../component/search/Search';
 
 export default function Navbar() {
     return(
@@ -8,10 +9,10 @@ export default function Navbar() {
                 <h1>NOVELS BR</h1>
             </div>
             <div className={styles.search}>
-                pesqusar...
+                <Search />
             </div>
             <nav>
-                <p >Casdastrar</p>
+                <p>Casdastrar</p>
                 <p>Login</p>
             </nav>
         </div>

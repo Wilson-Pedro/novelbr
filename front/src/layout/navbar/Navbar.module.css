@@ -1,7 +1,7 @@
 .navContainer {
     display: flex;
-    justify-content: space-around;
-    background-color: rgb(233, 158, 18);
+    justify-content: space-around; 
+    background-image: linear-gradient(rgb(233, 158, 18), rgb(141, 96, 13));
     width: 100%;
     padding: 2.5%;
 }
@@ -9,7 +9,7 @@
 .title {
     display: flex;
     justify-content: start;
-    width: 17%;
+    width: 20%;
 }
 
 .title h1 {
@@ -18,16 +18,17 @@
     font-family: 'Arial';
     cursor: pointer;
     font-size: 150%;
+    margin-top: 10%;
 }
 
 .search {
-    /* margin-left: 40%; */
+    margin-left: 30%;
 }
 
 .navContainer nav {
     display: flex;
     width: 10%;
-    justify-content: space-between;
+    margin-left: 40%;
 }
 
 .navContainer nav p {
@@ -35,9 +36,10 @@
     font-size: 110%;
     font-weight: bold;
     cursor: pointer;
-    margin-left: 30%;
+    margin-top: 25%;
+    margin-left: 5%;
 }
 
 .navContainer nav p:hover {
-    color: rgb(172, 123, 39);
+    color: rgb(255, 255, 255);
 }
