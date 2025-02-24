@@ -5,7 +5,7 @@
 
 .container {
     width: 95.25%;
-    height: 200%;
+    min-height: 200%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -29,6 +29,8 @@ section {
     text-align: center;
     width: 105%;
     margin: auto;
+    background-attachment: fixed;
+    border-bottom: 1px solid black;
 }
 
 section > h1 {
@@ -37,9 +39,13 @@ section > h1 {
     padding: 8%;
 }
 
-.banner {
+.lastReleases {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 110%;
     height: 50%;
-    background-color: rgb(249, 184, 93);
 }
 
 /* @media (max-width: 70%) {
