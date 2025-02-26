@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../../layout/navbar/Navbar';
+import Footer from '../../layout/footer/Rodape';
 import Card from '../../component/cards/Card';
 import styles from './Home.module.css';
 import Table from './../../layout/table/Table';
@@ -50,7 +51,7 @@ export default function Home() {
                 </div>
                 <Table />
             </div>
-
+            <Footer />
         </div>
     );
 }
