@@ -5,7 +5,7 @@ import Search from './../../component/search/Search';
 export default function Navbar() {
     return(
         <>
-            <div className={styles.title}>
+            <div className={styles.divTitle}>
                 <h1>NOVELS BR</h1>
             </div>
             <div className={styles.search}>

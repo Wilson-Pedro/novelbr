@@ -1,14 +1,29 @@
-input {
-    border: none;
-    padding: 5%;
-    border-radius: 5px;
-    background-color: rgb(223, 223, 223);
-    margin-top: 5%;
+.searchContainer {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.searchContainer input {
+    width: 100%;
+    padding: 10px 40px 10px 14px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    outline: none;
+    transition: 0.5s;
+}
+
+.searchContainer input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 .searchIncon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #777;
     cursor: pointer;
-    margin-top: 5%;
-    height: 22%;
-    width: 22%;
 }
