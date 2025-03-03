@@ -16,6 +16,12 @@
 
 .divTitle {
     max-width: 50%;
+    color: rgb(41, 27, 2);
+}
+
+.divTitle h1:hover{
+    color: rgb(10, 7, 0);
+    transition: .9s;
 }
 
 .search {
@@ -31,20 +37,22 @@ nav {
     gap: 20px;
     justify-content: center;
     font-size: 100%;
-    /* margin-left: 40%; */
+    cursor: pointer;
 }
 
 nav p {
     color: rgb(41, 27, 2);
-    /* font-size: 110%;
+    border: 2px solid rgb(41, 27, 2);
+    padding: 5%;
     font-weight: bold;
-    cursor: pointer;
-    margin-top: 25%;
-    margin-left: 5%; */
+    margin-top: 10%;
 }
 
 nav p:hover {
-    color: rgb(255, 255, 255);
+    color: rgb(121996, 138, 0);
+    border: 2px solid rgb(219, 138, 0);
+    background-color: rgb(49, 31, 0);
+    transition: .9s;
 }
 
 @media (min-width: 768px) {
