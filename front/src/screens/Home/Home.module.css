@@ -77,6 +77,10 @@ section h1 {
     font-size: 108%;
 }
 
+.divTitle h1 {
+    font-family: var(--fonte3);
+}
+
 .cardContainer {
     display: flex;
     justify-content: center;

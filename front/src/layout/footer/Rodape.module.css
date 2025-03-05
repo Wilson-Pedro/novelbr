@@ -11,12 +11,12 @@ footer {
 footer h3 {
     margin: auto;
     width: 7%;
-    color: black;
+    color: rgb(41, 27, 2);
     font-weight: bold;
     font-size: 135%;
     cursor: pointer;
 }
 
 footer h3:hover {
-    color: aliceblue;
+    color: rgb(10, 7, 0);
 }

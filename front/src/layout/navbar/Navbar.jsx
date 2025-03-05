@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './Navbar.module.css';
 import Search from './../../component/search/Search';
+import  { Link } from 'react-router-dom';
 
 export default function Navbar() {
     return(
@@ -13,7 +14,7 @@ export default function Navbar() {
             </div>
             <nav>
                 <p>Casdastrar</p>
-                <p>Login</p>
+                <p><Link className={styles.linkNone} to="/login">Login</Link></p>
             </nav>
         </>
     );

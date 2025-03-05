@@ -7,9 +7,9 @@ export default function Table() {
         <div className="container mt-4">
             {/* <h2 className="mb-3">Mais Populares</h2> */}
             <table className="table table-striped table-hover">
-                <thead className="table-dark">
+                <thead className="table-light">
                     <tr>
-                        <th>Nome</th>
+                        <th>Obra</th>
                         <th>Autor</th>
                         <th>Capítulos</th>
                     </tr>
