@@ -14,6 +14,7 @@
 
 - Java 17+
 - H2 Database
+- REACT
 
 <h2 id="started">🚀 Getting started</h2>
 
