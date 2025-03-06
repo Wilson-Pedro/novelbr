@@ -13,7 +13,7 @@ export default function Navbar() {
                 <Search />
             </div>
             <nav>
-                <p>Casdastrar</p>
+                <p><Link className={styles.linkNone} to="/register">Casdastrar</Link></p>
                 <p><Link className={styles.linkNone} to="/login">Login</Link></p>
             </nav>
         </>
