@@ -1,0 +1,73 @@
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+
+:root {
+    --fonte1: Verdana, Geneva, Tahoma, sans-serif;
+    --fonte2: 'Passion One', 'cursive';
+    --fonte3: 'Sriracha', 'cursive';
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(rgb(176, 150, 86), rgb(223, 191, 110));
+}
+
+.cardContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.navbar {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: .5%;
+    background-image: linear-gradient(rgb(233, 158, 18), rgb(141, 96, 13));
+    border-bottom: 1px solid black;
+}
+
+.main {
+    background-color: white;
+    width: 90%;
+    height: 100%;
+    box-shadow: 0px 0px 3px 0px black;
+}
+
+.divMain {
+    width: 100%;
+    padding: 5%;
+}
+
+.divMain h1 {
+    text-align: center;
+    font-family: var(--fonte3);
+    padding: 3%;
+}
+
+.divMain h4 {
+    margin-top: 3%;
+    font-weight: bold;
+}
+
+.noWeight {
+    font-weight: normal;
+}
+
+.info {
+    color: rgb(90, 90, 90);
+    font-weight: 200%;
+}

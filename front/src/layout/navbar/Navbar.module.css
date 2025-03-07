@@ -1,10 +1,14 @@
-/* .navContainer {
-    display: flex;
-    justify-content: space-around; 
-    background-image: linear-gradient(rgb(233, 158, 18), rgb(141, 96, 13));
-    width: 100%;
-    padding: 2.5%;
-} */
+@charset "UTF-8";
+
+@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
+
+:root {
+    --fonte1: Verdana, Geneva, Tahoma, sans-serif;
+    --fonte2: 'Passion One', 'cursive';
+    --fonte3: 'Sriracha', 'cursive';
+}
 
 .linkNone {
     text-decoration: none;
@@ -22,6 +26,12 @@
 .divTitle {
     max-width: 50%;
     color: rgb(41, 27, 2);
+}
+
+.divTitle h1 {
+    margin-top: 4%;
+    font-size: 300%;
+    font-family: var(--fonte2);
 }
 
 .divTitle h1:hover{
