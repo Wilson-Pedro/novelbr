@@ -2,6 +2,7 @@ import React from 'react';
 import  { Route, BrowserRouter, Routes } from "react-router-dom";
 
 import Home from './screens/Home/Home';
+import HomeUser from './screens/HomeUser/HomeUser';
 import Login from './screens/Login/Login';
 import UserRegister from './screens/UserRegister/UserRegister';
 import Profile from './screens/Profile/Profile';
@@ -14,6 +15,7 @@ export default function Rotas() {
                 <Route path="/login" element={ <Login /> } exact />
                 <Route path="/register" element={ <UserRegister /> } exact />
                 <Route path="/profile" element={ <Profile /> } exact />
+                <Route path="/homeUser/" element={ <HomeUser /> } exact />
             </Routes>
         </BrowserRouter>
     );

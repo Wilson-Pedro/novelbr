@@ -11,24 +11,24 @@ export default function Table() {
                     <tr>
                         <th>Obra</th>
                         <th>Autor</th>
-                        <th>Capítulos</th>
+                        <th>Capítulo</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <th>Renegade Immortal</th>
                         <th>耳根</th>
-                        <th>2088</th>
+                        <th className={styles.chapterNumber}>2088</th>
                     </tr>
                     <tr>
                         <th>The Overlord of Blood and Iron</th>
                         <th>Dam Hwa Gong</th>
-                        <th>355</th>
+                        <th className={styles.chapterNumber}>755</th>
                     </tr>
                     <tr>
                         <th>Red Storm</th>
                         <th>노경찬</th>
-                        <th>235</th>
+                        <th className={styles.chapterNumber}>235</th>
                     </tr>
                 </tbody>
             </table>

@@ -3,7 +3,8 @@ import styles from './Navbar.module.css';
 import Search from './../../component/search/Search';
 import  { Link } from 'react-router-dom';
 
-export default function Navbar() {
+export default function Navbar({ perfil=false }) {
+
     return(
         <>
             <div className={styles.divTitle}>
@@ -13,8 +14,25 @@ export default function Navbar() {
                 <Search />
             </div>
             <nav>
-                <p><Link className={styles.linkNone} to="/register">Casdastrar</Link></p>
-                <p><Link className={styles.linkNone} to="/login">Login</Link></p>
+                {perfil !== false ? (
+                    <>
+                        <p>
+                            <Link className={styles.linkNone} to="/profile">Usuário</Link>
+                        </p>
+                        <p>
+                            <Link className={styles.linkNone} to="/">Sair</Link>
+                        </p>   
+                    </>
+                ) : (
+                    <>
+                        <p>
+                            <Link className={styles.linkNone} to="/register">Casdastrar</Link>
+                        </p>
+                        <p>
+                            <Link className={styles.linkNone} to="/login">Login</Link>
+                        </p>
+                    </>
+                )}
             </nav>
         </>
     );

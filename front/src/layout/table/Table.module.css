@@ -1,3 +1,7 @@
 th {
     cursor: pointer;
 }
+
+.chapterNumber {
+    text-decoration: underline;
+}

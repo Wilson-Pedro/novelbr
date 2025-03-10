@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './Card.module.css';
 
-export default function Card({ imagePath="", title="", charpter=0 }) {
+export default function Card({ imagePath="", title="", author="" }) {
     return(
         <div className={styles.containerCard}>
             <div className={styles.containerImage}>
@@ -9,7 +9,7 @@ export default function Card({ imagePath="", title="", charpter=0 }) {
             </div>
             <div className={styles.containerInfo}>
                 <h3><abbr title={title}>{title}</abbr></h3>
-                <p>Capítulo {charpter}</p>
+                <p>by {author}</p>
             </div>
         </div>
     );

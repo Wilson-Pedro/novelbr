@@ -30,7 +30,7 @@ export default function Login() {
                     </div>
 
                     <div className={styles.buttonContainer}>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <Link to="/homeUser"><button type="submit" class="btn btn-primary">Login</button></Link>
                         <Link to="/"><button type="button" class="btn btn-danger">Voltar</button></Link>
                     </div>
                 </form>
