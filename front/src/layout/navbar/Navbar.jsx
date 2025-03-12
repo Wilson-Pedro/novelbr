@@ -1,6 +1,12 @@
 import React from 'react';
 import styles from './Navbar.module.css';
 import Search from './../../component/search/Search';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+
+import Dropdown from 'react-bootstrap/Dropdown';
+
 import  { Link } from 'react-router-dom';
 
 export default function Navbar({ perfil=false }) {
@@ -16,12 +22,22 @@ export default function Navbar({ perfil=false }) {
             <nav>
                 {perfil !== false ? (
                     <>
-                        <p>
+                        <Dropdown>
+                            <Dropdown.Toggle variant='Warning'>
+                                Usuário
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className={styles.dropdownMenu}>
+                                <Dropdown.Item className={styles.dropdownItem} href="/profile">Perfil</Dropdown.Item>
+                                <Dropdown.Item className={styles.dropdownItem} href="/">Sair</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+                        {/* <p>
                             <Link className={styles.linkNone} to="/profile">Usuário</Link>
                         </p>
                         <p>
                             <Link className={styles.linkNone} to="/">Sair</Link>
-                        </p>   
+                        </p>    */}
                     </>
                 ) : (
                     <>

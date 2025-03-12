@@ -20,7 +20,7 @@ export default function Home() {
             </section>
             <div className={styles.lastReleases}>
                 <div className={styles.divTitle}>
-                    <h1>MAIS POPULÁRES</h1>
+                    <h1>MAIS POPULARES</h1>
                 </div>
                 <div className={styles.cardContainer}>
                     <Card

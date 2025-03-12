@@ -55,6 +55,40 @@ nav {
     cursor: pointer;
 }
 
+.dropdownToggle {
+    border: 1px 1px 1px 1px solid black;
+}
+
+.dropdownToggle:hover {
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
+}
+
+.dropdownMenu {
+    background-image: linear-gradient(rgb(233, 158, 18), rgb(141, 96, 13));
+    color: rgb(53, 34, 3);
+    border: 2px solid rgb(53, 34, 3);
+    padding: 5%;
+    font-weight: bold;
+}
+
+.dropdownMenu:hover {
+    color: rgb(0, 0, 0);
+    border: 2px solid rgb(0, 0, 0);
+    font-weight: bold;
+}
+
+.dropdownItem {
+    color: rgb(53, 34, 3);
+    font-weight: bold;
+}
+
+.dropdownItem:hover {
+    color: rgb(17, 11, 1);
+    background-color: rgb(127, 82, 10);
+    font-weight: bold;
+}
+
 nav p {
     color: rgb(41, 27, 2);
     border: 2px solid rgb(41, 27, 2);
