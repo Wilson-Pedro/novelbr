@@ -28,7 +28,9 @@ export default function Profile() {
                 <div className={styles.divMain}>
                     <h1>Configurações ⚙️</h1>
                     <p className={styles.info}>Crie uma nova jornada.</p>
-                    <button type="button" class="btn btn-success">Criar História</button>
+                    <button type="button" class="btn btn-success">
+                        <Link className={styles.linkNone} to="/novelRegister">Criar História</Link>
+                    </button>
                 </div>
 
                 <hr />

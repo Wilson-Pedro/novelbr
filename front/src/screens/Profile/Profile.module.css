@@ -82,3 +82,8 @@
     width: 90%;
     height: 1%;
 }
+
+.linkNone {
+    text-decoration: none;
+    color: inherit;
+}
