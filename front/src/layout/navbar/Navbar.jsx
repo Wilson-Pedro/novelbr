@@ -32,12 +32,6 @@ export default function Navbar({ perfil=false }) {
                                 <Dropdown.Item className={styles.dropdownItem} href="/">Sair</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                        {/* <p>
-                            <Link className={styles.linkNone} to="/profile">Usuário</Link>
-                        </p>
-                        <p>
-                            <Link className={styles.linkNone} to="/">Sair</Link>
-                        </p>    */}
                     </>
                 ) : (
                     <>
