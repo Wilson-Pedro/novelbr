@@ -72,7 +72,11 @@ form input {
 }
 
 .buttonContainer {
-    margin-top: 10%;
+    margin-top: 20%;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+
+.buttonContainer button {
+    margin-left: 4%;
 }

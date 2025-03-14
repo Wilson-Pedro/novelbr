@@ -9,7 +9,9 @@ import imagePath2 from '../../assets/Isto é vida.jpg';
 import imagePath3 from '../../assets/Trem para o Nunca.jpg';
 import imagePath4 from '../../assets/Jornada para o Além.jpg';
 
+
 export default function Home() {
+
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>

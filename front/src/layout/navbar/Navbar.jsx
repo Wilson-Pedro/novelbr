@@ -7,20 +7,30 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
-import  { Link } from 'react-router-dom';
+import  { Link, useNavigate } from 'react-router-dom';
 
-export default function Navbar({ perfil=false }) {
+export default function Navbar({ userAuthenticate=false }) {
+
+    const navigate = useNavigate();
+    
+    function goToHome() {
+        if(userAuthenticate === true) {
+            navigate("/homeUser");
+        } else {
+            navigate("/");
+        }
+    }
 
     return(
         <>
             <div className={styles.divTitle}>
-                <h1>NOVELS BR</h1>
+                <h1 onClick={goToHome}>NOVELS BR</h1>
             </div>
             <div className={styles.search}>
                 <Search />
             </div>
             <nav>
-                {perfil !== false ? (
+                {userAuthenticate !== false ? (
                     <>
                         <Dropdown>
                             <Dropdown.Toggle variant='Warning'>
@@ -28,6 +38,7 @@ export default function Navbar({ perfil=false }) {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu className={styles.dropdownMenu}>
+                                <Dropdown.Item className={styles.dropdownItem} onClick={goToHome}>Home</Dropdown.Item>
                                 <Dropdown.Item className={styles.dropdownItem} href="/profile">Perfil</Dropdown.Item>
                                 <Dropdown.Item className={styles.dropdownItem} href="/">Sair</Dropdown.Item>
                             </Dropdown.Menu>

@@ -11,7 +11,7 @@ export default function NovelRegister() {
         <div className={styles.container}>
             <nav className={styles.navbar}>
                 <Navbar 
-                    perfil={true}
+                    userAuthenticate={true}
                 />
             </nav>
             <div className={styles.main}>

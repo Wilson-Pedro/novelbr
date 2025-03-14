@@ -10,7 +10,7 @@ export default function Novel() {
         <div className={styles.container}>
             <nav className={styles.navbar}>
                 <Navbar 
-                    perfil={true}
+                    userAuthenticate={false}
                 />
             </nav>
             <div className={styles.main}>

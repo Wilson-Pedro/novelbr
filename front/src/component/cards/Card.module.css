@@ -67,3 +67,8 @@ max-width: 100%; Garante que o texto não ultrapasse a div */
 .containerInfo p:hover {
     color: rgb(0, 1, 55);
 }
+
+
+.linkNone {
+    text-decoration: none;
+}

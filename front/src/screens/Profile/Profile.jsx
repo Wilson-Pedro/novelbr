@@ -9,11 +9,12 @@ import { Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Profile() {
+
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
                 <Navbar 
-                    perfil={true}
+                    userAuthenticate={true}
                 />
             </nav>
             <div className={styles.main}>

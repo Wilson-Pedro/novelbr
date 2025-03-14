@@ -15,7 +15,7 @@ export default function HomeUser() {
         <div className={styles.container}>
             <nav className={styles.navbar}>
                 <Navbar 
-                    perfil={true}
+                    userAuthenticate={true}
                 />
             </nav>
             <section>

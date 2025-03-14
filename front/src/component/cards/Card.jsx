@@ -1,9 +1,18 @@
 import React from 'react';
 import styles from './Card.module.css';
 
+import { useNavigate } from 'react-router-dom';
+
 export default function Card({ imagePath="", title="", author="" }) {
+
+    const navigate = useNavigate();
+
+    function navigateToNovel() {
+        navigate("/novel");
+    }
+
     return(
-        <div className={styles.containerCard}>
+        <div className={styles.containerCard} onClick={navigateToNovel}>
             <div className={styles.containerImage}>
                 <img className={styles.responsiveImage} src={imagePath} />
             </div>
