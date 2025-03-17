@@ -29,21 +29,25 @@ export default function Home() {
                         imagePath={imagePath1}
                         title="A casa ao Lado."
                         author="All Star"
+                        userAuthenticate={false}
                     />
                     <Card
                         imagePath={imagePath2}
                         title="Isto é Vida."
                         author="J. Key"
+                        userAuthenticate={false}
                     />
                     <Card
                         imagePath={imagePath3}
                         title="Trem para o Nunca."
                         author="Light"
+                        userAuthenticate={false}
                     />
                     <Card
                         imagePath={imagePath4}
                         title="Jornada para o Além."
                         author="S. Elppa"
+                        userAuthenticate={false}
                     />
                 </div>
             </div>

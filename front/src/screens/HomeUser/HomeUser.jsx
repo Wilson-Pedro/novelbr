@@ -30,21 +30,25 @@ export default function HomeUser() {
                         imagePath={imagePath1}
                         title="A casa ao Lado."
                         author="All Star"
+                        userAuthenticate={true}
                     />
                     <Card
                         imagePath={imagePath2}
                         title="Isto é Vida."
                         author="J. Key"
+                        userAuthenticate={true}
                     />
                     <Card
                         imagePath={imagePath3}
                         title="Trem para o Nunca."
                         author="Light"
+                        userAuthenticate={true}
                     />
                     <Card
                         imagePath={imagePath4}
                         title="Jornada para o Além."
                         author="S. Elppa"
+                        userAuthenticate={true}
                     />
                 </div>
             </div>

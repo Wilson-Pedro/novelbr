@@ -1,9 +1,21 @@
 import React from 'react';
 import styles from './UserRegister.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
 
 export default function UserRegister() {
+
+    const navigate = useNavigate();
+
+    function goToHome() {
+        navigate('/');
+    }
+
+    function goToHomeUser() {
+        navigate('/homeUser');
+    }
+
     return(
         <div className={styles.container}>
             <div className={styles.formContainer}>
@@ -48,8 +60,8 @@ export default function UserRegister() {
                     </div>
 
                     <div className={styles.buttonContainer}>
-                        <button type="submit" class="btn btn-primary">Cadastrar</button>
-                        <Link to="/"><button type="button" class="btn btn-danger">Cancelar</button></Link>
+                        <button onClick={goToHomeUser} type="submit" class="btn btn-primary">Cadastrar</button>
+                        <button onClick={goToHome} type="button" class="btn btn-danger">Cancelar</button>
                     </div>
                 </form>
             </div>

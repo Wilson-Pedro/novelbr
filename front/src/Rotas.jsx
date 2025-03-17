@@ -19,7 +19,7 @@ export default function Rotas() {
                 <Route path="/profile" element={ <Profile /> } exact />
                 <Route path="/homeUser" element={ <HomeUser /> } exact />
                 <Route path="/novelRegister" element={ <NovelRegister /> } exact />
-                <Route path="/novel" element={ <Novel /> } exact />
+                <Route path="/novel/:novelName" element={ <Novel /> } exact />
             </Routes>
         </BrowserRouter>
     );

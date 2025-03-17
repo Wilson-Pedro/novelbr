@@ -1,9 +1,21 @@
 import React from 'react';
 import styles from './Login.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Link } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+    const navigate = useNavigate();
+
+    function goToHome() {
+        navigate('/');
+    }
+
+    function goToHomeUser() {
+        navigate('/homeUser');
+    }
+
     return(
         <div className={styles.container}>
             <div className={styles.formContainer}>
@@ -30,8 +42,8 @@ export default function Login() {
                     </div>
 
                     <div className={styles.buttonContainer}>
-                        <Link to="/homeUser"><button type="submit" class="btn btn-primary">Login</button></Link>
-                        <Link to="/"><button type="button" class="btn btn-danger">Voltar</button></Link>
+                        <button onClick={goToHomeUser} type="submit" class="btn btn-primary">Login</button>
+                        <button onClick={goToHome} class="btn btn-danger">Voltar</button>
                     </div>
                 </form>
             </div>

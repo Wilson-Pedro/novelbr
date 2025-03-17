@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from './Novel.module.css';
 import Navbar from './../../layout/navbar/Navbar';
 import Footer from './../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
 
+import { useParams, useLocation } from 'react-router-dom';
+
 export default function Novel() {
+
+    const params = useParams();
+    const novelName =  params.novelName;
+
+    const location = useLocation();
+    const { isAuth } = location.state || {};
+
+    const[userAuthenticate, setUserAuthenticate] = useState(isAuth);
+
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
                 <Navbar 
-                    userAuthenticate={false}
+                    userAuthenticate={userAuthenticate}
                 />
             </nav>
             <div className={styles.main}>
@@ -19,7 +30,7 @@ export default function Novel() {
                         <img className={"img-fluid"} src={imagePath} />
                     </div>
                     <div className={styles.containerInfo}>
-                        <h1>Jornada para o Além</h1>
+                        <h1>{novelName}</h1>
                         <p><strong>Autor:</strong> S. Elppa</p>
                         <p><strong>Gênros:</strong> Aventura, Ação, Drama, Medieval, Magia.</p>
                         <h4>Sinopse</h4>
