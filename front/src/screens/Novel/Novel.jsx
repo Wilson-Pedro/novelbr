@@ -5,7 +5,7 @@ import Footer from './../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
 
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
 
 export default function Novel() {
 
@@ -14,8 +14,15 @@ export default function Novel() {
 
     const location = useLocation();
     const { isAuth } = location.state || {};
+    const userAuth = { isAuth: isAuth }
+
+    const navigate = useNavigate();
 
     const[userAuthenticate, setUserAuthenticate] = useState(isAuth);
+    
+    function goToChapter(chapterNumber) {
+        navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });
+    }
 
     return(
         <div className={styles.container}>
@@ -47,14 +54,14 @@ export default function Novel() {
                 <div className={styles.capitulos}>
                     <h1>Capítulos</h1>
                     <ul>
-                        <li>1º capítulo.</li>
-                        <li>2º capítulo.</li>
-                        <li>3º capítulo.</li>
-                        <li>4º capítulo.</li>
-                        <li>5º capítulo.</li>
-                        <li>6º capítulo.</li>
-                        <li>7º capítulo.</li>
-                        <li>8º capítulo.</li>
+                        <li onClick={() => goToChapter(1)}>1º capítulo.</li>
+                        <li onClick={() => goToChapter(2)}>2º capítulo.</li>
+                        <li onClick={() => goToChapter(3)}>3º capítulo.</li>
+                        <li onClick={() => goToChapter(4)}>4º capítulo.</li>
+                        <li onClick={() => goToChapter(5)}>5º capítulo.</li>
+                        <li onClick={() => goToChapter(6)}>6º capítulo.</li>
+                        <li onClick={() => goToChapter(7)}>7º capítulo.</li>
+                        <li onClick={() => goToChapter(8)}>8º capítulo.</li>
                     </ul>
                     
                 </div>

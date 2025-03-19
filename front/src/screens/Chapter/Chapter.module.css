@@ -32,93 +32,44 @@
 }
 
 .main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     background-color: white;
     width: 90%;
     height: 100%;
     box-shadow: 0px 0px 3px 0px black;
     border-radius: 7px;
+    padding-bottom: 5%;
 }
 
-.mainHead {
+.divTitle {
+    width: 100%;
+    color: rgb(63, 37, 0);
+    font-family: var(--fonte3);
+    text-align: center;
+    padding: 3%;
+}
+
+.divTitle h1 {
+    cursor: pointer;
+}
+
+.divTitle h1:hover {
+    color: rgb(29, 17, 0);
+}
+
+.divChapter {
     display: flex;
+    justify-content: center;
     align-items: center;
-    justify-content: space-around;
-    flex-direction: row;
-    width: 100%;
-    height: 50%;
-    padding: 1%;
+    flex-direction: column;
+    width: 80%;
 }
 
-.mainHead div {
-    border: 1px solid black;
-}
-
-.containerImage {
-    max-width: 25%;
-    border: 1x solid black;
-    background-color: coral;
-}
-
-.responsiveImage {
-    width: 100%;
-    height: 50%;
-    object-fit: contain;
-}
-
-.containerInfo {
-    padding: 2%;
-    max-width: 60%;
-    top: 0;
-}
-
-.containerInfo h1, p, h4 {
-    font-family: var(--fonte3);
-}
-
-.containerInfo h1 {
-    text-align: center;
-    color: rgb(63, 37, 0);
-}
-
-.containerInfo p {
+.divChapter p {
     margin-top: 4%;
-    text-align: justify;
-    font-size: 2.4vh;
 }
 
-.containerInfo h4 {
-    font-weight: bold;
-}
 
-.capitulos {
-    width: 100%;
-    text-align: center;
-    font-family: var(--fonte3);
-    color: rgb(63, 37, 0);
-    padding: 5%;
-}
-
-.capitulos ul {
-    margin-top: 5%;
-    cursor: pointer;
-    text-align: left;
-}
-
-.capitulos li {
-    cursor: pointer;
-    text-align: left;
-    margin-top: 1%;
-}
-
-.capitulos li:hover {
-    color: rgb(0, 0, 0);
-}
-
-.linkNone {
-    text-decoration: none;
-    color: inherit;
-}
-
-.linkNone {
-    text-decoration: none;
-}

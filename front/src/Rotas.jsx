@@ -8,6 +8,7 @@ import UserRegister from './screens/UserRegister/UserRegister';
 import Profile from './screens/Profile/Profile';
 import NovelRegister from './screens/NovelRegister/NovelRegister';
 import Novel from './screens/Novel/Novel';
+import Chapter from './screens/Chapter/Chapter';
 
 export default function Rotas() {
     return(
@@ -20,6 +21,7 @@ export default function Rotas() {
                 <Route path="/homeUser" element={ <HomeUser /> } exact />
                 <Route path="/novelRegister" element={ <NovelRegister /> } exact />
                 <Route path="/novel/:novelName" element={ <Novel /> } exact />
+                <Route path="/novel/:novelName/chapter/:chapterNumber" element={ <Chapter /> } exact />
             </Routes>
         </BrowserRouter>
     );
