@@ -60,6 +60,12 @@
     color: rgb(29, 17, 0);
 }
 
+.divButtons {
+    width: 18%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .divChapter {
     display: flex;
     justify-content: center;

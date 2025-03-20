@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './Chapter.module.css';
 import Navbar from './../../layout/navbar/Navbar';
 import Footer from './../../layout/footer/Rodape';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation } from 'react-router-dom';
 
 export default function Chapter() {
@@ -19,6 +20,10 @@ export default function Chapter() {
             <div className={styles.main}>
                 <div className={styles.divTitle}>
                     <h1>Isto é vida.</h1>
+                </div>
+                <div className={styles.divButtons}>
+                    <button type="button" class="btn btn-warning">&#60; Anterior </button>
+                    <button type="button" class="btn btn-warning">Próximo &#62;</button>
                 </div>
                 <div className={styles.divChapter}>
                     <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Incidunt eligendi fugiat 
@@ -121,6 +126,10 @@ export default function Chapter() {
                          ex dolores eos adipisci nihil nam quia provident, iure consequuntur quae 
                          blanditiis! Molestias iste sit voluptatum rem culpa.
                     </p>
+                </div> <br /><br />
+                <div className={styles.divButtons}>
+                    <button type="button" class="btn btn-warning">&#60; Anterior </button>
+                    <button type="button" class="btn btn-warning">Próximo &#62;</button>
                 </div>
             </div>
             <Footer />
