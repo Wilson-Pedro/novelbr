@@ -9,6 +9,7 @@ import Profile from './screens/Profile/Profile';
 import NovelRegister from './screens/NovelRegister/NovelRegister';
 import Novel from './screens/Novel/Novel';
 import Chapter from './screens/Chapter/Chapter';
+import ChapterRegister from './screens/ChapterRegister/ChapterRegister';
 
 export default function Rotas() {
     return(
@@ -22,6 +23,7 @@ export default function Rotas() {
                 <Route path="/novelRegister" element={ <NovelRegister /> } exact />
                 <Route path="/novel/:novelName" element={ <Novel /> } exact />
                 <Route path="/novel/:novelName/chapter/:chapterNumber" element={ <Chapter /> } exact />
+                <Route path="/chapterRegister" element={ <ChapterRegister /> } exact />
             </Routes>
         </BrowserRouter>
     );

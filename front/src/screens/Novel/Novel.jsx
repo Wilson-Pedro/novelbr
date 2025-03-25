@@ -5,7 +5,7 @@ import Footer from './../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
 
-import { useParams, useLocation, useNavigate, Link } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 export default function Novel() {
 
