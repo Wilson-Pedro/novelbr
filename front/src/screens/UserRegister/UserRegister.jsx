@@ -14,6 +14,7 @@ export default function UserRegister() {
 
     function goToHomeUser() {
         navigate('/homeUser');
+        
     }
 
     return(
