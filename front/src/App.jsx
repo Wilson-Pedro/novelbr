@@ -3,7 +3,7 @@ import Rotas from './Rotas';
 
 function App() {
   return (
-    <Rotas />
+      <Rotas />
   );
 }
 

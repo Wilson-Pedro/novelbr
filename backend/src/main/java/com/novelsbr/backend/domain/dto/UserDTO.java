@@ -1,7 +1,5 @@
 package com.novelsbr.backend.domain.dto;
 
-import java.time.LocalDate;
-
 import com.novelsbr.backend.domain.entities.User;
 
 public class UserDTO {
@@ -14,22 +12,25 @@ public class UserDTO {
 	
 	private String email;
 	
-	private LocalDate dateRegistrion;
+	private String password;
+	
+	public UserDTO() {
+	}
 	
 	public UserDTO(User user) {
 		this.id = user.getId();
 		this.name = user.getName();
 		this.username = user.getUsername();
 		this.email = user.getEmail();
-		this.dateRegistrion = user.getDateRegistrion();
+		this.password = user.getPassword();
 	}
 
-	public UserDTO(Long id, String name, String username, String email, LocalDate dateRegistrion) {
+	public UserDTO(Long id, String name, String username, String email, String password) {
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.email = email;
-		this.dateRegistrion = dateRegistrion;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -64,11 +65,11 @@ public class UserDTO {
 		this.email = email;
 	}
 
-	public LocalDate getDateRegistrion() {
-		return dateRegistrion;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setDateRegistrion(LocalDate dateRegistrion) {
-		this.dateRegistrion = dateRegistrion;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

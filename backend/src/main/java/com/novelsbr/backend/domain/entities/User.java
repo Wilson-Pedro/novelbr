@@ -24,21 +24,26 @@ public class User {
 	
 	private String email;
 	
+	private String password;
+	
 	private LocalDate dateRegistrion = LocalDate.now();
+	
+	public User() {
+	}
 	
 	public User(UserDTO userDTO) {
 		this.name = userDTO.getName();
 		this.username = userDTO.getUsername();
 		this.email = userDTO.getEmail();
-		this.dateRegistrion = userDTO.getDateRegistrion();
+		this.password = userDTO.getPassword();
 	}
 	
-	public User(Long id, String name, String username, String email, LocalDate dateRegistrion) {
+	public User(Long id, String name, String username, String email, String password) {
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.email = email;
-		this.dateRegistrion = dateRegistrion;
+		this.password = password;
 	}
 
 	public Long getId() {
@@ -71,6 +76,14 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public LocalDate getDateRegistrion() {
