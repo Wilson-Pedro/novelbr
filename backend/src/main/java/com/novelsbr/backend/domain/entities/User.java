@@ -1,5 +1,6 @@
 package com.novelsbr.backend.domain.entities;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 import com.novelsbr.backend.domain.dto.UserDTO;
@@ -12,7 +13,8 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TBL_USER")
-public class User {
+public class User implements Serializable {
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +28,7 @@ public class User {
 	
 	private String password;
 	
-	private LocalDate dateRegistrion = LocalDate.now();
+	private LocalDate dateRegistrion;
 	
 	public User() {
 	}
@@ -44,6 +46,7 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.dateRegistrion = LocalDate.now();
 	}
 
 	public Long getId() {

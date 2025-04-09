@@ -8,22 +8,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.novelsbr.backend.domain.dto.UserDTO;
-import com.novelsbr.backend.services.UserService;
+import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.services.NovelService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/novels")
 @CrossOrigin("*")
-public class UserController {
-
+public class NovelController {
+	
 	@Autowired
-	private UserService userService;
-	
-	@PostMapping("/register")
-	public ResponseEntity<Void> save(@RequestBody UserDTO userDTO) {
-		userService.save(userDTO);
+	private NovelService novelService;
+
+	@PostMapping("/")
+	public ResponseEntity<Void> save(@RequestBody NovelDTO novelDTO) {
+		novelService.save(novelDTO);
 		return ResponseEntity.status(201).build();
-		
 	}
-	
 }

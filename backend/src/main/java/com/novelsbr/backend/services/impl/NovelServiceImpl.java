@@ -1,0 +1,22 @@
+package com.novelsbr.backend.services.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.services.NovelService;
+
+@Service
+public class NovelServiceImpl implements NovelService {
+	
+	@Autowired
+	private NovelRepository novelRepository;
+
+	@Override
+	public void save(NovelDTO novelDTO) {
+		novelRepository.save(new Novel(novelDTO));
+	}
+
+}
