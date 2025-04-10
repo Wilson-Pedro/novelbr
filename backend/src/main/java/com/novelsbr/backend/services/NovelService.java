@@ -1,8 +1,9 @@
 package com.novelsbr.backend.services;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Novel;
 
 public interface NovelService {
 
-	void save(NovelDTO novelDTO);
+	Novel save(NovelDTO novelDTO);
 }

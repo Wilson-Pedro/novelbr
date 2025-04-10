@@ -38,6 +38,7 @@ public class User implements Serializable {
 		this.username = userDTO.getUsername();
 		this.email = userDTO.getEmail();
 		this.password = userDTO.getPassword();
+		this.dateRegistrion = LocalDate.now();
 	}
 	
 	public User(Long id, String name, String username, String email, String password) {

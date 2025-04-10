@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.UserDTO;
+import com.novelsbr.backend.domain.entities.User;
 import com.novelsbr.backend.services.UserService;
 
 @RestController
@@ -20,9 +21,9 @@ public class UserController {
 	private UserService userService;
 	
 	@PostMapping("/")
-	public ResponseEntity<Void> save(@RequestBody UserDTO userDTO) {
-		userService.save(userDTO);
-		return ResponseEntity.status(201).build();
+	public ResponseEntity<UserDTO> save(@RequestBody UserDTO userDTO) {
+		User user = userService.save(userDTO);
+		return ResponseEntity.status(201).body(new UserDTO(user));
 		
 	}
 	

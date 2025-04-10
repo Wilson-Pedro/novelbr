@@ -147,7 +147,7 @@ export default function NovelRegister() {
                             <div class="form-check">
                                 <input className="form-check-input" type="checkbox" value="THRILLER" onChange={(e) => addGenders(e)}  />
                                 <label class="form-check-label" for="checkChecked">
-                                    THRILLER
+                                    Triller
                                 </label>
                             </div>
                         </div>
@@ -179,7 +179,7 @@ export default function NovelRegister() {
                         </div>
                     </div>
 
-                    {genders}
+                    
 
                     <div className={styles.formDiv}>
                         <label htmlFor="">Sinopse</label>
