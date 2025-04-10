@@ -8,15 +8,16 @@ public enum Gender {
 	HISTORICAL(4, "Historical"),
 	HORROR(5, "Horror"),
 	LGBTQ(6, "LGBTQ"),
-	MAGICAL_REALISM(7, "Magical Realism"),
+	MAGICAL(7, "Magical"),
 	MYSTERY(8, "Mistery"),
-	NEW_ADULT(9, "New Adult"),
+	ADULT(9, "New Adult"),
 	ROMANCE(10, "Romance"),
 	SCIENCE_FICTION(11, "Science Fiction"),
 	THRILLER(12, "Thriller"),
 	WESTERN(13, "Western"),
-	YOUNG_ADULT(14, "Young Adult"),
-	ACTION(15, "Action");
+	SUSPENSEFUL(14, "Suspenseful"),
+	ACTION(15, "Action"),
+	MEDIEVAL(16, "Medieval");
 	
 	private Integer cod;
 	

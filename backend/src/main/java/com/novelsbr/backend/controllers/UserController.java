@@ -19,7 +19,7 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@PostMapping("/register")
+	@PostMapping("/")
 	public ResponseEntity<Void> save(@RequestBody UserDTO userDTO) {
 		userService.save(userDTO);
 		return ResponseEntity.status(201).build();

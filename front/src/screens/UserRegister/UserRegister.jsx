@@ -15,10 +15,10 @@ export default function UserRegister() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const submit = async () => {
+    const submitUser = async () => {
 
         try {
-            const response = await axios.post("http://localhost:8080/users/register", {
+            const response = await axios.post("http://localhost:8080/users/", {
                 name,
                 username,
                 email,
@@ -46,7 +46,7 @@ export default function UserRegister() {
                 <div className={styles.divLogin}>
                     <h3>CADASTRO</h3>
                 </div>
-                <form onSubmit={submit}>
+                <form onSubmit={submitUser}>
                     <div className={styles.inputContainer}>
                         <label htmlFor="">Nome Completo:</label><br />
                         <input

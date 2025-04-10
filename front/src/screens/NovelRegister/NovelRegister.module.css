@@ -63,6 +63,19 @@ form {
     border: 1px solid black;
 }
 
+.div_genders {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 100%;
+    margin-left: 10%;
+}
+
+.div_genders input {
+    border: 1px solid black;
+}
+
 .divBtn {
     margin-top: 8%;
     display: flex;

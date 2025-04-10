@@ -16,6 +16,7 @@ public class NovelServiceImpl implements NovelService {
 
 	@Override
 	public void save(NovelDTO novelDTO) {
+		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
 		novelRepository.save(new Novel(novelDTO));
 	}
 

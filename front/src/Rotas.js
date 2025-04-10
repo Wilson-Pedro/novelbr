@@ -6,10 +6,10 @@ import HomeUser from './screens/HomeUser/HomeUser.jsx';
 import Login from './screens/Login/Login.jsx';
 import UserRegister from './screens/UserRegister/UserRegister';
 import Profile from './screens/Profile/Profile.jsx';
-import NovelRegister from './screens/NovelRegister/NovelRegister.jsx';
+import NovelRegister from './screens/NovelRegister/NovelRegister';
 import Novel from './screens/Novel/Novel.jsx';
 import Chapter from './screens/Chapter/Chapter.jsx';
-import ChapterRegister from './screens/ChapterRegister/ChapterRegister.jsx';
+import ChapterRegister from './screens/ChapterRegister/ChapterRegister';
 
 export default function Rotas() {
     return(
