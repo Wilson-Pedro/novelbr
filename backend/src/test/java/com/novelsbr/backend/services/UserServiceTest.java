@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.novelsbr.backend.domain.dto.UserDTO;
 import com.novelsbr.backend.domain.entities.User;
 import com.novelsbr.backend.repositories.UserRepository;
-import com.novelsbr.backend.services.UserService;
 
 import jakarta.transaction.Transactional;
 
@@ -44,5 +43,4 @@ class UserServiceTest {
 		
 		assertEquals(1, userRepository.count());
 	}
-
 }

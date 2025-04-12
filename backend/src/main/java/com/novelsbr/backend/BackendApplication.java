@@ -1,16 +1,8 @@
 package com.novelsbr.backend;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.novelsbr.backend.domain.dto.NovelDTO;
-import com.novelsbr.backend.enums.Gender;
-import com.novelsbr.backend.services.NovelService;
 
 @SpringBootApplication
 public class BackendApplication implements CommandLineRunner {
