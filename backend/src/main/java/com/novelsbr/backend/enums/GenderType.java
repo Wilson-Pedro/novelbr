@@ -1,6 +1,6 @@
 package com.novelsbr.backend.enums;
 
-public enum Gender {
+public enum GenderType {
 
 	ADVENTURE(1, "Adventure"),
 	DYSTOPIA(2, "Dystopia"),
@@ -23,7 +23,7 @@ public enum Gender {
 	
 	private String description;
 	
-	private Gender(Integer cod, String description) {
+	private GenderType(Integer cod, String description) {
 		this.cod = cod;
 		this.description = description;
 	}

@@ -1,7 +1,9 @@
 package com.novelsbr.backend.domain.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 import com.novelsbr.backend.domain.dto.UserDTO;
 
@@ -28,7 +30,8 @@ public class User implements Serializable {
 	
 	private String password;
 	
-	private LocalDate dateRegistrion;
+	@CreationTimestamp
+	private LocalDateTime dateRegistrion;
 	
 	public User() {
 	}
@@ -38,7 +41,6 @@ public class User implements Serializable {
 		this.username = userDTO.getUsername();
 		this.email = userDTO.getEmail();
 		this.password = userDTO.getPassword();
-		this.dateRegistrion = LocalDate.now();
 	}
 	
 	public User(Long id, String name, String username, String email, String password) {
@@ -47,7 +49,6 @@ public class User implements Serializable {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.dateRegistrion = LocalDate.now();
 	}
 
 	public Long getId() {
@@ -90,11 +91,7 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public LocalDate getDateRegistrion() {
+	public LocalDateTime getDateRegistrion() {
 		return dateRegistrion;
-	}
-
-	public void setDateRegistrion(LocalDate dateRegistrion) {
-		this.dateRegistrion = dateRegistrion;
 	}
 }

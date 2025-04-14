@@ -1,11 +1,12 @@
 package com.novelsbr.backend.domain.dto;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.enums.Gender;
+import com.novelsbr.backend.domain.entities.User;
 
 public class NovelDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -14,7 +15,7 @@ public class NovelDTO implements Serializable {
 	
 	private String novelName;
 	
-	private String author;
+	private User author;
 	
 	private Set<Gender> genders;
 	
@@ -22,7 +23,7 @@ public class NovelDTO implements Serializable {
 	
 	private String imageUri;
 	
-	private LocalDate dateRegistrion;
+	private LocalDateTime dateRegistrion;
 	
 	public NovelDTO() {
 	}
@@ -37,7 +38,7 @@ public class NovelDTO implements Serializable {
 		this.dateRegistrion = novel.getDateRegistrion();
 	}
 
-	public NovelDTO(Long id, String novelName, String author, Set<Gender> genders, String synopsis, String imageUri) {
+	public NovelDTO(Long id, String novelName, User author, Set<Gender> genders, String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
 		this.author = author;
@@ -62,11 +63,11 @@ public class NovelDTO implements Serializable {
 		this.novelName = novelName;
 	}
 
-	public String getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
@@ -94,11 +95,7 @@ public class NovelDTO implements Serializable {
 		this.imageUri = imageUri;
 	}
 
-	public LocalDate getDateRegistrion() {
+	public LocalDateTime getDateRegistrion() {
 		return dateRegistrion;
-	}
-
-	public void setDateRegistrion(LocalDate dateRegistrion) {
-		this.dateRegistrion = dateRegistrion;
 	}
 }

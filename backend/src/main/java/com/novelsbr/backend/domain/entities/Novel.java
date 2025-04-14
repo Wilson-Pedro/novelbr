@@ -1,18 +1,22 @@
 package com.novelsbr.backend.domain.entities;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Set;
 
-import com.novelsbr.backend.domain.dto.NovelDTO;
-import com.novelsbr.backend.enums.Gender;
+import org.hibernate.annotations.CreationTimestamp;
 
-import jakarta.persistence.ElementCollection;
+import com.novelsbr.backend.domain.dto.NovelDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -26,9 +30,16 @@ public class Novel implements Serializable {
 	
 	private String novelName;
 	
-	private String author;
+	@ManyToOne
+	@JoinColumn(name = "author_id")
+	private User author;
 	
-	@ElementCollection
+	@ManyToMany
+	@JoinTable(
+			name = "TBL_NOVEL_GENERO", 
+			joinColumns = @JoinColumn(name = "novel_id"), 
+			inverseJoinColumns = @JoinColumn(name = "genero_id")
+	)
 	private Set<Gender> genders;
 	
 	@Lob
@@ -36,7 +47,8 @@ public class Novel implements Serializable {
 	
 	private String imageUri;
 	
-	private LocalDate dateRegistrion;
+	@CreationTimestamp
+	private LocalDateTime dateRegistrion;
 	
 	public Novel() {
 	}
@@ -48,17 +60,15 @@ public class Novel implements Serializable {
 		this.synopsis = novelDTO.getSynopsis();
 		this.imageUri = novelDTO.getImageUri();
 		this.dateRegistrion = novelDTO.getDateRegistrion();
-		this.dateRegistrion = LocalDate.now();
 	}
 
-	public Novel(Long id, String novelName, String author, Set<Gender> genders, String synopsis, String imageUri) {
+	public Novel(Long id, String novelName, User author, Set<Gender> genders, String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
 		this.author = author;
 		this.genders = genders;
 		this.synopsis = synopsis;
 		this.imageUri = imageUri;
-		this.dateRegistrion = LocalDate.now();
 	}
 
 	public Long getId() {
@@ -77,11 +87,11 @@ public class Novel implements Serializable {
 		this.novelName = novelName;
 	}
 
-	public String getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(String author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
@@ -109,11 +119,8 @@ public class Novel implements Serializable {
 		this.imageUri = imageUri;
 	}
 
-	public LocalDate getDateRegistrion() {
+	public LocalDateTime getDateRegistrion() {
 		return dateRegistrion;
 	}
 
-	public void setDateRegistrion(LocalDate dateRegistrion) {
-		this.dateRegistrion = dateRegistrion;
-	}
 }

@@ -1,6 +1,6 @@
 package com.novelsbr.backend.services;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,9 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.enums.Gender;
+import com.novelsbr.backend.domain.entities.User;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.UserRepository;
 
 @SpringBootTest
 class NovelServiceTest {
@@ -24,21 +28,36 @@ class NovelServiceTest {
 	@Autowired
 	NovelRepository novelRepository;
 	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	User user = new User(null, "João", "AllStar", "joao@gmail.com", "1234");
+	
 	NovelDTO novelDTO = new NovelDTO();
+	
 	Set<Gender> genders = new HashSet<>();
 
 	@BeforeEach
 	void setUp() {
 		novelRepository.deleteAll();
+		genderRepository.deleteAll();
+		userRepository.deleteAll();
+		
+		for(GenderType type : GenderType.values()) {
+			genders.add(new Gender(null, type));
+		}
+		genderRepository.saveAll(genders);
+		userRepository.save(user);
 	}
 	
 	@Test
 	void save() {
-		
-		genders.add(Gender.ADVENTURE);
 		novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
-				"All Star", 
+				user, 
 				genders, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");

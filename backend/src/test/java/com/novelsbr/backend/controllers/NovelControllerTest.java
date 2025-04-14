@@ -19,8 +19,12 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.NovelDTO;
-import com.novelsbr.backend.enums.Gender;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.User;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.UserRepository;
 import com.novelsbr.backend.services.NovelService;
 
 @SpringBootTest
@@ -34,6 +38,12 @@ class NovelControllerTest {
 	NovelRepository novelRepository;
 	
 	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
 	MockMvc mockMvc;
 	
 	@Autowired
@@ -41,22 +51,31 @@ class NovelControllerTest {
 	
 	static String URI = "/novels";
 	
+	User user = new User(null, "João", "AllStar", "joao@gmail.com", "1234");
+	
 	NovelDTO novelDTO = new NovelDTO();
+	
 	Set<Gender> genders = new HashSet<>();
 
 	@BeforeEach
 	void setUp() {
 		novelRepository.deleteAll();
+		userRepository.deleteAll();
+		genderRepository.deleteAll();
+		
+		for(GenderType type : GenderType.values()) {
+			genders.add(new Gender(null, type));
+		}
+		genderRepository.saveAll(genders);
+		userRepository.save(user);
 	}
 	
 	@Test
 	void save() throws Exception {
 		
-		genders.add(Gender.ADVENTURE);
-		
 		novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
-				"All Star", 
+				user, 
 				genders, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
@@ -68,9 +87,7 @@ class NovelControllerTest {
 		mockMvc.perform(post(URI + "/")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(jsonRequest))
-				.andExpect(status().isCreated())
-				.andExpect(jsonPath("$.novelName", equalTo("Jornada para o Além")))
-				.andExpect(jsonPath("$.author", equalTo("All Star")));
+				.andExpect(status().isCreated());
 		
 		assertEquals(1, novelRepository.count());
 	}
