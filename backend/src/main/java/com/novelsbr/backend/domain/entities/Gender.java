@@ -23,6 +23,9 @@ public class Gender implements Serializable {
 	
 	@Enumerated(EnumType.STRING)
 	private GenderType genderType;
+	
+	public Gender() {
+	}
 
 	public Gender(Integer id, GenderType genderType) {
 		this.id = id;

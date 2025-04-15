@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './NovelRegister.module.css';
 import Navbar from './../../layout/navbar/Navbar';
 import Footer from './../../layout/footer/Rodape';
@@ -15,6 +15,8 @@ export default function NovelRegister() {
     const [genders, setGenders] = useState([]);
     const [synopsis, setSynopsis] = useState('');
 
+    const[gendersBackend, setGendersBackend] = useState([]);
+
     const submitNovel = async () => {
         try {
             const response = await axios.post("http://localhost:8080/novels/", {
@@ -27,6 +29,16 @@ export default function NovelRegister() {
             console.log(error)
         }
     }
+
+    useEffect(() => {
+        axios.get("http://localhost:8080/genders")
+        .then((res) => {
+            setGendersBackend(res.data);
+        })
+        .catch((error) => {
+            console.log(error)
+        })
+    }, []);
 
     function addGenders(e) {
         const gender = e.target.value;
@@ -44,7 +56,7 @@ export default function NovelRegister() {
             <div className={styles.main}>
                 <form onSubmit={submitNovel}>
                     <div className={styles.formDiv}>
-                        <label htmlFor="">Nome da Obra</label>
+                        <label>Nome da Obra</label>
                         <input
                             type="text"
                             class="form-control"
@@ -58,7 +70,7 @@ export default function NovelRegister() {
                     </div>
 
                     <div className={styles.formDiv}>
-                        <label htmlFor="">Autor</label>
+                        <label>Autor</label>
                         <input
                             type="text"
                             class="form-control"
@@ -72,10 +84,20 @@ export default function NovelRegister() {
                     </div>
 
                     <div className={styles.formDiv}>
-                        <label htmlFor="">Gênros</label>
+                        <label>Gênros</label>
                     </div>
                     <div className={styles.div_genders}>
-                        <div>
+                        {gendersBackend.map((gender, index) => (
+                            <>
+                                <div class="form-check">
+                                        <input className="form-check-input" type="checkbox" value={gender.genderType} onChange={(e) => addGenders(e)} />
+                                        <label class="form-check-label" for="checkDefault">
+                                            {gender.genderType}
+                                        </label>
+                                </div>
+                            </>
+                        ))}
+                        {/* <div>
                             <div class="form-check">
                                 <input className="form-check-input" type="checkbox" value="ADVENTURE" onChange={(e) => addGenders(e)} />
                                 <label class="form-check-label" for="checkDefault">
@@ -147,7 +169,7 @@ export default function NovelRegister() {
                             <div class="form-check">
                                 <input className="form-check-input" type="checkbox" value="THRILLER" onChange={(e) => addGenders(e)}  />
                                 <label class="form-check-label" for="checkChecked">
-                                    Triller
+                                    Thriller
                                 </label>
                             </div>
                         </div>
@@ -176,13 +198,13 @@ export default function NovelRegister() {
                                     Distopia
                                 </label>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
 
                     
 
                     <div className={styles.formDiv}>
-                        <label htmlFor="">Sinopse</label>
+                        <label>Sinopse</label>
                         <textarea
                             className="form-control"
                             value={synopsis}

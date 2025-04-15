@@ -64,12 +64,18 @@ form {
 }
 
 .div_genders {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-rows: 1fr;
+    grid-template-rows: repeat(6, auto);
+    gap: 10px;
+    font-size: 90%;
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
     width: 100%;
-    margin-left: 10%;
+    margin-left: 10%; */
 }
 
 .div_genders input {

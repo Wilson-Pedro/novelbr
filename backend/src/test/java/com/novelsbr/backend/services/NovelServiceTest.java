@@ -66,10 +66,9 @@ class NovelServiceTest {
 		
 		Novel novel = novelService.save(novelDTO);
 		assertEquals("Jornada para o Além", novel.getNovelName());
-		assertEquals("All Star", novel.getAuthor());
+		assertEquals(user, novel.getAuthor());
 		assertEquals(genders, novel.getGenders());
 		
 		assertEquals(1, novelRepository.count());
 	}
-
 }

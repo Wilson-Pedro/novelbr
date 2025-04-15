@@ -10,6 +10,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.novelsbr.backend.domain.dto.UserDTO;
 import com.novelsbr.backend.domain.entities.User;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -18,7 +20,13 @@ import jakarta.transaction.Transactional;
 class UserServiceTest {
 	
 	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
 	
 	@Autowired
 	UserService userService;
@@ -27,6 +35,8 @@ class UserServiceTest {
 	
 	@BeforeEach
 	void setUp() {
+		novelRepository.deleteAll();
+		genderRepository.deleteAll();
 		userRepository.deleteAll();
 	}
 

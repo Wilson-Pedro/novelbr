@@ -24,6 +24,10 @@ export default function Novel() {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });
     }
 
+    function goToChapterRegister() {
+        navigate('/chapterRegister');
+    }
+
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
@@ -50,6 +54,19 @@ export default function Novel() {
                         </p>
                     </div>
                 </div>
+                {userAuthenticate !== false ? (
+                    <>
+                        <div className={styles.div_btn}>
+                            <button 
+                                onClick={goToChapterRegister}
+                                type="button" 
+                                class="btn btn-warning"
+                            >Cadastrar Capítulo</button>
+                        </div>
+                    </>
+                ): (
+                    <></>
+                )}
                 <hr />
                 <div className={styles.capitulos}>
                     <h1>Capítulos</h1>

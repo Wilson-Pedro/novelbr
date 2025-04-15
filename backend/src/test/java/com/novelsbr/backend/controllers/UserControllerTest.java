@@ -16,6 +16,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.UserDTO;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.UserRepository;
 import com.novelsbr.backend.services.UserService;
 
@@ -24,7 +26,13 @@ import com.novelsbr.backend.services.UserService;
 class UserControllerTest {
 	
 	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
 	
 	@Autowired
 	UserService userService;
@@ -41,6 +49,8 @@ class UserControllerTest {
 	
 	@BeforeEach
 	void setUp() {
+		novelRepository.deleteAll();
+		genderRepository.deleteAll();
 		userRepository.deleteAll();
 	}
 	

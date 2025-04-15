@@ -19,10 +19,10 @@ export default function ChapterRegister() {
         height: 400
     }
 
-    const handleChange = (event) => {
-        const editorContent = event.target.value;
-        setContent(editorContent);
-    }
+    // const handleChange = (event) => {
+    //     const editorContent = event.target.value;
+    //     setContent(editorContent);
+    // }
 
     return(
         <div className={styles.container}>
@@ -40,7 +40,7 @@ export default function ChapterRegister() {
                         ref={editor}
                         value={content}
                         config={config}
-                        onBlur={handleChange}
+                        onBlur={(newContent) => setContent(newContent)}
                         onChange={(newContent) => {}}
                     />
                 </div>

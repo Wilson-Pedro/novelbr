@@ -8,10 +8,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
-import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.domain.entities.User;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
@@ -44,22 +41,22 @@ public class BackendApplication implements CommandLineRunner {
 		for(GenderType type : GenderType.values()) {
 			genders.add(new Gender(null, type));
 		}
-		
-		User user = new User(null, "João", "AllStar", "joao@gmail.com", "1234");
-		
-		Novel novel = new Novel(null, 
-				"Jornada para o Além", 
-				user, 
-				genders, 
-				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
-				"https://wallpapercave.com/wp/wp5044832.jpg");
-		
-		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novel);
-		
+//		
+//		User user = new User(null, "João", "AllStar", "joao@gmail.com", "1234");
+//		
+//		Novel novel = new Novel(null, 
+//				"Jornada para o Além", 
+//				user, 
+//				genders, 
+//				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
+//				"https://wallpapercave.com/wp/wp5044832.jpg");
+//		
+//		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novel);
+//		
 		genderRepository.saveAll(genders);
-		userRepository.save(user);
-		novelRepository.save(novel);
-		chapterRepository.save(chapter);
+//		userRepository.save(user);
+//		novelRepository.save(novel);
+//		chapterRepository.save(chapter);
 	}
 
 }
