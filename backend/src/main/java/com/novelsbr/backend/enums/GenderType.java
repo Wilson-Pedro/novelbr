@@ -2,45 +2,37 @@ package com.novelsbr.backend.enums;
 
 public enum GenderType {
 
-	ADVENTURE(1, "Adventure"),
-	DYSTOPIA(2, "Dystopia"),
-	FANTASY(3, "Fantasy"),
-	HISTORICAL(4, "Historical"),
+	ADVENTURE(1, "Aventura"),
+	DYSTOPIA(2, "Distopia"),
+	FANTASY(3, "Fantasia"),
+	HISTORICAL(4, "Histórico"),
 	HORROR(5, "Horror"),
 	LGBTQ(6, "LGBTQ"),
-	MAGICAL(7, "Magical"),
-	MYSTERY(8, "Mistery"),
-	ADULT(9, "New Adult"),
+	MAGICAL(7, "Mágico"),
+	MYSTERY(8, "Mistério"),
+	ADULT(9, "Adulto"),
 	ROMANCE(10, "Romance"),
-	SCIENCE_FICTION(11, "Science Fiction"),
+	SCIENCE_FICTION(11, "Ficção Científica"),
 	THRILLER(12, "Thriller"),
-	WESTERN(13, "Western"),
-	SUSPENSEFUL(14, "Suspenseful"),
-	ACTION(15, "Action"),
+	WESTERN(13, "Ocidente"),
+	SUSPENSEFUL(14, "Suspense"),
+	ACTION(15, "Ação"),
 	MEDIEVAL(16, "Medieval");
 	
 	private Integer cod;
 	
-	private String description;
+	private String type;
 	
-	private GenderType(Integer cod, String description) {
+	private GenderType(Integer cod, String type) {
 		this.cod = cod;
-		this.description = description;
+		this.type = type;
 	}
 
 	public Integer getCod() {
 		return cod;
 	}
 
-	public void setCod(Integer cod) {
-		this.cod = cod;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
+	public String getType() {
+		return type;
 	}
 }

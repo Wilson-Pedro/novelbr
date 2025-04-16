@@ -1,0 +1,27 @@
+package com.novelsbr.backend.controllers;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.repositories.GenderRepository;
+
+@RestController
+@RequestMapping("/genders")
+@CrossOrigin("*")
+public class GenderController {
+
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@GetMapping
+	public ResponseEntity<List<Gender>> findAll() {
+		return ResponseEntity.ok(genderRepository.findAll());
+	}
+}

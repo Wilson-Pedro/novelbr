@@ -1,0 +1,41 @@
+package com.novelsbr.backend.services;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.User;
+import com.novelsbr.backend.enums.Gender;
+import com.novelsbr.backend.repositories.NovelRepository;
+
+@SpringBootTest
+class NovelServiceTest {
+	
+	@Autowired
+	NovelService novelService;
+	
+	@Autowired
+	NovelRepository novelRepository;
+	
+	NovelDTO novelDTO = new NovelDTO();
+
+	@BeforeEach
+	void setUp() {
+		novelRepository.deleteAll();
+		
+		Set<Gender> genders = new HashSet<>();
+		genders.add(Gender.ADVENTURE);
+		
+		novelDTO = new NovelDTO(null, 
+				"Jornada para o Além", 
+				"All Star", 
+				genders, 
+				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
+				"https://wallpapercave.com/wp/wp5044832.jpg");
+	}
+
+}

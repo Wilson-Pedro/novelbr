@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.novelsbr.backend.domain.dto.GenderDTO;
 import com.novelsbr.backend.domain.entities.Gender;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.services.GenderService;
 
 @RestController
 @RequestMapping("/genders")
@@ -18,10 +19,12 @@ import com.novelsbr.backend.repositories.GenderRepository;
 public class GenderController {
 
 	@Autowired
-	GenderRepository genderRepository;
+	GenderService genderService;
 	
 	@GetMapping
-	public ResponseEntity<List<Gender>> findAll() {
-		return ResponseEntity.ok(genderRepository.findAll());
+	public ResponseEntity<List<GenderDTO>> findAll() {
+		List<Gender> genders = genderService.findAll();
+		List<GenderDTO> gendersDTO = genders.stream().map(x -> new GenderDTO(x)).toList();
+		return ResponseEntity.ok(gendersDTO);
 	}
 }

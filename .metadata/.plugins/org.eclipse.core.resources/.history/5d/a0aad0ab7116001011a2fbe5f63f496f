@@ -1,0 +1,25 @@
+package com.novelsbr.backend.services;
+
+import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.novelsbr.backend.repositories.NovelRepository;
+
+@SpringBootTest
+class NovelServiceTest {
+	
+	@Autowired
+	NovelService novelService;
+	
+	@Autowired
+	NovelRepository novelRepository;
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

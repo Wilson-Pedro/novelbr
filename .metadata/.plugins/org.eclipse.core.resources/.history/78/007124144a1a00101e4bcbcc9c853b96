@@ -1,0 +1,22 @@
+package com.novelsbr.backend.services.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.novelsbr.backend.domain.dto.ChapterDTO;
+import com.novelsbr.backend.domain.entities.Chapter;
+import com.novelsbr.backend.repositories.ChapterRepository;
+import com.novelsbr.backend.services.ChapterService;
+
+@Service
+public class GenderServiceImpl implements ChapterService {
+	
+	@Autowired
+	private ChapterRepository chapterRepository;
+
+	@Override
+	public Chapter save(ChapterDTO chapterDTO) {
+		return chapterRepository.save(new Chapter(chapterDTO));
+	}
+
+}
