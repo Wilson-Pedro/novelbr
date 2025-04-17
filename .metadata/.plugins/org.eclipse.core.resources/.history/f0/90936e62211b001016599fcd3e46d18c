@@ -1,0 +1,21 @@
+package com.novelsbr.backend.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+import com.novelsbr.backend.repositories.AuthorRepository;
+
+public class AuthorDetailsService implements UserDetailsService {
+	
+	@Autowired
+	AuthorRepository authorRepository;
+
+	@Override
+	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		return authorRepository.findByEmail(email)
+				.orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+	}
+
+}

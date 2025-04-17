@@ -1,0 +1,9 @@
+package com.novelsbr.backend.services;
+
+import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.entities.Author;
+
+public interface AuthorService {
+
+	Author save(AuthorDTO userDTO);
+}

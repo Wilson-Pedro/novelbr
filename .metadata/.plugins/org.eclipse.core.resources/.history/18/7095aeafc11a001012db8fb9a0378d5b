@@ -1,0 +1,26 @@
+package com.novelsbr.backend.services.impl;
+
+//@Service
+//public class AuthorServiceImpl implements UserService, UserDetailsService {
+//	
+//	@Autowired
+//	private UserRepository userRepository;
+//
+//	@Override
+//	public User save(UserDTO userDTO) {
+//		User userSaved = new User(userDTO);
+//		String passwordEncrypt = new BCryptPasswordEncoder().encode(userDTO.getPassword());
+//		userSaved.setPassword(passwordEncrypt);
+//		return userRepository.save(userSaved);
+//	}
+//
+//	@Override
+//	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+////		return userRepository.findAll().stream()
+////				.filter(user -> user.getEmail().equals(email))
+////				.findFirst()
+////				.map(user -> User);
+//		return null;
+//	}
+//
+//}

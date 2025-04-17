@@ -17,26 +17,23 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
-import com.novelsbr.backend.domain.entities.User;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
-import com.novelsbr.backend.repositories.UserRepository;
-import com.novelsbr.backend.services.NovelService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class NovelControllerTest {
-	
-	@Autowired
-	NovelService novelService;
+
 	
 	@Autowired
 	NovelRepository novelRepository;
 	
 	@Autowired
-	UserRepository userRepository;
+	AuthorRepository authorRepository;
 	
 	@Autowired
 	GenderRepository genderRepository;
@@ -49,7 +46,7 @@ class NovelControllerTest {
 	
 	static String URI = "/novels";
 	
-	User user = new User(null, "João", "AllStar", "joao@gmail.com", "1234");
+	Author user = new Author(null, "João", "AllStar", "joao@gmail.com", "1234");
 	
 	NovelDTO novelDTO = new NovelDTO();
 	
@@ -58,14 +55,14 @@ class NovelControllerTest {
 	@BeforeEach
 	void setUp() {
 		novelRepository.deleteAll();
-		userRepository.deleteAll();
+		authorRepository.deleteAll();
 		genderRepository.deleteAll();
 		
 		for(GenderType type : GenderType.values()) {
 			genders.add(new Gender(null, type));
 		}
 		genderRepository.saveAll(genders);
-		userRepository.save(user);
+		authorRepository.save(user);
 	}
 	
 	@Test

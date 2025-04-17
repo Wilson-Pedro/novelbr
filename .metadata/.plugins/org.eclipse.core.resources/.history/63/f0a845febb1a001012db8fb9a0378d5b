@@ -1,0 +1,75 @@
+package com.novelsbr.backend.controllers;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.UserRepository;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class GenderControllerTest {
+	
+	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
+	ObjectMapper objectMapper;
+	
+	@Autowired
+	MockMvc mockMvc;
+	
+	List<Gender> genders = new ArrayList<>();
+	
+	static String URI = "/genders";
+	
+	@BeforeEach
+	void setUp() {
+		novelRepository.deleteAll();
+		genderRepository.deleteAll();
+		userRepository.deleteAll();
+	}
+	
+	@Test
+	void save() throws Exception {
+		assertEquals(0, genderRepository.count());
+		
+		for(GenderType type : GenderType.values()) {
+			genders.add(new Gender(null, type));
+		}
+		genderRepository.saveAll(genders);
+		
+		mockMvc.perform(get(URI)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk());
+		
+		
+		assertTrue(genderRepository.count() > 0);
+		assertEquals(genders.size(), genderRepository.count());
+	}
+}

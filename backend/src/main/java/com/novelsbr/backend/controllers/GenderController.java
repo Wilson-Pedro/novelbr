@@ -15,7 +15,7 @@ import com.novelsbr.backend.services.GenderService;
 
 @RestController
 @RequestMapping("/genders")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 public class GenderController {
 
 	@Autowired

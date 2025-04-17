@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import Card from '../../component/cards/Card';
@@ -9,7 +9,29 @@ import imagePath2 from '../../assets/Isto é vida.jpg';
 import imagePath3 from '../../assets/Trem para o Nunca.jpg';
 import imagePath4 from '../../assets/Jornada para o Além.jpg';
 
+import { Navigate } from 'react-router-dom';
+
+import axios from 'axios';
+
+const API = "http://localhost:8080";
+
 export default function HomeUser() {
+
+    const [user, setUser] = useState(null);
+
+    // useEffect(() => {
+    //     axios.get(API + "/authors/me", {
+    //         withCredentials: true
+    //     })
+    //     .then(res => {
+    //         setUser(res.data)
+    //     })
+    //     .catch(erro => {
+    //         setUser(null)
+    //     });
+    // }, []);
+
+   // if(!user) return <Navigate to="/login" />
 
     return(
         <div className={styles.container}>

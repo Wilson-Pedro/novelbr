@@ -18,18 +18,17 @@ export default function UserRegister() {
     const submitUser = async () => {
 
         try {
-            const response = await axios.post("http://localhost:8080/users/", {
+            const response = await axios.post("http://localhost:8080/authors/", {
                 name,
                 username,
                 email,
                 password,
             });
             console.log(response)
+            //navigate('/login');
         } catch(error) {
             console.error(error)
         }
-
-        //goToHomeUser();
     };
 
     function goToHome() {

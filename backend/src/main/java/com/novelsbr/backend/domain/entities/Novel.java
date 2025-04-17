@@ -32,7 +32,7 @@ public class Novel implements Serializable {
 	
 	@ManyToOne
 	@JoinColumn(name = "author_id")
-	private User author;
+	private Author author;
 	
 	@ManyToMany
 	@JoinTable(
@@ -62,7 +62,7 @@ public class Novel implements Serializable {
 		this.dateRegistrion = novelDTO.getDateRegistrion();
 	}
 
-	public Novel(Long id, String novelName, User author, Set<Gender> genders, String synopsis, String imageUri) {
+	public Novel(Long id, String novelName, Author author, Set<Gender> genders, String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
 		this.author = author;
@@ -87,11 +87,11 @@ public class Novel implements Serializable {
 		this.novelName = novelName;
 	}
 
-	public User getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 

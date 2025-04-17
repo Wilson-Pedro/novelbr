@@ -85,3 +85,8 @@ form input {
 .buttonContainer button {
     margin: 4%;
 }
+
+.errorMessage {
+    color: red;
+    font-weight: bold;
+}

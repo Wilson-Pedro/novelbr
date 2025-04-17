@@ -4,9 +4,9 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.domain.entities.User;
 
 public class NovelDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -15,7 +15,7 @@ public class NovelDTO implements Serializable {
 	
 	private String novelName;
 	
-	private User author;
+	private Author author;
 	
 	private Set<Gender> genders;
 	
@@ -38,7 +38,7 @@ public class NovelDTO implements Serializable {
 		this.dateRegistrion = novel.getDateRegistrion();
 	}
 
-	public NovelDTO(Long id, String novelName, User author, Set<Gender> genders, String synopsis, String imageUri) {
+	public NovelDTO(Long id, String novelName, Author author, Set<Gender> genders, String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
 		this.author = author;
@@ -63,11 +63,11 @@ public class NovelDTO implements Serializable {
 		this.novelName = novelName;
 	}
 
-	public User getAuthor() {
+	public Author getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(Author author) {
 		this.author = author;
 	}
 

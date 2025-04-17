@@ -14,7 +14,7 @@ import com.novelsbr.backend.services.ChapterService;
 
 @RestController
 @RequestMapping("/chapters")
-@CrossOrigin("*")
+@CrossOrigin("http://localhost:3000")
 public class ChapterController {
 	
 	@Autowired
