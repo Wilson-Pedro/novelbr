@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.services.AuthorService;
 
 @RestController
@@ -20,8 +21,15 @@ public class AuhtorController {
 	@Autowired
 	private AuthorService authorService;
 	
+	@Autowired
+	private AuthorRepository authorRepository;
+	
 	@PostMapping("/")
 	public ResponseEntity<AuthorDTO> save(@RequestBody AuthorDTO authorDTO) {
+		
+		if(authorRepository.findByUsername(authorDTO.getUsername()) != null)
+			return ResponseEntity.badRequest().build();
+		
 		Author author = authorService.save(authorDTO);
 		return ResponseEntity.status(201).body(new AuthorDTO(author));	
 	}

@@ -2,19 +2,19 @@ package com.novelsbr.backend.domain.dto;
 
 public class LoginRequest {
 	
-	private String email;
+	private String login;
 	private String password;
 	
 	public LoginRequest() {
 	}
 	
-	public LoginRequest(String email, String password) {
-		this.email =email;
+	public LoginRequest(String login, String password) {
+		this.login = login;
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getLogin() {
+		return login;
 	}
 
 	public String getPassword() {

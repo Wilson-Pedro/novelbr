@@ -3,14 +3,17 @@ package com.novelsbr.backend.domain.entities;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.enums.UserRole;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -28,11 +31,16 @@ public class Author implements Serializable, UserDetails {
 	
 	private String name;
 	
+	@Column(unique = true)
 	private String username;
 	
+	@Column(unique = true)
 	private String email;
 	
 	private String password;
+	
+	//@Enumerated(EnumType.STRING)
+	private UserRole role;
 	
 	@CreationTimestamp
 	private LocalDateTime dateRegistrion;
@@ -40,24 +48,32 @@ public class Author implements Serializable, UserDetails {
 	public Author() {
 	}
 	
-	public Author(AuthorDTO userDTO) {
-		this.name = userDTO.getName();
-		this.username = userDTO.getUsername();
-		this.email = userDTO.getEmail();
-		this.password = userDTO.getPassword();
+	public Author(AuthorDTO authorDTO) {
+		this.name = authorDTO.getName();
+		this.username = authorDTO.getUsername();
+		this.email = authorDTO.getEmail();
+		this.password = authorDTO.getPassword();
+		this.role = authorDTO.getRole();
 	}
 	
-	public Author(Long id, String name, String username, String email, String password) {
+	public Author(Long id, String name, String username, String email, String password, UserRole role) {
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.role = role;
 	}
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Collections.emptyList();
+		if(this.role == UserRole.AUTHOR) {
+			return List.of(
+					new SimpleGrantedAuthority("ROLE_AUTHOR"), 
+					new SimpleGrantedAuthority("ROLE_USER"));
+		} else {
+			return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+		}
 	}
 
 	public Long getId() {
@@ -98,6 +114,14 @@ public class Author implements Serializable, UserDetails {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 
 	public LocalDateTime getDateRegistrion() {

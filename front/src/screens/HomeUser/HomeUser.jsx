@@ -19,19 +19,22 @@ export default function HomeUser() {
 
     const [user, setUser] = useState(null);
 
-    // useEffect(() => {
-    //     axios.get(API + "/authors/me", {
-    //         withCredentials: true
-    //     })
-    //     .then(res => {
-    //         setUser(res.data)
-    //     })
-    //     .catch(erro => {
-    //         setUser(null)
-    //     });
-    // }, []);
+    useEffect(() => {
+        axios.get("http://localhost:8080/auth/me", {
+            withCredentials: true
+        })
+        .then(res => {
+            setUser(res.data)
+        })
+        .catch(error => {
+            setUser(null);
+            console.log("Error ao manter usuário autenticado: ", error.errorMessage)
+        });
+    }, []);
 
-   // if(!user) return <Navigate to="/login" />
+    console.log(user)
+
+   //if(!user) return <Navigate to="/login" /> 
 
     return(
         <div className={styles.container}>

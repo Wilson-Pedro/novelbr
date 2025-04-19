@@ -11,3 +11,5 @@
 1744807962706	Rename compilation unit 'UserServiceImpl.java'
 1744808175374	Rename compilation unit 'UserControllerTest.java'
 1744808217870	Rename type 'UserServiceTest'
+1745015108537	Delete element
+1745015131547	Rename package 'com.novelsbr.backend.config'

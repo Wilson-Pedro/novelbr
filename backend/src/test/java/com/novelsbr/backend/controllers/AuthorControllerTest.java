@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
@@ -39,7 +40,7 @@ class AuthorControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 	
-	AuthorDTO userDTO = new AuthorDTO(null, "João", "AllStar", "joao@gmail.com", "1234");
+	AuthorDTO userDTO = new AuthorDTO(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	static String URI = "/authors";
 	

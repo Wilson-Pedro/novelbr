@@ -1,13 +1,10 @@
 package com.novelsbr.backend.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,33 +12,28 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.LoginRequest;
-
-import jakarta.servlet.http.HttpServletRequest;
+import com.novelsbr.backend.domain.dto.LoginResponseDTO;
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.infra.security.TokenService;
 
 @RestController
 @RequestMapping("/auth")
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "http://localhost:3000", allowCredentials = "true")
 public class AuthController {
-
-	@Autowired
-	private AuthenticationManager authenticationManager;
 	
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	TokenService tokenService;
+
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest, HttpServletRequest request) {
-		try {
-			UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-					loginRequest.getEmail(), loginRequest.getPassword()
-			);
-			
-			Authentication authentication = authenticationManager.authenticate(authToken);
-			
-			SecurityContextHolder.getContext().setAuthentication(authentication);
-			request.getSession();
-			
-			return ResponseEntity.ok("Login Realizado com sucesso.");
-			
-		} catch (BadCredentialsException exception) {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciais inválidas");
-		}
+	public ResponseEntity login(@RequestBody LoginRequest loginRequest) {
+		var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword());
+		var auth = this.authenticationManager.authenticate(usernamePassword);
+		
+		var token = tokenService.generateToken((Author) auth.getPrincipal());
+		
+		return ResponseEntity.ok(new LoginResponseDTO(token));
 	}
 }

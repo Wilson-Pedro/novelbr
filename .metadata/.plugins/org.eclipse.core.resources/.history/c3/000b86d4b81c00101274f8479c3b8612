@@ -1,0 +1,5 @@
+package com.novelsbr.backend.infra.security;
+
+public class SecurityFilter {
+
+}

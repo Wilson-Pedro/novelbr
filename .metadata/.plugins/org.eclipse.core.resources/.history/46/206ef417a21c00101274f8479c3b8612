@@ -1,0 +1,7 @@
+package com.novelsbr.backend.enums;
+
+public enum UseRole {
+
+	AUTHOR,
+	USER;
+}

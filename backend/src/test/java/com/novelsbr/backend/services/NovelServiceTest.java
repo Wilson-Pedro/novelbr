@@ -15,6 +15,7 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
@@ -34,7 +35,7 @@ class NovelServiceTest {
 	@Autowired
 	GenderRepository genderRepository;
 	
-	Author user = new Author(null, "João", "AllStar", "joao@gmail.com", "1234");
+	Author user = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	NovelDTO novelDTO = new NovelDTO();
 	

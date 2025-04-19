@@ -1,7 +1,6 @@
 package com.novelsbr.backend.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -13,17 +12,11 @@ import com.novelsbr.backend.repositories.AuthorRepository;
 public class AuthorDetailsService implements UserDetailsService {
 	
 	@Autowired
-	AuthorRepository authorRepository;
+	private AuthorRepository authorRepository;
 
 	@Override
-	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		return authorRepository.findByEmail(email)
-			.map(author -> User.builder()
-				.username(author.getEmail())
-				.password(author.getPassword())
-				.roles("USER")
-				.build()
-			).orElseThrow(() -> new UsernameNotFoundException("User not Found"));
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		return authorRepository.findByUsername(username);
 	}
-
+	
 }

@@ -1,6 +1,7 @@
 package com.novelsbr.backend.domain.dto;
 
 import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.enums.UserRole;
 
 public class AuthorDTO {
 
@@ -14,23 +15,27 @@ public class AuthorDTO {
 	
 	private String password;
 	
+	private UserRole role;
+	
 	public AuthorDTO() {
 	}
 	
-	public AuthorDTO(Author user) {
-		this.id = user.getId();
-		this.name = user.getName();
-		this.username = user.getUsername();
-		this.email = user.getEmail();
-		this.password = user.getPassword();
+	public AuthorDTO(Author author) {
+		this.id = author.getId();
+		this.name = author.getName();
+		this.username = author.getUsername();
+		this.email = author.getEmail();
+		this.password = author.getPassword();
+		this.role = author.getRole();
 	}
 
-	public AuthorDTO(Long id, String name, String username, String email, String password) {
+	public AuthorDTO(Long id, String name, String username, String email, String password, UserRole role) {
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.role = role;
 	}
 
 	public Long getId() {
@@ -71,5 +76,13 @@ public class AuthorDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
 	}
 }

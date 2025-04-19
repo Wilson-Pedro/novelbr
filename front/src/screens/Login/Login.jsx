@@ -38,16 +38,6 @@ export default function Login() {
                     'Content-Type': 'application/json'
                 }
             });
-            // await axios.post("http://localhost:8080/login",
-            //     new URLSearchParams({ email, password }),
-            //     { withCredentials: true }
-            // ); 
-
-            // const res = await axios.get(API + "/authors/me", {
-            //         withCredentials: true,
-            //     }
-            // );
-            // console.log('Usuário autenticado: ', res.data);
             goToHomeUser();
 
         } catch(error) {
