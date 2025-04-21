@@ -1,0 +1,129 @@
+package com.novelsbr.backend.controllers;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.HashSet;
+import java.util.Set;
+
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.dto.LoginRequest;
+import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.UserRole;
+import com.novelsbr.backend.infra.security.TokenService;
+import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.services.AuthorService;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+class NovelControllerTest {
+
+	
+	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
+	AuthorRepository authorRepository;
+	
+	@Autowired
+	AuthorService authorService;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	TokenService tokenService;
+	
+	@Autowired
+	MockMvc mockMvc;
+	
+	@Autowired
+	ObjectMapper objectMapper;
+	
+	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+	
+	NovelDTO novelDTO = new NovelDTO();
+	
+	Set<Gender> genders = new HashSet<>();
+	
+	static String URI = "/novels";
+	
+	static String TOKEN = "";
+	
+	@Test
+	@Order(1)
+	void preparingTestEnvironment() {
+		novelRepository.deleteAll();
+		authorRepository.deleteAll();
+		genderRepository.deleteAll();
+		
+		for(GenderType type : GenderType.values()) {
+			genders.add(new Gender(null, type));
+		}
+		genderRepository.saveAll(genders);
+	}
+	
+	@Test
+	@Order(2)
+	void getToken() {
+		author = authorService.save(new AuthorDTO(author));	
+		LoginRequest login = new LoginRequest("AllStar", "1234");
+		
+		var usernamePassword = new UsernamePasswordAuthenticationToken(login.getLogin(), login.getPassword());		
+		var authentication = authenticationManager.authenticate(usernamePassword);
+		
+		String token = tokenService.generateToken((Author) authentication.getPrincipal());
+		
+		assertNotNull(token);
+		assertNotNull(author.getId());
+		
+		TOKEN = token;
+	}
+	
+	@Test
+	//@Transactional
+	void save() throws Exception {
+		
+		novelDTO = new NovelDTO(null, 
+				"Jornada para o Além", 
+				author.getId(), 
+				genders, 
+				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
+				"https://wallpapercave.com/wp/wp5044832.jpg");
+		
+		assertEquals(0, novelRepository.count());
+		
+		String jsonRequest = objectMapper.writeValueAsString(novelDTO);
+		
+		assertNotNull(author.getAuthorities());
+		
+		mockMvc.perform(post(URI + "/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonRequest))
+				.andExpect(status().isCreated());
+		
+		assertEquals(1, novelRepository.count());
+	}
+
+}

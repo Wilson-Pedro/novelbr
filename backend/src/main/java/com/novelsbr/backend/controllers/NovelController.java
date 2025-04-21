@@ -1,8 +1,11 @@
 package com.novelsbr.backend.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +22,13 @@ public class NovelController {
 	
 	@Autowired
 	private NovelService novelService;
+	
+	@GetMapping()
+	public ResponseEntity<List<NovelDTO>> findAll() {
+		List<Novel> novels = novelService.findAll();
+		List<NovelDTO> novlesDTO = novels.stream().map(x -> new NovelDTO(x)).toList();
+		return ResponseEntity.ok(novlesDTO);
+	}
 
 	@PostMapping("/")
 	public ResponseEntity<NovelDTO> save(@RequestBody NovelDTO novelDTO) {

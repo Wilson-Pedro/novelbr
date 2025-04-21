@@ -6,14 +6,11 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-const API = "http://localhost:8080";
-
 export default function Login() {
 
-    const [email, setEmail] = useState('');
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    
 
     const navigate = useNavigate();
 
@@ -29,19 +26,24 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            await axios.post("http://localhost:8080/auth/login", {
-                email: email,
+            const response = await axios.post("http://localhost:8080/auth/login", {
+                login: username,
                 password: password
             }, {
                 withCredentials: true,
                 headers: {
                     'Content-Type': 'application/json'
                 }
-            });
-            goToHomeUser();
+            })
 
+            if(response != null) {
+                const token = response.data.token;
+                localStorage.setItem('token', token);
+            }
+
+            goToHomeUser(); 
         } catch(error) {
-            setError("Email ou Senha inválidos")
+            setError("Username ou Senha inválidos")
             console.log(error.errorMessage)
         }
     }
@@ -55,12 +57,12 @@ export default function Login() {
                 <p className={styles.errorMessage}>{error}</p>
                 <form onSubmit={submitLogin}>
                     <div className={styles.inputContainer}>
-                        <label htmlFor="">Email:</label><br />
+                        <label htmlFor="">Username:</label><br />
                         <input
-                            type="email"
-                            placeholder="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            type="text"
+                            placeholder="username"
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             required
                         />
                     </div>

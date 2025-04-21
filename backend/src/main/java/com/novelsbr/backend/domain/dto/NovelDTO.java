@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 
@@ -15,7 +14,7 @@ public class NovelDTO implements Serializable {
 	
 	private String novelName;
 	
-	private Author author;
+	private Long author_id;
 	
 	private Set<Gender> genders;
 	
@@ -31,17 +30,17 @@ public class NovelDTO implements Serializable {
 	public NovelDTO(Novel novel) {
 		this.id = novel.getId();
 		this.novelName = novel.getNovelName();
-		this.author = novel.getAuthor();
+		this.author_id = novel.getAuthor().getId();
 		this.genders = novel.getGenders();
 		this.synopsis = novel.getSynopsis();
 		this.imageUri = novel.getImageUri();
 		this.dateRegistrion = novel.getDateRegistrion();
 	}
-
-	public NovelDTO(Long id, String novelName, Author author, Set<Gender> genders, String synopsis, String imageUri) {
+	
+	public NovelDTO(Long id, String novelName, Long author_id, Set<Gender> genders, String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
-		this.author = author;
+		this.author_id = author_id;
 		this.genders = genders;
 		this.synopsis = synopsis;
 		this.imageUri = imageUri;
@@ -63,12 +62,12 @@ public class NovelDTO implements Serializable {
 		this.novelName = novelName;
 	}
 
-	public Author getAuthor() {
-		return author;
+	public Long getAuthor_id() {
+		return author_id;
 	}
 
-	public void setAuthor(Author author) {
-		this.author = author;
+	public void setAuthor_id(Long author_id) {
+		this.author_id = author_id;
 	}
 
 	public Set<Gender> getGenders() {

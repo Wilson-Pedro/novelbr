@@ -3,7 +3,7 @@ import styles from './ChapterRegister.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Navigate } from 'react-router-dom';
 import JoditEditor from "jodit-react";
 
 export default function ChapterRegister() {
@@ -18,6 +18,9 @@ export default function ChapterRegister() {
         readonly: false,
         height: 400
     }
+
+    const token = localStorage.getItem('token');
+    if(!token) return <Navigate to="/login"/>
 
     // const handleChange = (event) => {
     //     const editorContent = event.target.value;

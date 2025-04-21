@@ -1,0 +1,101 @@
+package com.novelsbr.backend.domain.dto;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.util.Set;
+
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Novel;
+
+public class NovelDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
+	
+	private String novelName;
+	
+	private Author author;
+	
+	private Set<Gender> genders;
+	
+	private String synopsis;
+	
+	private String imageUri;
+	
+	private LocalDateTime dateRegistrion;
+	
+	public NovelDTO() {
+	}
+
+	public NovelDTO(Novel novel) {
+		this.id = novel.getId();
+		this.novelName = novel.getNovelName();
+		this.author = novel.getAuthor();
+		this.genders = novel.getGenders();
+		this.synopsis = novel.getSynopsis();
+		this.imageUri = novel.getImageUri();
+		this.dateRegistrion = novel.getDateRegistrion();
+	}
+
+	public NovelDTO(Long id, String novelName, Author author, Set<Gender> genders, String synopsis, String imageUri) {
+		this.id = id;
+		this.novelName = novelName;
+		this.author = author;
+		this.genders = genders;
+		this.synopsis = synopsis;
+		this.imageUri = imageUri;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNovelName() {
+		return novelName;
+	}
+
+	public void setNovelName(String novelName) {
+		this.novelName = novelName;
+	}
+
+	public Author getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(Author author) {
+		this.author = author;
+	}
+
+	public Set<Gender> getGenders() {
+		return genders;
+	}
+
+	public void setGenders(Set<Gender> genders) {
+		this.genders = genders;
+	}
+
+	public String getSynopsis() {
+		return synopsis;
+	}
+
+	public void setSynopsis(String synopsis) {
+		this.synopsis = synopsis;
+	}
+
+	public String getImageUri() {
+		return imageUri;
+	}
+
+	public void setImageUri(String imageUri) {
+		this.imageUri = imageUri;
+	}
+
+	public LocalDateTime getDateRegistrion() {
+		return dateRegistrion;
+	}
+}

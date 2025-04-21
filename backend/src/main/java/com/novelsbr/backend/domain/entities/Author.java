@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.enums.UserRole;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,10 +30,8 @@ public class Author implements Serializable, UserDetails {
 	
 	private String name;
 	
-	@Column(unique = true)
 	private String username;
 	
-	@Column(unique = true)
 	private String email;
 	
 	private String password;

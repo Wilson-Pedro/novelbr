@@ -1,6 +1,7 @@
 package com.novelsbr.backend.controllers;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -8,22 +9,33 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.dto.LoginRequest;
+import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.UserRole;
+import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.services.AuthorService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class GenderControllerTest {
 	
 	@Autowired
@@ -33,7 +45,16 @@ class GenderControllerTest {
 	AuthorRepository authorRepository;
 	
 	@Autowired
+	AuthorService authorService;
+	
+	@Autowired
 	GenderRepository genderRepository;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	TokenService tokenService;
 	
 	@Autowired
 	ObjectMapper objectMapper;
@@ -43,25 +64,49 @@ class GenderControllerTest {
 	
 	List<Gender> genders = new ArrayList<>();
 	
+	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+	
 	static String URI = "/genders";
 	
-	@BeforeEach
-	void setUp() {
+	static String TOKEN = "";
+	
+	
+	@Test
+	@Order(1)
+	void preparingTestEnvironment() {
 		novelRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
 	}
 	
 	@Test
-	void findAll() throws Exception {
-		assertEquals(0, genderRepository.count());
+	@Order(2)
+	void getToken() {
+		author = authorService.save(new AuthorDTO(author));	
+		System.out.println("Author 1: " + author);
+		LoginRequest login = new LoginRequest("AllStar", "1234");
 		
+		var usernamePassword = new UsernamePasswordAuthenticationToken(login.getLogin(), login.getPassword());		
+		var authentication = authenticationManager.authenticate(usernamePassword);
+		
+		String token = tokenService.generateToken((Author) authentication.getPrincipal());
+		
+		assertNotNull(token);
+		
+		TOKEN = token;
+	}
+	
+	@Test
+	void findAll() throws Exception {
 		for(GenderType type : GenderType.values()) {
 			genders.add(new Gender(null, type));
 		}
 		genderRepository.saveAll(genders);
 		
-		mockMvc.perform(get(URI))
+		System.out.println("Author 2: " + author);
+		
+		mockMvc.perform(get(URI)
+				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk());
 		
 		

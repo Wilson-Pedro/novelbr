@@ -4,11 +4,15 @@ import Navbar from './../../layout/navbar/Navbar';
 import Card from './../../component/cards/Card';
 import Footer from './../../layout/footer/Rodape';
 import imagePath1 from '../../assets/A_casa_ao_lado.jpg';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function Profile() {
+
+    const token = localStorage.getItem('token');
+    if(!token) return <Navigate to="/login"/>
+
 
     return(
         <div className={styles.container}>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import Card from '../../component/cards/Card';
@@ -11,30 +11,10 @@ import imagePath4 from '../../assets/Jornada para o Além.jpg';
 
 import { Navigate } from 'react-router-dom';
 
-import axios from 'axios';
-
-const API = "http://localhost:8080";
-
 export default function HomeUser() {
 
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        axios.get("http://localhost:8080/auth/me", {
-            withCredentials: true
-        })
-        .then(res => {
-            setUser(res.data)
-        })
-        .catch(error => {
-            setUser(null);
-            console.log("Error ao manter usuário autenticado: ", error.errorMessage)
-        });
-    }, []);
-
-    console.log(user)
-
-   //if(!user) return <Navigate to="/login" /> 
+    const token = localStorage.getItem('token');
+    if(!token) return <Navigate to="/login" /> 
 
     return(
         <div className={styles.container}>

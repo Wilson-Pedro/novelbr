@@ -28,13 +28,17 @@ public class AuthorDTO {
 		this.password = author.getPassword();
 		this.role = author.getRole();
 	}
-
-	public AuthorDTO(Long id, String name, String username, String email, String password, UserRole role) {
+	
+	public AuthorDTO(Long id, String name, String username, String email, String password) {
 		this.id = id;
 		this.name = name;
 		this.username = username;
 		this.email = email;
 		this.password = password;
+	}
+
+	public AuthorDTO(Long id, String name, String username, String email, String password, UserRole role) {
+		this(id, name, username, email, password);
 		this.role = role;
 	}
 

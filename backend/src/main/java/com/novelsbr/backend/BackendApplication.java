@@ -5,6 +5,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
@@ -18,7 +21,7 @@ public class BackendApplication implements CommandLineRunner {
 	AuthorRepository authorRepository;
 	
 	@Autowired
-	AuthorService userService;
+	AuthorService authorService;
 	
 	@Autowired
 	NovelRepository novelRepository;
@@ -41,12 +44,11 @@ public class BackendApplication implements CommandLineRunner {
 //			genders.add(new Gender(null, type));
 //		}
 //		
-//		Author auhtor = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
-//		userService.save(new AuthorDTO(auhtor));
+		Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 //		
 //		Novel novel = new Novel(null, 
 //				"Jornada para o Além", 
-//				auhtor, 
+//				author, 
 //				genders, 
 //				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 //				"https://wallpapercave.com/wp/wp5044832.jpg");
@@ -54,9 +56,11 @@ public class BackendApplication implements CommandLineRunner {
 //		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novel);
 //		
 //		genderRepository.saveAll(genders);
-//		authorRepository.save(auhtor);
+//		authorRepository.save(author);
 //		novelRepository.save(novel);
 //		chapterRepository.save(chapter);
+		
+		authorService.save(new AuthorDTO(author));
 	}
 
 }

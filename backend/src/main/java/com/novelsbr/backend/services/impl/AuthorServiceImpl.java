@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.services.AuthorService;
 
@@ -20,6 +21,7 @@ public class AuthorServiceImpl implements AuthorService {
 		Author authorSaved = new Author(authorDTO);
 		String passwordEncrypt = new BCryptPasswordEncoder().encode(authorDTO.getPassword());
 		authorSaved.setPassword(passwordEncrypt);
+		authorSaved.setRole(UserRole.AUTHOR);
 		return authorRepository.save(authorSaved);
 	}
 }
