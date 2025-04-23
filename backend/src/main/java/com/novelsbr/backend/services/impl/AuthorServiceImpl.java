@@ -10,6 +10,8 @@ import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.services.AuthorService;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class AuthorServiceImpl implements AuthorService {
 	
@@ -23,5 +25,13 @@ public class AuthorServiceImpl implements AuthorService {
 		authorSaved.setPassword(passwordEncrypt);
 		authorSaved.setRole(UserRole.AUTHOR);
 		return authorRepository.save(authorSaved);
+	}
+
+	@Override
+	public Author findByUsername(String username) {
+		return authorRepository.findAll().stream()
+				.filter(user -> user.getUsername().equals(username))
+				.findFirst()
+				.orElseThrow(EntityNotFoundException::new);
 	}
 }

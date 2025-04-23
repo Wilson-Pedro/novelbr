@@ -37,8 +37,9 @@ export default function Login() {
             })
 
             if(response != null) {
-                const token = response.data.token;
-                localStorage.setItem('token', token);
+                const data = response.data;
+                localStorage.setItem('userId', data.userId)
+                localStorage.setItem('token', data.token);
             }
 
             goToHomeUser(); 

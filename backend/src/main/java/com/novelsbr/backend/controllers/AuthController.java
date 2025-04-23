@@ -14,6 +14,7 @@ import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.dto.LoginResponseDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.infra.security.TokenService;
+import com.novelsbr.backend.services.AuthorService;
 
 @RestController
 @RequestMapping("/auth")
@@ -25,15 +26,18 @@ public class AuthController {
 	
 	@Autowired
 	TokenService tokenService;
+	
+	@Autowired
+	AuthorService authorService;
 
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-		System.out.println("Chegou no Controller do login");
 		var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword());
 		var auth = this.authenticationManager.authenticate(usernamePassword);
 		
 		var token = tokenService.generateToken((Author) auth.getPrincipal());
+		Long userId = authorService.findByUsername(loginRequest.getLogin()).getId();
 		
-		return ResponseEntity.ok(new LoginResponseDTO(token));
+		return ResponseEntity.ok(new LoginResponseDTO(token, userId));
 	}
 }

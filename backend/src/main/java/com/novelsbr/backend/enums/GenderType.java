@@ -1,5 +1,10 @@
 package com.novelsbr.backend.enums;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Stream;
+
 public enum GenderType {
 
 	ADVENTURE(1, "Aventura"),
@@ -34,5 +39,21 @@ public enum GenderType {
 
 	public String getType() {
 		return type;
+	}
+	
+	public static GenderType toEnum(String type) {
+		return Stream.of(GenderType.values())
+				.filter(genderType -> genderType.getType().equals(type))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException
+						("Formato de Pagamento inválido: " + type));
+	}
+	
+	public static List<GenderType> stringToGender(Collection<String> types) {
+		List<GenderType> genderTypes = new ArrayList<>();
+		for(String type : types) {
+			genderTypes.add(toEnum(type));
+		}
+		return genderTypes;
 	}
 }

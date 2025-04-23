@@ -1,12 +1,16 @@
 package com.novelsbr.backend.services.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
@@ -26,8 +30,14 @@ public class NovelServiceImpl implements NovelService {
 	@Transactional
 	public Novel save(NovelDTO novelDTO) {
 		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
+		List<Gender> gendersList = GenderType.stringToGender(novelDTO.getGenders()).stream()
+				.map(gender -> new Gender(gender.getCod(), gender))
+				.toList();
+		Set<Gender> genders = new HashSet<>(gendersList);
 		Novel novel = new Novel(novelDTO);
-		novel.setAuthor(authorRepository.findById(novelDTO.getAuthor_id()).get());
+		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).get());
+		novel.setGenders(genders);
+		
 		return novelRepository.save(novel);
 	}
 
@@ -35,5 +45,4 @@ public class NovelServiceImpl implements NovelService {
 	public List<Novel> findAll() {
 		return novelRepository.findAll();
 	}
-
 }

@@ -1,5 +1,8 @@
 package com.novelsbr.backend;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +10,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
@@ -39,10 +44,10 @@ public class BackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-//		Set<Gender> genders = new HashSet<>();
-//		for(GenderType type : GenderType.values()) {
-//			genders.add(new Gender(null, type));
-//		}
+		Set<Gender> genders = new HashSet<>();
+		for(GenderType type : GenderType.values()) {
+			genders.add(new Gender(null, type));
+		}
 //		
 		Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 //		
@@ -55,7 +60,7 @@ public class BackendApplication implements CommandLineRunner {
 //		
 //		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novel);
 //		
-//		genderRepository.saveAll(genders);
+		genderRepository.saveAll(genders);
 //		authorRepository.save(author);
 //		novelRepository.save(novel);
 //		chapterRepository.save(chapter);

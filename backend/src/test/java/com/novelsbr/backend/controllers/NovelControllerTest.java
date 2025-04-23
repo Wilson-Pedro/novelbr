@@ -6,7 +6,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -68,6 +70,7 @@ class NovelControllerTest {
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	Set<Gender> genders = new HashSet<>();
+	List<String> gendersStr = new ArrayList<>();
 	
 	static String URI = "/novels";
 	
@@ -106,13 +109,16 @@ class NovelControllerTest {
 	void save() throws Exception {
 		
 		Long author_id = authorRepository.findAll().get(0).getId();
+		for(Gender gender : genders) {
+			gendersStr.add(gender.getGenderType().getType());
+		}
 		
 		assertEquals(0, novelRepository.count());
 		
 		NovelDTO novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
 				author_id, 
-				genders, 
+				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
 		

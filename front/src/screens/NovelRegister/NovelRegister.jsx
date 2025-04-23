@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './NovelRegister.module.css';
 import Navbar from './../../layout/navbar/Navbar';
 import Footer from './../../layout/footer/Rodape';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -14,34 +14,57 @@ export default function NovelRegister() {
     const [author, setAuthor] = useState('');
     const [genders, setGenders] = useState([]);
     const [synopsis, setSynopsis] = useState('');
+    const [authorId, setAuthorId] = useState(0);
+
+    const navigate = useNavigate();
 
     const[gendersBackend, setGendersBackend] = useState([]);
 
+    useEffect(() => {
+
+        const token = localStorage.getItem('token');
+        const userId = localStorage.getItem('userId');
+
+        if(!token) return navigate('/login');
+
+        setAuthorId(userId);
+        //setTokenUser(token)
+
+        const fetchGenders = async () => {
+            try {
+                const response = await axios.get("http://localhost:8080/genders", {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                setGendersBackend(response.data);
+            } catch(error) {
+                console.log("Error ao buscar gêneros: ", error)
+            }
+        }
+
+        fetchGenders();
+    }, [navigate]);
+
     const submitNovel = async () => {
+        //e.preventDefault();
+        const token = localStorage.getItem('token');
         try {
             await axios.post("http://localhost:8080/novels/", {
                 novelName,
-                author,
+                authorId,
                 genders,
                 synopsis
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
             })
         } catch (error) {
-            console.log(error)
+            console.log(error.errorMessage)
         }
     }
-
-    useEffect(() => {
-        axios.get("http://localhost:8080/genders")
-        .then((res) => {
-            setGendersBackend(res.data);
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }, []);
-
-    const token = localStorage.getItem('token');
-    if(!token) return <Navigate to="/login" />
 
     function addGenders(e) {
         const gender = e.target.value;
@@ -59,10 +82,10 @@ export default function NovelRegister() {
             <div className={styles.main}>
                 <form onSubmit={submitNovel}>
                     <div className={styles.formDiv}>
-                        <label>Nome da Obra</label>
+                        <label>Nome da Obra </label>
                         <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             value={novelName}
                             onChange={(e) => setNovelName(e.target.value)}
                             placeholder="Nome da Obra"
@@ -76,7 +99,7 @@ export default function NovelRegister() {
                         <label>Autor</label>
                         <input
                             type="text"
-                            class="form-control"
+                            className="form-control"
                             value={author}
                             onChange={(e) => setAuthor(e.target.value)}
                             placeholder="Autor"
@@ -91,7 +114,7 @@ export default function NovelRegister() {
                     </div>
                     <div className={styles.div_genders}>
                         {gendersBackend.map((gender, index) => (
-                            <div className="form-check">
+                            <div className="form-check" key={index}>
                                     <input className="form-check-input" type="checkbox" value={gender.genderType} onChange={(e) => addGenders(e)} />
                                     <label>
                                         {gender.genderType}
@@ -114,8 +137,8 @@ export default function NovelRegister() {
                     </div>
 
                     <div className={styles.divBtn}>
-                        <button type="submit" class="btn btn-primary">Criar</button>
-                        <button type="button" class="btn btn-danger">
+                        <button type="submit" className="btn btn-primary">Criar</button>
+                        <button type="button" className="btn btn-danger">
                             <Link className={styles.linkNone} to="/profile">Cancelar</Link>
                         </button>
                     </div>

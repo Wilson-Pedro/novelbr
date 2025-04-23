@@ -2,7 +2,9 @@ package com.novelsbr.backend.services;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -40,6 +42,7 @@ class NovelServiceTest {
 	NovelDTO novelDTO = new NovelDTO();
 	
 	Set<Gender> genders = new HashSet<>();
+	List<String> gendersStr = new ArrayList<>();
 
 	@BeforeEach
 	void setUp() {
@@ -56,10 +59,14 @@ class NovelServiceTest {
 	
 	@Test
 	void save() {
+		for(Gender gender : genders) {
+			gendersStr.add(gender.getGenderType().getType());
+		}
+		
 		novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
 				user.getId(), 
-				genders, 
+				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
 		

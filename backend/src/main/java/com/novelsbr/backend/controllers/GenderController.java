@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.GenderDTO;
-import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.services.GenderService;
 
 @RestController
@@ -23,8 +22,8 @@ public class GenderController {
 	
 	@GetMapping
 	public ResponseEntity<List<GenderDTO>> findAll() {
-		List<Gender> genders = genderService.findAll();
-		List<GenderDTO> gendersDTO = genders.stream().map(x -> new GenderDTO(x)).toList();
+		List<GenderDTO> gendersDTO = genderService.findAll()
+				.stream().map(x -> new GenderDTO(x)).toList();
 		return ResponseEntity.ok(gendersDTO);
 	}
 }

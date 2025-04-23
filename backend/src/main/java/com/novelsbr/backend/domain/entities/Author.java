@@ -14,6 +14,8 @@ import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.enums.UserRole;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,7 +38,7 @@ public class Author implements Serializable, UserDetails {
 	
 	private String password;
 	
-	//@Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private UserRole role;
 	
 	@CreationTimestamp

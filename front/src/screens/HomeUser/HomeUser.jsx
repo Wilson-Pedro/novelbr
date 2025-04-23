@@ -21,7 +21,7 @@ export default function HomeUser() {
             <nav className={styles.navbar}>
                 <Navbar 
                     userAuthenticate={true}
-                />
+                /> 
             </nav>
             <section>
                 <h1>Sua História começa aqui!</h1>

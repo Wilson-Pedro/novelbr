@@ -6,4 +6,6 @@ import com.novelsbr.backend.domain.entities.Author;
 public interface AuthorService {
 
 	Author save(AuthorDTO authorDTO);
+	
+	Author findByUsername(String username);
 }

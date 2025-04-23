@@ -1,0 +1,32 @@
+package com.novelsbr.backend.services.impl;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
+
+import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.enums.UserRole;
+import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.services.AuthorService;
+
+@Service
+public class AuthorServiceImpl implements AuthorService {
+	
+	@Autowired
+	private AuthorRepository authorRepository;
+
+	@Override
+	public Author save(AuthorDTO authorDTO) {
+		Author authorSaved = new Author(authorDTO);
+		String passwordEncrypt = new BCryptPasswordEncoder().encode(authorDTO.getPassword());
+		authorSaved.setPassword(passwordEncrypt);
+		authorSaved.setRole(UserRole.AUTHOR);
+		return authorRepository.save(authorSaved);
+	}
+
+	@Override
+	public Author findByUsername(String username) {
+		return null;
+	}
+}
