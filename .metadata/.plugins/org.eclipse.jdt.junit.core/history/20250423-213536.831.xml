@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="java" project="backend" tests="15" started="15" failures="0" errors="1" ignored="0">
+  <testsuite name="com.novelsbr.backend.BackendApplicationTests" time="141.868" displayname="BackendApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]">
+    <testcase name="contextLoads" classname="com.novelsbr.backend.BackendApplicationTests" time="141.868" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.GenderServiceTest" time="6.391" displayname="GenderServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]">
+    <testcase name="save" classname="com.novelsbr.backend.services.GenderServiceTest" time="6.391" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.AuthorServiceTest" time="0.62" displayname="AuthorServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]">
+    <testcase name="save" classname="com.novelsbr.backend.services.AuthorServiceTest" time="0.62" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.NovelServiceTest" time="0.401" displayname="NovelServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]">
+    <testcase name="save" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.401" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:save()]">
+      <error>org.springframework.dao.DataIntegrityViolationException: could not execute statement [Referential integrity constraint violation: "FK1MYIIME1LTYS91O6NY0YUMH9H: PUBLIC.TBL_NOVEL_GENERO FOREIGN KEY(GENERO_ID) REFERENCES PUBLIC.TBL_GENDER(ID) (5)"; SQL statement:
+insert into tbl_novel_genero (novel_id,genero_id) values (?,?) [23506-232]] [insert into tbl_novel_genero (novel_id,genero_id) values (?,?)]; SQL [insert into tbl_novel_genero (novel_id,genero_id) values (?,?)]; constraint [K1MYIIME1LTYS91O6NY0YUMH9H]&#13;
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.convertHibernateAccessException(HibernateJpaDialect.java:290)&#13;
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:241)&#13;
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)&#13;
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)&#13;
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)&#13;
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl$$SpringCGLIB$$0.save(&lt;generated&gt;)&#13;
+	at com.novelsbr.backend.services.NovelServiceTest.save(NovelServiceTest.java:75)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: org.hibernate.exception.ConstraintViolationException: could not execute statement [Referential integrity constraint violation: "FK1MYIIME1LTYS91O6NY0YUMH9H: PUBLIC.TBL_NOVEL_GENERO FOREIGN KEY(GENERO_ID) REFERENCES PUBLIC.TBL_GENDER(ID) (5)"; SQL statement:
+insert into tbl_novel_genero (novel_id,genero_id) values (?,?) [23506-232]] [insert into tbl_novel_genero (novel_id,genero_id) values (?,?)]&#13;
+	at org.hibernate.exception.internal.SQLExceptionTypeDelegate.convert(SQLExceptionTypeDelegate.java:62)&#13;
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:58)&#13;
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:108)&#13;
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:197)&#13;
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.performNonBatchedMutation(AbstractMutationExecutor.java:134)&#13;
+	at org.hibernate.engine.jdbc.mutation.internal.MutationExecutorSingleNonBatched.performNonBatchedOperations(MutationExecutorSingleNonBatched.java:55)&#13;
+	at org.hibernate.engine.jdbc.mutation.internal.AbstractMutationExecutor.execute(AbstractMutationExecutor.java:55)&#13;
+	at org.hibernate.persister.collection.mutation.InsertRowsCoordinatorStandard.insertRows(InsertRowsCoordinatorStandard.java:117)&#13;
+	at org.hibernate.persister.collection.BasicCollectionPersister.recreate(BasicCollectionPersister.java:116)&#13;
+	at org.hibernate.action.internal.CollectionRecreateAction.execute(CollectionRecreateAction.java:47)&#13;
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:644)&#13;
+	at org.hibernate.engine.spi.ActionQueue.executeActions(ActionQueue.java:511)&#13;
+	at org.hibernate.event.internal.AbstractFlushingEventListener.performExecutions(AbstractFlushingEventListener.java:414)&#13;
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:41)&#13;
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)&#13;
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1429)&#13;
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:491)&#13;
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2354)&#13;
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1978)&#13;
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)&#13;
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)&#13;
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)&#13;
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)&#13;
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)&#13;
+	... 12 more&#13;
+Caused by: org.h2.jdbc.JdbcSQLIntegrityConstraintViolationException: Referential integrity constraint violation: "FK1MYIIME1LTYS91O6NY0YUMH9H: PUBLIC.TBL_NOVEL_GENERO FOREIGN KEY(GENERO_ID) REFERENCES PUBLIC.TBL_GENDER(ID) (5)"; SQL statement:
+insert into tbl_novel_genero (novel_id,genero_id) values (?,?) [23506-232]&#13;
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:520)&#13;
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)&#13;
+	at org.h2.message.DbException.get(DbException.java:223)&#13;
+	at org.h2.message.DbException.get(DbException.java:199)&#13;
+	at org.h2.constraint.ConstraintReferential.checkRowOwnTable(ConstraintReferential.java:308)&#13;
+	at org.h2.constraint.ConstraintReferential.checkRow(ConstraintReferential.java:249)&#13;
+	at org.h2.table.Table.fireConstraints(Table.java:1227)&#13;
+	at org.h2.table.Table.fireAfterRow(Table.java:1245)&#13;
+	at org.h2.command.dml.Insert.insertRows(Insert.java:188)&#13;
+	at org.h2.command.dml.Insert.update(Insert.java:135)&#13;
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)&#13;
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)&#13;
+	at org.h2.command.Command.executeUpdate(Command.java:304)&#13;
+	at org.h2.command.Command.executeUpdate(Command.java:248)&#13;
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdateInternal(JdbcPreparedStatement.java:213)&#13;
+	at org.h2.jdbc.JdbcPreparedStatement.executeUpdate(JdbcPreparedStatement.java:172)&#13;
+	at com.zaxxer.hikari.pool.ProxyPreparedStatement.executeUpdate(ProxyPreparedStatement.java:61)&#13;
+	at com.zaxxer.hikari.pool.HikariProxyPreparedStatement.executeUpdate(HikariProxyPreparedStatement.java)&#13;
+	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)&#13;
+	... 32 more&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.GenderControllerTest" time="1.932" displayname="GenderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.095" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="1.005" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.824" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findAll()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" time="3.07" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.164" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.315" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.036" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="2.548" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthControllerTest" time="1.2" displayname="AuthControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]">
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.791" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:save()]"/>
+    <testcase name="login" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.406" displayname="login()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:login()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.279" displayname="AuthorControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]">
+    <testcase name="deleteAll" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.032" displayname="deleteAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:deleteAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.244" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:save()]"/>
+  </testsuite>
+</testrun>

@@ -45,4 +45,9 @@ public class Gender implements Serializable {
 	public GenderType getGenderType() {
 		return genderType;
 	}
+
+	@Override
+	public String toString() {
+		return "Gender [id=" + id + ", genderType=" + genderType + "]";
+	}
 }

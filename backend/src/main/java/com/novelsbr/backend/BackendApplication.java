@@ -44,12 +44,12 @@ public class BackendApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Set<Gender> genders = new HashSet<>();
-		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(null, type));
-		}
+//		Set<Gender> genders = new HashSet<>();
+//		for(GenderType type : GenderType.values()) {
+//			genders.add(new Gender(null, type));
+//		}
 //		
-		Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+//		Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 //		
 //		Novel novel = new Novel(null, 
 //				"Jornada para o Além", 
@@ -60,12 +60,12 @@ public class BackendApplication implements CommandLineRunner {
 //		
 //		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novel);
 //		
-		genderRepository.saveAll(genders);
+//		genderRepository.saveAll(genders);
 //		authorRepository.save(author);
 //		novelRepository.save(novel);
 //		chapterRepository.save(chapter);
 		
-		authorService.save(new AuthorDTO(author));
+//		authorService.save(new AuthorDTO(author));
 	}
 
 }
