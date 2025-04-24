@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
 import com.novelsbr.backend.services.NovelService;
 
 @RestController
@@ -34,5 +35,10 @@ public class NovelController {
 	public ResponseEntity<NovelDTO> save(@RequestBody NovelDTO novelDTO) {
 		Novel novel = novelService.save(novelDTO);
 		return ResponseEntity.status(201).body(new NovelDTO(novel));
+	}
+	
+	@GetMapping("/novelCards")
+	public ResponseEntity<List<AuthorNovelMinProjection>> findNovelCards() {
+		return ResponseEntity.ok(novelService.findNovelCards());
 	}
 }

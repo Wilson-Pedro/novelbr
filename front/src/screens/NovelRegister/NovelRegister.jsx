@@ -44,7 +44,7 @@ export default function NovelRegister() {
         }
 
         fetchGenders();
-    }, [navigate]);
+    }, [navigate]); 
 
     const submitNovel = async () => {
         //e.preventDefault();

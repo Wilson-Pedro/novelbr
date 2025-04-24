@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
@@ -44,5 +45,10 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	public List<Novel> findAll() {
 		return novelRepository.findAll();
+	}
+
+	@Override
+	public List<AuthorNovelMinProjection> findNovelCards() {
+		return novelRepository.findNovelCards();
 	}
 }

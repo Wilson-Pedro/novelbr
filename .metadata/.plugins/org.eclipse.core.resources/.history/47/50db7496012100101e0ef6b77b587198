@@ -1,0 +1,77 @@
+package com.novelsbr.backend;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.UserRole;
+import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.services.AuthorService;
+
+@SpringBootApplication
+public class BackendApplication implements CommandLineRunner {
+	
+	@Autowired
+	AuthorRepository authorRepository;
+	
+	@Autowired
+	AuthorService authorService;
+	
+	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
+	ChapterRepository chapterRepository;
+
+	public static void main(String[] args) {
+		SpringApplication.run(BackendApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		
+		Set<Gender> genders = new HashSet<>();
+		for(GenderType type : GenderType.values()) {
+			genders.add(new Gender(null, type));
+		}
+		
+//		Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+		List<Author> authors = List.of(
+				new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR),
+				new Author(null, "Ana", "J. Key", "ana@gmail.com", "1234", UserRole.AUTHOR),
+				new Author(null, "Júlia", "Light", "julia@gmail.com", "1234", UserRole.AUTHOR),
+				new Author(null, "Roberto", "S. Elppa", "joao@gmail.com", "1234", UserRole.AUTHOR)
+			);
+//		
+//		Novel novel = new Novel(null, 
+//				"Jornada para o Além", 
+//				author, 
+//				genders, 
+//				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
+//				"https://wallpapercave.com/wp/wp5044832.jpg");
+//		
+//		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novel);
+//		
+		genderRepository.saveAll(genders);
+//		authorRepository.save(author);
+//		novelRepository.save(novel);
+//		chapterRepository.save(chapter);
+		
+//		authorService.save(new AuthorDTO(author));
+	}
+
+}

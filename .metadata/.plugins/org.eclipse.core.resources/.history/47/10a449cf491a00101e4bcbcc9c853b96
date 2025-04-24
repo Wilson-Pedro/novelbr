@@ -1,5 +1,0 @@
-package com.novelsbr.backend.services;
-
-public interface GenderService {
-
-}

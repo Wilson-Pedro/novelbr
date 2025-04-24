@@ -4,10 +4,13 @@ import java.util.List;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
 
 public interface NovelService {
 
 	Novel save(NovelDTO novelDTO);
 	
 	List<Novel> findAll();
+	
+	List<AuthorNovelMinProjection> findNovelCards();
 }

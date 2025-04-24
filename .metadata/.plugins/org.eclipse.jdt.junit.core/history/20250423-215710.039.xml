@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelServiceTest" project="backend" tests="1" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.novelsbr.backend.services.NovelServiceTest" time="3.201" displayname="NovelServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]">
-    <testcase name="save" classname="com.novelsbr.backend.services.NovelServiceTest" time="3.201" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:save()]"/>
-  </testsuite>
-</testrun>

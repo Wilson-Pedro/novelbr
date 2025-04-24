@@ -28,14 +28,17 @@ public class SecurityConfig {
 		return httpSecurity
 				.cors(cors -> {})
 				.csrf(csrf -> csrf.disable())
+				.headers(headers -> headers.frameOptions(frame -> frame.disable()))
 				.sessionManagement(session -> 
-				session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+							session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
+						.requestMatchers("/h2-console/**").permitAll()
+						.requestMatchers(HttpMethod.GET, "/novels").permitAll()
+						.requestMatchers("/novels/novelCards").permitAll()
 						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "/authors/").permitAll()
 						.requestMatchers(HttpMethod.GET, "/authors").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.POST, "/novels/").hasRole("AUTHOR")
-						.requestMatchers(HttpMethod.GET, "/novels").permitAll()
 						.requestMatchers(HttpMethod.GET, "/genders").hasRole("AUTHOR")
 						.anyRequest().authenticated()
 				)

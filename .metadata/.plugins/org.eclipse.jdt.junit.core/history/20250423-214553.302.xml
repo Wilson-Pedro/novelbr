@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelControllerTest" project="backend" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" time="41.576" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
-    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="39.178" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
-    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.596" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
-    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.331" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]"/>
-    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="1.466" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]"/>
-  </testsuite>
-</testrun>
