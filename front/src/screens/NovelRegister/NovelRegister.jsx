@@ -47,7 +47,6 @@ export default function NovelRegister() {
     }, [navigate]); 
 
     const submitNovel = async () => {
-        //e.preventDefault();
         const token = localStorage.getItem('token');
         try {
             await axios.post("http://localhost:8080/novels/", {

@@ -1,16 +1,30 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import Card from '../../component/cards/Card';
 import styles from './Home.module.css';
 import Table from './../../layout/table/Table';
-import imagePath1 from '../../assets/A_casa_ao_lado.jpg';
-import imagePath2 from '../../assets/Isto é vida.jpg';
-import imagePath3 from '../../assets/Trem para o Nunca.jpg';
-import imagePath4 from '../../assets/Jornada para o Além.jpg';
 
+import axios from 'axios';
+
+const API = "http://localhost:8080";
 
 export default function Home() {
+
+    const [novelCards, setNovelCards] = useState([])
+
+    useEffect(() => {
+        const fetchNovelCards = async () => {
+            try {
+                const response = await axios.get(`${API}/novels/novelCards`);
+                setNovelCards(response.data);
+            } catch(error) {
+                console.log(error.errorMessage)
+            }
+        }
+
+        fetchNovelCards();
+    }, [])
 
     return(
         <div className={styles.container}>
@@ -25,30 +39,15 @@ export default function Home() {
                     <h1>MAIS POPULARES</h1>
                 </div>
                 <div className={styles.cardContainer}>
-                    <Card
-                        imagePath={imagePath1}
-                        title="A casa ao Lado"
-                        author="All Star"
-                        userAuthenticate={false}
-                    />
-                    <Card
-                        imagePath={imagePath2}
-                        title="Isto é Vida"
-                        author="J. Key"
-                        userAuthenticate={false}
-                    />
-                    <Card
-                        imagePath={imagePath3}
-                        title="Trem para o Nunca"
-                        author="Light"
-                        userAuthenticate={false}
-                    />
-                    <Card
-                        imagePath={imagePath4}
-                        title="Jornada para o Além"
-                        author="S. Elppa"
-                        userAuthenticate={false}
-                    />
+                    {novelCards.map((novelCard, index) => (
+                        <Card
+                            index={index}
+                            imagePath={novelCard.imageUri}
+                            title={novelCard.novelName}
+                            author={novelCard.username}
+                            userAuthenticate={false}
+                        />
+                    ))}
                 </div>
             </div>
             <div className={styles.morePopular}>
