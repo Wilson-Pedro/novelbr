@@ -3,14 +3,14 @@ import styles from './Card.module.css';
 
 import { useNavigate } from 'react-router-dom';
 
-export default function Card({ imagePath="", title="", author="", userAuthenticate=false }) {
+export default function Card({ imagePath="", title="", author="", userAuthenticate=false, authorId, novelId }) {
 
     const navigate = useNavigate();
     
     const userAuth = { isAuth: userAuthenticate }
 
     function navigateToNovel() {
-        navigate(`/novel/${title}`, { state: userAuth });
+        navigate(`/novel/${novelId}`, { state: userAuth });
     }
 
     return(

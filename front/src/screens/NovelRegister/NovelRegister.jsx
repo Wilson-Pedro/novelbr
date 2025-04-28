@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 export default function NovelRegister() {
 
     const [novelName, setNovelName] = useState('');
-    const [author, setAuthor] = useState('');
     const [genders, setGenders] = useState([]);
     const [synopsis, setSynopsis] = useState('');
     const [authorId, setAuthorId] = useState(0);
@@ -89,20 +88,6 @@ export default function NovelRegister() {
                             onChange={(e) => setNovelName(e.target.value)}
                             placeholder="Nome da Obra"
                             aria-label="Nome da Obra"
-                            aria-describedby="basic-addon1"
-                            required
-                        />
-                    </div>
-
-                    <div className={styles.formDiv}>
-                        <label>Autor</label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={author}
-                            onChange={(e) => setAuthor(e.target.value)}
-                            placeholder="Autor"
-                            aria-label="Autor"
                             aria-describedby="basic-addon1"
                             required
                         />

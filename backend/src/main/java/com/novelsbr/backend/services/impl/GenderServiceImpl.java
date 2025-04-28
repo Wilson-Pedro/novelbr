@@ -20,4 +20,11 @@ public class GenderServiceImpl implements GenderService {
 		return genderRepository.findAll();
 	}
 
+	@Override
+	public List<String> findGendersByNovelId(Long novelId) {
+		return genderRepository.findGendersByNovelId(novelId).stream()
+				.map(x -> x.getGenderType().getType())
+				.toList();
+	}
+
 }

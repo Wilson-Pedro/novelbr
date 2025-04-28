@@ -7,4 +7,6 @@ import com.novelsbr.backend.domain.entities.Gender;
 public interface GenderService {
 
 	List<Gender> findAll();
+	
+	List<String> findGendersByNovelId(Long novelId);
 }

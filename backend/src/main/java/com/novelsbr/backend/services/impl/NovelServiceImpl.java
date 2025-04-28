@@ -7,10 +7,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
+import com.novelsbr.backend.domain.projections.CardNovelProjection;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
@@ -48,7 +49,12 @@ public class NovelServiceImpl implements NovelService {
 	}
 
 	@Override
-	public List<AuthorNovelMinProjection> findNovelCards() {
+	public List<CardNovelProjection> findNovelCards() {
 		return novelRepository.findNovelCards();
+	}
+
+	@Override
+	public AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId) {
+		return new AuthorNovelInfoDTO(novelRepository.findNovelInfoByNovelId(novelId));
 	}
 }

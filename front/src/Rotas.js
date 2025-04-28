@@ -21,7 +21,7 @@ export default function Rotas() {
                 <Route path="/profile" element={ <Profile /> } exact />
                 <Route path="/homeUser" element={ <HomeUser /> } exact />
                 <Route path="/novelRegister" element={ <NovelRegister /> } exact />
-                <Route path="/novel/:novelName" element={ <Novel /> } exact />
+                <Route path="/novel/:novelId" element={ <Novel /> } exact />
                 <Route path="/novel/:novelName/chapter/:chapterNumber" element={ <Chapter /> } exact />
                 <Route path="/chapterRegister" element={ <ChapterRegister /> } exact />
             </Routes>

@@ -4,10 +4,6 @@ import Footer from '../../layout/footer/Rodape';
 import Card from '../../component/cards/Card';
 import styles from './../Home/Home.module.css';
 import Table from '../../layout/table/Table';
-import imagePath1 from '../../assets/A_casa_ao_lado.jpg';
-import imagePath2 from '../../assets/Isto é vida.jpg';
-import imagePath3 from '../../assets/Trem para o Nunca.jpg';
-import imagePath4 from '../../assets/Jornada para o Além.jpg';
 
 import axios from 'axios';
 
@@ -53,11 +49,13 @@ export default function HomeUser() {
                     {novelCards.map((novelCard, index) => (
                         <Card
                             index={index}
+                            authorId={novelCard.authorId}
+                            novelId={novelCard.novelId}
                             imagePath={novelCard.imageUri}
                             title={novelCard.novelName}
                             author={novelCard.username}
                             userAuthenticate={true}
-                        />
+                        /> 
                     ))}
                 </div>
             </div>

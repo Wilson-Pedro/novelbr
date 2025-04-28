@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,5 +26,11 @@ public class GenderController {
 		List<GenderDTO> gendersDTO = genderService.findAll()
 				.stream().map(x -> new GenderDTO(x)).toList();
 		return ResponseEntity.ok(gendersDTO);
+	}
+	
+	@GetMapping("/novel/{novelId}")
+	public ResponseEntity<List<String>> findGendersByNovelId(@PathVariable Long novelId) {
+		List<String> genders = genderService.findGendersByNovelId(novelId);
+		return ResponseEntity.ok(genders);
 	}
 }

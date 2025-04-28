@@ -1,0 +1,34 @@
+package com.novelsbr.backend.domain.dto;
+
+import java.io.Serializable;
+
+public class AuthorNovelMinDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private Long authorId;
+	
+	private Long novelId;
+	
+	private String novelName;
+	
+	private String userName;
+	
+	private String imageUri;
+	
+	private String synopsis;
+	
+	public AuthorNovelMinDTO() {
+	}
+
+	public AuthorNovelMinDTO(Long authorId, Long novelId, String novelName, String userName, String imageUri,
+			String synopsis) {
+		this.authorId = authorId;
+		this.novelId = novelId;
+		this.novelName = novelName;
+		this.userName = userName;
+		this.imageUri = imageUri;
+		this.synopsis = synopsis;
+	}
+	
+	
+}

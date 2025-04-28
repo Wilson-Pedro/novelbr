@@ -12,7 +12,7 @@ public enum GenderType {
 	FANTASY(3, "Fantasia"),
 	HISTORICAL(4, "Histórico"),
 	HORROR(5, "Horror"),
-	LGBTQ(6, "LGBTQ"),
+	LGBTQ(6, "Yaoi"),
 	MAGICAL(7, "Mágico"),
 	MYSTERY(8, "Mistério"),
 	ADULT(9, "Adulto"),
@@ -22,7 +22,12 @@ public enum GenderType {
 	WESTERN(13, "Ocidente"),
 	SUSPENSEFUL(14, "Suspense"),
 	ACTION(15, "Ação"),
-	MEDIEVAL(16, "Medieval");
+	MEDIEVAL(16, "Medieval"),
+	SLICE_OF_LIFE(17, "Slice of life"),
+	SHOUJO(18, "Shoujo"),
+	TERROR(19, "Terror"),
+	DRAMA(20, "Drama");
+	
 	
 	private Integer cod;
 	

@@ -1,25 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Novel.module.css';
 import Navbar from './../../layout/navbar/Navbar';
 import Footer from './../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
+import axios from 'axios';
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+
+const API = "http://localhost:8080";
 
 export default function Novel() {
 
     const params = useParams();
-    const novelName =  params.novelName;
+    const novelId =  parseInt(params.novelId);
 
     const location = useLocation();
     const { isAuth } = location.state || {};
     const userAuth = { isAuth: isAuth }
+    const [novelInfo, setNovelInfo] = useState({});
+    const [genders, setGenders] = useState([]);
+    const [novelName, setNovelName] = useState('');
 
     const navigate = useNavigate();
 
     const[userAuthenticate, setUserAuthenticate] = useState(isAuth);
-    
+
+    useEffect(() => {
+
+        const fetchNovelInfo = async () => {
+            try {
+                const response = await axios.get(`${API}/novels/novelCards/${novelId}`);
+                setNovelInfo(response.data);
+
+            } catch(error) {
+                console.log(error.errorMessage)
+            }
+        }
+
+        const fetchNovelGenders = async () => {
+            try {
+                const response = await axios.get(`${API}/genders/novel/${novelId}`);
+                setGenders(response.data);
+            } catch(error) {
+                console.log(error.errorMessage)
+            }
+        }
+
+        fetchNovelInfo();
+        fetchNovelGenders();
+    }, []);
+
     function goToChapter(chapterNumber) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });
     }
@@ -36,21 +67,20 @@ export default function Novel() {
                 />
             </nav>
             <div className={styles.main}>
-                <div className={styles.mainHead}>
+                <div className={styles.mainHead}> 
                     <div className={styles.containerImage}>
-                        <img className={"img-fluid"} src={imagePath} />
+                        <img className={"img-fluid"} src={novelInfo.imageUri || imagePath} />
                     </div>
                     <div className={styles.containerInfo}>
-                        <h1>{novelName}</h1>
-                        <p><strong>Autor:</strong> S. Elppa</p>
-                        <p><strong>Gênros:</strong> Aventura, Ação, Drama, Medieval, Magia.</p>
+                        <h1>{novelInfo.novelName || '---'}</h1>
+                        <p><strong>Autor:</strong> {novelInfo.username || '---'}</p>
+                        <p><strong>Gêneros:</strong> {genders.map((gender, index) => (
+                            <span>{gender}{(index+1) < genders.length ? <>, </> : <>.</>} </span>
+                        ))}</p>
+                        {/* <p><strong>Gênros:</strong> Aventura, Ação, Drama, Medieval, Magia.</p> */}
                         <h4>Sinopse</h4>
                         <p className={styles.sinopse}>
-                            Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza: a barreira entre o mundo dos vivos e o Além está se rompendo. Espíritos errantes vagam pela terra, e monstros há muito adormecidos despertam de seu torpor. Apenas uma chave pode selar a fenda entre os reinos, mas ela foi perdida há séculos, enterrada nos confins do desconhecido.
-                            <br/><br/>
-                            Elarys, uma jovem ladina meio-elfa, se vê envolvida no caos ao descobrir que carrega em seu sangue a marca dos Guardiões do Véu, uma linhagem há muito extinta. Ao lado de um grupo improvável — um mago caído em desgraça, um guerreiro orc renegado e uma draconiana com segredos sombrios — ela embarca em uma jornada perigosa pelas terras selvagens de Eldoria, enfrentando seres místicos, deuses esquecidos e seus próprios demônios internos.
-                            <br/><br/>
-                            A cada passo, o tempo se esgota, e a sombra do Além se alastra. O destino do mundo está nas mãos de quem nunca quis ser heroína. Será Elarys capaz de impedir o fim da realidade antes que tudo sucumba ao vazio eterno?
+                            {novelInfo.synopsis || '---'}
                         </p>
                     </div>
                 </div>

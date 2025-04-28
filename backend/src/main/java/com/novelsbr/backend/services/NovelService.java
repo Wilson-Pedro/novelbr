@@ -2,9 +2,10 @@ package com.novelsbr.backend.services;
 
 import java.util.List;
 
+import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
+import com.novelsbr.backend.domain.projections.CardNovelProjection;
 
 public interface NovelService {
 
@@ -12,5 +13,7 @@ public interface NovelService {
 	
 	List<Novel> findAll();
 	
-	List<AuthorNovelMinProjection> findNovelCards();
+	List<CardNovelProjection> findNovelCards();
+	
+	AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId);
 }

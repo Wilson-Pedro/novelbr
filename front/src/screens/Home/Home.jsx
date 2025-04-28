@@ -42,6 +42,8 @@ export default function Home() {
                     {novelCards.map((novelCard, index) => (
                         <Card
                             index={index}
+                            authorId={novelCard.authorId}
+                            novelId={novelCard.novelId}
                             imagePath={novelCard.imageUri}
                             title={novelCard.novelName}
                             author={novelCard.username}

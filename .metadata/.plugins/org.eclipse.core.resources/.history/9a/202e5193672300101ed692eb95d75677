@@ -1,0 +1,8 @@
+package com.novelsbr.backend.domain.projections;
+
+public interface GenderProjection {
+
+	Integer getId();
+	
+	String getGenderType();
+}

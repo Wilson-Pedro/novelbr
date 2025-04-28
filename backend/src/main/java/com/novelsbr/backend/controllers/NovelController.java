@@ -6,14 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
+import com.novelsbr.backend.domain.projections.CardNovelProjection;
 import com.novelsbr.backend.services.NovelService;
 
 @RestController
@@ -26,8 +28,8 @@ public class NovelController {
 	
 	@GetMapping()
 	public ResponseEntity<List<NovelDTO>> findAll() {
-		List<Novel> novels = novelService.findAll();
-		List<NovelDTO> novlesDTO = novels.stream().map(x -> new NovelDTO(x)).toList();
+		List<NovelDTO> novlesDTO = novelService.findAll()
+				.stream().map(x -> new NovelDTO(x)).toList();
 		return ResponseEntity.ok(novlesDTO);
 	}
 
@@ -38,7 +40,12 @@ public class NovelController {
 	}
 	
 	@GetMapping("/novelCards")
-	public ResponseEntity<List<AuthorNovelMinProjection>> findNovelCards() {
+	public ResponseEntity<List<CardNovelProjection>> findNovelCards() {
 		return ResponseEntity.ok(novelService.findNovelCards());
+	}
+	
+	@GetMapping("/novelCards/{novelId}")
+	public ResponseEntity<AuthorNovelInfoDTO> findNovelInfoByNovelId(@PathVariable Long novelId) {
+		return ResponseEntity.ok(novelService.findNovelInfoByNovelId(novelId));
 	}
 }
