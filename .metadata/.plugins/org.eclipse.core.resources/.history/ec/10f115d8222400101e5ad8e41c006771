@@ -11,8 +11,6 @@ public interface NovelService {
 
 	Novel save(NovelDTO novelDTO);
 	
-	Novel findById(Long id);
-	
 	List<Novel> findAll();
 	
 	List<CardNovelProjection> findNovelCards();

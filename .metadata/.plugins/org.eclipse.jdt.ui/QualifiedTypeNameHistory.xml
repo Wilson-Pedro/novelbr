@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.GenderRepository"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.GenderDTO"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.User"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.UserService"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.userdetails.User"/>
     <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.security.SecurityProperties.User"/>
@@ -32,7 +29,6 @@
     <fullyQualifiedTypeName name="org.springframework.security.authentication.UsernamePasswordAuthenticationToken"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.LoginRequest"/>
     <fullyQualifiedTypeName name="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.AuthorService"/>
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
@@ -42,7 +38,6 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.AuthorRepository"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="javax.security.auth.x500.X500Principal"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.EntityNotFoundException"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
     <fullyQualifiedTypeName name="java.util.stream.Stream"/>
@@ -53,11 +48,16 @@
     <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer.OrderAnnotation"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Order"/>
-    <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorNovelMinDTO"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpMethod"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Gender"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.GenderType"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.EntityNotFoundException"/>
+    <fullyQualifiedTypeName name="java.io.Serializable"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Chapter"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.ChapterDTO"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.NovelDTO"/>
 </qualifiedTypeNameHistroy>

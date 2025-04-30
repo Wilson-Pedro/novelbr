@@ -17,7 +17,6 @@ import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -57,10 +56,5 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	public AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId) {
 		return new AuthorNovelInfoDTO(novelRepository.findNovelInfoByNovelId(novelId));
-	}
-
-	@Override
-	public Novel findById(Long id) {
-		return novelRepository.findById(id).orElseThrow(EntityNotFoundException::new);
 	}
 }

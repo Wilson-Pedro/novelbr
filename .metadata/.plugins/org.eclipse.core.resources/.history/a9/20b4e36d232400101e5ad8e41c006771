@@ -22,9 +22,7 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public Chapter save(ChapterDTO chapterDTO) {
 		Novel novel = novelService.findById(chapterDTO.getNovelId());
-		Chapter chapter = new Chapter(chapterDTO);
-		chapter.setNovel(novel);
-		return chapterRepository.save(chapter);
+		return chapterRepository.save(new Chapter(chapterDTO));
 	}
 
 }

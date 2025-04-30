@@ -23,7 +23,7 @@ export default function Rotas() {
                 <Route path="/novelRegister" element={ <NovelRegister /> } exact />
                 <Route path="/novel/:novelId" element={ <Novel /> } exact />
                 <Route path="/novel/:novelName/chapter/:chapterNumber" element={ <Chapter /> } exact />
-                <Route path="/chapterRegister" element={ <ChapterRegister /> } exact />
+                <Route path="/chapterRegister/:novelId" element={ <ChapterRegister /> } exact />
             </Routes>
         </BrowserRouter>
     );

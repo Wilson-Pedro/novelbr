@@ -1,9 +1,11 @@
 package com.novelsbr.backend.domain.dto;
 
-import com.novelsbr.backend.domain.entities.Chapter;
-import com.novelsbr.backend.domain.entities.Novel;
+import java.io.Serializable;
 
-public class ChapterDTO {
+import com.novelsbr.backend.domain.entities.Chapter;
+
+public class ChapterDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	
@@ -11,7 +13,7 @@ public class ChapterDTO {
 	
 	private String chapterText;
 	
-	private Novel novel;
+	private Long novelId;
 	
 	
 	public ChapterDTO() {
@@ -21,14 +23,14 @@ public class ChapterDTO {
 		this.id = chapter.getId();
 		this.title = chapter.getTitle();
 		this.chapterText = chapter.getChapterText();
-		this.novel = chapter.getNovel();
+		this.novelId = chapter.getNovel().getId();
 	}
 	
-	public ChapterDTO(Long id, String title, String chapterText, Novel novel) {
+	public ChapterDTO(Long id, String title, String chapterText, Long novelId) {
 		this.id = id;
 		this.title = title;
 		this.chapterText = chapterText;
-		this.novel = novel;
+		this.novelId = novelId;
 	}
 
 	public Long getId() {
@@ -55,11 +57,11 @@ public class ChapterDTO {
 		this.chapterText = chapterText;
 	}
 
-	public Novel getNovel() {
-		return novel;
+	public Long getNovelId() {
+		return novelId;
 	}
 
-	public void setNovel(Novel novel) {
-		this.novel = novel;
+	public void setNovelId(Long novelId) {
+		this.novelId = novelId;
 	}
 }

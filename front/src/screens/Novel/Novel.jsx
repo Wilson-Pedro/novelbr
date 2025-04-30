@@ -56,11 +56,11 @@ export default function Novel() {
     }
 
     function goToChapterRegister() {
-        navigate('/chapterRegister');
+        navigate(`/chapterRegister/${novelId}`);
     }
 
     return(
-        <div className={styles.container}>
+        <div className={styles.container}> 
             <nav className={styles.navbar}>
                 <Navbar 
                     userAuthenticate={userAuthenticate}

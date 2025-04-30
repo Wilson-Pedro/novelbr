@@ -59,3 +59,35 @@
 .divTitle h1:hover {
     color: rgb(29, 17, 0);
 }
+
+.formDiv {
+    width: 100%;
+    padding-left: 5%;
+}
+
+.formDiv label {
+    font-size: 20px;
+}
+
+.formDiv input {
+    font-size: 15px;
+    border: 1px solid black;
+    width: 98%;
+}
+
+.textEditor {
+    width: 95%;
+}
+
+.divBtn {
+    margin-top: 8%;
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    width: 50%;
+}
+
+.linkNone {
+    text-decoration: none;
+    color: inherit;
+}
