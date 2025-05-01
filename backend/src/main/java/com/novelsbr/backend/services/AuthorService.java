@@ -8,4 +8,8 @@ public interface AuthorService {
 	Author save(AuthorDTO authorDTO);
 	
 	Author findByUsername(String username);
+	
+	void validadeRegistration(AuthorDTO authorDTO);
+	
+	boolean existsByUsername(String username);
 }

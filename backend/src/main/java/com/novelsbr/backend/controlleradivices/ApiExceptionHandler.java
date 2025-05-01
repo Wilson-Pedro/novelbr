@@ -1,0 +1,24 @@
+package com.novelsbr.backend.controlleradivices;
+
+import java.time.Instant;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import com.novelsbr.backend.domain.dto.ProblamDTO;
+import com.novelsbr.backend.exceptions.ExistingAuthorException;
+
+@ControllerAdvice
+public class ApiExceptionHandler {
+
+	@ExceptionHandler(ExistingAuthorException.class)
+	public ResponseEntity<ProblamDTO> existingAuthorException() {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ProblamDTO problamDTO = new ProblamDTO("Existing Author", status.value(), Instant.now());
+
+		return ResponseEntity.status(status).body(problamDTO);
+	}
+}

@@ -8,4 +8,6 @@ import com.novelsbr.backend.domain.entities.Author;
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
 	UserDetails findByUsername(String username);
+	
+	boolean existsByUsername(String username);
 }

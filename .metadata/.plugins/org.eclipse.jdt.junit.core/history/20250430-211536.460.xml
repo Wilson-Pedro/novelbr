@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ChapterServiceTest" project="backend" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="com.novelsbr.backend.services.ChapterServiceTest" time="1157.73" displayname="ChapterServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]">
-    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.ChapterServiceTest" time="1149.736" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:preparingTestEnvironment()]"/>
-    <testcase name="save" classname="com.novelsbr.backend.services.ChapterServiceTest" time="7.994" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:save()]"/>
-  </testsuite>
-</testrun>

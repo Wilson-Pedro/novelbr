@@ -12,6 +12,7 @@ import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 
@@ -32,10 +33,14 @@ class AuthorServiceTest {
 	@Autowired
 	AuthorService authorService;
 	
+	@Autowired
+	ChapterRepository chapterRepository;
+	
 	AuthorDTO author = new AuthorDTO(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	@BeforeEach
 	void setUp() {
+		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();

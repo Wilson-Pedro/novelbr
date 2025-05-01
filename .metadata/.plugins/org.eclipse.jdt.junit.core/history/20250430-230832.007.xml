@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="ChapterControllerTest" project="backend" tests="2" started="2" failures="0" errors="0" ignored="0">
-  <testsuite name="com.novelsbr.backend.controllers.ChapterControllerTest" time="5.594" displayname="ChapterControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]">
-    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="2.589" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:preparingTestEnvironment()]"/>
-    <testcase name="save" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="3.003" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:save()]"/>
-  </testsuite>
-</testrun>

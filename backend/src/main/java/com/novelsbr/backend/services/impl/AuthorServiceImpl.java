@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
+import com.novelsbr.backend.exceptions.ExistingAuthorException;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.services.AuthorService;
 
@@ -20,9 +21,9 @@ public class AuthorServiceImpl implements AuthorService {
 
 	@Override
 	public Author save(AuthorDTO authorDTO) {
+		validadeRegistration(authorDTO);
 		Author authorSaved = new Author(authorDTO);
-		String passwordEncrypt = new BCryptPasswordEncoder().encode(authorDTO.getPassword());
-		authorSaved.setPassword(passwordEncrypt);
+		authorSaved.setPassword(new BCryptPasswordEncoder().encode(authorDTO.getPassword()));
 		authorSaved.setRole(UserRole.AUTHOR);
 		return authorRepository.save(authorSaved);
 	}
@@ -33,5 +34,15 @@ public class AuthorServiceImpl implements AuthorService {
 				.filter(user -> user.getUsername().equals(username))
 				.findFirst()
 				.orElseThrow(EntityNotFoundException::new);
+	}
+	
+	@Override
+	public void validadeRegistration(AuthorDTO authorDTO) {
+		if(existsByUsername(authorDTO.getUsername())) throw new ExistingAuthorException();
+	}
+
+	@Override
+	public boolean existsByUsername(String username) {
+		return authorRepository.existsByUsername(username);
 	}
 }
