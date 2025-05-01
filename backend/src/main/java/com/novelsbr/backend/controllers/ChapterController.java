@@ -23,6 +23,6 @@ public class ChapterController {
 	@PostMapping("/")
 	public ResponseEntity<ChapterDTO> save(@RequestBody ChapterDTO chapterDTO) {
 		Chapter chapter = chapterService.save(chapterDTO);
-		return ResponseEntity.ok(new ChapterDTO(chapter));
+		return ResponseEntity.status(201).body(new ChapterDTO(chapter));
 	}
 }

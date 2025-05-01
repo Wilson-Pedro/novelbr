@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="java" project="backend" tests="22" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.BackendApplicationTests" incomplete="true" displayname="BackendApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]">
+    <testcase name="contextLoads" classname="com.novelsbr.backend.BackendApplicationTests" incomplete="true" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.GenderServiceTest" incomplete="true" displayname="GenderServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]">
+    <testcase name="save" classname="com.novelsbr.backend.services.GenderServiceTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.AuthorServiceTest" incomplete="true" displayname="AuthorServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]">
+    <testcase name="save" classname="com.novelsbr.backend.services.AuthorServiceTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="NovelServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:save()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findAll()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="ChapterServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.ChapterControllerTest" incomplete="true" displayname="ChapterControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.ChapterControllerTest" incomplete="true" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.ChapterControllerTest" incomplete="true" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:getToken()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.ChapterControllerTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.GenderControllerTest" incomplete="true" displayname="GenderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.GenderControllerTest" incomplete="true" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.GenderControllerTest" incomplete="true" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.GenderControllerTest" incomplete="true" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findAll()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" incomplete="true" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" incomplete="true" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" incomplete="true" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" incomplete="true" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthControllerTest" incomplete="true" displayname="AuthControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]">
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthControllerTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:save()]"/>
+    <testcase name="login" classname="com.novelsbr.backend.controllers.AuthControllerTest" incomplete="true" displayname="login()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:login()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthorControllerTest" incomplete="true" displayname="AuthorControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]">
+    <testcase name="deleteAll" classname="com.novelsbr.backend.controllers.AuthorControllerTest" incomplete="true" displayname="deleteAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:deleteAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthorControllerTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:save()]"/>
+  </testsuite>
+</testrun>

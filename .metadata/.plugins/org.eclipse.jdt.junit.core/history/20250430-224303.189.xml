@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="com.novelsbr.backend.controllers" project="backend" tests="14" started="14" failures="0" errors="1" ignored="0">
+  <testsuite name="com.novelsbr.backend.controllers.ChapterControllerTest" time="10.07" displayname="ChapterControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="8.96" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.99" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:getToken()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.111" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:save()]">
+      <error>org.springframework.dao.InvalidDataAccessApiUsageException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.novelsbr.backend.domain.entities.Author' (save the transient instance before flushing)&#13;
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:368)&#13;
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)&#13;
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:566)&#13;
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.processCommit(AbstractPlatformTransactionManager.java:795)&#13;
+	at org.springframework.transaction.support.AbstractPlatformTransactionManager.commit(AbstractPlatformTransactionManager.java:758)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.commitTransactionAfterReturning(TransactionAspectSupport.java:698)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:416)&#13;
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)&#13;
+	at jdk.proxy2/jdk.proxy2.$Proxy143.save(Unknown Source)&#13;
+	at com.novelsbr.backend.controllers.ChapterControllerTest.save(ChapterControllerTest.java:123)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.IllegalStateException: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.novelsbr.backend.domain.entities.Author' (save the transient instance before flushing)&#13;
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:157)&#13;
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:167)&#13;
+	at org.hibernate.internal.ExceptionConverterImpl.convert(ExceptionConverterImpl.java:173)&#13;
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1433)&#13;
+	at org.hibernate.internal.SessionImpl.managedFlush(SessionImpl.java:491)&#13;
+	at org.hibernate.internal.SessionImpl.flushBeforeTransactionCompletion(SessionImpl.java:2354)&#13;
+	at org.hibernate.internal.SessionImpl.beforeTransactionCompletion(SessionImpl.java:1978)&#13;
+	at org.hibernate.engine.jdbc.internal.JdbcCoordinatorImpl.beforeTransactionCompletion(JdbcCoordinatorImpl.java:439)&#13;
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl.beforeCompletionCallback(JdbcResourceLocalTransactionCoordinatorImpl.java:169)&#13;
+	at org.hibernate.resource.transaction.backend.jdbc.internal.JdbcResourceLocalTransactionCoordinatorImpl$TransactionDriverControlImpl.commit(JdbcResourceLocalTransactionCoordinatorImpl.java:267)&#13;
+	at org.hibernate.engine.transaction.internal.TransactionImpl.commit(TransactionImpl.java:101)&#13;
+	at org.springframework.orm.jpa.JpaTransactionManager.doCommit(JpaTransactionManager.java:562)&#13;
+	... 16 more&#13;
+Caused by: org.hibernate.TransientObjectException: persistent instance references an unsaved transient instance of 'com.novelsbr.backend.domain.entities.Author' (save the transient instance before flushing)&#13;
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:382)&#13;
+	at org.hibernate.engine.spi.CascadingActions$9.cascade(CascadingActions.java:372)&#13;
+	at org.hibernate.engine.internal.Cascade.cascadeToOne(Cascade.java:570)&#13;
+	at org.hibernate.engine.internal.Cascade.cascadeAssociation(Cascade.java:492)&#13;
+	at org.hibernate.engine.internal.Cascade.cascadeProperty(Cascade.java:253)&#13;
+	at org.hibernate.engine.internal.Cascade.cascade(Cascade.java:192)&#13;
+	at org.hibernate.event.internal.AbstractFlushingEventListener.prepareEntityFlushes(AbstractFlushingEventListener.java:169)&#13;
+	at org.hibernate.event.internal.AbstractFlushingEventListener.preFlush(AbstractFlushingEventListener.java:107)&#13;
+	at org.hibernate.event.internal.AbstractFlushingEventListener.flushEverythingToExecutions(AbstractFlushingEventListener.java:82)&#13;
+	at org.hibernate.event.internal.DefaultFlushEventListener.onFlush(DefaultFlushEventListener.java:40)&#13;
+	at org.hibernate.event.service.internal.EventListenerGroupImpl.fireEventOnEachListener(EventListenerGroupImpl.java:127)&#13;
+	at org.hibernate.internal.SessionImpl.doFlush(SessionImpl.java:1429)&#13;
+	... 24 more&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.GenderControllerTest" time="3.493" displayname="GenderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.283" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.348" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="2.856" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findAll()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" time="0.908" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.174" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.342" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.035" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.341" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthControllerTest" time="0.723" displayname="AuthControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]">
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.541" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:save()]"/>
+    <testcase name="login" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.18" displayname="login()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:login()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.254" displayname="AuthorControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]">
+    <testcase name="deleteAll" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.052" displayname="deleteAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:deleteAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.2" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:save()]"/>
+  </testsuite>
+</testrun>
