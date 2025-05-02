@@ -18,4 +18,6 @@ public interface NovelService {
 	List<CardNovelProjection> findNovelCards();
 	
 	AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId);
+	
+	boolean existsByNovelName(String novelName);
 }

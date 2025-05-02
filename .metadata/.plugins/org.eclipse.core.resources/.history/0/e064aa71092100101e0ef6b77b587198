@@ -1,6 +1,0 @@
-package com.novelsbr.backend.domain.projections;
-
-public interface AuthorNovelMinProjection {
-
-	
-}

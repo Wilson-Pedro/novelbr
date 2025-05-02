@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.novelsbr.backend.domain.dto.ProblamDTO;
 import com.novelsbr.backend.exceptions.ExistingAuthorException;
+import com.novelsbr.backend.exceptions.ExistingNovelException;
+
+import jakarta.persistence.EntityNotFoundException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
@@ -18,6 +21,24 @@ public class ApiExceptionHandler {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		
 		ProblamDTO problamDTO = new ProblamDTO("Existing Author", status.value(), Instant.now());
+
+		return ResponseEntity.status(status).body(problamDTO);
+	}
+	
+	@ExceptionHandler(ExistingNovelException.class)
+	public ResponseEntity<ProblamDTO> existingNovelException() {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ProblamDTO problamDTO = new ProblamDTO("Existing Novel", status.value(), Instant.now());
+
+		return ResponseEntity.status(status).body(problamDTO);
+	}
+	
+	@ExceptionHandler(EntityNotFoundException.class)
+	public ResponseEntity<ProblamDTO> entityNotFoundException() {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		
+		ProblamDTO problamDTO = new ProblamDTO("Entity not found", status.value(), Instant.now());
 
 		return ResponseEntity.status(status).body(problamDTO);
 	}

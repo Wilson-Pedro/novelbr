@@ -1,6 +1,7 @@
 package com.novelsbr.backend.repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -10,6 +11,8 @@ import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
 import com.novelsbr.backend.domain.projections.CardNovelProjection;
 
 public interface NovelRepository extends JpaRepository<Novel, Long> {
+	
+	boolean existsByNovelName(String novelName);
 
 	@Query(nativeQuery = true, value = """
 			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.image_uri 
@@ -25,5 +28,5 @@ public interface NovelRepository extends JpaRepository<Novel, Long> {
 			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
 			WHERE n.id = :novelId	
 			""")
-	AuthorNovelMinProjection findNovelInfoByNovelId(Long novelId);
+	Optional<AuthorNovelMinProjection> findNovelInfoByNovelId(Long novelId);
 }

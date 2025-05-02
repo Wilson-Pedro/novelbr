@@ -1,0 +1,48 @@
+package com.novelsbr.backend.exceptions;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.services.NovelService;
+
+import jakarta.persistence.EntityNotFoundException;
+
+@SpringBootTest
+class AuthorExceptionsTest {
+	
+	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
+	AuthorRepository authorRepository;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
+	NovelService novelService;
+	
+	@BeforeEach
+	void setUp() {
+		novelRepository.deleteAll();
+		genderRepository.deleteAll();
+		authorRepository.deleteAll();
+	}
+
+	@Test
+	void entityNotFoundException01() {
+		assertThrows(EntityNotFoundException.class, () -> novelService.findById(70L));
+	}
+
+	@Test
+	void entityNotFoundException02() {
+		assertThrows(EntityNotFoundException.class, () -> novelService.findNovelInfoByNovelId(70L));
+	}
+}

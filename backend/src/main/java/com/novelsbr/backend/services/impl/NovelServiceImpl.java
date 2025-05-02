@@ -13,6 +13,7 @@ import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.projections.CardNovelProjection;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.exceptions.ExistingNovelException;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
@@ -32,6 +33,7 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	@Transactional
 	public Novel save(NovelDTO novelDTO) {
+		validadeRegistration(novelDTO);
 		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
 		List<Gender> gendersList = GenderType.stringToGender(novelDTO.getGenders()).stream()
 				.map(gender -> new Gender(gender.getCod(), gender))
@@ -56,11 +58,21 @@ public class NovelServiceImpl implements NovelService {
 
 	@Override
 	public AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId) {
-		return new AuthorNovelInfoDTO(novelRepository.findNovelInfoByNovelId(novelId));
+		return new AuthorNovelInfoDTO(novelRepository.findNovelInfoByNovelId(novelId)
+				.orElseThrow(EntityNotFoundException::new));
 	}
 
 	@Override
 	public Novel findById(Long id) {
 		return novelRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+	}
+
+	@Override
+	public boolean existsByNovelName(String novelName) {
+		return novelRepository.existsByNovelName(novelName);
+	}
+	
+	public void validadeRegistration(NovelDTO novelDTO) {
+		if(existsByNovelName(novelDTO.getNovelName())) throw new ExistingNovelException();
 	}
 }

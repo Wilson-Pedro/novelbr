@@ -36,12 +36,11 @@ class AuthorExceptionsTest {
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
 	}
-
+	
 	@Test
 	void existingAuthorExceptionTest() {
 		Author author = new Author(null, "João", "All Star", "joao@gmail.com", "1234", UserRole.AUTHOR);
 		authorRepository.save(author);
 		assertThrows(ExistingAuthorException.class, () -> authorService.save(new AuthorDTO(author)));
 	}
-
 }
