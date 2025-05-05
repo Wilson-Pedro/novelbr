@@ -23,8 +23,8 @@ public class GenderController {
 	
 	@GetMapping
 	public ResponseEntity<List<GenderDTO>> findAll() {
-		List<GenderDTO> gendersDTO = genderService.findAll()
-				.stream().map(x -> new GenderDTO(x)).toList();
+		List<GenderDTO> gendersDTO = genderService.findAllGenders().stream()
+				.map(x -> new GenderDTO(x)).toList();
 		return ResponseEntity.ok(gendersDTO);
 	}
 	

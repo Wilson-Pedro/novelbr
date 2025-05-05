@@ -41,7 +41,6 @@ export default function NovelRegister() {
                 console.log("Error ao buscar gêneros: ", error)
             }
         }
-
         fetchGenders();
     }, [navigate]); 
 
@@ -67,7 +66,11 @@ export default function NovelRegister() {
     function addGenders(e) {
         const gender = e.target.value;
         const newGenders = [...genders, gender];
-        setGenders(newGenders);
+        if(!genders.includes(gender)) {
+            setGenders(newGenders);
+        } else {
+            setGenders(newGenders.filter(item => item !== gender));
+        }
     }
 
     return (
@@ -106,6 +109,7 @@ export default function NovelRegister() {
                             </div>
                         ))}
                     </div>
+                    {genders}
 
                     <div className={styles.formDiv}>
                         <label>Sinopse</label>

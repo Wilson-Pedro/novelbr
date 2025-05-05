@@ -9,4 +9,6 @@ public interface GenderService {
 	List<Gender> findAll();
 	
 	List<String> findGendersByNovelId(Long novelId);
+	
+	List<Gender> findAllGenders();
 }

@@ -71,7 +71,7 @@ export default function ChapterRegister() {
                         aria-label="Título do capítulo"
                         aria-describedby="basic-addon1"
                         required
-                    />
+                    /> 
                 </div> <br />
                 <h3>Capítulo</h3> <br />
                 <div className={styles.textEditor}>

@@ -13,12 +13,12 @@ import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.projections.CardNovelProjection;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.exceptions.NotFoundException;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -35,15 +35,19 @@ public class NovelServiceImpl implements NovelService {
 	public Novel save(NovelDTO novelDTO) {
 		validadeRegistration(novelDTO);
 		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
-		List<Gender> gendersList = GenderType.stringToGender(novelDTO.getGenders()).stream()
-				.map(gender -> new Gender(gender.getCod(), gender))
-				.toList();
-		Set<Gender> genders = new HashSet<>(gendersList);
+		Set<Gender> genders = StringsToGenders(novelDTO.getGenders());
 		Novel novel = new Novel(novelDTO);
-		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).get());
+		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
 		novel.setGenders(genders);
 		
 		return novelRepository.save(novel);
+	}
+
+	private Set<Gender> StringsToGenders(List<String> gendersStr) {
+		List<Gender> gendersList = GenderType.stringToGender(gendersStr).stream()
+				.map(gender -> new Gender(gender.getCod(), gender))
+				.toList();
+		return new HashSet<>(gendersList);
 	}
 
 	@Override
@@ -59,12 +63,12 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	public AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId) {
 		return new AuthorNovelInfoDTO(novelRepository.findNovelInfoByNovelId(novelId)
-				.orElseThrow(EntityNotFoundException::new));
+				.orElseThrow(NotFoundException::new));
 	}
 
 	@Override
 	public Novel findById(Long id) {
-		return novelRepository.findById(id).orElseThrow(EntityNotFoundException::new);
+		return novelRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 
 	@Override

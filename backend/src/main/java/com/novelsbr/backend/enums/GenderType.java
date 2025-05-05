@@ -26,7 +26,8 @@ public enum GenderType {
 	SLICE_OF_LIFE(17, "Slice of life"),
 	SHOUJO(18, "Shoujo"),
 	TERROR(19, "Terror"),
-	DRAMA(20, "Drama");
+	DRAMA(20, "Drama"),
+	POLITICAL(21, "Político");
 	
 	
 	private Integer cod;

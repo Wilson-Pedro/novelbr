@@ -17,4 +17,9 @@ public interface GenderRepository extends JpaRepository<Gender, Integer>{
 			WHERE  n.id = :novelId
 			""")
 	List<GenderProjection> findGendersByNovelId(Long novelId);
+	
+	@Query(nativeQuery = true, value = """
+			SELECT id, gender_type FROM TBL_GENDER ORDER BY GENDER_TYPE
+			""")
+	List<GenderProjection> findAllGenders();
 }

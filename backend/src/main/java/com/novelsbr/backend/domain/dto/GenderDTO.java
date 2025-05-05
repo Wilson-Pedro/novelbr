@@ -14,6 +14,11 @@ public class GenderDTO implements Serializable {
 	public GenderDTO() {
 	}
 
+	public GenderDTO(Integer id, String genderType) {
+		this.id = id;
+		this.genderType = genderType;
+	}
+
 	public GenderDTO(Gender gender) {
 		this.id = gender.getId();
 		this.genderType = gender.getGenderType().getType();

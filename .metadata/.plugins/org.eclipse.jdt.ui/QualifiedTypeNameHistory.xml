@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.security.authentication.dao.DaoAuthenticationProvider"/>
-    <fullyQualifiedTypeName name="org.springframework.security.authentication.ProviderManager"/>
-    <fullyQualifiedTypeName name="org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties.Authentication"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.context.SecurityContextHolder"/>
     <fullyQualifiedTypeName name="org.springframework.security.core.Authentication"/>
     <fullyQualifiedTypeName name="org.springframework.web.client.HttpStatusCodeException"/>
@@ -18,7 +15,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.servlet.config.annotation.WebMvcConfigurer"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="javax.security.auth.x500.X500Principal"/>
-    <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
     <fullyQualifiedTypeName name="java.util.stream.Stream"/>
     <fullyQualifiedTypeName name="java.util.ArrayList"/>
@@ -27,20 +23,16 @@
     <fullyQualifiedTypeName name="org.junit.jupiter.api.TestMethodOrder"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer.OrderAnnotation"/>
-    <fullyQualifiedTypeName name="org.junit.jupiter.api.Order"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorNovelMinDTO"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpMethod"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Gender"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.enums.GenderType"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Chapter"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.ChapterDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.ChapterRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.ChapterService"/>
     <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.NovelDTO"/>
     <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ControllerAdvice"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
@@ -53,11 +45,19 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.ExistingAuthorException"/>
     <fullyQualifiedTypeName name="org.springframework.boot.test.context.SpringBootTest"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.AuthorRepository"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.services.AuthorService"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.enums.GenderType"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.Order"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.NovelRepository"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.NovelDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.services.AuthorService"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EntityNotFoundException"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.EntityNotFoundException"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.GenderDTO"/>
 </qualifiedTypeNameHistroy>
