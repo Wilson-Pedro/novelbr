@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
+import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.domain.projections.CardNovelProjection;
 import com.novelsbr.backend.services.NovelService;
 
 @RestController
@@ -40,7 +40,7 @@ public class NovelController {
 	}
 	
 	@GetMapping("/novelCards")
-	public ResponseEntity<List<CardNovelProjection>> findNovelCards() {
+	public ResponseEntity<List<CardNovelDTO>> findNovelCards() {
 		return ResponseEntity.ok(novelService.findNovelCards());
 	}
 	

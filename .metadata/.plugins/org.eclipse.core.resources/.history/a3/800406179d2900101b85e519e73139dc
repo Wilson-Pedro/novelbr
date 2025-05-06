@@ -57,8 +57,7 @@ public class NovelServiceImpl implements NovelService {
 
 	@Override
 	public List<CardNovelDTO> findNovelCards() {
-		return novelRepository.findNovelCards().stream()
-				.map(x -> new CardNovelDTO(x)).toList();
+		return novelRepository.findNovelCards();
 	}
 
 	@Override
