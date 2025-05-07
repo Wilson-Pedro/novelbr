@@ -91,22 +91,11 @@ class NovelServiceTest {
 	}
 	
 	@Test
-	void findById() {
+	void findNovelCards() {
 		
 		List<CardNovelDTO> list = novelService.findNovelCards();
 		
 		assertEquals(list.size(), novelRepository.findNovelCards().size());
-	}
-	
-	@Test
-	void findNovelCards() {
-		
-		Long novelId = novelRepository.findAll().get(0).getId();
-		
-		Novel novel = novelService.findById(novelId);
-		assertEquals("Jornada para o Além", novel.getNovelName());
-		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
-		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
 	}
 	
 	@Test

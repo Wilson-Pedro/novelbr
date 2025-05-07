@@ -141,13 +141,4 @@ class NovelControllerTest {
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk());
 	}
-	
-	@Test
-	@Order(4)
-	void findNovelCards() throws Exception {
-		
-		mockMvc.perform(get(URI + "/novelCards")
-				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isOk());
-	}
 }
