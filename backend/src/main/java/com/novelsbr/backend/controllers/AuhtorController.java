@@ -3,6 +3,8 @@ package com.novelsbr.backend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
-import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.services.AuthorService;
 
 @RestController
@@ -21,16 +22,14 @@ public class AuhtorController {
 	@Autowired
 	private AuthorService authorService;
 	
-	@Autowired
-	private AuthorRepository authorRepository;
-	
 	@PostMapping("/")
 	public ResponseEntity<AuthorDTO> save(@RequestBody AuthorDTO authorDTO) {
-		
-		if(authorRepository.findByUsername(authorDTO.getUsername()) != null)
-			return ResponseEntity.badRequest().build();
-		
 		Author author = authorService.save(authorDTO);
 		return ResponseEntity.status(201).body(new AuthorDTO(author));	
+	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<AuthorDTO> findById(@PathVariable Long id) {
+		return ResponseEntity.ok(new AuthorDTO(authorService.findById(id)));
 	}
 }

@@ -8,10 +8,9 @@ import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.exceptions.ExistingAuthorException;
+import com.novelsbr.backend.exceptions.NotFoundException;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.services.AuthorService;
-
-import jakarta.persistence.EntityNotFoundException;
 
 @Service
 public class AuthorServiceImpl implements AuthorService {
@@ -22,9 +21,11 @@ public class AuthorServiceImpl implements AuthorService {
 	@Override
 	public Author save(AuthorDTO authorDTO) {
 		validadeRegistration(authorDTO);
+		
 		Author authorSaved = new Author(authorDTO);
 		authorSaved.setPassword(new BCryptPasswordEncoder().encode(authorDTO.getPassword()));
 		authorSaved.setRole(UserRole.AUTHOR);
+		
 		return authorRepository.save(authorSaved);
 	}
 
@@ -33,7 +34,12 @@ public class AuthorServiceImpl implements AuthorService {
 		return authorRepository.findAll().stream()
 				.filter(user -> user.getUsername().equals(username))
 				.findFirst()
-				.orElseThrow(EntityNotFoundException::new);
+				.orElseThrow(NotFoundException::new);
+	}
+	
+	@Override
+	public Author findById(Long id) {
+		return authorRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 	
 	@Override

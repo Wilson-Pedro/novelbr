@@ -17,6 +17,8 @@ public interface NovelService {
 	
 	List<CardNovelDTO> findNovelCards();
 	
+	List<CardNovelDTO> findNovelCardsByUsername(String username);
+	
 	AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId);
 	
 	boolean existsByNovelName(String novelName);

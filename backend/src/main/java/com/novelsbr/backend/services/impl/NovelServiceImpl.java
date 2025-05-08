@@ -35,7 +35,7 @@ public class NovelServiceImpl implements NovelService {
 	public Novel save(NovelDTO novelDTO) {
 		validadeRegistration(novelDTO);
 		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
-		Set<Gender> genders = StringsToGenders(novelDTO.getGenders());
+		Set<Gender> genders = stringsToGenders(novelDTO.getGenders());
 		Novel novel = new Novel(novelDTO);
 		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
 		novel.setGenders(genders);
@@ -43,7 +43,7 @@ public class NovelServiceImpl implements NovelService {
 		return novelRepository.save(novel);
 	}
 
-	private Set<Gender> StringsToGenders(List<String> gendersStr) {
+	private Set<Gender> stringsToGenders(List<String> gendersStr) {
 		List<Gender> gendersList = GenderType.stringToGender(gendersStr).stream()
 				.map(gender -> new Gender(gender.getCod(), gender))
 				.toList();
@@ -58,6 +58,12 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	public List<CardNovelDTO> findNovelCards() {
 		return novelRepository.findNovelCards().stream()
+				.map(x -> new CardNovelDTO(x)).toList();
+	}
+	
+	@Override
+	public List<CardNovelDTO> findNovelCardsByUsername(String username) {
+		return novelRepository.findNovelCardsByUsername(username).stream()
 				.map(x -> new CardNovelDTO(x)).toList();
 	}
 

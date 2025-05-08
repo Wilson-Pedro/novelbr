@@ -44,6 +44,11 @@ public class NovelController {
 		return ResponseEntity.ok(novelService.findNovelCards());
 	}
 	
+	@GetMapping("/novelCards/author/{username}")
+	public ResponseEntity<List<CardNovelDTO>> findNovelCardsByUsername(@PathVariable String username) {
+		return ResponseEntity.ok(novelService.findNovelCardsByUsername(username));
+	}
+	
 	@GetMapping("/novelCards/{novelId}")
 	public ResponseEntity<AuthorNovelInfoDTO> findNovelInfoByNovelId(@PathVariable Long novelId) {
 		return ResponseEntity.ok(novelService.findNovelInfoByNovelId(novelId));

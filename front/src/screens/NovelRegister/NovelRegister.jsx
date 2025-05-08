@@ -8,6 +8,8 @@ import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+const API = "http://localhost:8080";
+
 export default function NovelRegister() {
 
     const [novelName, setNovelName] = useState('');
@@ -31,7 +33,7 @@ export default function NovelRegister() {
 
         const fetchGenders = async () => {
             try {
-                const response = await axios.get("http://localhost:8080/genders", {
+                const response = await axios.get(`${API}/genders`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }

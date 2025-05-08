@@ -1,18 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.css';
 import Navbar from './../../layout/navbar/Navbar';
 import Card from './../../component/cards/Card';
 import Footer from './../../layout/footer/Rodape';
-import imagePath1 from '../../assets/A_casa_ao_lado.jpg';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import axios from 'axios';
+
+const API = "http://localhost:8080";
+
 export default function Profile() {
+
+    const [cards, setCards] = useState([]);
+    const params = useParams();
+    const username = params.username;
+
+    useEffect(() => {
+
+        const fetchNovelCardByUsername = async () => {
+
+            try {
+                const response = await axios.get(`${API}/novels/novelCards/author/${username}`);
+                setCards(response.data);
+            } catch(error) {
+                console.log("Error ao buscar Card por Username: ", error.errorMessage);
+            }
+
+        }
+
+        fetchNovelCardByUsername();
+    }, [])
 
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
-
 
     return(
         <div className={styles.container}>
@@ -33,7 +55,7 @@ export default function Profile() {
                 <div className={styles.divMain}>
                     <h1>Configurações ⚙️</h1>
                     <p className={styles.info}>Crie uma nova jornada.</p>
-                    <button type="button" class="btn btn-success">
+                    <button type="button" className="btn btn-success">
                         <Link className={styles.linkNone} to="/novelRegister">Criar História</Link>
                     </button>
                 </div>
@@ -42,13 +64,16 @@ export default function Profile() {
                 <div className={styles.divMain}>
                     <h1>Minhas Obras 📖</h1>
                     <div className={styles.cardContainer}>
-                        <Card
-                            imagePath={imagePath1}
-                            title="A casa ao Lado."
-                            charpter={23}
-                        />
+                        {cards.map((card, index) => (
+                            <Card
+                                index={index}
+                                imagePath={card.imageUri}
+                                title={card.novelName}
+                                author={card.username}
+                            />
+                        ))}
                     </div>
-                    <Link to="/homeUser"><button type="button" class="btn btn-danger">Voltar</button></Link>
+                    <Link to="/homeUser"><button type="button" className="btn btn-danger">Voltar</button></Link>
                 </div>
             </div>
             <Footer />
