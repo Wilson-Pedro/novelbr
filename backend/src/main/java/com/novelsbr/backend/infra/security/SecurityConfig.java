@@ -42,6 +42,7 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.GET, "/genders").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.GET, "/genders/novel/{novelId}").permitAll()
 						.requestMatchers(HttpMethod.POST, "/chapters/").hasRole("AUTHOR")
+						.requestMatchers(HttpMethod.GET, "/chapters/novelsTile/author/**").permitAll()
 						.anyRequest().authenticated()
 				)
 				.addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

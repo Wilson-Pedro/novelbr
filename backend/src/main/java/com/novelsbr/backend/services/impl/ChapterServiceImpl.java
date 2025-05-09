@@ -1,9 +1,12 @@
 package com.novelsbr.backend.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
+import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.repositories.ChapterRepository;
@@ -25,6 +28,12 @@ public class ChapterServiceImpl implements ChapterService {
 		Chapter chapter = new Chapter(chapterDTO);
 		chapter.setNovel(novel);
 		return chapterRepository.save(chapter);
+	}
+
+	@Override
+	public List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByAuthorId(Long authorId) {
+		return chapterRepository.findAllNovelsChapterTitleByAuthorId(authorId)
+				.stream().map(x -> new NovelsChapterTitleDTO(x)).toList();
 	}
 
 }

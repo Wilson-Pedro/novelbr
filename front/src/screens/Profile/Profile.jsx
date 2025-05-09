@@ -31,7 +31,7 @@ export default function Profile() {
         }
 
         fetchNovelCardByUsername();
-    }, [])
+    }, []) 
 
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
@@ -67,9 +67,12 @@ export default function Profile() {
                         {cards.map((card, index) => (
                             <Card
                                 index={index}
+                                authorId={card.authorId}
+                                novelId={card.novelId}
                                 imagePath={card.imageUri}
                                 title={card.novelName}
                                 author={card.username}
+                                userAuthenticate={true}
                             />
                         ))}
                     </div>

@@ -1,8 +1,0 @@
-package com.novelsbr.backend.controlleradivices;
-
-import org.springframework.web.bind.annotation.ControllerAdvice;
-
-@ControllerAdvice
-public class ApiExceptionHandler {
-
-}
