@@ -28,6 +28,8 @@ public class Chapter implements Serializable {
 	
 	private String title;
 	
+	private Integer chapterNumber;
+	
 	@Lob
 	@Column(columnDefinition = "TEXT")
 	private String chapterText;
@@ -68,6 +70,14 @@ public class Chapter implements Serializable {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Integer getChapterNumber() {
+		return chapterNumber;
+	}
+
+	public void setChapterNumber(Integer chapterNumber) {
+		this.chapterNumber = chapterNumber;
 	}
 
 	public String getChapterText() {

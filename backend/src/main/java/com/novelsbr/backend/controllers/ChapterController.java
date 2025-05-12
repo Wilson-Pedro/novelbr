@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
+import com.novelsbr.backend.domain.dto.ChapterTextDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.services.ChapterService;
@@ -32,8 +33,14 @@ public class ChapterController {
 	}
 	
 	@GetMapping("/novelsTile/author/{authorId}")
-	public ResponseEntity<List<NovelsChapterTitleDTO>> save(@PathVariable Long authorId) {
-		return ResponseEntity.ok(
-				chapterService.findAllNovelsChapterTitleByAuthorId(authorId));
+	public ResponseEntity<List<NovelsChapterTitleDTO>> findNovelsChapterTilte(
+			@PathVariable Long authorId) {
+		return ResponseEntity.ok(chapterService.findAllNovelsChapterTitleByAuthorId(authorId));
+	}
+	
+	@GetMapping("/{novelName}/{chapterNumber}")
+	public ResponseEntity<ChapterTextDTO> findChapterText(
+			@PathVariable Integer chapterNumber, @PathVariable String novelName) {
+		return ResponseEntity.ok(chapterService.findChapterText(chapterNumber, novelName));
 	}
 }

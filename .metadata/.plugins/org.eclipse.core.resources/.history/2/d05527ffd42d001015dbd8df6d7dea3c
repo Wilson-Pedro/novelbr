@@ -1,0 +1,26 @@
+package com.novelsbr.backend.domain.dto;
+
+import com.novelsbr.backend.domain.projections.ChapterTextProjection;
+
+public class ChapterTextDTO {
+
+	private Integer chapterNumber;
+	
+	private String title;
+	
+	private String chapterText;
+	
+	private String novelName;
+
+	public ChapterTextDTO() {
+	}
+
+	public ChapterTextDTO(ChapterTextProjection projection) {
+		this.chapterNumber = projection.getChapterNumber();
+		this.title = projection.getTitle();
+		this.chapterText = projection.getChapterText();
+		this.novelName = projection.getNovelName();
+	}
+	
+	
+}

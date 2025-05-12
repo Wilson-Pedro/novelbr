@@ -111,7 +111,6 @@ export default function NovelRegister() {
                             </div>
                         ))}
                     </div>
-                    {genders}
 
                     <div className={styles.formDiv}>
                         <label>Sinopse</label>

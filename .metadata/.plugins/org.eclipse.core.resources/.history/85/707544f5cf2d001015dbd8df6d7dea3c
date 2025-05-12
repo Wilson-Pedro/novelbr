@@ -1,0 +1,40 @@
+package com.novelsbr.backend.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.novelsbr.backend.domain.dto.ChapterDTO;
+import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
+import com.novelsbr.backend.domain.entities.Chapter;
+import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.repositories.ChapterRepository;
+import com.novelsbr.backend.services.ChapterService;
+import com.novelsbr.backend.services.NovelService;
+
+@Service
+public class ChapterServiceImpl implements ChapterService {
+	
+	@Autowired
+	private ChapterRepository chapterRepository;
+	
+	@Autowired
+	private NovelService novelService;
+
+	@Override
+	public Chapter save(ChapterDTO chapterDTO) {
+		Novel novel = novelService.findById(chapterDTO.getNovelId());
+		Chapter chapter = new Chapter(chapterDTO);
+		Integer chapterNumber = chapterRepository.findMaxChapterNumber(novel.getId());
+		chapter.setNovel(novel);
+		return chapterRepository.save(chapter);
+	}
+
+	@Override
+	public List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByAuthorId(Long authorId) {
+		return chapterRepository.findAllNovelsChapterTitleByAuthorId(authorId)
+				.stream().map(x -> new NovelsChapterTitleDTO(x)).toList();
+	}
+
+}

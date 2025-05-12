@@ -1,0 +1,12 @@
+package com.novelsbr.backend.domain.projections;
+
+public interface ChapterTextProjection {
+
+	Integer getChapterNumber();
+	
+	String getTtile();
+	
+	String getChapterText();
+	
+	String getNovelName();
+}

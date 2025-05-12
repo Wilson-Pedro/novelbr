@@ -35,6 +35,7 @@ export default function Novel() {
             try {
                 const response = await axios.get(`${API}/novels/novelCards/${novelId}`);
                 setNovelInfo(response.data);
+                setNovelName(response.data.novelName);
 
             } catch(error) {
                 console.log(error.errorMessage)
@@ -59,9 +60,9 @@ export default function Novel() {
             }
         }
 
-        fetchNovelsChapterTitles();
+        fetchNovelsChapterTitles(); 
         fetchNovelInfo();
-        fetchNovelGenders();
+        fetchNovelGenders(); 
     }, []);
 
     function goToChapter(chapterNumber) {
@@ -115,7 +116,7 @@ export default function Novel() {
                     <h1>Capítulos</h1>
                     <ul>
                         {chapterTiles.map((data, index) => (
-                            <li>{index+1}º {data.title}</li>
+                            <li onClick={() => goToChapter(index+1)}>{index+1}º {data.title}</li>
                         ))}
                     </ul>
                     {/* <ul>

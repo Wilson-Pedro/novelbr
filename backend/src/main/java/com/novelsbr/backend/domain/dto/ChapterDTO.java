@@ -11,6 +11,8 @@ public class ChapterDTO implements Serializable{
 	
 	private String title;
 	
+	private Integer chapterNumber;
+	
 	private String chapterText;
 	
 	private Long novelId;
@@ -22,6 +24,7 @@ public class ChapterDTO implements Serializable{
 	public ChapterDTO(Chapter chapter) {
 		this.id = chapter.getId();
 		this.title = chapter.getTitle();
+		this.chapterNumber = chapter.getChapterNumber();
 		this.chapterText = chapter.getChapterText();
 		this.novelId = chapter.getNovel().getId();
 	}
@@ -47,6 +50,14 @@ public class ChapterDTO implements Serializable{
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Integer getChapterNumber() {
+		return chapterNumber;
+	}
+
+	public void setChapterNumber(Integer chapterNumber) {
+		this.chapterNumber = chapterNumber;
 	}
 
 	public String getChapterText() {

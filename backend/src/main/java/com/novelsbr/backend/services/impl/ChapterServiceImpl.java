@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
+import com.novelsbr.backend.domain.dto.ChapterTextDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Novel;
@@ -26,7 +27,9 @@ public class ChapterServiceImpl implements ChapterService {
 	public Chapter save(ChapterDTO chapterDTO) {
 		Novel novel = novelService.findById(chapterDTO.getNovelId());
 		Chapter chapter = new Chapter(chapterDTO);
+		Integer chapterNumber = chapterRepository.findMaxChapterNumber(novel.getId());
 		chapter.setNovel(novel);
+		chapter.setChapterNumber(chapterNumber == null ? 1 : chapterNumber + 1);
 		return chapterRepository.save(chapter);
 	}
 
@@ -36,4 +39,8 @@ public class ChapterServiceImpl implements ChapterService {
 				.stream().map(x -> new NovelsChapterTitleDTO(x)).toList();
 	}
 
+	@Override
+	public ChapterTextDTO findChapterText(Integer chapterNumber, String novelName) {
+		return new ChapterTextDTO(chapterRepository.findChapterText(chapterNumber, novelName));
+	}
 }
