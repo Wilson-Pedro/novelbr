@@ -34,8 +34,8 @@ public class ChapterServiceImpl implements ChapterService {
 	}
 
 	@Override
-	public List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByNovelId(Long novelId) {
-		return chapterRepository.findAllNovelsChapterTitleByNovelId(novelId)
+	public List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByAuthorId(Long authorId) {
+		return chapterRepository.findAllNovelsChapterTitleByAuthorId(authorId)
 				.stream().map(x -> new NovelsChapterTitleDTO(x)).toList();
 	}
 

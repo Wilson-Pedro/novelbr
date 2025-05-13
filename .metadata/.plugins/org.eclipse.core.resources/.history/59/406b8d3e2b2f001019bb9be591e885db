@@ -13,5 +13,5 @@ public interface ChapterService {
 	
 	ChapterTextDTO findChapterText(Integer chapterNumber, String novelName);
 	
-	List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByNovelId(Long novelId);
+	List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByAuthorId(Long authorId);
 }

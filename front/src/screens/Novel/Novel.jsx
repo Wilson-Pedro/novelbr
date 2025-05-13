@@ -22,14 +22,17 @@ export default function Novel() {
     const [genders, setGenders] = useState([]);
     const [chapterTiles, setChapterTitles] = useState([]);
     const [novelName, setNovelName] = useState('');
+    const [authorId, setAuthorId] = useState(0);
 
     const navigate = useNavigate();
 
+    const token = localStorage.getItem('token');
     const[userAuthenticate, setUserAuthenticate] = useState(isAuth);
 
     useEffect(() => {
 
         const userId = parseInt(localStorage.getItem('userId'));
+        setAuthorId(userId);
 
         const fetchNovelInfo = async () => {
             try {
@@ -53,7 +56,7 @@ export default function Novel() {
 
         const fetchNovelsChapterTitles = async () => {
             try {
-                const response = await axios.get(`${API}/chapters/novelsTile/author/${userId}`);
+                const response = await axios.get(`${API}/chapters/novelsTile/novel/${novelId}`);
                 setChapterTitles(response.data)
             } catch(error) {
                 console.log(error.errorMessage)
@@ -98,7 +101,7 @@ export default function Novel() {
                         </p>
                     </div>
                 </div>
-                {userAuthenticate !== false ? (
+                {token != null && authorId == novelInfo.authorId ? (
                     <>
                         <div className={styles.div_btn}>
                             <button 
@@ -119,16 +122,6 @@ export default function Novel() {
                             <li onClick={() => goToChapter(index+1)}>{index+1}º {data.title}</li>
                         ))}
                     </ul>
-                    {/* <ul>
-                        <li onClick={() => goToChapter(1)}>1º capítulo.</li>
-                        <li onClick={() => goToChapter(2)}>2º capítulo.</li>
-                        <li onClick={() => goToChapter(3)}>3º capítulo.</li>
-                        <li onClick={() => goToChapter(4)}>4º capítulo.</li>
-                        <li onClick={() => goToChapter(5)}>5º capítulo.</li>
-                        <li onClick={() => goToChapter(6)}>6º capítulo.</li>
-                        <li onClick={() => goToChapter(7)}>7º capítulo.</li>
-                        <li onClick={() => goToChapter(8)}>8º capítulo.</li>
-                    </ul> */}
                     
                 </div>
             </div>

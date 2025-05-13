@@ -3,7 +3,7 @@ import styles from './Chapter.module.css';
 import Navbar from './../../layout/navbar/Navbar';
 import Footer from './../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -20,18 +20,24 @@ export default function Chapter() {
     const novelName = params.novelName;
     const chapterNumber =  parseInt(params.chapterNumber);
 
-        useEffect(() => {
-    
-            const fetchChapter = async () => {
-                try {
-                    const response = await axios.get(`${API}/chapters/${novelName}/${chapterNumber}`);
-                    setChapterInfo(response.data);
-                } catch(error) {
-                    console.log("Error ao buscar capítulo: ", error)
-                }
+    const navigate = useNavigate();
+
+    function goToNovel() {
+        navigate(`/novel/${chapterInfo.novelId}`);
+    }
+
+    useEffect(() => {
+
+        const fetchChapter = async () => {
+            try {
+                const response = await axios.get(`${API}/chapters/${novelName}/${chapterNumber}`);
+                setChapterInfo(response.data);
+            } catch(error) {
+                console.log("Error ao buscar capítulo: ", error)
             }
-            fetchChapter();
-        }, []); 
+        }
+        fetchChapter();
+    }, []); 
 
     return(
         <div className={styles.container}>
@@ -42,14 +48,15 @@ export default function Chapter() {
             </nav>
             <div className={styles.main}>
                 <div className={styles.divTitle}>
-                    <h1>{chapterInfo.title}</h1>
+                    <h1 onClick={goToNovel}>{chapterInfo.novelName}</h1>
                 </div>
                 <div className={styles.divButtons}>
                     <button type="button" class="btn btn-warning">&#60; Anterior </button>
                     <button type="button" class="btn btn-warning">Próximo &#62;</button>
                 </div>
-                <div className={styles.divChapter}>
-                    {chapterInfo.chapterText}
+                <div className={styles.divChapter} 
+                dangerouslySetInnerHTML={{ __html: chapterInfo.chapterText }}
+                >
                 </div> <br /><br />
                 <div className={styles.divButtons}>
                     <button type="button" class="btn btn-warning">&#60; Anterior </button>

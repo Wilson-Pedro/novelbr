@@ -32,7 +32,7 @@ public class ChapterController {
 		return ResponseEntity.status(201).body(new ChapterDTO(chapter));
 	}
 	
-	@GetMapping("/novelsTile/novel/{novelId}")
+	@GetMapping("/novelsTile/author/{authorId}")
 	public ResponseEntity<List<NovelsChapterTitleDTO>> findNovelsChapterTilte(
 			@PathVariable Long novelId) {
 		return ResponseEntity.ok(chapterService.findAllNovelsChapterTitleByNovelId(novelId));

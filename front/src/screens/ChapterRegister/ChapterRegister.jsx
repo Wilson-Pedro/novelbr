@@ -3,7 +3,7 @@ import styles from './ChapterRegister.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navigate, useParams, Link } from 'react-router-dom';
+import { Navigate, useParams, Link, useNavigate } from 'react-router-dom';
 import JoditEditor from "jodit-react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,9 +14,11 @@ const API = "http://localhost:8080";
 
 export default function ChapterRegister() {
 
+    const navigate = useNavigate();
     const params = useParams();
     const novelId = parseInt(params.novelId) || 0;
     const editor = useRef(null);
+    
     const [title, setTitle] = useState('');
     const [chapterText, setChapterText] = useState('');
 
@@ -43,6 +45,8 @@ export default function ChapterRegister() {
                 Authorization: `Bearer ${token}`
             }
         });
+
+        navigate(`novel/${novelId}`)
 
         } catch(error) {
             console.log(error.errorMessage);

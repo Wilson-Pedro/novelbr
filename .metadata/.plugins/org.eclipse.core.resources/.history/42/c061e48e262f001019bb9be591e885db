@@ -10,8 +10,6 @@ public class ChapterTextDTO {
 	
 	private String chapterText;
 	
-	private Long novelId;
-	
 	private String novelName;
 
 	public ChapterTextDTO() {
@@ -21,7 +19,6 @@ public class ChapterTextDTO {
 		this.chapterNumber = projection.getChapterNumber();
 		this.title = projection.getTitle();
 		this.chapterText = projection.getChapterText();
-		this.novelId = projection.getNovelId();
 		this.novelName = projection.getNovelName();
 	}
 
@@ -35,10 +32,6 @@ public class ChapterTextDTO {
 
 	public String getChapterText() {
 		return chapterText;
-	}
-
-	public Long getNovelId() {
-		return novelId;
 	}
 
 	public String getNovelName() {
