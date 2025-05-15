@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AuthorServiceTest" project="backend" tests="3" started="3" failures="0" errors="1" ignored="0">
+  <testsuite name="com.novelsbr.backend.services.AuthorServiceTest" time="2.806" displayname="AuthorServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]">
+    <testcase name="setUp" classname="com.novelsbr.backend.services.AuthorServiceTest" time="1.589" displayname="setUp()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:setUp()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.AuthorServiceTest" time="1.188" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:save()]"/>
+    <testcase name="findById" classname="com.novelsbr.backend.services.AuthorServiceTest" time="0.025" displayname="findById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:findById()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.services.AuthorServiceTest.findById(AuthorServiceTest.java:70)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+</testrun>

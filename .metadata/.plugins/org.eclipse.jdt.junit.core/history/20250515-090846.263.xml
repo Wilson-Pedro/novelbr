@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="AuthorServiceTest" project="backend" tests="3" started="3" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.services.AuthorServiceTest" time="4.082" displayname="AuthorServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]">
+    <testcase name="setUp" classname="com.novelsbr.backend.services.AuthorServiceTest" time="2.037" displayname="setUp()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:setUp()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.AuthorServiceTest" time="2.043" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:save()]"/>
+    <testcase name="findById" classname="com.novelsbr.backend.services.AuthorServiceTest" time="0.0" displayname="findById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:findById()]"/>
+  </testsuite>
+</testrun>

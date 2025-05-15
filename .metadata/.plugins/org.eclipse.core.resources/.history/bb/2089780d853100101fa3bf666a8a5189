@@ -52,6 +52,7 @@ class AuthorServiceTest {
 
 	@Test
 	@Order(2)
+	@Transactional
 	void save() {
 		assertEquals(0, authorRepository.count());
 		
@@ -65,6 +66,7 @@ class AuthorServiceTest {
 	}
 	
 	@Test
+	@Transactional
 	void findById() {
 		Long author_id = authorRepository.findAll().get(0).getId();
 		

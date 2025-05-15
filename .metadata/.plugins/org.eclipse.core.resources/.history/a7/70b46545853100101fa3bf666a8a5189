@@ -52,6 +52,7 @@ class AuthorServiceTest {
 
 	@Test
 	@Order(2)
+	@Transactional
 	void save() {
 		assertEquals(0, authorRepository.count());
 		

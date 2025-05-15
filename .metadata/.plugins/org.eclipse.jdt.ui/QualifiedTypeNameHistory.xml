@@ -18,7 +18,6 @@
     <fullyQualifiedTypeName name="java.util.Collection"/>
     <fullyQualifiedTypeName name="java.util.HashSet"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.TestMethodOrder"/>
-    <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer.OrderAnnotation"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorNovelMinDTO"/>
     <fullyQualifiedTypeName name="org.springframework.http.HttpMethod"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer"/>
 </qualifiedTypeNameHistroy>
