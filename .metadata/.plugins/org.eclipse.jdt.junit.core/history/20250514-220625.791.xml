@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="java" project="backend" tests="29" started="29" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.BackendApplicationTests" time="284.642" displayname="BackendApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]">
+    <testcase name="contextLoads" classname="com.novelsbr.backend.BackendApplicationTests" time="284.642" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.exceptions.AuthorExceptionsTest" time="1.87" displayname="AuthorExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.AuthorExceptionsTest]">
+    <testcase name="existingAuthorExceptionTest" classname="com.novelsbr.backend.exceptions.AuthorExceptionsTest" time="1.87" displayname="existingAuthorExceptionTest()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.AuthorExceptionsTest]/[method:existingAuthorExceptionTest()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="1.105" displayname="NovelExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]">
+    <testcase name="setUp" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.115" displayname="setUp()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:setUp()]"/>
+    <testcase name="existingNovelException" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.127" displayname="existingNovelException()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:existingNovelException()]"/>
+    <testcase name="entityNotFoundException01" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.046" displayname="entityNotFoundException01()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:entityNotFoundException01()]"/>
+    <testcase name="entityNotFoundException02" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.799" displayname="entityNotFoundException02()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:entityNotFoundException02()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.GenderServiceTest" time="2.664" displayname="GenderServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]">
+    <testcase name="save" classname="com.novelsbr.backend.services.GenderServiceTest" time="2.664" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.AuthorServiceTest" time="0.239" displayname="AuthorServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]">
+    <testcase name="save" classname="com.novelsbr.backend.services.AuthorServiceTest" time="0.239" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.NovelServiceTest" time="0.317" displayname="NovelServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.118" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.038" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:save()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.027" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findAll()]"/>
+    <testcase name="findById" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.09" displayname="findById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findById()]"/>
+    <testcase name="findNovelCards" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.037" displayname="findNovelCards()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelCards()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.ChapterServiceTest" time="0.244" displayname="ChapterServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.122" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.12" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.ChapterControllerTest" time="1.392" displayname="ChapterControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.146" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="1.244" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:save()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.GenderControllerTest" time="0.866" displayname="GenderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.077" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.342" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.442" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findAll()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" time="0.81" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.404" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.275" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.019" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.069" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]"/>
+    <testcase name="findNovelCards" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.035" displayname="findNovelCards()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelCards()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthControllerTest" time="0.601" displayname="AuthControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]">
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.45" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:save()]"/>
+    <testcase name="login" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.15" displayname="login()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:login()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.3" displayname="AuthorControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]">
+    <testcase name="deleteAll" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.023" displayname="deleteAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:deleteAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.264" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:save()]"/>
+  </testsuite>
+</testrun>
