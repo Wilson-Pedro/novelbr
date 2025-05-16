@@ -79,16 +79,16 @@ class ChapterServiceTest {
 	@Order(2)
 	void save() {
 		
-		Long novel_id = novelRepository.findAll().get(0).getId();
+		Long novelId = novelRepository.findAll().get(0).getId();
 		
 		assertEquals(0, chapterRepository.count());
 		
-		ChapterDTO chapterDTO = new ChapterDTO(null, "Hellifen", "Em uma pequena vila...", novel_id);
+		ChapterDTO chapterDTO = new ChapterDTO(null, "Hellifen", "Em uma pequena vila...", novelId);
 		Chapter chapter = chapterService.save(chapterDTO);
 		assertEquals("Hellifen", chapter.getTitle());
 		assertEquals("Em uma pequena vila...", chapter.getChapterText());
 		assertNotNull(chapter.getId());
-		assertEquals(novel_id, chapter.getNovel().getId());
+		assertEquals(novelId, chapter.getNovel().getId());
 		
 		assertEquals(1, chapterRepository.count());
 	}

@@ -18,7 +18,6 @@ import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 
-import jakarta.transaction.Transactional;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -66,9 +65,9 @@ class AuthorServiceTest {
 	
 	@Test
 	void findById() {
-		Long author_id = authorRepository.findAll().get(0).getId();
+		Long authorId = authorRepository.findAll().get(0).getId();
 		
-		Author userFinded = authorService.findById(author_id);
+		Author userFinded = authorService.findById(authorId);
 		assertNotNull(userFinded.getId());
 		assertEquals("João", userFinded.getName());
 		assertEquals("AllStar", userFinded.getUsername());

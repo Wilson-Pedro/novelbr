@@ -14,6 +14,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
@@ -41,7 +42,7 @@ class NovelServiceTest {
 	@Autowired
 	GenderRepository genderRepository;
 	
-	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+	Author author = new Author(null, "João", "All Star", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	NovelDTO novelDTO = new NovelDTO();
 	
@@ -71,11 +72,11 @@ class NovelServiceTest {
 	@Order(2)
 	void save() {
 		
-		Long author_id = authorRepository.findAll().get(0).getId();
+		Long authorId = authorRepository.findAll().get(0).getId();
 		
 		novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
-				author_id, 
+				authorId, 
 				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
@@ -91,7 +92,7 @@ class NovelServiceTest {
 	}
 	
 	@Test
-	void findById() {
+	void findNovelCards() {
 		
 		List<CardNovelDTO> list = novelService.findNovelCards();
 		
@@ -99,7 +100,7 @@ class NovelServiceTest {
 	}
 	
 	@Test
-	void findNovelCards() {
+	void findNovelById() {
 		
 		Long novelId = novelRepository.findAll().get(0).getId();
 		
@@ -107,6 +108,28 @@ class NovelServiceTest {
 		assertEquals("Jornada para o Além", novel.getNovelName());
 		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
 		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
+	}
+	
+	@Test
+	void findNovelCardsByUsername() {
+		
+		List<CardNovelDTO> list = novelService.findNovelCardsByUsername("All Star");
+		
+		assertEquals(list.size(), novelRepository.findNovelCards().size());
+	}
+	
+	@Test
+	void findNovelInfoByNovelId() {
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		Long authorId = authorRepository.findAll().get(0).getId();
+		
+		AuthorNovelInfoDTO info = novelService.findNovelInfoByNovelId(novelId);
+		assertEquals("Jornada para o Além", info.getNovelName());
+		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", info.getSynopsis());
+		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", info.getImageUri());
+		assertEquals(authorId, info.getAuthorId());
+		assertEquals(novelId, info.getNovelId());
 	}
 	
 	@Test
