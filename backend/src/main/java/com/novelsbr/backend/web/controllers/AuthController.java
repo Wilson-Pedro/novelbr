@@ -1,4 +1,4 @@
-package com.novelsbr.backend.controllers;
+package com.novelsbr.backend.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,7 +7,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.LoginRequest;
@@ -15,11 +14,11 @@ import com.novelsbr.backend.domain.dto.LoginResponseDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.web.api.AuthAPI;
 
 @RestController
-@RequestMapping("/auth")
 @CrossOrigin("http://localhost:3000")
-public class AuthController {
+public class AuthController implements AuthAPI {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;

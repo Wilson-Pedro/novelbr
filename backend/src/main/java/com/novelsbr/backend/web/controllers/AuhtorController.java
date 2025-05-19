@@ -1,4 +1,4 @@
-package com.novelsbr.backend.controllers;
+package com.novelsbr.backend.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -7,17 +7,16 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.web.api.AuthorAPI;
 
 @RestController
-@RequestMapping("/authors")
 @CrossOrigin("http://localhost:3000")
-public class AuhtorController {
+public class AuhtorController implements AuthorAPI {
 
 	@Autowired
 	private AuthorService authorService;

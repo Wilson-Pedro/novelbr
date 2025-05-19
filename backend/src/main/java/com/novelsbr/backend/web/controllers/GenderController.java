@@ -1,4 +1,4 @@
-package com.novelsbr.backend.controllers;
+package com.novelsbr.backend.web.controllers;
 
 import java.util.List;
 
@@ -7,16 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.GenderDTO;
 import com.novelsbr.backend.services.GenderService;
+import com.novelsbr.backend.web.api.GenderAPI;
 
 @RestController
-@RequestMapping("/genders")
 @CrossOrigin("http://localhost:3000")
-public class GenderController {
+public class GenderController implements GenderAPI {
 
 	@Autowired
 	GenderService genderService;

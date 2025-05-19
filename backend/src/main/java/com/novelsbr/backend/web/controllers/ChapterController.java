@@ -1,4 +1,4 @@
-package com.novelsbr.backend.controllers;
+package com.novelsbr.backend.web.controllers;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
@@ -17,11 +16,11 @@ import com.novelsbr.backend.domain.dto.ChapterTextDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.services.ChapterService;
+import com.novelsbr.backend.web.api.ChapterAPI;
 
 @RestController
-@RequestMapping("/chapters")
 @CrossOrigin("http://localhost:3000")
-public class ChapterController {
+public class ChapterController implements ChapterAPI {
 	
 	@Autowired
 	private ChapterService chapterService;

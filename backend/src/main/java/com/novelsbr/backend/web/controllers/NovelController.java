@@ -1,4 +1,4 @@
-package com.novelsbr.backend.controllers;
+package com.novelsbr.backend.web.controllers;
 
 import java.util.List;
 
@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
@@ -17,11 +16,11 @@ import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.web.api.NovelAPI;
 
 @RestController
-@RequestMapping("/novels")
 @CrossOrigin("http://localhost:3000")
-public class NovelController {
+public class NovelController implements NovelAPI {
 	
 	@Autowired
 	private NovelService novelService;
