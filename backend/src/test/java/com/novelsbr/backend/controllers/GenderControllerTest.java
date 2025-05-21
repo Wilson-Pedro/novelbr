@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -25,13 +25,17 @@ import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
+
+import jakarta.transaction.Transactional;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -51,6 +55,9 @@ class GenderControllerTest {
 	GenderRepository genderRepository;
 	
 	@Autowired
+	ChapterRepository chapterRepository;
+	
+	@Autowired
 	AuthenticationManager authenticationManager;
 	
 	@Autowired
@@ -62,18 +69,18 @@ class GenderControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 	
-	List<Gender> genders = new ArrayList<>();
+	Set<Gender> genders = new HashSet<>();
 	
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	static String URI = "/genders";
 	
 	static String TOKEN = "";
-	
-	
+
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
+		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
@@ -97,13 +104,14 @@ class GenderControllerTest {
 	}
 	
 	@Test
+	@Order(3)
 	void findAll() throws Exception {
+		
 		for(GenderType type : GenderType.values()) {
 			genders.add(new Gender(null, type));
 		}
-		genderRepository.saveAll(genders);
 		
-		System.out.println("Author 2: " + author);
+		genderRepository.saveAll(genders);
 		
 		mockMvc.perform(get(URI)
 				.header("Authorization", "Bearer " + TOKEN))
@@ -112,5 +120,28 @@ class GenderControllerTest {
 		
 		assertTrue(genderRepository.count() > 0);
 		assertEquals(genders.size(), genderRepository.count());
+	}
+	
+	@Test
+	@Transactional
+	void findGendersByNovelId() throws Exception {
+		
+		Author author2 = new Author(null, "Lucas", "Purple", "lucas@gmail.com", "1234", UserRole.AUTHOR);
+		
+		Novel novel = new Novel(null, 
+				"Jornada para o Além", 
+				author2, 
+				genders, 
+				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
+				"https://wallpapercave.com/wp/wp5044832.jpg");
+		
+		authorRepository.save(author2);
+		novelRepository.save(novel);
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		
+		mockMvc.perform(get(URI + "/novel/" + novelId)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk());
 	}
 }

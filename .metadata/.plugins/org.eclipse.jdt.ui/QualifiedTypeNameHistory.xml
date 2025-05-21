@@ -24,9 +24,7 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Gender"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Chapter"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.ChapterDTO"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.ChapterRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.ChapterService"/>
-    <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
     <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ControllerAdvice"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
@@ -42,13 +40,11 @@
     <fullyQualifiedTypeName name="org.junit.jupiter.api.BeforeEach"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
-    <fullyQualifiedTypeName name="java.util.Set"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.GenderType"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.Order"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.NovelRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.NovelDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelService"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.AuthorService"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EntityNotFoundException"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.EntityNotFoundException"/>
@@ -60,4 +56,8 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.ChapterRepository"/>
 </qualifiedTypeNameHistroy>

@@ -108,7 +108,7 @@ class NovelControllerTest {
 	@Order(3)
 	void save() throws Exception {
 		
-		Long author_id = authorRepository.findAll().get(0).getId();
+		Long authorId = authorRepository.findAll().get(0).getId();
 		for(Gender gender : genders) {
 			gendersStr.add(gender.getGenderType().getType());
 		}
@@ -117,7 +117,7 @@ class NovelControllerTest {
 		
 		NovelDTO novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
-				author_id, 
+				authorId, 
 				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
