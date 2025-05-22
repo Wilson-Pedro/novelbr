@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelControllerTest" project="backend" tests="7" started="7" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" time="3.763" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="1.481" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.409" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.393" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="1.073" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]"/>
+    <testcase name="findNovelCards" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.118" displayname="findNovelCards()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelCards()]"/>
+    <testcase name="findNovelInfoByNovelId" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.226" displayname="findNovelInfoByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelInfoByNovelId()]"/>
+    <testcase name="findNovelCardsByUsername" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.052" displayname="findNovelCardsByUsername()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelCardsByUsername()]"/>
+  </testsuite>
+</testrun>

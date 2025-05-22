@@ -1,9 +1,11 @@
 package com.novelsbr.backend.controllers;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.ArrayList;
@@ -149,5 +151,35 @@ class NovelControllerTest {
 		mockMvc.perform(get(URI + "/novelCards")
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk());
+	}
+	
+	@Test
+	void findNovelCardsByUsername() throws Exception {
+		String username = novelRepository.findAll().get(0).getAuthor().getUsername();
+
+
+		mockMvc.perform(get(URI + "/novelCards/author/" + username)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	void findNovelInfoByNovelId() throws Exception {
+		Long novelId = novelRepository.findAll().get(0).getId();
+		String novelName = novelRepository.findAll().get(0).getNovelName();
+		String username = novelRepository.findAll().get(0).getAuthor().getUsername();
+		String imageUri = novelRepository.findAll().get(0).getImageUri();
+		String synopsis = novelRepository.findAll().get(0).getSynopsis();
+
+
+		mockMvc.perform(get(URI + "/novelCards/" + novelId)
+						.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.novelName", equalTo(novelName)))
+				.andExpect(jsonPath("$.username", equalTo(username)))
+				.andExpect(jsonPath("$.imageUri", equalTo(imageUri)))
+				.andExpect(jsonPath("$.synopsis", equalTo(synopsis)));
+
 	}
 }
