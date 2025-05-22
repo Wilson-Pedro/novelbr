@@ -21,6 +21,7 @@ import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.NovelService;
 
 @SpringBootApplication
@@ -43,6 +44,9 @@ public class BackendApplication implements CommandLineRunner {
 	
 	@Autowired
 	ChapterRepository chapterRepository;
+	
+	@Autowired
+	ChapterService chapterService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BackendApplication.class, args);
@@ -89,7 +93,8 @@ public class BackendApplication implements CommandLineRunner {
 				);
 
 		
-//		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novel);
+//		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(0));
+//		Chapter chapter2 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(0));
 		Author author = new Author(null, "João", "All Star", "joao@gmail.com", "1234", UserRole.AUTHOR);
 		author = authorService.save(new AuthorDTO(author));
 		NovelDTO novelDTO = new NovelDTO(null, "A casa ao Lado", author.getId(), gendersStr, 
@@ -99,7 +104,8 @@ public class BackendApplication implements CommandLineRunner {
 		
 		authorRepository.saveAll(authors);
 		novelRepository.saveAll(novels);
-//		chapterRepository.save(chapter);
+//		chapterService.save(new ChapterDTO(chapter));
+//		chapterService.save(new ChapterDTO(chapter2));
 	}
 
 }

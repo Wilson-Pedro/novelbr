@@ -11,6 +11,7 @@ import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
@@ -30,8 +31,12 @@ class AuthorExceptionsTest {
 	@Autowired
 	AuthorService authorService;
 	
+	@Autowired
+	ChapterRepository chapterRepository;
+	
 	@BeforeEach
 	void setUp() {
+		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();

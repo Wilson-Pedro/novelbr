@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ChapterServiceTest" project="backend" tests="4" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="ChapterServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:save()]"/>
+    <testcase name="findAllNovelsChapterTitleByNovelId" classname="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="findAllNovelsChapterTitleByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:findAllNovelsChapterTitleByNovelId()]"/>
+    <testcase name="findChapterText" classname="com.novelsbr.backend.services.ChapterServiceTest" incomplete="true" displayname="findChapterText()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:findChapterText()]"/>
+  </testsuite>
+</testrun>

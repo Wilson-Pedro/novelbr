@@ -15,6 +15,7 @@ import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
+import com.novelsbr.backend.domain.records.ChapterNumberDTO;
 import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.web.api.ChapterAPI;
 
@@ -37,9 +38,16 @@ public class ChapterController implements ChapterAPI {
 		return ResponseEntity.ok(chapterService.findAllNovelsChapterTitleByNovelId(novelId));
 	}
 	
-	@GetMapping("/{novelName}/{chapterNumber}")
+	@GetMapping("/{novelName}/{chapterNumber}") 
 	public ResponseEntity<ChapterTextDTO> findChapterText(
 			@PathVariable Integer chapterNumber, @PathVariable String novelName) {
 		return ResponseEntity.ok(chapterService.findChapterText(chapterNumber, novelName));
+	}
+	
+	@GetMapping("/chapterNumber/novel/{novelId}") 
+	public ResponseEntity<ChapterNumberDTO> findMaxChapterNumberByNovelId(
+			@PathVariable Long novelId) {
+		ChapterNumberDTO chapterNumber = new ChapterNumberDTO(chapterService.findMaxChapterNumber(novelId));
+		return ResponseEntity.ok(chapterNumber);
 	}
 }

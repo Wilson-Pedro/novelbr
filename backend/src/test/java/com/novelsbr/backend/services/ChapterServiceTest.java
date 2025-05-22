@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
+import com.novelsbr.backend.domain.dto.ChapterTextDTO;
+import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
@@ -93,11 +96,31 @@ class ChapterServiceTest {
 		assertEquals(1, chapterRepository.count());
 	}
 	
-//	@Test
-//	void findAll() {
-//		
-//		List<Novel> novels = novelService.findAll();
-//		
-//		assertEquals(novels.size(), novelRepository.count());
-//	}
+	@Test
+	@Order(3)
+	void findAllNovelsChapterTitleByNovelId() {
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		ChapterDTO chapterDTO = new ChapterDTO(null, "Hellifen", "O dia mal havia começado...", novelId);
+		
+		chapterService.save(chapterDTO);
+		
+		List<NovelsChapterTitleDTO> novels = chapterService.findAllNovelsChapterTitleByNovelId(novelId);
+		
+		assertEquals(novels.size(), 2);
+	}
+	
+	@Test
+	void findChapterText() {
+		
+		Chapter chapter = chapterRepository.findAll().get(1);
+		Integer chapterNumber = chapter.getChapterNumber();
+		String novelName = chapter.getNovel().getNovelName();
+		ChapterTextDTO chapterText = chapterService.findChapterText(chapterNumber, novelName);
+		
+		assertEquals(chapterText.getChapterNumber(), chapterNumber);
+		assertEquals(chapterText.getTitle(), chapter.getTitle());
+		assertEquals(chapterText.getNovelId(), chapter.getNovel().getId());
+		assertEquals(chapterText.getNovelName(), novelName);
+	}
 }

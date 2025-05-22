@@ -19,6 +19,7 @@ import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 
@@ -38,6 +39,9 @@ class GenderServiceTest {
 	@Autowired
 	GenderService genderService;
 	
+	@Autowired
+	ChapterRepository chapterRepository;
+	
 	Set<Gender> genders = new HashSet<>();
 
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
@@ -52,6 +56,7 @@ class GenderServiceTest {
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
+		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
