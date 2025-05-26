@@ -99,4 +99,10 @@ public class Chapter implements Serializable {
 	public LocalDateTime getDateRegistration() {
 		return dateRegistration;
 	}
+
+	@Override
+	public String toString() {
+		return "Chapter [id=" + id + ", title=" + title + ", chapterNumber=" + chapterNumber + ", chapterText="
+				+ chapterText + ", dateRegistration=" + dateRegistration + "]";
+	}
 }

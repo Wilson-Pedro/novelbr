@@ -1,8 +1,11 @@
 package com.novelsbr.backend.controllers;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.HashSet;
@@ -24,7 +27,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.LoginRequest;
+import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.enums.GenderType;
@@ -36,8 +41,7 @@ import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.services.ChapterService;
-
-import jakarta.transaction.Transactional;
+import com.novelsbr.backend.services.NovelService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -52,6 +56,9 @@ class ChapterControllerTest {
 	
 	@Autowired
 	NovelRepository novelRepository;
+	
+	@Autowired
+	NovelService novelService;
 	
 	@Autowired
 	AuthorRepository authorRepository;
@@ -109,7 +116,6 @@ class ChapterControllerTest {
 	
 	@Test
 	@Order(2)
-	@Transactional
 	void save() throws Exception {
 		
 		Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
@@ -121,7 +127,7 @@ class ChapterControllerTest {
 				genders, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
-		novelRepository.save(novel);
+		novelService.save(new NovelDTO(novel));
 		
 		getToken();
 		
@@ -140,5 +146,47 @@ class ChapterControllerTest {
 				.andExpect(status().isCreated());
 		
 		assertEquals(1, chapterRepository.count());
+	}
+	
+	@Test
+	@Order(3)
+	void findAllNovelsChapterTitleByNovelId() throws Exception {
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		ChapterDTO chapterDTO = new ChapterDTO(null, "Hellifen", "O dia mal havia começado...", novelId);
+		
+		chapterService.save(chapterDTO);
+			
+		mockMvc.perform(get(URI + "/novelsTile/novel/" + novelId))
+				.andExpect(status().isOk());
+		
+		assertEquals(2, chapterRepository.count());
+	}
+	
+	@Test
+	@Order(4)
+	void findMaxChapterNumberByNovelId() throws Exception {
+		Long novelId = novelRepository.findAll().get(0).getId();
+			
+		mockMvc.perform(get(URI + "/chapterNumber/novel/" + novelId))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.chapterNumber", equalTo(2)));
+	}
+	
+	@Test
+	void findChapterText() throws Exception {
+		
+		Chapter chapter = chapterRepository.findAll().get(1);
+		Integer chapterNumber = chapter.getChapterNumber();
+		String novelName = chapter.getNovel().getNovelName();
+			
+		mockMvc.perform(get(URI + "/" + novelName + "/" + chapterNumber))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.chapterNumber", equalTo(chapter.getChapterNumber())))
+				.andExpect(jsonPath("$.title", equalTo(chapter.getTitle())))
+				.andExpect(jsonPath("$.chapterText", equalTo(chapter.getChapterText())))
+				.andExpect(jsonPath("$.novelName", equalTo(chapter.getNovel().getNovelName())));
+		
+		assertEquals(2, chapterRepository.count());
 	}
 }

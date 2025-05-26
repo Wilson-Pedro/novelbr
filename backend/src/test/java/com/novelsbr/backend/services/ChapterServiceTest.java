@@ -111,6 +111,17 @@ class ChapterServiceTest {
 	}
 	
 	@Test
+	@Order(4)
+	void findMaxChapterNumber() {
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		
+		Integer chapterNumber = chapterService.findMaxChapterNumber(novelId);
+		
+		assertEquals(chapterNumber, 2);
+	}
+	
+	@Test
 	void findChapterText() {
 		
 		Chapter chapter = chapterRepository.findAll().get(1);

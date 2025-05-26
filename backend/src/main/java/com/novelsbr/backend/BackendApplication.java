@@ -10,8 +10,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.enums.GenderType;

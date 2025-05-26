@@ -7,11 +7,13 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-const API = "http://localhost:8080";
+const API = "http://localhost:8080"; 
 
 export default function Chapter() {
 
     const [chapterInfo, setChapterInfo] = useState({});
+    const [maxChapterNumber, setMaxChapterNumber] = useState(1);
+    const [novelId, setNovelId] = useState(0);
 
     const location = useLocation();
     const { isAuth } = location.state || {};
@@ -32,12 +34,32 @@ export default function Chapter() {
             try {
                 const response = await axios.get(`${API}/chapters/${novelName}/${chapterNumber}`);
                 setChapterInfo(response.data);
+                setNovelId(response.data.novelId);
             } catch(error) {
-                console.log("Error ao buscar capítulo: ", error)
+                console.log("Error ao buscar capítulo: ", error.errorMessage)
             }
         }
+
         fetchChapter();
-    }, []); 
+    }, []);
+
+    useEffect(() => {
+
+        const fetchMaxChapterNumber = async () => {
+            try {
+                const response = await axios.get(`${API}/chapters/chapterNumber/novel/${1}`);
+                setMaxChapterNumber(response.data.chapterNumber)
+                console.log(response)
+            } catch(error) {
+                console.log('Error ao buscar o último capítulo da Novel ', error.errorMessage)
+            }
+        }
+        fetchMaxChapterNumber();
+    }, []);
+
+    function goToChapter(chapterNumber) {
+        navigate(`/novel/${novelName}/chapter/${chapterNumber}`);
+    }
 
     return(
         <div className={styles.container}>
@@ -48,19 +70,27 @@ export default function Chapter() {
             </nav>
             <div className={styles.main}>
                 <div className={styles.divTitle}>
-                    <h1 onClick={goToNovel}>{chapterInfo.novelName}</h1>
+                    <h1 onClick={goToNovel}>{chapterInfo.novelName} {maxChapterNumber}</h1>
                 </div>
                 <div className={styles.divButtons}>
-                    <button type="button" class="btn btn-warning">&#60; Anterior </button>
-                    <button type="button" class="btn btn-warning">Próximo &#62;</button>
+                    {chapterNumber- 1 == 0 ? ( <></> ) : (
+                        <> <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber - 1)}>&#60; Anterior </button> </>
+                    )}
+                    {chapterNumber + 1 > maxChapterNumber ? (
+                        <></>
+                    ) : ( <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber + 1)}>Próximo &#62;</button> )}
                 </div>
                 <div className={styles.divChapter} 
                 dangerouslySetInnerHTML={{ __html: chapterInfo.chapterText }}
                 >
                 </div> <br /><br />
                 <div className={styles.divButtons}>
-                    <button type="button" class="btn btn-warning">&#60; Anterior </button>
-                    <button type="button" class="btn btn-warning">Próximo &#62;</button>
+                    {chapterNumber- 1 == 0 ? ( <></> ) : (
+                        <> <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber - 1)}>&#60; Anterior </button> </>
+                    )}
+                    {chapterNumber + 1 > maxChapterNumber ? (
+                        <></>
+                    ) : ( <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber + 1)}>Próximo &#62;</button> )}
                 </div>
             </div>
             <Footer />
