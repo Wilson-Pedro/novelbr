@@ -15,7 +15,8 @@ export default function UserRegister() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const submitUser = async () => {
+    const submitUser = async (e) => {
+        e.preventDefault();
 
         try {
             const response = await axios.post("http://localhost:8080/authors/", {
@@ -25,7 +26,7 @@ export default function UserRegister() {
                 password,
             });
             console.log(response)
-            //navigate('/login');
+            navigate('/login');
         } catch(error) {
             console.error(error)
         }

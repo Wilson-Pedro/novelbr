@@ -40,22 +40,23 @@ export default function Chapter() {
             }
         }
 
-        fetchChapter();
-    }, []);
+        fetchChapter(); 
+    }, [novelName, chapterNumber]);
 
     useEffect(() => {
-
-        const fetchMaxChapterNumber = async () => {
-            try {
-                const response = await axios.get(`${API}/chapters/chapterNumber/novel/${1}`);
-                setMaxChapterNumber(response.data.chapterNumber)
-                console.log(response)
-            } catch(error) {
-                console.log('Error ao buscar o último capítulo da Novel ', error.errorMessage)
+        if(novelId !== 0) {
+            const fetchMaxChapterNumber = async () => {
+                try {
+                    const response = await axios.get(`${API}/chapters/chapterNumber/novel/${novelId}`);
+                    setMaxChapterNumber(response.data.chapterNumber)
+                    console.log(response)
+                } catch(error) {
+                    console.log('Error ao buscar o último capítulo da Novel ', error.errorMessage)
+                }
             }
+            fetchMaxChapterNumber();
         }
-        fetchMaxChapterNumber();
-    }, []);
+    }, [novelId]);
 
     function goToChapter(chapterNumber) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`);
@@ -70,10 +71,10 @@ export default function Chapter() {
             </nav>
             <div className={styles.main}>
                 <div className={styles.divTitle}>
-                    <h1 onClick={goToNovel}>{chapterInfo.novelName} {maxChapterNumber}</h1>
+                    <h1 onClick={goToNovel}>{chapterInfo.novelName}</h1>
                 </div>
                 <div className={styles.divButtons}>
-                    {chapterNumber- 1 == 0 ? ( <></> ) : (
+                    {chapterNumber- 1 === 0 ? ( <></> ) : (
                         <> <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber - 1)}>&#60; Anterior </button> </>
                     )}
                     {chapterNumber + 1 > maxChapterNumber ? (
@@ -85,7 +86,7 @@ export default function Chapter() {
                 >
                 </div> <br /><br />
                 <div className={styles.divButtons}>
-                    {chapterNumber- 1 == 0 ? ( <></> ) : (
+                    {chapterNumber- 1 === 0 ? ( <></> ) : (
                         <> <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber - 1)}>&#60; Anterior </button> </>
                     )}
                     {chapterNumber + 1 > maxChapterNumber ? (

@@ -3,7 +3,7 @@ import styles from './ChapterRegister.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navigate, useParams, Link, useNavigate } from 'react-router-dom';
+import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import JoditEditor from "jodit-react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -33,24 +33,28 @@ export default function ChapterRegister() {
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
 
-    const submitChapter = async () => {
+    const submitChapter = async (e) => {
+        e.preventDefault();
         try {
             const response = await axios.post(`${API}/chapters/`, {
                 title,
                 chapterText,
                 novelId
             },
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
 
-        navigate(`novel/${novelId}`)
-
+            navigate(`/novel/${novelId}`, { replace: true });
         } catch(error) {
             console.log(error.errorMessage);
         }
+    }
+
+    function goToNovel() {
+        navigate(`/novel/${novelId}`);
     }
 
     return(
@@ -89,8 +93,8 @@ export default function ChapterRegister() {
                 </div>
                 <div className={styles.divBtn}>
                     <button type="submit" className="btn btn-primary">Criar</button>
-                    <button type="button" className="btn btn-danger">
-                        <Link className={styles.linkNone} to="/homeUser">Cancelar</Link>
+                    <button type="button" className="btn btn-danger" onClick={() => goToNovel()}>
+                        Cancelar
                     </button>
                 </div>
             </form>
