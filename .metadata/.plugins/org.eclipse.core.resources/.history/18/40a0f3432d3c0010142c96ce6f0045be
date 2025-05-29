@@ -96,10 +96,10 @@ public class BackendApplication implements CommandLineRunner {
 
 		
 		Chapter chapter = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(0));
-		Chapter chapter2 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(1));
-		Chapter chapter3 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(1));
+		Chapter chapter2 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(0));
+		Chapter chapter3 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(0));
 		Chapter chapter4 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(0));
-		Chapter chapter5 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(2));
+		Chapter chapter5 = new Chapter(null, "Hellifen", "Em uma pequena vila...", novels.get(0));
 		Author author = new Author(null, "João", "All Star", "joao@gmail.com", "1234", UserRole.AUTHOR);
 		author = authorService.save(new AuthorDTO(author));
 		NovelDTO novelDTO = new NovelDTO(null, "A casa ao Lado", author.getId(), gendersStr, 
