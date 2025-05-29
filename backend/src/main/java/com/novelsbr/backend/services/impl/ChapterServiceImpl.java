@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
+import com.novelsbr.backend.domain.dto.LastChaptersDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Novel;
@@ -47,5 +48,11 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public Integer findMaxChapterNumber(Long novelId) {
 		return chapterRepository.findMaxChapterNumber(novelId);
+	}
+
+	@Override
+	public List<LastChaptersDTO> findLastChapters() {
+		return chapterRepository.findLastChapters().stream()
+				.map(x -> new LastChaptersDTO(x)).toList();
 	}
 }

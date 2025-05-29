@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
+import com.novelsbr.backend.domain.dto.LastChaptersDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 
@@ -16,4 +17,6 @@ public interface ChapterService {
 	List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByNovelId(Long novelId);
 	
 	Integer findMaxChapterNumber(Long novelId);
+	
+	List<LastChaptersDTO> findLastChapters();
 }

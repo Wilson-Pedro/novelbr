@@ -1,8 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Table.module.css';
 
+import axios from 'axios';
+
+const API = "http://localhost:8080";
+
 export default function Table() {
+
+    const [lastChapters, setLastChapters] = useState([]);
+
+    useEffect(() => {
+        const fetchLastChapters = async () => {
+            try { 
+                const response = await axios.get(`${API}/chapters/lastChapters`);
+                setLastChapters(response.data);
+            } catch(error) {
+                console.log('Error ao buscar últimos capítulos: ', error.errorMessage)
+            }
+        }
+        fetchLastChapters();
+    }, [])
+
     return(
         <div className="container mt-4">
             {/* <h2 className="mb-3">Mais Populares</h2> */}
@@ -10,26 +29,18 @@ export default function Table() {
                 <thead className="table-light">
                     <tr>
                         <th>Obra</th>
-                        <th>Autor</th>
+                        <th>Títutlo</th>
                         <th>Capítulo</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>Renegade Immortal</th>
-                        <th>耳根</th>
-                        <th className={styles.chapterNumber}>2088</th>
-                    </tr>
-                    <tr>
-                        <th>The Overlord of Blood and Iron</th>
-                        <th>Dam Hwa Gong</th>
-                        <th className={styles.chapterNumber}>755</th>
-                    </tr>
-                    <tr>
-                        <th>Red Storm</th>
-                        <th>노경찬</th>
-                        <th className={styles.chapterNumber}>235</th>
-                    </tr>
+                    {lastChapters.map((chapter, index) => (
+                        <tr index={index}>
+                            <th>{chapter.novelName}</th>
+                            <th>{chapter.title}</th>
+                            <th className={styles.chapterNumber}>{chapter.chapterNumber}</th>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
+import com.novelsbr.backend.domain.dto.LastChaptersDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.records.ChapterNumberDTO;
@@ -50,5 +51,10 @@ public class ChapterController implements ChapterAPI {
 		Integer chapterNumber = chapterService.findMaxChapterNumber(novelId);
 		ChapterNumberDTO chapterNumberDTO = new ChapterNumberDTO(chapterNumber);
 		return ResponseEntity.ok(chapterNumberDTO);
+	}
+	
+	@GetMapping("/lastChapters") 
+	public ResponseEntity<List<LastChaptersDTO>> findLastChapters() {
+		return ResponseEntity.ok(chapterService.findLastChapters());
 	}
 }

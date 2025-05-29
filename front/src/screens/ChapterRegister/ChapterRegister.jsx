@@ -33,7 +33,7 @@ export default function ChapterRegister() {
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
 
-    const submitChapter = async (e) => {
+    const submitChapter = async (e) => { 
         e.preventDefault();
         try {
             const response = await axios.post(`${API}/chapters/`, {
