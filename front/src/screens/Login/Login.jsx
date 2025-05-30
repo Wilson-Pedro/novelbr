@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
+const API_URL = process.env.REACT_APP_API;
+
 export default function Login() {
 
     const [username, setUsername] = useState('');
@@ -26,7 +28,7 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:8080/auth/login", {
+            const response = await axios.post(`${API_URL}/auth/login`, {
                 login: username,
                 password: password
             }, {

@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 const API = "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API;
 
 export default function Novel() {
 
@@ -36,7 +37,7 @@ export default function Novel() {
 
         const fetchNovelInfo = async () => {
             try {
-                const response = await axios.get(`${API}/novels/novelCards/${novelId}`);
+                const response = await axios.get(`${API_URL}/novels/novelCards/${novelId}`);
                 setNovelInfo(response.data);
                 setNovelName(response.data.novelName);
 
@@ -47,7 +48,7 @@ export default function Novel() {
 
         const fetchNovelGenders = async () => {
             try {
-                const response = await axios.get(`${API}/genders/novel/${novelId}`);
+                const response = await axios.get(`${API_URL}/genders/novel/${novelId}`);
                 setGenders(response.data);
             } catch(error) {
                 console.log(error.errorMessage)
@@ -56,7 +57,7 @@ export default function Novel() {
 
         const fetchNovelsChapterTitles = async () => {
             try {
-                const response = await axios.get(`${API}/chapters/novelsTile/novel/${novelId}`);
+                const response = await axios.get(`${API_URL}/chapters/novelsTile/novel/${novelId}`);
                 setChapterTitles(response.data)
             } catch(error) {
                 console.log(error.errorMessage)

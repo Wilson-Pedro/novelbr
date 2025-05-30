@@ -22,13 +22,13 @@ public interface ChapterRepository extends JpaRepository<Chapter, Integer> {
 	List<NovelsChapterTitleProjection> findAllNovelsChapterTitleByNovelId(Long novelId);
 	
 	@Query(nativeQuery = true, value = """
-		SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, c.title, c.chapter_number, c.date_registration
-		FROM TBL_NOVEL AS n 
-		INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
-		INNER JOIN TBL_CHAPTER c ON c.novel_id = n.id 
-		ORDER BY c.date_registration DESC
-		LIMIT 10
-			""")
+			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, c.title, c.chapter_number, c.date_registration
+			FROM TBL_NOVEL AS n 
+			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+			INNER JOIN TBL_CHAPTER c ON c.novel_id = n.id 
+			ORDER BY c.date_registration DESC
+			LIMIT 10
+				""")
 	List<LastChaptersProjection> findLastChapters();
 	
 	@Query(nativeQuery = true, value = """

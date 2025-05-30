@@ -7,7 +7,7 @@ import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-const API = "http://localhost:8080"; 
+const API_URL = process.env.REACT_APP_API;
 
 export default function Chapter() {
 
@@ -32,7 +32,7 @@ export default function Chapter() {
 
         const fetchChapter = async () => {
             try {
-                const response = await axios.get(`${API}/chapters/${novelName}/${chapterNumber}`);
+                const response = await axios.get(`${API_URL}/chapters/${novelName}/${chapterNumber}`);
                 setChapterInfo(response.data);
                 setNovelId(response.data.novelId);
             } catch(error) {
@@ -47,7 +47,7 @@ export default function Chapter() {
         if(novelId !== 0) {
             const fetchMaxChapterNumber = async () => {
                 try {
-                    const response = await axios.get(`${API}/chapters/chapterNumber/novel/${novelId}`);
+                    const response = await axios.get(`${API_URL}/chapters/chapterNumber/novel/${novelId}`);
                     setMaxChapterNumber(response.data.chapterNumber)
                     console.log(response)
                 } catch(error) {

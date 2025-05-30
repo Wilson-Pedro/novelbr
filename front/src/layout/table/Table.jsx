@@ -4,7 +4,7 @@ import styles from './Table.module.css';
 
 import axios from 'axios';
 
-const API = "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API;
 
 export default function Table() {
 
@@ -13,7 +13,7 @@ export default function Table() {
     useEffect(() => {
         const fetchLastChapters = async () => {
             try { 
-                const response = await axios.get(`${API}/chapters/lastChapters`);
+                const response = await axios.get(`${API_URL}/chapters/lastChapters`);
                 setLastChapters(response.data);
             } catch(error) {
                 console.log('Error ao buscar últimos capítulos: ', error.errorMessage)
@@ -26,7 +26,7 @@ export default function Table() {
         <div className="container mt-4">
             {/* <h2 className="mb-3">Mais Populares</h2> */}
             <table className="table table-striped table-hover">
-                <thead className="table-light">
+                <thead className="table-light"> 
                     <tr>
                         <th>Obra</th>
                         <th>Títutlo</th>

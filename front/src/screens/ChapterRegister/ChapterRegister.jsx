@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from 'axios';
 
-const API = "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API;
 
 export default function ChapterRegister() {
 
@@ -36,7 +36,7 @@ export default function ChapterRegister() {
     const submitChapter = async (e) => { 
         e.preventDefault();
         try {
-            const response = await axios.post(`${API}/chapters/`, {
+            const response = await axios.post(`${API_URL}/chapters/`, {
                 title,
                 chapterText,
                 novelId

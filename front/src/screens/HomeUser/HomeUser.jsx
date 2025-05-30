@@ -9,7 +9,7 @@ import axios from 'axios';
 
 import { Navigate } from 'react-router-dom';
 
-const API = "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API;
 
 export default function HomeUser() {
 
@@ -18,7 +18,7 @@ export default function HomeUser() {
     useEffect(() => {
         const fetchNovelCards = async () => {
             try {
-                const response = await axios.get(`${API}/novels/novelCards`);
+                const response = await axios.get(`${API_URL}/novels/novelCards`);
                 setNovelCards(response.data);
             } catch(error) {
                 console.log(error.errorMessage)

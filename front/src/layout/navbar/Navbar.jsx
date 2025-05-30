@@ -10,7 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import  { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
-const API = "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API;
 
 export default function Navbar({ userAuthenticate=false }) {
 
@@ -25,7 +25,7 @@ export default function Navbar({ userAuthenticate=false }) {
         if(token) {
             const fetchGenders = async () => {
                 try {
-                    const response = await axios.get(`${API}/authors/${userId}`, {
+                    const response = await axios.get(`${API_URL}/authors/${userId}`, {
                         headers: {
                             Authorization: `Bearer ${token}`
                         }

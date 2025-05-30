@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const API = "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API;
 
 export default function NovelRegister() {
 
@@ -33,7 +33,7 @@ export default function NovelRegister() {
 
         const fetchGenders = async () => {
             try {
-                const response = await axios.get(`${API}/genders`, {
+                const response = await axios.get(`${API_URL}/genders`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -49,7 +49,7 @@ export default function NovelRegister() {
     const submitNovel = async () => {
         const token = localStorage.getItem('token');
         try {
-            await axios.post("http://localhost:8080/novels/", {
+            await axios.post(`${API_URL}/novels/`, {
                 novelName,
                 authorId,
                 genders,

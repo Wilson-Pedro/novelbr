@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
+const API_URL = process.env.REACT_APP_API;
 
 export default function UserRegister() {
 
@@ -19,7 +20,7 @@ export default function UserRegister() {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:8080/authors/", {
+            const response = await axios.post(`${API_URL}/authors/`, {
                 name,
                 username,
                 email,

@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.projections.ChapterTextProjection;
+import com.novelsbr.backend.domain.projections.LastChaptersProjection;
 import com.novelsbr.backend.domain.projections.NovelsChapterTitleProjection;
 
 public interface ChapterRepository extends JpaRepository<Chapter, Integer> {
@@ -19,6 +20,16 @@ public interface ChapterRepository extends JpaRepository<Chapter, Integer> {
 			WHERE n.id = :novelId
 			""")
 	List<NovelsChapterTitleProjection> findAllNovelsChapterTitleByNovelId(Long novelId);
+	
+	@Query(nativeQuery = true, value = """
+		SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, c.title, c.chapter_number, c.date_registration
+		FROM TBL_NOVEL AS n 
+		INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+		INNER JOIN TBL_CHAPTER c ON c.novel_id = n.id 
+		ORDER BY c.date_registration DESC
+		LIMIT 10
+			""")
+	List<LastChaptersProjection> findLastChapters();
 	
 	@Query(nativeQuery = true, value = """
 				SELECT MAX(c.chapter_number) FROM TBL_CHAPTER c WHERE c.NOVEL_ID = :novelId

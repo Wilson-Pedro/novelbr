@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from 'axios';
 
-const API = "http://localhost:8080";
+const API_URL = process.env.REACT_APP_API;
 
 export default function Profile() {
 
@@ -22,7 +22,7 @@ export default function Profile() {
         const fetchNovelCardByUsername = async () => {
 
             try {
-                const response = await axios.get(`${API}/novels/novelCards/author/${username}`);
+                const response = await axios.get(`${API_URL}/novels/novelCards/author/${username}`);
                 setCards(response.data);
             } catch(error) {
                 console.log("Error ao buscar Card por Username: ", error.errorMessage);
