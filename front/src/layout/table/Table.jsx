@@ -25,24 +25,30 @@ export default function Table() {
     return(
         <div className="container mt-4">
             {/* <h2 className="mb-3">Mais Populares</h2> */}
-            <table className="table table-striped table-hover">
-                <thead className="table-light"> 
-                    <tr>
-                        <th>Obra</th>
-                        <th>Títutlo</th>
-                        <th>Capítulo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {lastChapters.map((chapter, index) => (
-                        <tr index={index}>
-                            <th>{chapter.novelName}</th>
-                            <th>{chapter.title}</th>
-                            <th className={styles.chapterNumber}>{chapter.chapterNumber}</th>
+            {lastChapters.length == 0 ? (
+                <>
+                    <p className={styles.pCenter}>Nenhum capítulo foi registrado.</p>
+                </>
+            ) : (
+                <table className="table table-striped table-hover">
+                    <thead className="table-light"> 
+                        <tr>
+                            <th>Obra</th>
+                            <th>Títutlo</th>
+                            <th>Capítulo</th>
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {lastChapters.map((chapter, index) => (
+                            <tr index={index}>
+                                <th>{chapter.novelName}</th>
+                                <th>{chapter.title}</th>
+                                <th className={styles.chapterNumber}>{chapter.chapterNumber}</th>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            )}
         </div>
     );
 }

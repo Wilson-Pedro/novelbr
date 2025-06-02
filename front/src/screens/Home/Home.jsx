@@ -54,6 +54,7 @@ export default function Home() {
             </div>
             <div className={styles.morePopular}>
                 <div className={styles.divTitle}>
+                    <br />
                     <h1>ÚLTIMOS LANÇAMENTOS</h1>
                 </div>
                 <Table />

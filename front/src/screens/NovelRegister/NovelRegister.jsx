@@ -46,8 +46,10 @@ export default function NovelRegister() {
         fetchGenders();
     }, [navigate]); 
 
-    const submitNovel = async () => {
+    const submitNovel = async (e) => {
+        e.preventDefault();
         const token = localStorage.getItem('token');
+        const username = localStorage.getItem('username');
         try {
             await axios.post(`${API_URL}/novels/`, {
                 novelName,
@@ -63,6 +65,7 @@ export default function NovelRegister() {
         } catch (error) {
             console.log(error.errorMessage)
         }
+        navigate(`/profile/${username}`)
     }
 
     function addGenders(e) {

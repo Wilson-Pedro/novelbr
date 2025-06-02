@@ -118,11 +118,18 @@ export default function Novel() {
                 <hr />
                 <div className={styles.capitulos}>
                     <h1>Capítulos</h1>
-                    <ul>
-                        {chapterTiles.map((data, index) => (
-                            <li onClick={() => goToChapter(index+1)}>{index+1}º {data.title}</li>
-                        ))}
-                    </ul>
+                    {chapterTiles.length == 0 ? (
+                        <>
+                            <br/>
+                            <p>Nenhum capítulo foi registrado.</p>
+                        </>
+                    ) : (
+                        <ul>
+                            {chapterTiles.map((data, index) => (
+                                <li onClick={() => goToChapter(index+1)}>{index+1}º {data.title}</li>
+                            ))}
+                        </ul>
+                    ) }
                     
                 </div>
             </div>

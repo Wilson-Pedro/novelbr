@@ -66,7 +66,6 @@ export default function Chapter() {
         <div className={styles.container}>
             <nav className={styles.navbar}>
                 <Navbar 
-                    userAuthenticate={isAuth}
                 />
             </nav>
             <div className={styles.main}>

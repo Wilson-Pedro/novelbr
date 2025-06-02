@@ -37,6 +37,6 @@ public class AuthController implements AuthAPI {
 		var token = tokenService.generateToken((Author) auth.getPrincipal());
 		Long userId = authorService.findByUsername(loginRequest.getLogin()).getId();
 		
-		return ResponseEntity.ok(new LoginResponseDTO(token, userId));
+		return ResponseEntity.ok(new LoginResponseDTO(token, loginRequest.getLogin(), userId));
 	}
 }

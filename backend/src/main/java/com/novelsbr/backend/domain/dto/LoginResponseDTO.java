@@ -1,5 +1,5 @@
 package com.novelsbr.backend.domain.dto;
 
-public record LoginResponseDTO(String token, Long userId) {
+public record LoginResponseDTO(String token, String username, Long userId) {
 
 }

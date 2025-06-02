@@ -63,19 +63,26 @@ export default function Profile() {
                 <hr />
                 <div className={styles.divMain}>
                     <h1>Minhas Obras 📖</h1>
-                    <div className={styles.cardContainer}>
-                        {cards.map((card, index) => (
-                            <Card
-                                index={index}
-                                authorId={card.authorId}
-                                novelId={card.novelId}
-                                imagePath={card.imageUri}
-                                title={card.novelName}
-                                author={card.username}
-                                userAuthenticate={true}
-                            />
-                        ))}
-                    </div>
+                    {cards.length == 0 ? (
+                        <>
+                            <br/>
+                            <p className={styles.pCenter}>Você não possui obras cadastradas</p>
+                        </>
+                    ) : (
+                        <div className={styles.cardContainer}>
+                            {cards.map((card, index) => (
+                                <Card
+                                    index={index}
+                                    authorId={card.authorId}
+                                    novelId={card.novelId}
+                                    imagePath={card.imageUri}
+                                    title={card.novelName}
+                                    author={card.username}
+                                    userAuthenticate={true}
+                                />
+                            ))}
+                        </div>
+                    )}
                     <Link to="/homeUser"><button type="button" className="btn btn-danger">Voltar</button></Link>
                 </div>
             </div>

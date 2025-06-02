@@ -42,6 +42,7 @@ export default function Login() {
                 const data = response.data;
                 localStorage.setItem('userId', data.userId)
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('username', data.username)
             }
 
             goToHomeUser(); 

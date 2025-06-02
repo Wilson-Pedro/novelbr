@@ -5,3 +5,7 @@ th {
 .chapterNumber {
     text-decoration: underline;
 }
+
+.pCenter {
+    text-align: center;
+}
