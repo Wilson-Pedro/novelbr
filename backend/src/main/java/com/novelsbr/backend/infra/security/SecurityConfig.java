@@ -43,6 +43,7 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.GET, "/genders/novel/{novelId}").permitAll()
 						.requestMatchers(HttpMethod.POST, "/chapters/").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.GET, "/chapters/**").permitAll()
+						.requestMatchers("/upload/**").permitAll()
 						//.requestMatchers(HttpMethod.GET, "/chapters/novelsTile/author/**").permitAll()
 						.anyRequest().authenticated()
 				)
