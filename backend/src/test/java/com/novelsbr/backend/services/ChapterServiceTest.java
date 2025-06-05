@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
+import com.novelsbr.backend.domain.dto.LastChaptersDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
@@ -133,5 +134,12 @@ class ChapterServiceTest {
 		assertEquals(chapterText.getTitle(), chapter.getTitle());
 		assertEquals(chapterText.getNovelId(), chapter.getNovel().getId());
 		assertEquals(chapterText.getNovelName(), novelName);
+	}
+	
+	@Test
+	void findLastChapters() {
+		List<LastChaptersDTO> lastChapters = chapterService.findLastChapters();
+		
+		assertEquals(lastChapters.size(), 2);
 	}
 }

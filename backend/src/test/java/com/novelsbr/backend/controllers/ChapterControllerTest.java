@@ -189,4 +189,11 @@ class ChapterControllerTest {
 		
 		assertEquals(2, chapterRepository.count());
 	}
+	
+	@Test
+	void findLastChapters() throws Exception {
+			
+		mockMvc.perform(get(URI + "/lastChapters"))
+				.andExpect(status().isOk());
+	}
 }
