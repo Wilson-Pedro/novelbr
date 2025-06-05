@@ -19,7 +19,7 @@ public class UploadController {
 	@Autowired
 	UploadService uploadService;
 	
-	private final String folder = "C:\\spring-react\\novelbr\\front\\public\\imagens";
+	private final String folder = "C:\\spring-react\\novelbr\\front\\src\\assets";
 
 	@PostMapping("/image")
 	public ResponseEntity<Void> uploadImage(@RequestParam("file") MultipartFile file) {

@@ -16,6 +16,8 @@ export default function NovelRegister() {
     const [genders, setGenders] = useState([]);
     const [synopsis, setSynopsis] = useState('');
     const [authorId, setAuthorId] = useState(0);
+    const [imageUri, setImageUri] = useState('')
+    const [selectFile, setSelectFile] = useState(null);
 
     const navigate = useNavigate();
 
@@ -55,7 +57,8 @@ export default function NovelRegister() {
                 novelName,
                 authorId,
                 genders,
-                synopsis
+                synopsis,
+                imageUri
             },
             {
                 headers: {
@@ -65,7 +68,22 @@ export default function NovelRegister() {
         } catch (error) {
             console.log(error.errorMessage)
         }
+        uploadImage();
         navigate(`/profile/${username}`)
+    }
+
+    const uploadImage = async () => {
+        const formData = new FormData();
+        formData.append("file", selectFile);
+        try {
+            await axios.post(`${API_URL}/upload/image`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+        } catch(error) {
+            console.log("Error ao fazer upload da imagem: ", error.errorMessage)
+        }
     }
 
     function addGenders(e) {
@@ -78,6 +96,13 @@ export default function NovelRegister() {
         }
     }
 
+    const handleFileChange = async (e) => {
+        if(e.target.files[0] != null) {
+            setSelectFile(e.target.files[0]);
+            setImageUri(e.target.files[0].name);
+        }
+    }
+
     return (
         <div className={styles.container}>
             <nav className={styles.navbar}>
@@ -86,7 +111,7 @@ export default function NovelRegister() {
                 />
             </nav>
             <div className={styles.main}>
-                <form onSubmit={submitNovel}>
+                <form onSubmit={submitNovel} enctype="multipart/form-data">
                     <div className={styles.formDiv}>
                         <label>Nome da Obra </label>
                         <input
@@ -126,6 +151,19 @@ export default function NovelRegister() {
                             required
                         >
                         </textarea>
+                    </div>
+
+                    <div className={styles.formDiv}>
+                        <label>Capa da Obra </label>
+                        <input
+                            type="file"
+                            className="form-control"
+                            name="file"
+                            onChange={handleFileChange}
+                            placeholder="Capa da Obra"
+                            aria-label="Capa da Obra"
+                            required
+                        />
                     </div>
 
                     <div className={styles.divBtn}>

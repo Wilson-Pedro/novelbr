@@ -174,7 +174,7 @@ class ChapterControllerTest {
 	}
 	
 	@Test
-	void findChapterText() throws Exception {
+	void findChapterText() throws Exception { 
 		
 		Chapter chapter = chapterRepository.findAll().get(1);
 		Integer chapterNumber = chapter.getChapterNumber();
