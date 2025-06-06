@@ -8,8 +8,8 @@ import axios from 'axios';
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
-const API = "http://localhost:8080";
 const API_URL = process.env.REACT_APP_API;
+const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
 export default function Novel() {
 
@@ -87,7 +87,7 @@ export default function Novel() {
             <div className={styles.main}>
                 <div className={styles.mainHead}> 
                     <div className={styles.containerImage}>
-                        <img className={"img-fluid"} src={novelInfo.imageUri || imagePath} />
+                        <img className={"img-fluid"} src={`${IMG_PATH}/${novelInfo.imageUri}` || imagePath} />
                     </div>
                     <div className={styles.containerInfo}>
                         <h1>{novelInfo.novelName || '---'}</h1>

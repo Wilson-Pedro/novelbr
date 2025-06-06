@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
+const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
 export default function Profile() {
 
