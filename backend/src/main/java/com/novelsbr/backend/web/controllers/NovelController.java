@@ -52,4 +52,9 @@ public class NovelController implements NovelAPI {
 	public ResponseEntity<AuthorNovelInfoDTO> findNovelInfoByNovelId(@PathVariable Long novelId) {
 		return ResponseEntity.ok(novelService.findNovelInfoByNovelId(novelId));
 	}
+	
+	@GetMapping("/{id}")
+	public ResponseEntity<Novel> findById(@PathVariable Long id) {
+		return ResponseEntity.ok(novelService.findById(id));
+	}
 }

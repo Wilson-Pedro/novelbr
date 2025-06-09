@@ -71,6 +71,12 @@ public class Novel implements Serializable {
 		this.imageUri = imageUri;
 	}
 
+	@Override
+	public String toString() {
+		return "Novel [id=" + id + ", novelName=" + novelName + ", author=" + author + ", genders=" + genders
+				+ ", synopsis=" + synopsis + ", imageUri=" + imageUri + ", dateRegistrion=" + dateRegistrion + "]";
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -68,11 +68,12 @@ export default function NovelRegister() {
         } catch (error) {
             console.log(error.errorMessage)
         }
-        uploadImage();
+        uploadImage(e);
         navigate(`/profile/${username}`)
     }
 
-    const uploadImage = async () => {
+    const uploadImage = async (e) => {
+        e.preventDefault();
         const formData = new FormData();
         formData.append("file", selectFile);
         try {

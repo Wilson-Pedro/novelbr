@@ -1,0 +1,44 @@
+package com.novelsbr.backend.services.impl;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.services.GenderService;
+import com.novelsbr.backend.services.NovelService;
+
+@Service
+public class GenderServiceImpl implements GenderService {
+	
+	@Autowired
+	private GenderRepository genderRepository;
+	
+	@Autowired
+	private NovelService novelService;
+
+	@Override
+	public List<Gender> findAll() {
+		return genderRepository.findAll();
+	}
+
+	@Override
+	public List<String> findGendersByNovelId(Long novelId) {
+		var a = novelService.findById(novelId).getGenders().stream()
+				.map(x -> x.getGenderType().getType()).toList();
+		System.out.println(novelService.findById(novelId).getGenders());
+		System.out.println("==============================================");
+		System.out.println("Service: " + a);
+		return a;
+	}
+
+	@Override
+	public List<Gender> findAllGenders() {
+		return genderRepository.findAllGenders().stream()
+				.map(x -> new Gender(x.getId(), x.getGenderType()))
+				.toList();
+	}
+
+}

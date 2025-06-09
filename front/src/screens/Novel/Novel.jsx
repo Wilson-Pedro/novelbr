@@ -102,7 +102,7 @@ export default function Novel() {
                         </p>
                     </div>
                 </div>
-                {token != null && authorId == novelInfo.authorId ? (
+                {token != null && authorId === novelInfo.authorId ? (
                     <>
                         <div className={styles.div_btn}>
                             <button 
@@ -118,7 +118,7 @@ export default function Novel() {
                 <hr />
                 <div className={styles.capitulos}>
                     <h1>Capítulos</h1>
-                    {chapterTiles.length == 0 ? (
+                    {chapterTiles.length === 0 ? (
                         <>
                             <br/>
                             <p>Nenhum capítulo foi registrado.</p>

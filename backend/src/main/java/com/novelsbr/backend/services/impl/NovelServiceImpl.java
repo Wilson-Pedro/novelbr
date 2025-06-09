@@ -35,11 +35,9 @@ public class NovelServiceImpl implements NovelService {
 	public Novel save(NovelDTO novelDTO) {
 		validadeRegistration(novelDTO);
 		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
-		Set<Gender> genders = stringsToGenders(novelDTO.getGenders());
 		Novel novel = new Novel(novelDTO);
 		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
-		novel.setGenders(genders);
-		
+		novel.setGenders(stringsToGenders(novelDTO.getGenders()));
 		return novelRepository.save(novel);
 	}
 

@@ -67,7 +67,7 @@ export default function Profile() {
                     {cards.length == 0 ? (
                         <>
                             <br/>
-                            <p className={styles.pCenter}>Você não possui obras cadastradas</p>
+                            <p className={styles.pCenter}>Você não possui obras cadastradas.</p>
                         </>
                     ) : (
                         <div className={styles.cardContainer}>
