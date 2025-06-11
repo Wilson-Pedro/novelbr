@@ -67,7 +67,7 @@ export default function Novel() {
         fetchNovelsChapterTitles(); 
         fetchNovelInfo();
         fetchNovelGenders(); 
-    }, []);
+    }, [novelId]);
 
     function goToChapter(chapterNumber) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });

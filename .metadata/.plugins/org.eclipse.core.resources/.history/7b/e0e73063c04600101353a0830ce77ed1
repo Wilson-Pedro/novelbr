@@ -37,7 +37,7 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByNovelId(Long novelId) {
 		return chapterRepository.findAllNovelsChapterTitleByNovelId(novelId)
-				.stream().map(NovelsChapterTitleDTO::new).toList();
+				.stream().map(x -> new NovelsChapterTitleDTO(x)).toList();
 	}
 
 	@Override
@@ -53,6 +53,6 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public List<LastChaptersDTO> findLastChapters() {
 		return chapterRepository.findLastChapters().stream()
-				.map(LastChaptersDTO::new).toList();
+				.map(x -> new LastChaptersDTO(x)).toList();
 	}
 }

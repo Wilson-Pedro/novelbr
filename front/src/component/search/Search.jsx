@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Search.module.css';
 import { FaSearch } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -9,7 +10,10 @@ const API_URL = process.env.REACT_APP_API;
 export default function Search() {
 
     const [novelName, setNovelName] = useState('');
+    const [novelId, setNovelId] = useState(0);
     const [novelsFinded, setNovelsFinded] = useState([]);
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const search = async () => {
@@ -22,7 +26,7 @@ export default function Search() {
                 const response = await axios.get(`${API_URL}/novels/search/${novelName}`);
                 setNovelsFinded(response.data);
             } catch(error) {
-                console.log('Error ao tentar buscar novels ', error.errorMessage);
+                console.log('Error ao tentar buscar novels ', error);
             }
         };
 
@@ -30,6 +34,12 @@ export default function Search() {
 
         return () => clearTimeout(delay);
     }, [novelName]);
+
+    function goToNovel(novelId) {
+        setNovelName('');
+        setNovelsFinded([]);
+        navigate(`/novel/${novelId}`);
+    }
 
     return (
         <div className={styles.searchContainer} >
@@ -41,8 +51,11 @@ export default function Search() {
             <FaSearch className={styles.searchIncon} />
             {novelsFinded.length > 0 && (
                 <ul className={styles.ul}>
-                    {novelsFinded.map(novel => (
-                        <li className={styles.li}>{novel.novelName}</li>
+                    {novelsFinded.map((novel) => (
+                        <li 
+                        className={styles.li} 
+                        onClick={() => goToNovel(novel.id)} 
+                        key={novel.id}>{novel.novelName}</li>
                     ))}
                 </ul>
             )

@@ -67,7 +67,7 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	public List<CardNovelDTO> findNovelCardsByUsername(String username) {
 		return novelRepository.findNovelCardsByUsername(username).stream()
-				.map(CardNovelDTO::new).toList();
+				.map(x -> new CardNovelDTO(x)).toList();
 	}
 
 	@Override

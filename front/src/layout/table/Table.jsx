@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Table.module.css';
+import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -9,6 +10,11 @@ const API_URL = process.env.REACT_APP_API;
 export default function Table() {
 
     const [lastChapters, setLastChapters] = useState([]);
+    const navigate = useNavigate();
+
+    function goToChapter(novelName, chapterNumber) {
+        navigate(`/novel/${novelName}/chapter/${chapterNumber}`);
+    }
 
     useEffect(() => {
         const fetchLastChapters = async () => {
@@ -40,7 +46,7 @@ export default function Table() {
                     </thead>
                     <tbody>
                         {lastChapters.map((chapter, index) => (
-                            <tr index={index}>
+                            <tr index={index} onClick={() => goToChapter(chapter.novelName, chapter.chapterNumber)}>
                                 <th>{chapter.novelName}</th>
                                 <th>{chapter.title}</th>
                                 <th className={styles.chapterNumber}>{chapter.chapterNumber}</th>
