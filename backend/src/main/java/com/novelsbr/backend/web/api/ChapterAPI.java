@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
+import com.novelsbr.backend.domain.dto.LastChaptersDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
+import com.novelsbr.backend.domain.records.ChapterNumberDTO;
 
 @RequestMapping("/chapters")
 public interface ChapterAPI {
@@ -26,4 +28,11 @@ public interface ChapterAPI {
 	@GetMapping("/{novelName}/{chapterNumber}")
 	public ResponseEntity<ChapterTextDTO> findChapterText(
 			@PathVariable Integer chapterNumber, @PathVariable String novelName);
+	
+	@GetMapping("/chapterNumber/novel/{novelId}") 
+	public ResponseEntity<ChapterNumberDTO> findMaxChapterNumberByNovelId(
+			@PathVariable Long novelId);
+	
+	@GetMapping("/lastChapters") 
+	public ResponseEntity<List<LastChaptersDTO>> findLastChapters();
 }

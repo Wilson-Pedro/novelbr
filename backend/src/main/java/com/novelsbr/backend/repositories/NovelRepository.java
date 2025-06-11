@@ -37,4 +37,6 @@ public interface NovelRepository extends JpaRepository<Novel, Long> {
 			WHERE n.id = :novelId	
 			""")
 	Optional<AuthorNovelMinProjection> findNovelInfoByNovelId(Long novelId);
+	
+	List<Novel> findByNovelNameContainingIgnoreCase(String novelName);
 }

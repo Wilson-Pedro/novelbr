@@ -52,6 +52,11 @@ public class NovelServiceImpl implements NovelService {
 	public List<Novel> findAll() {
 		return novelRepository.findAll();
 	}
+	
+	@Override
+	public List<Novel> searchNovel(String novelName) {
+		return novelRepository.findByNovelNameContainingIgnoreCase(novelName);
+	}
 
 	@Override
 	public List<CardNovelDTO> findNovelCards() {

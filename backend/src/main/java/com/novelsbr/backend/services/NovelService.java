@@ -15,6 +15,8 @@ public interface NovelService {
 	
 	List<Novel> findAll();
 	
+	List<Novel> searchNovel(String novelName);
+	
 	List<CardNovelDTO> findNovelCards();
 	
 	List<CardNovelDTO> findNovelCardsByUsername(String username);

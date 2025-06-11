@@ -27,3 +27,27 @@
     color: #777;
     cursor: pointer;
 }
+
+.ul {
+    position: absolute;
+    top: 38px;
+    left:0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    list-style-type: disc;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.li {
+    padding: 8px;
+    cursor: pointer;
+}
+
+.li:hover {
+    background: lightgray;
+}

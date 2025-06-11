@@ -25,7 +25,7 @@ public class NovelController implements NovelAPI {
 	@Autowired
 	private NovelService novelService;
 	
-	@GetMapping()
+	@GetMapping
 	public ResponseEntity<List<NovelDTO>> findAll() {
 		List<NovelDTO> novlesDTO = novelService.findAll()
 				.stream().map(x -> new NovelDTO(x)).toList();
@@ -53,8 +53,10 @@ public class NovelController implements NovelAPI {
 		return ResponseEntity.ok(novelService.findNovelInfoByNovelId(novelId));
 	}
 	
-	@GetMapping("/{id}")
-	public ResponseEntity<Novel> findById(@PathVariable Long id) {
-		return ResponseEntity.ok(novelService.findById(id));
+	@GetMapping("/search/{novelName}")
+	public ResponseEntity<List<NovelDTO>> searchNovel(@PathVariable String novelName) {
+		List<NovelDTO> novlesDTO = novelService.searchNovel(novelName)
+				.stream().map(x -> new NovelDTO(x)).toList();
+		return ResponseEntity.ok(novlesDTO);
 	}
 }
