@@ -31,7 +31,7 @@ export default function Table() {
     return(
         <div className="container mt-4">
             {/* <h2 className="mb-3">Mais Populares</h2> */}
-            {lastChapters.length == 0 ? (
+            {lastChapters.length === 0 ? (
                 <>
                     <p className={styles.pCenter}>Nenhum capítulo foi registrado.</p>
                 </>
@@ -42,6 +42,7 @@ export default function Table() {
                             <th>Obra</th>
                             <th>Títutlo</th>
                             <th>Capítulo</th>
+                            <th>Data de publicação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -50,6 +51,7 @@ export default function Table() {
                                 <th>{chapter.novelName}</th>
                                 <th>{chapter.title}</th>
                                 <th className={styles.chapterNumber}>{chapter.chapterNumber}</th>
+                                <th>{chapter.dateRegistration}</th>
                             </tr>
                         ))}
                     </tbody>

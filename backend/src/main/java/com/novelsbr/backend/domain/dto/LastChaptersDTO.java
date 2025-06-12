@@ -2,6 +2,7 @@ package com.novelsbr.backend.domain.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import com.novelsbr.backend.domain.projections.LastChaptersProjection;
 
@@ -20,7 +21,7 @@ public class LastChaptersDTO implements Serializable {
 	
 	private Integer chapterNumber;
 	
-	private LocalDateTime dateRegistration;
+	private String dateRegistration;
 	
 	public LastChaptersDTO() {
 	}
@@ -32,7 +33,7 @@ public class LastChaptersDTO implements Serializable {
 		this.username = projection.getUsername();
 		this.title = projection.getTitle();
 		this.chapterNumber = projection.getChapterNumber();
-		this.dateRegistration = projection.getDateRegistration();
+		this.dateRegistration = formatDate(projection.getDateRegistration());
 	}
 
 	public Long getNovelId() {
@@ -59,7 +60,11 @@ public class LastChaptersDTO implements Serializable {
 		return chapterNumber;
 	}
 
-	public LocalDateTime getDateRegistration() {
+	public String getDateRegistration() {
 		return dateRegistration;
+	}
+	
+	private String formatDate(LocalDateTime dateTime) {
+		return dateTime.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
 	}
 }
