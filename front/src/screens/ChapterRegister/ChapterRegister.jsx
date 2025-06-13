@@ -49,7 +49,7 @@ export default function ChapterRegister() {
 
             navigate(`/novel/${novelId}`, { replace: true });
         } catch(error) {
-            console.log(error.errorMessage);
+            console.log(error);
         }
     }
 

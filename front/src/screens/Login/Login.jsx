@@ -48,7 +48,7 @@ export default function Login() {
             goToHomeUser(); 
         } catch(error) {
             setError("Username ou Senha inválidos")
-            console.log(error.errorMessage)
+            console.log(error)
         }
     }
 

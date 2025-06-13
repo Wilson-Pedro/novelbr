@@ -17,18 +17,21 @@ public class AuthorNovelInfoDTO implements Serializable {
 	
 	private String imageUri;
 	
+	private Integer year;
+	
 	private String synopsis;
 	
 	public AuthorNovelInfoDTO() {
 	}
 
-	public AuthorNovelInfoDTO(AuthorNovelMinProjection authorNovelMinProjection) {
-		this.authorId = authorNovelMinProjection.getAuthorId();
-		this.novelId = authorNovelMinProjection.getNovelId();
-		this.novelName = authorNovelMinProjection.getNovelName();
-		this.username = authorNovelMinProjection.getUsername();
-		this.imageUri = authorNovelMinProjection.getImageUri();
-		this.synopsis = authorNovelMinProjection.getSynopsis();
+	public AuthorNovelInfoDTO(AuthorNovelMinProjection projection) {
+		this.authorId = projection.getAuthorId();
+		this.novelId = projection.getNovelId();
+		this.novelName = projection.getNovelName();
+		this.username = projection.getUsername();
+		this.imageUri = projection.getImageUri();
+		this.year = projection.getDateRegistrion().getYear();
+		this.synopsis = projection.getSynopsis();
 	}
 
 	public Long getAuthorId() {
@@ -53,5 +56,9 @@ public class AuthorNovelInfoDTO implements Serializable {
 
 	public String getSynopsis() {
 		return synopsis;
+	}
+	
+	public Integer getYear() {
+		return year;
 	}
 }

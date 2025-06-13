@@ -1,0 +1,20 @@
+package com.novelsbr.backend.domain.projections;
+
+import java.time.LocalDateTime;
+
+public interface AuthorNovelMinProjection {
+
+	Long getNovelId();
+	
+	Long getAuthorId();
+	
+	String getNovelName();
+	
+	String getUsername();
+	
+	String getImageUri();
+	
+	String getSynopsis();
+	
+	LocalDateTime getDtateRegistrion();
+}

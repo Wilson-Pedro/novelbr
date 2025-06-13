@@ -10,7 +10,6 @@ import NovelRegister from './screens/NovelRegister/NovelRegister';
 import Novel from './screens/Novel/Novel.jsx';
 import Chapter from './screens/Chapter/Chapter.jsx';
 import ChapterRegister from './screens/ChapterRegister/ChapterRegister';
-import UploadImage from './screens/UploadImg/UploadImage.jsx';
 
 export default function Rotas() {
     return(
@@ -25,7 +24,6 @@ export default function Rotas() {
                 <Route path="/novel/:novelId" element={ <Novel /> } exact />
                 <Route path="/novel/:novelName/chapter/:chapterNumber" element={ <Chapter /> } exact />
                 <Route path="/chapterRegister/:novelId" element={ <ChapterRegister /> } exact />
-                {/* <Route path="/uploadImageTest" element={ <UploadImage /> } exact /> */}
             </Routes>
         </BrowserRouter>
     );

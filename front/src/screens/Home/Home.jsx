@@ -19,7 +19,7 @@ export default function Home() {
                 const response = await axios.get(`${API_URL}/novels/novelCards`);
                 setNovelCards(response.data);
             } catch(error) {
-                console.log(error.errorMessage)
+                console.log(error)
             }
         }
 

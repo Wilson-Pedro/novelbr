@@ -22,7 +22,7 @@ export default function Table() {
                 const response = await axios.get(`${API_URL}/chapters/lastChapters`);
                 setLastChapters(response.data);
             } catch(error) {
-                console.log('Error ao buscar últimos capítulos: ', error.errorMessage)
+                console.log('Error ao buscar últimos capítulos: ', error)
             }
         }
         fetchLastChapters();

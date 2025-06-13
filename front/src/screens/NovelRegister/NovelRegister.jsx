@@ -66,7 +66,7 @@ export default function NovelRegister() {
                 }
             })
         } catch (error) {
-            console.log(error.errorMessage)
+            console.log(error)
         }
         uploadImage(e);
         navigate(`/profile/${username}`)
@@ -83,7 +83,7 @@ export default function NovelRegister() {
                 }
             })
         } catch(error) {
-            console.log("Error ao fazer upload da imagem: ", error.errorMessage)
+            console.log("Error ao fazer upload da imagem: ", error)
         }
     }
 

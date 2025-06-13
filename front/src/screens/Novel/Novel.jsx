@@ -42,7 +42,7 @@ export default function Novel() {
                 setNovelName(response.data.novelName);
 
             } catch(error) {
-                console.log(error.errorMessage)
+                console.log(error)
             }
         }
 
@@ -51,7 +51,7 @@ export default function Novel() {
                 const response = await axios.get(`${API_URL}/genders/novel/${novelId}`);
                 setGenders(response.data);
             } catch(error) {
-                console.log(error.errorMessage)
+                console.log(error)
             }
         }
 
@@ -60,7 +60,7 @@ export default function Novel() {
                 const response = await axios.get(`${API_URL}/chapters/novelsTile/novel/${novelId}`);
                 setChapterTitles(response.data)
             } catch(error) {
-                console.log(error.errorMessage)
+                console.log(error)
             }
         }
 
@@ -95,6 +95,7 @@ export default function Novel() {
                         <p><strong>Gêneros:</strong> {genders.map((gender, index) => (
                             <span>{gender}{(index+1) < genders.length ? <>, </> : <>.</>} </span>
                         ))}</p>
+                        <p><strong>Ano:</strong> {novelInfo.year || '---'}</p>
                         {/* <p><strong>Gênros:</strong> Aventura, Ação, Drama, Medieval, Magia.</p> */}
                         <h4>Sinopse</h4>
                         <p className={styles.sinopse}>

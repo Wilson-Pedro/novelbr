@@ -26,7 +26,7 @@ export default function Profile() {
                 const response = await axios.get(`${API_URL}/novels/novelCards/author/${username}`);
                 setCards(response.data);
             } catch(error) {
-                console.log("Error ao buscar Card por Username: ", error.errorMessage);
+                console.log("Error ao buscar Card por Username: ", error);
             }
 
         }

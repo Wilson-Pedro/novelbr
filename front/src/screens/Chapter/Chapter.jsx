@@ -36,7 +36,7 @@ export default function Chapter() {
                 setChapterInfo(response.data);
                 setNovelId(response.data.novelId);
             } catch(error) {
-                console.log("Error ao buscar capítulo: ", error.errorMessage)
+                console.log("Error ao buscar capítulo: ", error)
             }
         }
 
@@ -51,7 +51,7 @@ export default function Chapter() {
                     setMaxChapterNumber(response.data.chapterNumber)
                     console.log(response)
                 } catch(error) {
-                    console.log('Error ao buscar o último capítulo da Novel ', error.errorMessage)
+                    console.log('Error ao buscar o último capítulo da Novel ', error)
                 }
             }
             fetchMaxChapterNumber();
