@@ -17,4 +17,7 @@ public interface AuthorAPI {
 	
 	@GetMapping("/{id}")
 	public ResponseEntity<AuthorDTO> findById(@PathVariable Long id);
+	
+	@GetMapping("/username/{username}")
+	public ResponseEntity<AuthorDTO> findByUsername(@PathVariable String username);
 }

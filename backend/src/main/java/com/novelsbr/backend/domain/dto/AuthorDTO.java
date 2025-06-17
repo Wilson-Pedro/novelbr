@@ -29,6 +29,12 @@ public class AuthorDTO {
 		this.role = author.getRole();
 	}
 	
+	public AuthorDTO(String name, String username, String email) {
+		this.name = name;
+		this.username = username;
+		this.email = email;
+	}
+	
 	public AuthorDTO(Long id, String name, String username, String email, String password) {
 		this.id = id;
 		this.name = name;

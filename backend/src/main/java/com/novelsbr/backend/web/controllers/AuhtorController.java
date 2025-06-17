@@ -31,4 +31,11 @@ public class AuhtorController implements AuthorAPI {
 	public ResponseEntity<AuthorDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(new AuthorDTO(authorService.findById(id)));
 	}
+	
+	@GetMapping("/username/{username}")
+	public ResponseEntity<AuthorDTO> findByUsername(@PathVariable String username) {
+		Author author = authorService.findByUsername(username);
+		AuthorDTO dto = new AuthorDTO(author.getName(), author.getUsername(), author.getEmail());
+		return ResponseEntity.ok(dto);
+	}
 }
