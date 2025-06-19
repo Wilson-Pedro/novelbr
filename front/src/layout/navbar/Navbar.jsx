@@ -51,6 +51,14 @@ export default function Navbar({ userAuthenticate=false }) {
         navigate(`/profile/${username}`)
     }
 
+    function goToRegister() {
+        navigate(`/register`)
+    }
+
+        function goToLogin() {
+        navigate(`/login`)
+    }
+
     return(
         <>
             <div className={styles.divTitle}>
@@ -59,7 +67,7 @@ export default function Navbar({ userAuthenticate=false }) {
             <div className={styles.search}>
                 <Search />
             </div>
-            <nav>
+            <nav clasName="container-fluid">
                 {userAuthenticate !== false ? (
                     <>
                         <Dropdown>
@@ -76,12 +84,16 @@ export default function Navbar({ userAuthenticate=false }) {
                     </>
                 ) : (
                     <>
-                        <p>
-                            <Link className={styles.linkNone} to="/register">Casdastrar</Link>
-                        </p>
-                        <p>
-                            <Link className={styles.linkNone} to="/login">Login</Link>
-                        </p>
+                        <Dropdown>
+                            <Dropdown.Toggle variant='Warning'>
+                                Mais
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu className={styles.dropdownMenu}>
+                                <Dropdown.Item className={styles.dropdownItem} onClick={goToRegister}>Cadastrar</Dropdown.Item>
+                                <Dropdown.Item className={styles.dropdownItem} onClick={goToLogin}>Login</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
                     </>
                 )}
             </nav>

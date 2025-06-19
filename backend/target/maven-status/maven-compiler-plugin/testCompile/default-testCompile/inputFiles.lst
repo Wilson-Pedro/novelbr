@@ -1,0 +1,12 @@
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\BackendApplicationTests.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\controllers\AuthControllerTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\controllers\AuthorControllerTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\controllers\ChapterControllerTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\controllers\GenderControllerTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\controllers\NovelControllerTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\exceptions\AuthorExceptionsTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\exceptions\NovelExceptionsTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\services\AuthorServiceTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\services\ChapterServiceTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\services\GenderServiceTest.java
+C:\spring-react\novelbr\backend\src\test\java\com\novelsbr\backend\services\NovelServiceTest.java

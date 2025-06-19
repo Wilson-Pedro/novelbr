@@ -59,7 +59,7 @@ export default function Profile() {
     if(!token) return <Navigate to="/login"/>
 
     return(
-        <div className={styles.container}>
+        <div >
             <nav className={styles.navbar}>
                 <Navbar 
                     userAuthenticate={true}

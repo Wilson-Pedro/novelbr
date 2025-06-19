@@ -97,6 +97,62 @@ section h1 {
     border-bottom: 2px solid black;
 }
 
+@media (max-width: 1024px) {
+    .navbar {
+        flex-direction: column;
+        padding: 2%;
+        font-size: 95%;
+    }
+
+    section {
+        height: 60vh;
+        background-attachment: scroll; /* melhora a performance em mobile */
+    }
+
+    section h1 {
+        font-size: 5vw;
+    }
+
+    .cardContainer {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .divTitle h1 {
+        font-size: 150%;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        font-size: 85%;
+        padding: 4%;
+        flex-direction: column;
+    }
+
+    section {
+        height: 50vh;
+        background-size: cover;
+        padding: 10px;
+    }
+
+    section h1 {
+        font-size: 6vw;
+    }
+
+    .cardContainer {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+    }
+
+    .morePopular,
+    .lastReleases {
+        padding: 10px;
+    }
+}
+
+
 /* @media (max-width: 70%) {
     .navbar {
         width: 100%;

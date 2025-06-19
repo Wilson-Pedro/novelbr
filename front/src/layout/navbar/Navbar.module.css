@@ -17,7 +17,7 @@
 
 .navContainer {
     width: 100%;
-    max-width: 100%px;
+    max-width: 100%;
     margin: 0 auto;
     padding: 2.5%;
     background-image: linear-gradient(rgb(233, 158, 18), rgb(141, 96, 13));
@@ -108,7 +108,55 @@ nav p:hover {
     transition: .9s;
 }
 
-@media (min-width: 768px) {
+/* Botão de hambúrguer (oculto por padrão) */
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: rgb(41, 27, 2);
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Menu de navegação (desktop) */
+.navMenu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+/* Oculta o menu quando fechado no mobile */
+@media (max-width: 768px) {
+  .hamburger {
+    display: block;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  .navMenu {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background-image: linear-gradient(rgb(233, 158, 18), rgb(141, 96, 13));
+    border-bottom: 1px solid black;
+    position: absolute;
+    top: 70px;
+    right: 0;
+    width: 100%;
+    padding: 20px;
+    border-top: 2px solid black;
+    z-index: 998;
+  }
+
+  .showMenu {
+    display: flex;
+  }
+}
+
+
+/* @media (min-width: 768px) {
     .navbar {
         flex-direction: column;
         justify-content: space-between;
@@ -121,5 +169,39 @@ nav p:hover {
 
     nav {
         margin-top: 0;
+    }
+} */
+
+@media (max-width: 768px) {
+    .divTitle {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .divTitle h1 {
+        font-size: 200%;
+    }
+
+    .search {
+        width: 100%;
+        max-width: 100%;
+        justify-content: center;
+        margin: 10px 0;
+    }
+
+    nav {
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+    }
+
+    nav p {
+        margin-left: 0;
+        text-align: center;
+        width: 110%;
+    }
+
+    .dropdownMenu {
+        width: 100%;
     }
 }

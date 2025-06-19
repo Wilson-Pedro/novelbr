@@ -5,13 +5,15 @@ import Card from '../../component/cards/Card';
 import styles from './Home.module.css';
 import Table from './../../layout/table/Table';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
 
 export default function Home() {
 
-    const [novelCards, setNovelCards] = useState([])
+    const [novelCards, setNovelCards] = useState([]);
 
     useEffect(() => {
         const fetchNovelCards = async () => {
