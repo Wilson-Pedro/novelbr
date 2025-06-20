@@ -90,3 +90,17 @@ form input {
     color: red;
     font-weight: bold;
 }
+
+@media(max-width: 600px) {
+    .formContainer {
+        width: 80%;
+    }
+
+    form label {
+        font-size: 1.2em;
+    }
+    
+    form input {
+        font-size: 1.2em;
+    }
+}

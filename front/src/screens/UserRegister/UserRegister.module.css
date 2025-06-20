@@ -85,3 +85,9 @@ form input {
 .buttonContainer button {
     margin: 4%;
 }
+
+@media(max-width: 600px) {
+    .formContainer {
+        width: 80%;
+    }
+}
