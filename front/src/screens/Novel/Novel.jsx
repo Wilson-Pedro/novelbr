@@ -6,6 +6,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
 import axios from 'axios';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API;
@@ -87,7 +89,7 @@ export default function Novel() {
             <div className={styles.main}>
                 <div className={styles.mainHead}> 
                     <div className={styles.containerImage}>
-                        <img className={"img-fluid"} src={`${IMG_PATH}/${novelInfo.imageUri}` || imagePath} />
+                        <img className="img-fluid" src={`${IMG_PATH}/${novelInfo.imageUri}` || imagePath} />
                     </div>
                     <div className={styles.containerInfo}>
                         <h1>{novelInfo.novelName || '---'}</h1>

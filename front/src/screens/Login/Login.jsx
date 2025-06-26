@@ -58,7 +58,7 @@ export default function Login() {
                 <div className={styles.divLogin}>
                     <h3>LOGIN</h3>
                 </div>
-                <p className={styles.errorMessage}>{error}</p>
+                <p >{error}</p>
                 <form onSubmit={submitLogin}>
                     <div className={styles.inputContainer}>
                         <label htmlFor="">Username:</label><br />
