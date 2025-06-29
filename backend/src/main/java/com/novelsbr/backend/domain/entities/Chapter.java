@@ -30,7 +30,6 @@ public class Chapter implements Serializable {
 	
 	private Integer chapterNumber;
 	
-	@Lob
 	@Column(columnDefinition = "TEXT")
 	private String chapterText;
 	
@@ -46,7 +45,7 @@ public class Chapter implements Serializable {
 	
 	public Chapter(ChapterDTO chapterDTO) {
 		this.title = chapterDTO.getTitle();
-		this.chapterText = chapterDTO.getChapterText();
+//		this.chapterText = chapterDTO.getChapterText();
 	}
 
 	public Chapter(Long id, String title, String chapterText, Novel novel) {

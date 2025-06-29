@@ -29,6 +29,8 @@ public class ChapterController implements ChapterAPI {
 
 	@PostMapping("/")
 	public ResponseEntity<ChapterDTO> save(@RequestBody ChapterDTO chapterDTO) {
+		System.out.println("=======================================================");
+		System.out.println(chapterDTO.getChapterText());
 		Chapter chapter = chapterService.save(chapterDTO);
 		return ResponseEntity.status(201).body(new ChapterDTO(chapter));
 	}

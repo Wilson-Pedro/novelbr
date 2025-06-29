@@ -1,0 +1,17 @@
+package com.novelsbr.backend.utils.htmlsanitizer;
+
+import org.owasp.html.PolicyFactory;
+import org.owasp.html.Sanitizers;
+
+public class HtmlSanitizerUtil {
+
+	private static final PolicyFactory policy = Sanitizers.FORMATTING
+			.and(Sanitizers.BLOCKS)
+            .and(Sanitizers.LINKS)        // Permite <a>, mas remove javascript:
+            .and(Sanitizers.IMAGES)       // Se quiser permitir imagens
+            .and(Sanitizers.STYLES);      // (opcional) para estilo inline seguro
+	
+	public static String sanitize(String html) {
+		return policy.sanitize(html);
+	}
+}

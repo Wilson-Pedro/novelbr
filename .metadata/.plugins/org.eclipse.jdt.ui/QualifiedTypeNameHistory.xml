@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Chapter"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.services.ChapterService"/>
-    <fullyQualifiedTypeName name="java.lang.RuntimeException"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ControllerAdvice"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.ExceptionHandler"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.ExistingEntityException"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
+    <fullyQualifiedTypeName name="org.owasp.html.PolicyFactory"/>
+    <fullyQualifiedTypeName name="org.owasp.html.HtmlSanitizer"/>
+    <fullyQualifiedTypeName name="org.owasp.html.Sanitizers"/>
 </qualifiedTypeNameHistroy>

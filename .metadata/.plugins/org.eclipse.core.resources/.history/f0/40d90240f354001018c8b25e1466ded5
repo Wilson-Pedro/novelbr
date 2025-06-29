@@ -1,0 +1,21 @@
+package com.novelsbr.backend.utils.htmlsanitizer;
+
+import org.owasp.html.HtmlPolicyBuilder;
+import org.owasp.html.PolicyFactory;
+
+import com.google.common.base.Predicates;
+
+public class HtmlSanitizerUtil {
+
+	private static final PolicyFactory policy = new HtmlPolicyBuilder()
+	        .allowElements("p", "b", "i", "u", "strong", "em", "ul", "ol", "li", "br", "span", "div")
+	        .allowAttributes("href").onElements("a")
+	        .disallowAttributes("href").matching(Predicates.not(Predicates.containsPattern("javascript:"))).onElements("a")
+	        .allowUrlProtocols("http", "https", "mailto")
+	        .toFactory();
+			
+	
+	public static String sanitize(String html) {
+		return policy.sanitize(html);
+	}
+}

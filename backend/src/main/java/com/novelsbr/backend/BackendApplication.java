@@ -22,6 +22,7 @@ import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
 
 @SpringBootApplication
 public class BackendApplication implements CommandLineRunner {

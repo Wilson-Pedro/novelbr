@@ -68,7 +68,7 @@ export default function Chapter() {
                 <Navbar 
                 />
             </nav>
-            <div className={styles.main}>
+            <div >
                 <div className={styles.divTitle}>
                     <h1 onClick={goToNovel}>{chapterInfo.novelName}</h1>
                 </div>
@@ -81,7 +81,7 @@ export default function Chapter() {
                     ) : ( <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber + 1)}>Próximo &#62;</button> )}
                 </div>
                 <div className={styles.divChapter} 
-                dangerouslySetInnerHTML={{ __html: chapterInfo.chapterText }}
+                    dangerouslySetInnerHTML={{ __html: chapterInfo.chapterText }}
                 >
                 </div> <br /><br />
                 <div className={styles.divButtons}>

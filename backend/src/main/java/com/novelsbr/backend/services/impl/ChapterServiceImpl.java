@@ -14,6 +14,7 @@ import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
 
 @Service
 public class ChapterServiceImpl implements ChapterService {
@@ -29,8 +30,14 @@ public class ChapterServiceImpl implements ChapterService {
 		Novel novel = novelService.findById(chapterDTO.getNovelId());
 		Chapter chapter = new Chapter(chapterDTO);
 		Integer chapterNumber = findMaxChapterNumber(novel.getId());
+		System.out.println("=======================================================");
+		System.out.println("Sanitized HTML: " + chapterDTO.getChapterText());
+		String htmlSanitizer = HtmlSanitizerUtil.sanitize(chapterDTO.getChapterText());
+		chapter.setChapterText(htmlSanitizer);
+		System.out.println("Sanitized HTML: " + chapter.getChapterText());
 		chapter.setNovel(novel);
 		chapter.setChapterNumber(chapterNumber == null ? 1 : chapterNumber + 1);
+		
 		return chapterRepository.save(chapter);
 	}
 

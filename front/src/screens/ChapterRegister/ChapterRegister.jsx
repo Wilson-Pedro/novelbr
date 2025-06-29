@@ -27,7 +27,22 @@ export default function ChapterRegister() {
 
     const config = {
         readonly: false,
-        height: 400
+        height: 400,
+        enter: 'p',
+        cleanHTML: false,
+        useDefaultParser: true,
+        allowScriptTags: false,
+        toolbarButtonSize: 'medium',
+        buttons: [
+            'bold', 'italic', 'underline',
+            '|', 'ul', 'ol',
+            '|', 'outdent', 'indent',
+            '|', 'link', 'unlink',
+            '|', 'hr',
+            '|', 'undo', 'redo'
+        ],
+        removeButtons: ['source', 'brush', 'file', 'video', 'copyformat'],
+        toolbarSticky: false
     }
 
     const token = localStorage.getItem('token');
@@ -55,6 +70,13 @@ export default function ChapterRegister() {
 
     function goToNovel() {
         navigate(`/novel/${novelId}`);
+    }
+
+    const handleBlur = () => {
+        if (editor.current) {
+            const html = editor.current.value;
+            setChapterText(html);
+        }
     }
 
     return(
@@ -87,8 +109,8 @@ export default function ChapterRegister() {
                         ref={editor}
                         value={chapterText}
                         config={config}
-                        onBlur={(newContent) => setChapterText(newContent)}
-                        onChange={(newContent) => {}}
+                        onBlur={handleBlur}
+                        onChange={() => {}}
                     />
                 </div>
                 <div className={styles.divBtn}>
