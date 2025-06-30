@@ -10,9 +10,9 @@ const API_URL = process.env.REACT_APP_API;
 
 export default function Login() {
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [error, setError] = useState('');
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [error, setError] = useState<string>('');
 
     const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ export default function Login() {
         navigate('/homeUser');
     }
 
-    const submitLogin = async (e) => {
+    const submitLogin = async (e:any) => {
         e.preventDefault();
 
         try {

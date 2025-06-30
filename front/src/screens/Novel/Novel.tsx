@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Novel.module.css';
-import Navbar from './../../layout/navbar/Navbar';
-import Footer from './../../layout/footer/Rodape';
+import Navbar from '../../layout/navbar/Navbar';
+import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
 import axios from 'axios';
@@ -13,19 +13,32 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
-export default function Novel() {
+interface NovelInfo {
+    imageUri:string;
+    novelName:string;
+    username:string;
+    year:number;
+    synopsis:string;
+    authorId:number;
+}
+
+interface ChapterTiles {
+    title:String;
+}
+
+const Novel: React.FC = () => {
 
     const params = useParams();
-    const novelId =  parseInt(params.novelId);
+    const novelId =  parseInt(params.novelId || '');
 
     const location = useLocation();
     const { isAuth } = location.state || {};
     const userAuth = { isAuth: isAuth }
-    const [novelInfo, setNovelInfo] = useState({});
+    const [novelInfo, setNovelInfo] = useState<NovelInfo>({} as NovelInfo);
     const [genders, setGenders] = useState([]);
-    const [chapterTiles, setChapterTitles] = useState([]);
-    const [novelName, setNovelName] = useState('');
-    const [authorId, setAuthorId] = useState(0);
+    const [chapterTiles, setChapterTitles] = useState<ChapterTiles[]>([]);
+    const [novelName, setNovelName] = useState<string>('');
+    const [authorId, setAuthorId] = useState<number>(0);
 
     const navigate = useNavigate();
 
@@ -34,7 +47,7 @@ export default function Novel() {
 
     useEffect(() => {
 
-        const userId = parseInt(localStorage.getItem('userId'));
+        const userId = parseInt(localStorage.getItem('userId') || '');
         setAuthorId(userId);
 
         const fetchNovelInfo = async () => {
@@ -69,9 +82,9 @@ export default function Novel() {
         fetchNovelsChapterTitles(); 
         fetchNovelInfo();
         fetchNovelGenders(); 
-    }, [novelId]);
+    }, [novelId, novelName]);
 
-    function goToChapter(chapterNumber) {
+    function goToChapter(chapterNumber:number) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });
     }
 
@@ -140,3 +153,5 @@ export default function Novel() {
         </div>
     );
 }
+
+export default Novel;

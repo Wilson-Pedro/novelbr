@@ -24,8 +24,9 @@
 }
 
 .divTitle {
-    max-width: 50%;
+    width: 80%;
     color: rgb(41, 27, 2);
+    margin-left: 5%;
 }
 
 .divTitle h1 {
@@ -126,55 +127,10 @@ nav p:hover {
   align-items: center;
 }
 
-/* Oculta o menu quando fechado no mobile */
-@media (max-width: 768px) {
-  .hamburger {
-    display: block;
-    position: absolute;
-    top: 20px;
-    right: 20px;
-  }
-
-  .navMenu {
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    background-image: linear-gradient(rgb(233, 158, 18), rgb(141, 96, 13));
-    border-bottom: 1px solid black;
-    position: absolute;
-    top: 70px;
-    right: 0;
-    width: 100%;
-    padding: 20px;
-    border-top: 2px solid black;
-    z-index: 998;
-  }
-
-  .showMenu {
-    display: flex;
-  }
-}
-
-
-/* @media (min-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 10px 20px;
-    }
-
-    .search {
-        margin: 0;
-    }
-
-    nav {
-        margin-top: 0;
-    }
-} */
 
 @media (max-width: 768px) {
     .divTitle {
-        max-width: 100%;
+        width: 100%;
         text-align: center;
     }
 

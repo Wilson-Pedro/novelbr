@@ -7,11 +7,16 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
 
-export default function Search() {
+interface NovelsFinded {
+    id:number;
+    novelName:string;
+}
 
-    const [novelName, setNovelName] = useState('');
-    const [novelId, setNovelId] = useState(0);
-    const [novelsFinded, setNovelsFinded] = useState([]);
+const Search: React.FC = () => {
+
+    const [novelName, setNovelName] = useState<string>('');
+    const [novelId, setNovelId] = useState<number>(0);
+    const [novelsFinded, setNovelsFinded] = useState<NovelsFinded[]>([]);
 
     const navigate = useNavigate();
 
@@ -35,7 +40,7 @@ export default function Search() {
         return () => clearTimeout(delay);
     }, [novelName]);
 
-    function goToNovel(novelId) {
+    function goToNovel(novelId:number) {
         setNovelName('');
         setNovelsFinded([]);
         navigate(`/novel/${novelId}`);
@@ -64,3 +69,5 @@ export default function Search() {
         </div>
     );
 }
+
+export default Search;

@@ -3,7 +3,7 @@ import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import Card from '../../component/cards/Card';
 import styles from './Home.module.css';
-import Table from './../../layout/table/Table';
+import Table from '../../layout/table/Table';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -11,9 +11,26 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
 
+interface NovelCard {
+    index?:number;
+    authorId:number;
+    novelId:number;
+    imageUri:string;
+    novelName:string;
+    username:string;
+}
+
+interface LastChapters {
+    index?:number;
+    novelName:string;
+    chapterNumber:number;
+    title:string;
+    dateRegistration:string
+}
+
 export default function Home() {
 
-    const [novelCards, setNovelCards] = useState([]);
+    const [novelCards, setNovelCards] = useState<NovelCard[]>([]);
 
     useEffect(() => {
         const fetchNovelCards = async () => {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Rotas from './Rotas';
 
-function App() {
+const App: React.FC = () => {
   return (
       <Rotas />
   );

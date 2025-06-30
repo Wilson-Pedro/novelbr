@@ -16,7 +16,7 @@ export default function UserRegister() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const submitUser = async (e) => {
+    const submitUser = async (e:any) => {
         e.preventDefault();
 
         try {

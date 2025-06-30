@@ -7,12 +7,20 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
 
-export default function Table() {
+interface LastChapters {
+    index?:number;
+    novelName:string;
+    chapterNumber:number;
+    title:string;
+    dateRegistration:string
+}
 
-    const [lastChapters, setLastChapters] = useState([]);
+const Table: React.FC = () => {
+
+    const [lastChapters, setLastChapters] = useState<LastChapters[]>([]);
     const navigate = useNavigate();
 
-    function goToChapter(novelName, chapterNumber) {
+    function goToChapter(novelName:string, chapterNumber:number) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`);
     }
 
@@ -46,8 +54,8 @@ export default function Table() {
                         </tr>
                     </thead>
                     <tbody>
-                        {lastChapters.map((chapter, index) => (
-                            <tr index={index} onClick={() => goToChapter(chapter.novelName, chapter.chapterNumber)}>
+                        {lastChapters.map((chapter) => (
+                            <tr onClick={() => goToChapter(chapter.novelName, chapter.chapterNumber)}>
                                 <th>{chapter.novelName}</th>
                                 <th>{chapter.title}</th>
                                 <th className={styles.chapterNumber}>{chapter.chapterNumber}</th>
@@ -60,3 +68,5 @@ export default function Table() {
         </div>
     );
 }
+
+export default Table;

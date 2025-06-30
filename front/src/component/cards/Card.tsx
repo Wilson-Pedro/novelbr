@@ -5,7 +5,17 @@ import { useNavigate } from 'react-router-dom';
 
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
-export default function Card({ imagePath="", title="", author="", userAuthenticate=false, authorId, novelId }) {
+interface CardProps {
+    index?:number;
+    imagePath?:string;
+    title?:string;
+    author?:string;
+    userAuthenticate?:boolean;
+    authorId:number;
+    novelId:number;
+}
+
+const Card: React.FC<CardProps> = ({ imagePath, title, author, userAuthenticate, authorId, novelId }) => {
 
     const navigate = useNavigate();
     
@@ -30,3 +40,5 @@ export default function Card({ imagePath="", title="", author="", userAuthentica
         </div>
     );
 }
+
+export default Card;

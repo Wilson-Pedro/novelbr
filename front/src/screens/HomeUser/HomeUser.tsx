@@ -11,9 +11,18 @@ import { Navigate } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API;
 
+interface NovelCard {
+    index?:number;
+    authorId:number;
+    novelId:number;
+    imageUri:string;
+    novelName:string;
+    username:string;
+}
+
 export default function HomeUser() {
 
-    const [novelCards, setNovelCards] = useState([])
+    const [novelCards, setNovelCards] = useState<NovelCard[]>([])
 
     useEffect(() => {
         const fetchNovelCards = async () => {

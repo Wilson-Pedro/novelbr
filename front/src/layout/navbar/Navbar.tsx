@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
-import Search from './../../component/search/Search';
+import Search from '../../component/search/Search';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
@@ -12,15 +12,19 @@ import  { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 const API_URL = process.env.REACT_APP_API;
 
-export default function Navbar({ userAuthenticate=false }) {
+interface NavbarProp {
+    userAuthenticate?:boolean;
+}
 
-    const [username, setUsername] = useState('');
+const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
+
+    const [username, setUsername] = useState<string>('');
     const navigate = useNavigate();
 
     useEffect(() => {
 
         const token = localStorage.getItem('token');
-        const userId = parseInt(localStorage.getItem('userId'));
+        const userId = parseInt(localStorage.getItem('userId') || '');
 
         if(token) {
             const fetchGenders = async () => {
@@ -67,7 +71,7 @@ export default function Navbar({ userAuthenticate=false }) {
             <div className={styles.search}>
                 <Search />
             </div>
-            <nav clasName="container-fluid">
+            <nav className="container-fluid">
                 {userAuthenticate !== false ? (
                     <>
                         <Dropdown>
@@ -100,3 +104,5 @@ export default function Navbar({ userAuthenticate=false }) {
         </>
     );
 }
+
+export default Navbar;

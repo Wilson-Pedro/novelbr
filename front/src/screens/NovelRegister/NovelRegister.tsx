@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './NovelRegister.module.css';
-import Navbar from './../../layout/navbar/Navbar';
-import Footer from './../../layout/footer/Rodape';
+import Navbar from '../../layout/navbar/Navbar';
+import Footer from '../../layout/footer/Rodape';
 import { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -10,27 +10,34 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const API_URL = process.env.REACT_APP_API;
 
+interface GendersBackend {
+    genderType:string;
+}
+
 export default function NovelRegister() {
 
     const [novelName, setNovelName] = useState('');
-    const [genders, setGenders] = useState([]);
+    const [genders, setGenders] = useState<string[]>([]);
     const [synopsis, setSynopsis] = useState('');
-    const [authorId, setAuthorId] = useState(0);
+    const [authorId, setAuthorId] = useState<number>(0);
     const [imageUri, setImageUri] = useState('')
-    const [selectFile, setSelectFile] = useState(null);
+    const [selectFile, setSelectFile] = useState<any>(null);
 
     const navigate = useNavigate();
 
-    const[gendersBackend, setGendersBackend] = useState([]);
+    const[gendersBackend, setGendersBackend] = useState<GendersBackend[]>([]);
 
     useEffect(() => {
 
         const token = localStorage.getItem('token');
         const userId = localStorage.getItem('userId');
 
-        if(!token) return navigate('/login');
+        if (!token) {
+            navigate('/login');
+            return;
+        }
 
-        setAuthorId(userId);
+        setAuthorId(userId ? parseInt(userId) : 0);
         //setTokenUser(token)
 
         const fetchGenders = async () => {
@@ -44,11 +51,11 @@ export default function NovelRegister() {
             } catch(error) {
                 console.log("Error ao buscar gêneros: ", error)
             }
-        }
+        };
         fetchGenders();
     }, [navigate]); 
 
-    const submitNovel = async (e) => {
+    const submitNovel = async (e:any) => {
         e.preventDefault();
         const token = localStorage.getItem('token');
         const username = localStorage.getItem('username');
@@ -72,7 +79,7 @@ export default function NovelRegister() {
         navigate(`/profile/${username}`)
     }
 
-    const uploadImage = async (e) => {
+    const uploadImage = async (e:any) => {
         e.preventDefault();
         const formData = new FormData();
         formData.append("file", selectFile);
@@ -87,7 +94,7 @@ export default function NovelRegister() {
         }
     }
 
-    function addGenders(e) {
+    function addGenders(e:any) {
         const gender = e.target.value;
         const newGenders = [...genders, gender];
         if(!genders.includes(gender)) {
@@ -97,7 +104,7 @@ export default function NovelRegister() {
         }
     }
 
-    const handleFileChange = async (e) => {
+    const handleFileChange = async (e:any) => {
         if(e.target.files[0] != null) {
             setSelectFile(e.target.files[0]);
             setImageUri(e.target.files[0].name);
@@ -112,7 +119,7 @@ export default function NovelRegister() {
                 />
             </nav>
             <div className={styles.main}>
-                <form onSubmit={submitNovel} enctype="multipart/form-data">
+                <form onSubmit={submitNovel} encType="multipart/form-data">
                     <div className={styles.formDiv}>
                         <label>Nome da Obra </label>
                         <input

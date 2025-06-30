@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.css';
-import Navbar from './../../layout/navbar/Navbar';
-import Card from './../../component/cards/Card';
-import Footer from './../../layout/footer/Rodape';
+import Navbar from '../../layout/navbar/Navbar';
+import Card from '../../component/cards/Card';
+import Footer from '../../layout/footer/Rodape';
 import { Link, Navigate, useParams, useNavigate } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,10 +11,25 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
 
+interface Author {
+    name:string;
+    username:string;
+    email:string;
+}
+
+interface NovelCard {
+    index?:number;
+    authorId:number;
+    novelId:number;
+    imageUri:string;
+    novelName:string;
+    username:string;
+}
+
 export default function Profile() {
 
-    const [cards, setCards] = useState([]);
-    const [author, setAuthor] = useState([]);
+    const [cards, setCards] = useState<NovelCard[]>([]);
+    const [author, setAuthor] = useState<Author>({} as Author);
     const params = useParams();
     const username = params.username;
 
@@ -23,7 +38,11 @@ export default function Profile() {
     useEffect(() => {
 
         const token = localStorage.getItem('token');
-        if(!token) return navigate('/login');
+
+        if(!token) {
+            navigate('/login');
+            return;
+        } 
 
         const fetchNovelCardByUsername = async () => {
 
@@ -69,7 +88,7 @@ export default function Profile() {
                 <div className={styles.divMain}>
                     <h1>Informações do Usuário ℹ️</h1>
                     <h4>Nome: <span className={styles.noWeight}>{author.name}</span></h4>
-                    <h4>Pseudônimo: <sapn className={styles.noWeight}>{author.username}</sapn></h4>
+                    <h4>Pseudônimo: <span className={styles.noWeight}>{author.username}</span></h4>
                     <h4>Email: <span className={styles.noWeight}>{author.email}</span></h4>
                 </div>
 

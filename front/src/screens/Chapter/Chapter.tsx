@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Chapter.module.css';
-import Navbar from './../../layout/navbar/Navbar';
-import Footer from './../../layout/footer/Rodape';
+import Navbar from '../../layout/navbar/Navbar';
+import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
 
@@ -9,18 +9,24 @@ import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
 
+interface ChapterInfo {
+    novelId:number;
+    novelName:string;
+    chapterText:string;
+}
+
 export default function Chapter() {
 
-    const [chapterInfo, setChapterInfo] = useState({});
-    const [maxChapterNumber, setMaxChapterNumber] = useState(1);
-    const [novelId, setNovelId] = useState(0);
+    const [chapterInfo, setChapterInfo] = useState<ChapterInfo>({} as ChapterInfo);
+    const [maxChapterNumber, setMaxChapterNumber] = useState<number>(1);
+    const [novelId, setNovelId] = useState<number>(0);
 
     const location = useLocation();
     const { isAuth } = location.state || {};
 
     const params = useParams();
     const novelName = params.novelName;
-    const chapterNumber =  parseInt(params.chapterNumber);
+    const chapterNumber =  parseInt(params.chapterNumber || '');
 
     const navigate = useNavigate();
 
@@ -58,7 +64,7 @@ export default function Chapter() {
         }
     }, [novelId]);
 
-    function goToChapter(chapterNumber) {
+    function goToChapter(chapterNumber:number) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`);
     }
 
@@ -68,7 +74,7 @@ export default function Chapter() {
                 <Navbar 
                 />
             </nav>
-            <div >
+            <div className={styles.main}>
                 <div className={styles.divTitle}>
                     <h1 onClick={goToNovel}>{chapterInfo.novelName}</h1>
                 </div>

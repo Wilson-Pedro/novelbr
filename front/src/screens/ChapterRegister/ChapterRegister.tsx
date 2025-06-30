@@ -16,16 +16,16 @@ export default function ChapterRegister() {
 
     const navigate = useNavigate();
     const params = useParams();
-    const novelId = parseInt(params.novelId) || 0;
+    const novelId = parseInt(params.novelId || '');
     const editor = useRef(null);
     
-    const [title, setTitle] = useState('');
-    const [chapterText, setChapterText] = useState('');
+    const [title, setTitle] = useState<string>('');
+    const [chapterText, setChapterText] = useState<string>('');
 
     // const location = useLocation();
     // const { isAuth } = location.state || {};
 
-    const config = {
+    const config:{} = {
         readonly: false,
         height: 400,
         enter: 'p',
@@ -48,7 +48,7 @@ export default function ChapterRegister() {
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
 
-    const submitChapter = async (e) => { 
+    const submitChapter = async (e:any) => { 
         e.preventDefault();
         try {
             const response = await axios.post(`${API_URL}/chapters/`, {
@@ -72,12 +72,12 @@ export default function ChapterRegister() {
         navigate(`/novel/${novelId}`);
     }
 
-    const handleBlur = () => {
-        if (editor.current) {
-            const html = editor.current.value;
-            setChapterText(html);
-        }
-    }
+    // const handleBlur = () => {
+    //     if (editor.current) {
+    //         const html = editor.current.value;
+    //         setChapterText(html);
+    //     }
+    // }
 
     return(
         <div className={styles.container}>
@@ -109,8 +109,9 @@ export default function ChapterRegister() {
                         ref={editor}
                         value={chapterText}
                         config={config}
-                        onBlur={handleBlur}
-                        onChange={() => {}}
+                        //onBlur={handleBlur}
+                        //onChange={() => {}}
+                        onChange={(e:string) => setChapterText(e)}
                     />
                 </div>
                 <div className={styles.divBtn}>
