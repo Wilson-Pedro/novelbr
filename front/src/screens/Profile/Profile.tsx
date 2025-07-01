@@ -78,7 +78,7 @@ export default function Profile() {
     if(!token) return <Navigate to="/login"/>
 
     return(
-        <div >
+        <div className={styles.container}>
             <nav className={styles.navbar}>
                 <Navbar 
                     userAuthenticate={true}
@@ -124,6 +124,7 @@ export default function Profile() {
                             ))}
                         </div>
                     )}
+                    <br/><br/>
                     <Link to="/homeUser"><button type="button" className="btn btn-danger">Voltar</button></Link>
                 </div>
             </div>

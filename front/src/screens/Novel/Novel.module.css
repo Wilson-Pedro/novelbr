@@ -104,6 +104,8 @@
 
 .div_btn button {
     text-align: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
 }
 
 .capitulos {
@@ -139,17 +141,7 @@
     text-decoration: none;
 }
 
-/* @media (max-width: 1024px) {
-    .mainHead {
-        flex-direction: column;
-    }
-
-    .containerInfo {
-        width: 100%;
-    }
-} */
-
-@media (max-width: 1200px) {
+@media (max-width: 1300px) {
     .mainHead {
         flex-direction: column;
     }
@@ -169,17 +161,6 @@
         height: 50%;
         width: 50%;
         padding: 2%;
-        font-size: 2em;
-    }
-}
-
-@media (max-width: 600px) {
-
-
-    .div_btn button {
-        height: 20%;
-        width: 40%;
-        padding: 2%;
-        font-size: 2em;
+        font-size: 200%;
     }
 }

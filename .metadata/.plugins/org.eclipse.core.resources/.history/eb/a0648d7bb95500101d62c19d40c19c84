@@ -1,0 +1,67 @@
+package com.novelsbr.backend;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.UserRole;
+import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.services.ChapterService;
+import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
+
+@SpringBootApplication
+public class BackendApplication implements CommandLineRunner {
+	
+	@Autowired
+	AuthorRepository authorRepository;
+	
+	@Autowired
+	AuthorService authorService;
+	
+	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
+	NovelService novelService;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
+	ChapterRepository chapterRepository;
+	
+	@Autowired
+	ChapterService chapterService;
+
+	public static void main(String[] args) {
+		SpringApplication.run(BackendApplication.class, args);
+	}
+
+	@Override
+	public void run(String... args) throws Exception {
+		
+		String textoPerigoso = """
+								<script>alert('oi')</script>
+								<p>Olá Mundo</p>
+								""";
+		String textoSintetizado = HtmlSanitizerUtil.sanitize(textoPerigoso);
+		System.out.println("=============================================");
+		System.out.println(textoSintetizado);
+	}
+
+}

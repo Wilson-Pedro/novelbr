@@ -45,7 +45,8 @@ form {
     justify-content: center;
     flex-direction: column;
     height: 100%;
-    width: 50%;
+    width: 100%;
+    max-width: 600px;
     padding-bottom: 10%;
 }
 
@@ -58,16 +59,22 @@ form {
     font-size: 20px;
 }
 
-.formDiv input {
+.formDiv input, 
+.formDiv textarea {
     font-size: 15px;
     border: 1px solid black;
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
 }
 
 .div_genders {
+    padding-left: 3%;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 15px;
-    margin-left: 15%;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin: 1rem 0;
 }
 
 .div_genders input {
@@ -75,14 +82,40 @@ form {
 }
 
 .divBtn {
-    margin-top: 8%;
+    margin-top: 2rem;
+    flex-wrap: wrap;
     display: flex;
+    gap: 10px;
     align-items: start;
-    justify-content: space-between;
-    width: 50%;
+    justify-content: center;
+    width: 100%;
+}
+
+.divBtn button {
+    min-width: 120px;
 }
 
 .linkNone {
     text-decoration: none;
     color: inherit;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        padding: 1rem;
+        font-size: 90%;
+    }
+
+    .main {
+        padding: 1rem;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .formDiv label {
+        font-size: 16px;
+    }
 }
