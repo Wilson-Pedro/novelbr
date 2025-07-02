@@ -7,6 +7,7 @@ import { Navigate, useParams, useNavigate } from 'react-router-dom';
 import JoditEditor from "jodit-react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Jodit } from 'jodit';
 
 import axios from 'axios';
 
@@ -17,7 +18,7 @@ export default function ChapterRegister() {
     const navigate = useNavigate();
     const params = useParams();
     const novelId = parseInt(params.novelId || '');
-    const editor = useRef(null);
+    const editor = useRef<any | null>(null);
     
     const [title, setTitle] = useState<string>('');
     const [chapterText, setChapterText] = useState<string>('');
@@ -72,12 +73,12 @@ export default function ChapterRegister() {
         navigate(`/novel/${novelId}`);
     }
 
-    // const handleBlur = () => {
-    //     if (editor.current) {
-    //         const html = editor.current.value;
-    //         setChapterText(html);
-    //     }
-    // }
+    const handleBlur = () => {
+        if (editor.current) {
+            const html = editor.current.getEditorValue();
+            setChapterText(html);
+        }
+    }
 
     return(
         <div className={styles.container}>
@@ -105,14 +106,15 @@ export default function ChapterRegister() {
                 </div> <br />
                 <h3>Capítulo</h3> <br />
                 <div className={styles.textEditor}>
-                    <JoditEditor 
-                        ref={editor}
+                    <textarea
+                        className="form-control"
                         value={chapterText}
-                        config={config}
-                        //onBlur={handleBlur}
-                        //onChange={() => {}}
-                        onChange={(e:string) => setChapterText(e)}
-                    />
+                        onChange={(e) => setChapterText(e.target.value)}
+                        placeholder="Capítulo"
+                        id="floatingTextarea2"
+                        required
+                    >
+                    </textarea>
                 </div>
                 <div className={styles.divBtn}>
                     <button type="submit" className="btn btn-primary">Criar</button>

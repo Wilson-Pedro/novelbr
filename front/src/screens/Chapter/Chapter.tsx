@@ -10,6 +10,7 @@ import axios from 'axios';
 const API_URL = process.env.REACT_APP_API;
 
 interface ChapterInfo {
+    title:string;
     novelId:number;
     novelName:string;
     chapterText:string;
@@ -85,6 +86,9 @@ export default function Chapter() {
                     {chapterNumber + 1 > maxChapterNumber ? (
                         <></>
                     ) : ( <button type="button" className="btn btn-warning" onClick={() => goToChapter(chapterNumber + 1)}>Próximo &#62;</button> )}
+                </div>
+                <div className={styles.divTitle}>
+                    <h1>{chapterInfo.title}</h1>
                 </div>
                 <div className={styles.divChapter} 
                     dangerouslySetInnerHTML={{ __html: chapterInfo.chapterText }}

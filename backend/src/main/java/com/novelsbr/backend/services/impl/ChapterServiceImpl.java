@@ -28,13 +28,12 @@ public class ChapterServiceImpl implements ChapterService {
 	@Override
 	public Chapter save(ChapterDTO chapterDTO) {
 		Novel novel = novelService.findById(chapterDTO.getNovelId());
-		Chapter chapter = new Chapter(chapterDTO);
+		Chapter chapter = new Chapter();
 		Integer chapterNumber = findMaxChapterNumber(novel.getId());
-		System.out.println("=======================================================");
-		System.out.println("Sanitized HTML: " + chapterDTO.getChapterText());
-		String htmlSanitizer = HtmlSanitizerUtil.sanitize(chapterDTO.getChapterText());
-		chapter.setChapterText(htmlSanitizer);
-		System.out.println("Sanitized HTML: " + chapter.getChapterText());
+		
+		chapter.setTitle(HtmlSanitizerUtil.sanitize(chapterDTO.getTitle()));
+		chapter.setChapterText(HtmlSanitizerUtil.sanitize(chapterDTO.getChapterText()));
+		
 		chapter.setNovel(novel);
 		chapter.setChapterNumber(chapterNumber == null ? 1 : chapterNumber + 1);
 		

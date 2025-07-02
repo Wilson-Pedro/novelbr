@@ -91,3 +91,19 @@
     text-decoration: none;
     color: inherit;
 }
+
+@media (max-width: 1024px) {
+    .navbar {
+        flex-direction: column;
+        padding: 2%;
+        font-size: 95%;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        font-size: 85%;
+        padding: 4%;
+        flex-direction: column;
+    }
+}
