@@ -55,9 +55,11 @@ class NovelServiceTest {
 		novelRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
+		Integer id = 1;
 		
 		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(null, type));
+			genders.add(new Gender(id, type));
+			id++;
 		}
 		
 		for(Gender gender : genders) {

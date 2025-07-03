@@ -10,6 +10,8 @@ import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.services.GenderService;
 import com.novelsbr.backend.services.NovelService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class GenderServiceImpl implements GenderService {
 	
@@ -25,6 +27,7 @@ public class GenderServiceImpl implements GenderService {
 	}
 
 	@Override
+	@Transactional
 	public List<String> findGendersByNovelId(Long novelId) {
 		return novelService.findById(novelId).getGenders().stream()
 				.map(x -> x.getGenderType().getType()).toList();
