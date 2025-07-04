@@ -26,7 +26,6 @@
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
     <fullyQualifiedTypeName name="org.junit.jupiter.api.MethodOrderer"/>
     <fullyQualifiedTypeName name="java.util.Set"/>
-    <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.ChapterRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.ChapterDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.records.ChapterNumberDTO"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="org.owasp.html.HtmlSanitizer"/>
     <fullyQualifiedTypeName name="org.owasp.html.Sanitizers"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil"/>
+    <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
 </qualifiedTypeNameHistroy>

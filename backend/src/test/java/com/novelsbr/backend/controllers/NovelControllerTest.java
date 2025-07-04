@@ -185,4 +185,14 @@ class NovelControllerTest {
 				.andExpect(jsonPath("$.synopsis", equalTo(synopsis)));
 
 	}
+	
+	@Test
+	void searchNovel() throws Exception {
+		String name = "Jornada";
+
+		mockMvc.perform(get(URI + "/search/" + name)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk());
+
+	}
 }

@@ -1,5 +1,6 @@
 package com.novelsbr.backend.services;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashSet;
@@ -70,6 +71,12 @@ class GenderServiceTest {
 		genderRepository.saveAll(genders);
 		authorRepository.save(author);
 		novelRepository.save(novel);
+	}
+	
+	@Test
+	void findAll() {
+		List<Gender> genders = genderService.findAll();
+		assertEquals(genders.size(), genderRepository.count());
 	}
 	
 	@Test

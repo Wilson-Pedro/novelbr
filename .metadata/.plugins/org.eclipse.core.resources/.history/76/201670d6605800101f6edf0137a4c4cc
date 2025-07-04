@@ -145,8 +145,10 @@ class NovelServiceTest {
 	@Test
 	void searchNovel() {
 		
-		String name = "Jornada";
+		String name = "A casa";
 		List<Novel> novels = novelService.searchNovel(name);
 		assertEquals(novels.size(), novelRepository.count());
+		
+		
 	}
 }
