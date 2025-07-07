@@ -11,6 +11,7 @@ import com.novelsbr.backend.domain.dto.LastChaptersDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.exceptions.NotFoundException;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.NovelService;
@@ -60,5 +61,10 @@ public class ChapterServiceImpl implements ChapterService {
 	public List<LastChaptersDTO> findLastChapters() {
 		return chapterRepository.findLastChapters().stream()
 				.map(LastChaptersDTO::new).toList();
+	}
+
+	@Override
+	public Chapter findById(Long id) {
+		return chapterRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 }

@@ -1,0 +1,5 @@
+package com.novelsbr.backend.services.impl;
+
+public class CommentServiceImpl {
+
+}

@@ -1,0 +1,72 @@
+package com.novelsbr.backend.domain.dto;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Column;
+
+public class CommentDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
+	
+	private Long authorId;
+	
+	private Integer commentId;
+	
+	@Column(columnDefinition = "TEXT")
+	private String text;
+	
+	private LocalDateTime dateRegistration;
+	
+	public CommentDTO() {
+	}
+
+	public CommentDTO(Long id, Long authorId, Integer commentId, String text, LocalDateTime dateRegistration) {
+		this.id = id;
+		this.authorId = authorId;
+		this.commentId = commentId;
+		this.text = text;
+		this.dateRegistration = dateRegistration;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
+	}
+
+	public Integer getCommentId() {
+		return commentId;
+	}
+
+	public void setCommentId(Integer commentId) {
+		this.commentId = commentId;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public LocalDateTime getDateRegistration() {
+		return dateRegistration;
+	}
+
+	public void setDateRegistration(LocalDateTime dateRegistration) {
+		this.dateRegistration = dateRegistration;
+	}
+}

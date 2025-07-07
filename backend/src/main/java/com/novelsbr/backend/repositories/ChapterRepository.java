@@ -10,7 +10,7 @@ import com.novelsbr.backend.domain.projections.ChapterTextProjection;
 import com.novelsbr.backend.domain.projections.LastChaptersProjection;
 import com.novelsbr.backend.domain.projections.NovelsChapterTitleProjection;
 
-public interface ChapterRepository extends JpaRepository<Chapter, Integer> {
+public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	
 	@Query(nativeQuery = true, value = """
 			SELECT c.id AS chapter_id,  n.id AS novel_id, a.id AS author_id,  c.title 

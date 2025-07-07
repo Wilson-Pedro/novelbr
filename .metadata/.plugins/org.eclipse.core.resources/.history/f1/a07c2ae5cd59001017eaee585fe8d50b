@@ -1,0 +1,5 @@
+package com.novelsbr.backend.enums;
+
+public enum CommentType {
+
+}

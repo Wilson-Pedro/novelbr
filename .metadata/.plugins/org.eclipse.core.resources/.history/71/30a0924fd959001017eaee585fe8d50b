@@ -1,0 +1,15 @@
+package com.novelsbr.backend.domain.entities;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "TBL_COMMENT_NOVEL")
+public class CommentNovel {
+
+	@ManyToOne
+	@JoinColumn(name = "novel_id")
+	private Novel novel;
+}

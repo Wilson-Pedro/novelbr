@@ -17,7 +17,6 @@ public class ChapterDTO implements Serializable{
 	
 	private Long novelId;
 	
-	
 	public ChapterDTO() {
 	}
 	

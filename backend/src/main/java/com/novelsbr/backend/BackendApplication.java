@@ -10,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
@@ -96,6 +97,10 @@ public class BackendApplication implements CommandLineRunner {
 		novelService.save(novelDTO2);
 		novelService.save(novelDTO3);
 		novelService.save(novelDTO4);
+
+		//ChapterDTO chapterDTO = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		
+		//chapterService.save(chapterDTO);
 	}
 
 }

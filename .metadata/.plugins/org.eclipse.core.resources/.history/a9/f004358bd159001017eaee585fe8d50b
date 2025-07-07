@@ -1,0 +1,8 @@
+package com.novelsbr.backend.web.controllers;
+
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class CommentController {
+
+}

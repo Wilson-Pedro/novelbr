@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -131,5 +132,25 @@ public class Author implements Serializable, UserDetails {
 	public String toString() {
 		return "Author [id=" + id + ", name=" + name + ", username=" + username + ", email=" + email + ", password="
 				+ password + ", dateRegistrion=" + dateRegistrion + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(dateRegistrion, email, id, name, password, role, username);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Author other = (Author) obj;
+		return Objects.equals(dateRegistrion, other.dateRegistrion) && Objects.equals(email, other.email)
+				&& Objects.equals(id, other.id) && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && role == other.role
+				&& Objects.equals(username, other.username);
 	}
 }

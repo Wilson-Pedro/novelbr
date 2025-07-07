@@ -1,0 +1,27 @@
+package com.novelsbr.backend.domain.entities;
+
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+
+import com.novelsbr.backend.enums.CommentType;
+
+import jakarta.persistence.Column;
+
+public class Comment {
+
+	private Long id;
+	
+	private Author author;
+	
+	private CommentType commentType;
+	
+	@Column(columnDefinition = "TEXT")
+	private String text;
+	
+	@CreationTimestamp
+	private LocalDateTime dateRegistration;
+	
+	public Comment() {
+	}
+}

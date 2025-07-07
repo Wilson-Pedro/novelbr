@@ -1,0 +1,8 @@
+package com.novelsbr.backend.web.api;
+
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("/comments")
+public interface CommentAPI {
+
+}

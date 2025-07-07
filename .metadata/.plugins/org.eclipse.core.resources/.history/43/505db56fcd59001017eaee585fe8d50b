@@ -1,0 +1,5 @@
+package com.novelsbr.backend.domain.entities;
+
+public class Comment {
+
+}

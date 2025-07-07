@@ -52,7 +52,7 @@ public enum GenderType {
 				.filter(genderType -> genderType.getType().equals(type))
 				.findFirst()
 				.orElseThrow(() -> new IllegalArgumentException
-						("Formato de Pagamento inválido: " + type));
+						("Formato de Gênero inválido: " + type));
 	}
 	
 	public static List<GenderType> stringToGender(Collection<String> types) {

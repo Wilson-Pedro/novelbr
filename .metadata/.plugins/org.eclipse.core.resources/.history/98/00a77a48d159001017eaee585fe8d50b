@@ -1,0 +1,5 @@
+package com.novelsbr.backend.web.api;
+
+public interface CommentAPI {
+
+}
