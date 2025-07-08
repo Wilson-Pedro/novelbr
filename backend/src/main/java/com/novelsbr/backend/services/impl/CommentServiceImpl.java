@@ -1,5 +1,7 @@
 package com.novelsbr.backend.services.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +10,7 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Comment;
 import com.novelsbr.backend.domain.entities.CommentChapter;
 import com.novelsbr.backend.domain.entities.CommentNovel;
+import com.novelsbr.backend.exceptions.NotFoundException;
 import com.novelsbr.backend.repositories.CommentRepository;
 import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.services.ChapterService;
@@ -34,19 +37,33 @@ public class CommentServiceImpl implements CommentService {
 		Comment commentSaved = preparingCommentToSave(commentDTO);
 		if(commentSaved == null) throw new RuntimeException();
 		commentRepository.save(commentSaved);
+		if(commentDTO.getCommentFatherId() != null) {
+			Comment commentFather = findById(commentDTO.getCommentFatherId());
+			commentFather.getComments().add(commentSaved);
+			commentRepository.save(commentFather);
+		}
+	}
+	
+	public Comment findById(Long id) {
+		return commentRepository.findById(id).orElseThrow(NotFoundException::new);
+	}
+	
+	@Override
+	public List<Comment> findAll() {
+		return commentRepository.findAll();
 	}
 
 	private Comment preparingCommentToSave(CommentDTO commentDTO) {
-		Comment comment = new Comment(commentDTO);
+		//Comment comment = new Comment(commentDTO);
 		Author author = authorService.findById(commentDTO.getAuthorId());
 		
-		if(comment.isNovel()) {
+		if(commentDTO.getCommentCode() == 1) {
 			CommentNovel commentNovel = new CommentNovel(commentDTO);
 			commentNovel.setNovel(novelService.findById(commentDTO.getEntityId()));
 			commentNovel.setAuthor(author);
 			return commentNovel;
 			
-		} else if(comment.isChapter()) {
+		} else if(commentDTO.getCommentCode() == 2) {
 			CommentChapter commentChapter = new CommentChapter(commentDTO);
 			commentChapter.setChapter(chapterService.findById(commentDTO.getEntityId()));
 			commentChapter.setAuthor(author);

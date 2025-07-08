@@ -1,12 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.List"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.NovelDTO"/>
-    <fullyQualifiedTypeName name="java.lang.AssertionError"/>
-    <fullyQualifiedTypeName name="java.util.Collection"/>
-    <fullyQualifiedTypeName name="org.hibernate.mapping.Collection"/>
-    <fullyQualifiedTypeName name="java.util.stream.Collector"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.LastChaptersDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.projections.LastChaptersProjection"/>
     <fullyQualifiedTypeName name="java.io.IOException"/>
     <fullyQualifiedTypeName name="java.nio.file.Paths"/>
@@ -47,7 +40,6 @@
     <fullyQualifiedTypeName name="jakarta.persistence.InheritanceType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="jakarta.persistence.JoinColumn"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Comment"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.CommentType"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.CommentNovel"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.CommentChapter"/>
@@ -60,4 +52,12 @@
     <fullyQualifiedTypeName name="jakarta.persistence.Enumerated"/>
     <fullyQualifiedTypeName name="jakarta.persistence.EnumType"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.ChapterDTO"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonBackReference"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.OneToMany"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.CascadeType"/>
+    <fullyQualifiedTypeName name="com.fasterxml.jackson.annotation.JsonManagedReference"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.NotFoundException"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Comment"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="jakarta.persistence.Column"/>
 </qualifiedTypeNameHistroy>

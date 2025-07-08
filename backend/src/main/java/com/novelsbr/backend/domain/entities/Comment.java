@@ -2,17 +2,23 @@ package com.novelsbr.backend.domain.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.novelsbr.backend.domain.dto.CommentDTO;
 import com.novelsbr.backend.enums.CommentType;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,12 +26,13 @@ import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "TBL_COMMENT")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class Comment implements Serializable {
+public abstract class Comment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -42,6 +49,15 @@ public class Comment implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String text;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "comment_father_id")
+	@JsonBackReference
+	private Comment commentFather;
+	
+	@OneToMany(mappedBy = "commentFather", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JsonManagedReference
+	private List<Comment> comments = new ArrayList<>();
+	
 	@CreationTimestamp
 	private LocalDateTime dateRegistration;
 	
@@ -49,7 +65,7 @@ public class Comment implements Serializable {
 	}
 	
 	public Comment(CommentDTO commentDTO) {
-		this.id = commentDTO.getId();
+		this.id = commentDTO.getId() == null ? null : commentDTO.getId();
 		this.commentType = CommentType.toEnum(commentDTO.getCommentCode());
 		this.text = commentDTO.getText();
 		this.dateRegistration = commentDTO.getDateRegistration();
@@ -61,6 +77,12 @@ public class Comment implements Serializable {
 		this.commentType = commentType;
 		this.text = text;
 		this.dateRegistration = dateRegistration;
+	}
+
+	public Comment(Long id, Author author, CommentType commentType, String text, Comment commentFather,
+			LocalDateTime dateRegistration) {
+		this(id, author, commentType, text, dateRegistration);
+		this.commentFather = commentFather == null ? null : commentFather;
 	}
 
 	public Long getId() {
@@ -95,6 +117,18 @@ public class Comment implements Serializable {
 		this.text = text;
 	}
 
+	public Comment getCommentFather() {
+		return commentFather == null ? null : commentFather;
+	}
+
+	public void setCommentFather(Comment commentFather) {
+		this.commentFather = commentFather;
+	}
+
+	public List<Comment> getComments() {
+		return comments;
+	}
+
 	public LocalDateTime getDateRegistration() {
 		return dateRegistration;
 	}
@@ -106,6 +140,8 @@ public class Comment implements Serializable {
 	public boolean isChapter() {
 		return this.commentType.equals(CommentType.CHAPTER);
 	}
+	
+	public abstract Long getEntityId();
 
 	@Override
 	public int hashCode() {

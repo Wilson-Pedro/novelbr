@@ -98,9 +98,9 @@ public class BackendApplication implements CommandLineRunner {
 		novelService.save(novelDTO3);
 		novelService.save(novelDTO4);
 
-		//ChapterDTO chapterDTO = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapterDTO = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
 		
-		//chapterService.save(chapterDTO);
+		chapterService.save(chapterDTO);
 	}
 
 }

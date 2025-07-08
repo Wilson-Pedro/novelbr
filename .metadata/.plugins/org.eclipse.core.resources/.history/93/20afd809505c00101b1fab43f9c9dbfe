@@ -1,0 +1,104 @@
+package com.novelsbr.backend.domain.dto;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import com.novelsbr.backend.domain.entities.Comment;
+
+import jakarta.persistence.Column;
+
+public class CommentDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
+	
+	private Long authorId;
+	
+	private Integer commentCode;
+	
+	private Long entityId;
+	
+	private Long commentFatherId;
+	
+	@Column(columnDefinition = "TEXT")
+	private String text;
+	
+	private LocalDateTime dateRegistration;
+	
+	public CommentDTO() {
+	}
+	
+	public CommentDTO(Comment comment) {
+		this.id = comment.getId();
+		this.authorId = comment.getAuthor().getId();
+		this.commentCode = comment.getCommentType().getCode();
+		this.commentFatherId = comment.getId() == null ? null : comment.getId();
+		this.text = comment.getText();
+		this.dateRegistration = comment.getDateRegistration();
+	}
+
+	public CommentDTO(Long id, Long authorId, Integer commentCode, Long entityId, String text, LocalDateTime dateRegistration) {
+		this.id = id;
+		this.authorId = authorId;
+		this.commentCode = commentCode;
+		this.entityId = entityId;
+		this.text = text;
+		this.dateRegistration = dateRegistration;
+	}
+
+	public Long getId() {
+		return id == null ? null : id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
+	}
+
+	public Integer getCommentCode() {
+		return commentCode;
+	}
+
+	public void setCommentCode(Integer commentCode) {
+		this.commentCode = commentCode;
+	}
+
+	public Long getEntityId() {
+		return entityId;
+	}
+
+	public void setEntityId(Long entityId) {
+		this.entityId = entityId;
+	}
+
+//	public Long getCommentFatherId() {
+//		return commentFatherId == null ? null : commentFatherId;
+//	}
+
+	public void setCommenFathertId(Long commentFatherId) {
+		this.commentFatherId = commentFatherId;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public LocalDateTime getDateRegistration() {
+		return dateRegistration;
+	}
+
+	public void setDateRegistration(LocalDateTime dateRegistration) {
+		this.dateRegistration = dateRegistration;
+	}
+}

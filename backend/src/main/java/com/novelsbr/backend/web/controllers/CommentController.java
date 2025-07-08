@@ -1,13 +1,18 @@
 package com.novelsbr.backend.web.controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.CommentDTO;
+import com.novelsbr.backend.domain.entities.Comment;
 import com.novelsbr.backend.services.CommentService;
+import com.novelsbr.backend.utils.mapper.CommentMapper;
 import com.novelsbr.backend.web.api.CommentAPI;
 
 @RestController
@@ -17,10 +22,16 @@ public class CommentController implements CommentAPI {
 	@Autowired
 	private CommentService commentService;
 
+	@GetMapping
+	public ResponseEntity<List<CommentDTO>> findAll() {
+		List<Comment> comments = commentService.findAll();
+		List<CommentDTO> dtos = comments.stream().map(x -> CommentMapper.toDTO(x)).toList();
+		return ResponseEntity.ok(dtos);
+	}
+	
 	@PostMapping("/")
 	public ResponseEntity<Void> save(CommentDTO commentDTO) {
 		commentService.save(commentDTO);
 		return ResponseEntity.status(201).build();
 	}
-
 }

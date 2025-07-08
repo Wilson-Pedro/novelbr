@@ -39,4 +39,9 @@ public class CommentNovel extends Comment {
 	public void setNovel(Novel novel) {
 		this.novel = novel;
 	}
+	
+	@Override
+	public Long getEntityId() {
+		return novel.getId();
+	}
 }
