@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.novelsbr.backend.domain.dto.ProblamDTO;
-import com.novelsbr.backend.exceptions.NotFoundException;
+import com.novelsbr.backend.exceptions.EntityNullException;
 import com.novelsbr.backend.exceptions.ExistingAuthorException;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
+import com.novelsbr.backend.exceptions.NotFoundException;
+import com.novelsbr.backend.exceptions.TypeNotFoundException;
 
 @ControllerAdvice
 public class ApiExceptionHandler {
@@ -38,6 +40,24 @@ public class ApiExceptionHandler {
 		HttpStatus status = HttpStatus.NOT_FOUND;
 		
 		ProblamDTO problamDTO = new ProblamDTO("Entity not found", status.value(), Instant.now());
+
+		return ResponseEntity.status(status).body(problamDTO);
+	}
+	
+	@ExceptionHandler(EntityNullException.class)
+	public ResponseEntity<ProblamDTO> entityNullException() {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ProblamDTO problamDTO = new ProblamDTO("Entity is null", status.value(), Instant.now());
+
+		return ResponseEntity.status(status).body(problamDTO);
+	}
+	
+	@ExceptionHandler(TypeNotFoundException.class)
+	public ResponseEntity<ProblamDTO> typeNotFoundException() {
+		HttpStatus status = HttpStatus.NOT_FOUND;
+		
+		ProblamDTO problamDTO = new ProblamDTO("Type not found", status.value(), Instant.now());
 
 		return ResponseEntity.status(status).body(problamDTO);
 	}

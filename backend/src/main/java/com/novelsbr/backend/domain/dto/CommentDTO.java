@@ -2,6 +2,8 @@ package com.novelsbr.backend.domain.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.novelsbr.backend.domain.entities.Comment;
 
@@ -22,6 +24,8 @@ public class CommentDTO implements Serializable {
 	
 	@Column(columnDefinition = "TEXT")
 	private String text;
+	
+	private List<CommentMinDTO> comments = new ArrayList<>();
 	
 	private LocalDateTime dateRegistration;
 	
@@ -92,6 +96,14 @@ public class CommentDTO implements Serializable {
 
 	public void setText(String text) {
 		this.text = text;
+	}
+
+	public List<CommentMinDTO> getComments() {
+		return comments;
+	}
+
+	public void setComments(List<CommentMinDTO> comments) {
+		this.comments = comments;
 	}
 
 	public LocalDateTime getDateRegistration() {

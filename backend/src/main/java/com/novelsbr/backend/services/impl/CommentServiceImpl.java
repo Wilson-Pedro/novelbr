@@ -10,7 +10,10 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Comment;
 import com.novelsbr.backend.domain.entities.CommentChapter;
 import com.novelsbr.backend.domain.entities.CommentNovel;
+import com.novelsbr.backend.enums.CommentType;
+import com.novelsbr.backend.exceptions.EntityNullException;
 import com.novelsbr.backend.exceptions.NotFoundException;
+import com.novelsbr.backend.exceptions.TypeNotFoundException;
 import com.novelsbr.backend.repositories.CommentRepository;
 import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.services.ChapterService;
@@ -35,13 +38,20 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public void save(CommentDTO commentDTO) {
 		Comment commentSaved = preparingCommentToSave(commentDTO);
-		if(commentSaved == null) throw new RuntimeException();
-		commentRepository.save(commentSaved);
+		if(commentSaved == null) throw new EntityNullException();
 		if(commentDTO.getCommentFatherId() != null) {
 			Comment commentFather = findById(commentDTO.getCommentFatherId());
-			commentFather.getComments().add(commentSaved);
+			commentSaved.setCommentFather(commentFather);
+			
+			List<Comment> comments = commentFather.getComments();
+			comments.add(commentSaved);
+			commentFather.setComments(comments);
+			
+			commentRepository.save(commentSaved);
 			commentRepository.save(commentFather);
+			return;
 		}
+		commentRepository.save(commentSaved);
 	}
 	
 	public Comment findById(Long id) {
@@ -54,7 +64,6 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	private Comment preparingCommentToSave(CommentDTO commentDTO) {
-		//Comment comment = new Comment(commentDTO);
 		Author author = authorService.findById(commentDTO.getAuthorId());
 		
 		if(commentDTO.getCommentCode() == 1) {
@@ -68,6 +77,8 @@ public class CommentServiceImpl implements CommentService {
 			commentChapter.setChapter(chapterService.findById(commentDTO.getEntityId()));
 			commentChapter.setAuthor(author);
 			return commentChapter;
+		} else if(commentDTO.getCommentCode() > CommentType.values().length) {
+			throw new TypeNotFoundException();
 		}
 		return null;
 	}

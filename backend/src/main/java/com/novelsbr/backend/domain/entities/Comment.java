@@ -129,6 +129,10 @@ public abstract class Comment implements Serializable {
 		return comments;
 	}
 
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
+	}
+
 	public LocalDateTime getDateRegistration() {
 		return dateRegistration;
 	}
@@ -142,6 +146,13 @@ public abstract class Comment implements Serializable {
 	}
 	
 	public abstract Long getEntityId();
+
+	@Override
+	public String toString() {
+		return "Comment [id=" + id + ", author=" + author + ", commentType=" + commentType + ", text=" + text
+				+ ", commentFather=" + commentFather + ", comments=" + comments + ", dateRegistration="
+				+ dateRegistration + "]";
+	}
 
 	@Override
 	public int hashCode() {
