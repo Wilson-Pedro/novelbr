@@ -65,6 +65,7 @@ public class ChapterServiceImpl implements ChapterService {
 
 	@Override
 	public Chapter findById(Long id) {
-		return chapterRepository.findById(id).orElseThrow(NotFoundException::new);
+		return chapterRepository.findById(id).orElseThrow(
+				() -> new NotFoundException("Chapter not found."));
 	}
 }

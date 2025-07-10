@@ -5,4 +5,8 @@ public class ExistingNovelException extends RuntimeException{
 
 	public ExistingNovelException() {
 	}
+	
+	public ExistingNovelException(String msg) {
+		super(msg);
+	}
 }

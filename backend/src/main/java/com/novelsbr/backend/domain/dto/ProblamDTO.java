@@ -1,28 +1,30 @@
 package com.novelsbr.backend.domain.dto;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class ProblamDTO {
-
-	private String title;
+public class ProblamDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
+	
+	private String message;
 	private Integer errorCod;
 	private Instant instant;
 	
 	public ProblamDTO() {
 	}
 
-	public ProblamDTO(String title, Integer errorCod, Instant instant) {
-		this.title = title;
+	public ProblamDTO(String message, Integer errorCod, Instant instant) {
+		this.message = message;
 		this.errorCod = errorCod;
 		this.instant = instant;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getMessage() {
+		return message;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public Integer getErrorCod() {

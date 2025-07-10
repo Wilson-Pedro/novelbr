@@ -39,12 +39,14 @@ public class AuthorServiceImpl implements AuthorService {
 	
 	@Override
 	public Author findById(Long id) {
-		return authorRepository.findById(id).orElseThrow(NotFoundException::new);
+		return authorRepository.findById(id).orElseThrow(
+				() -> new NotFoundException("Author not Found."));
 	}
 	
 	@Override
 	public void validadeRegistration(AuthorDTO authorDTO) {
-		if(existsByUsername(authorDTO.getUsername())) throw new ExistingAuthorException();
+		if(existsByUsername(authorDTO.getUsername())) throw new ExistingAuthorException(
+				"There is already an author with this username.");
 	}
 
 	@Override

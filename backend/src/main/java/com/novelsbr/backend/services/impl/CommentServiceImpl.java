@@ -55,7 +55,8 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	public Comment findById(Long id) {
-		return commentRepository.findById(id).orElseThrow(NotFoundException::new);
+		return commentRepository.findById(id).orElseThrow(
+				() -> new NotFoundException("Comment not found"));
 	}
 	
 	@Override
@@ -77,8 +78,9 @@ public class CommentServiceImpl implements CommentService {
 			commentChapter.setChapter(chapterService.findById(commentDTO.getEntityId()));
 			commentChapter.setAuthor(author);
 			return commentChapter;
+			
 		} else if(commentDTO.getCommentCode() > CommentType.values().length) {
-			throw new TypeNotFoundException();
+			throw new TypeNotFoundException("Comment Type Not Found, verify the commentCode.");
 		}
 		return null;
 	}

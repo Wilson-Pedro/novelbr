@@ -18,28 +18,31 @@ import com.novelsbr.backend.exceptions.TypeNotFoundException;
 public class ApiExceptionHandler {
 
 	@ExceptionHandler(ExistingAuthorException.class)
-	public ResponseEntity<ProblamDTO> existingAuthorException() {
+	public ResponseEntity<ProblamDTO> existingAuthorException(ExistingAuthorException e) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
+		String title = e.getMessage() != null ? e.getMessage() : "Existing Author";
 		
-		ProblamDTO problamDTO = new ProblamDTO("Existing Author", status.value(), Instant.now());
+		ProblamDTO problamDTO = new ProblamDTO(title, status.value(), Instant.now());
 
 		return ResponseEntity.status(status).body(problamDTO);
 	}
 	
 	@ExceptionHandler(ExistingNovelException.class)
-	public ResponseEntity<ProblamDTO> existingNovelException() {
+	public ResponseEntity<ProblamDTO> existingNovelException(ExistingNovelException e) {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
+		String title = e.getMessage() != null ? e.getMessage() : "Existing Novel";
 		
-		ProblamDTO problamDTO = new ProblamDTO("Existing Novel", status.value(), Instant.now());
+		ProblamDTO problamDTO = new ProblamDTO(title, status.value(), Instant.now());
 
 		return ResponseEntity.status(status).body(problamDTO);
 	}
 	
 	@ExceptionHandler(NotFoundException.class)
-	public ResponseEntity<ProblamDTO> entityNotFoundException() {
+	public ResponseEntity<ProblamDTO> entityNotFoundException(NotFoundException e) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
+		String title = e.getMessage() != null ? e.getMessage() : "Entity not found";
 		
-		ProblamDTO problamDTO = new ProblamDTO("Entity not found", status.value(), Instant.now());
+		ProblamDTO problamDTO = new ProblamDTO(title, status.value(), Instant.now());
 
 		return ResponseEntity.status(status).body(problamDTO);
 	}
@@ -54,10 +57,11 @@ public class ApiExceptionHandler {
 	}
 	
 	@ExceptionHandler(TypeNotFoundException.class)
-	public ResponseEntity<ProblamDTO> typeNotFoundException() {
+	public ResponseEntity<ProblamDTO> typeNotFoundException(TypeNotFoundException e) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
+		String title = e.getMessage() != null ? e.getMessage() : "Type not found";
 		
-		ProblamDTO problamDTO = new ProblamDTO("Type not found", status.value(), Instant.now());
+		ProblamDTO problamDTO = new ProblamDTO(title, status.value(), Instant.now());
 
 		return ResponseEntity.status(status).body(problamDTO);
 	}

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.nio.file.Paths"/>
     <fullyQualifiedTypeName name="java.nio.file.Path"/>
     <fullyQualifiedTypeName name="java.nio.file.Files"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.CrossOrigin"/>
@@ -19,7 +18,6 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil"/>
     <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
     <fullyQualifiedTypeName name="org.hibernate.annotations.CreationTimestamp"/>
-    <fullyQualifiedTypeName name="org.yaml.snakeyaml.comments.CommentType"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
@@ -37,7 +35,6 @@
     <fullyQualifiedTypeName name="jakarta.persistence.InheritanceType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="jakarta.persistence.JoinColumn"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.enums.CommentType"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.CommentNovel"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.CommentChapter"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.ChapterService"/>
@@ -56,8 +53,11 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.NotFoundException"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Column"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.CommentDTO"/>
-    <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.GetMapping"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.Comment"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.utils.mapper.CommentMapper"/>
+    <fullyQualifiedTypeName name="java.util.List"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.CommentMinDTO"/>
+    <fullyQualifiedTypeName name="org.yaml.snakeyaml.comments.CommentType"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.enums.CommentType"/>
 </qualifiedTypeNameHistroy>

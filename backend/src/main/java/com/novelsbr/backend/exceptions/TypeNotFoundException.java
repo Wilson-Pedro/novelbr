@@ -5,4 +5,8 @@ public class TypeNotFoundException extends RuntimeException {
 
 	public TypeNotFoundException() {
 	}
+	
+	public TypeNotFoundException(String msg) {
+		super(msg);
+	}
 }

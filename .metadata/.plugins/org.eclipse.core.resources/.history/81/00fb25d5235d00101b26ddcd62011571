@@ -1,0 +1,14 @@
+package com.novelsbr.backend.exceptions;
+
+public class NotFoundException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
+	
+	private String msg;
+
+	public NotFoundException() {
+	}
+	
+	public NotFoundException(String msg) {
+		this.msg = msg;
+	}
+}

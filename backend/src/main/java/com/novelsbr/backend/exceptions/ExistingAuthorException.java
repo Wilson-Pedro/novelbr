@@ -5,4 +5,8 @@ public class ExistingAuthorException extends RuntimeException{
 
 	public ExistingAuthorException() {
 	}
+	
+	public ExistingAuthorException(String msg) {
+		super(msg);
+	}
 }
