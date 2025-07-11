@@ -36,7 +36,7 @@ public class CommentDTO implements Serializable {
 		this.id = comment.getId();
 		this.authorId = comment.getAuthor().getId();
 		this.commentCode = comment.getCommentType().getCode();
-		this.commentFatherId = comment.getCommentFather() == null ? null : comment.getCommentFather().getId();
+		this.commentFatherId = comment.getId() == null ? null : comment.getId();
 		this.text = comment.getText();
 		this.dateRegistration = comment.getDateRegistration();
 	}

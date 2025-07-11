@@ -1,0 +1,44 @@
+package com.novelsbr.backend.enums;
+
+import java.util.stream.Stream;
+
+import com.novelsbr.backend.exceptions.TypeNotFoundException;
+
+public enum CommentType {
+
+	NOVEL(1, "Novel"),
+	CHAPTER(2, "chapter");
+	
+	private Integer code;
+	
+	private String type;
+	
+	CommentType(int code, String type) {
+		this.code = code;
+		this.type = type;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public String getType() {
+		return type;
+	}
+	
+	public static CommentType toEnum(String type) {
+		return Stream.of(CommentType.values())
+				.filter(genderType -> genderType.getType().equals(type))
+				.findFirst()
+				.orElseThrow(() -> new TypeNotFoundException
+						("Tipo de comentário inválido: " + type));
+	}
+	
+	public static CommentType toEnum(Integer code) {
+		return Stream.of(CommentType.values())
+				.filter(genderType -> genderType.getCode().equals(code))
+				.findFirst()
+				.orElseThrow(() -> new TypeNotFoundException
+						("Id comentário inválido: " + code));
+	}
+}

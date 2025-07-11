@@ -59,25 +59,23 @@ public class CommentServiceImpl implements CommentService {
 
 	private Comment preparingCommentToSave(CommentDTO commentDTO) {
 		Author author = authorService.findById(commentDTO.getAuthorId());
-		CommentType commentType = CommentType.toEnum(commentDTO.getCommentCode());
 		
-		Comment comment;
+		if(commentDTO.getCommentCode() > CommentType.values().length) {
+			throw new TypeNotFoundException("Comment Type Not Found, verify the commentCode.");
 		
-		switch (commentType) {
-			case NOVEL -> {
-				CommentNovel commentNovel = new CommentNovel(commentDTO);
-				commentNovel.setNovel(novelService.findById(commentDTO.getEntityId()));
-				commentNovel.setAuthor(author);
-				comment = commentNovel;
-			}
-			case CHAPTER -> {
-				CommentChapter commentChapter = new CommentChapter(commentDTO);
-				commentChapter.setChapter(chapterService.findById(commentDTO.getEntityId()));
-				commentChapter.setAuthor(author);
-				comment = commentChapter;
-			}
-			default -> throw new TypeNotFoundException("Comment Type Not Found, verify the commentCode.");
+		} else if(commentDTO.getCommentCode() == 1) {
+			CommentNovel commentNovel = new CommentNovel(commentDTO);
+			commentNovel.setNovel(novelService.findById(commentDTO.getEntityId()));
+			commentNovel.setAuthor(author);
+			return commentNovel;
+			
+		} else if(commentDTO.getCommentCode() == 2) {
+			CommentChapter commentChapter = new CommentChapter(commentDTO);
+			commentChapter.setChapter(chapterService.findById(commentDTO.getEntityId()));
+			commentChapter.setAuthor(author);
+			return commentChapter;
+			
 		}
-		return comment;
+		return null;
 	}
 }
