@@ -32,9 +32,11 @@ import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.NovelStatus;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
@@ -61,6 +63,9 @@ class NovelControllerTest {
 	AuthenticationManager authenticationManager;
 	
 	@Autowired
+	ChapterRepository chapterRepository;
+	
+	@Autowired
 	TokenService tokenService;
 	
 	@Autowired
@@ -81,9 +86,10 @@ class NovelControllerTest {
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
+		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
-		authorRepository.deleteAll();
 		genderRepository.deleteAll();
+		authorRepository.deleteAll();
 		Integer id = 1;
 		
 		for(GenderType type : GenderType.values()) {
@@ -123,6 +129,7 @@ class NovelControllerTest {
 		NovelDTO novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
 				authorId, 
+				"em curso",
 				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");

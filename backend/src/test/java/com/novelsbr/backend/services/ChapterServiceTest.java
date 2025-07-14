@@ -23,6 +23,7 @@ import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.NovelStatus;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
@@ -57,7 +58,8 @@ class ChapterServiceTest {
 	
 	Novel novel = new Novel(null, 
 			"Jornada para o Além", 
-			author, 
+			author,
+			NovelStatus.IN_COURSE,
 			genders, 
 			"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 			"https://wallpapercave.com/wp/wp5044832.jpg");

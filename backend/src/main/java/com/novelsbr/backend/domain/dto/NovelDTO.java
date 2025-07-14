@@ -17,6 +17,8 @@ public class NovelDTO implements Serializable {
 	
 	private Long authorId;
 	
+	private String novelStatus;
+	
 	private List<String> genders;
 	
 	private String synopsis;
@@ -32,16 +34,18 @@ public class NovelDTO implements Serializable {
 		this.id = novel.getId();
 		this.novelName = novel.getNovelName();
 		this.authorId = novel.getAuthor().getId();
+		this.novelStatus = novel.getNovelStatus().getStatus();
 		this.genders = genderToString(novel.getGenders());
 		this.synopsis = novel.getSynopsis();
 		this.imageUri = novel.getImageUri();
 		this.dateRegistrion = novel.getDateRegistrion();
 	}
 	
-	public NovelDTO(Long id, String novelName, Long authorId, List<String> genders, String synopsis, String imageUri) {
+	public NovelDTO(Long id, String novelName, Long authorId, String novelStatus, List<String> genders, String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
 		this.authorId = authorId;
+		this.novelStatus = novelStatus;
 		this.genders = genders;
 		this.synopsis = synopsis;
 		this.imageUri = imageUri;
@@ -75,6 +79,14 @@ public class NovelDTO implements Serializable {
 
 	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
+	}
+
+	public String getNovelStatus() {
+		return novelStatus;
+	}
+
+	public void setNovelStatus(String novelStatus) {
+		this.novelStatus = novelStatus;
 	}
 
 	public List<String> getGenders() {

@@ -1,0 +1,43 @@
+package com.novelsbr.backend.enums;
+
+import java.util.stream.Stream;
+
+public enum NovelStatus {
+
+	IN_COURSE(1, "em curso"),
+	FINISHED(2, "finalizado"),
+	HIATO(3, "hiato");
+	
+	private Integer code;
+	
+	private String type;
+	
+	NovelStatus(int code, String type) {
+		this.code = code;
+		this.type = type;
+	}
+
+	public Integer getCode() {
+		return code;
+	}
+
+	public String getType() {
+		return type;
+	}
+	
+	public static NovelStatus toEnum(String type) {
+		return Stream.of(NovelStatus.values())
+				.filter(genderType -> genderType.getType().equals(type))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException
+						("Tipo de comentário inválido: " + type));
+	}
+	
+	public static NovelStatus toEnum(Integer code) {
+		return Stream.of(NovelStatus.values())
+				.filter(genderType -> genderType.getCode().equals(code))
+				.findFirst()
+				.orElseThrow(() -> new IllegalArgumentException
+						("Id comentário inválido: " + code));
+	}
+}

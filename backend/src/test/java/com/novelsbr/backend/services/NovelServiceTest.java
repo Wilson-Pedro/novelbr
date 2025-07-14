@@ -21,6 +21,7 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.NovelStatus;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
@@ -79,6 +80,7 @@ class NovelServiceTest {
 		novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
 				authorId, 
+				"em curso",
 				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
@@ -89,6 +91,7 @@ class NovelServiceTest {
 		assertEquals("Jornada para o Além", novel.getNovelName());
 		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
 		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
+		assertEquals(NovelStatus.IN_COURSE, novel.getNovelStatus());
 		
 		assertEquals(1, novelRepository.count());
 	}

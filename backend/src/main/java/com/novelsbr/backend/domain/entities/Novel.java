@@ -7,6 +7,7 @@ import java.util.Set;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.enums.NovelStatus;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -35,6 +36,8 @@ public class Novel implements Serializable {
 	@JoinColumn(name = "author_id")
 	private Author author;
 	
+	private NovelStatus novelStatus;
+	
 	@ManyToMany
 	@JoinTable(
 			name = "TBL_NOVEL_GENERO", 
@@ -57,15 +60,18 @@ public class Novel implements Serializable {
 	
 	public Novel(NovelDTO novelDTO) {
 		this.novelName = novelDTO.getNovelName();
+		this.novelStatus = NovelStatus.toEnum(novelDTO.getNovelStatus());
 		this.synopsis = novelDTO.getSynopsis();
 		this.imageUri = novelDTO.getImageUri();
 		this.dateRegistrion = novelDTO.getDateRegistrion();
 	}
 
-	public Novel(Long id, String novelName, Author author, Set<Gender> genders, String synopsis, String imageUri) {
+	public Novel(Long id, String novelName, Author author, NovelStatus novelStatus, Set<Gender> genders,
+			String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
 		this.author = author;
+		this.novelStatus = novelStatus;
 		this.genders = genders;
 		this.synopsis = synopsis;
 		this.imageUri = imageUri;
@@ -99,6 +105,14 @@ public class Novel implements Serializable {
 
 	public void setAuthor(Author author) {
 		this.author = author;
+	}
+
+	public NovelStatus getNovelStatus() {
+		return novelStatus;
+	}
+
+	public void setNovelStatus(NovelStatus novelStatus) {
+		this.novelStatus = novelStatus;
 	}
 
 	public Set<Gender> getGenders() {

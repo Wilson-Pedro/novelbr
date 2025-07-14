@@ -1,5 +1,0 @@
-package com.novelsbr.backend.web.controllers;
-
-public class CommentController {
-
-}
