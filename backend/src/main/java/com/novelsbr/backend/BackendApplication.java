@@ -64,7 +64,7 @@ public class BackendApplication implements CommandLineRunner {
 		
 		Set<Gender> genders = new HashSet<>();
 		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(type.getCod(), type));
+			genders.add(new Gender(type));
 		}
 		genderRepository.saveAll(genders);
 		
@@ -112,9 +112,9 @@ public class BackendApplication implements CommandLineRunner {
 		novelService.save(novelDTO3);
 		novelService.save(novelDTO4);
 
-		ChapterDTO chapterDTO = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
-		
-		chapterService.save(chapterDTO);
+//		ChapterDTO chapterDTO = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+//		
+//		chapterService.save(chapterDTO);
 	}
 
 }

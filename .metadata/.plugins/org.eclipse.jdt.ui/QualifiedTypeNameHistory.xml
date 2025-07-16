@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="java.util.stream.Collectors"/>
     <fullyQualifiedTypeName name="java.time.LocalDateTime"/>
     <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
     <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
@@ -60,4 +59,5 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelStatusService"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.NovelStatus"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.NovelStatusType"/>
+    <fullyQualifiedTypeName name="java.util.Optional"/>
 </qualifiedTypeNameHistroy>

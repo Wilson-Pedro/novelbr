@@ -20,26 +20,26 @@ public class NovelStatus implements Serializable {
 	private Integer id;
 	
 	@Enumerated(EnumType.STRING)
-	private NovelStatusType genderType;
+	private NovelStatusType novelStatusType;
 	
 	public NovelStatus() {
 	}
 
-	public NovelStatus(NovelStatusType genderType) {
-		this.id = genderType.getCode();
-		this.genderType = genderType;
+	public NovelStatus(NovelStatusType novelStatusType) {
+		this.id = novelStatusType.getCode();
+		this.novelStatusType = novelStatusType;
 	}
 
 	public NovelStatus(NovelStatusDTO dto) {
 		this.id = dto.getId();
-		this.genderType = NovelStatusType.toEnum(dto.getGenderType());
+		this.novelStatusType = NovelStatusType.toEnum(dto.getGenderType());
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public NovelStatusType getGenderType() {
-		return genderType;
-	}	
+	public NovelStatusType getNovelStatusType() {
+		return novelStatusType;
+	}
 }

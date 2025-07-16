@@ -100,7 +100,7 @@ class NovelControllerTest {
 		Integer id = 1;
 		
 		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(id, type));
+			genders.add(new Gender(type));
 			id++;
 		}
 		

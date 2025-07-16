@@ -34,7 +34,7 @@ public class NovelDTO implements Serializable {
 		this.id = novel.getId();
 		this.novelName = novel.getNovelName();
 		this.authorId = novel.getAuthor().getId();
-		this.novelStatusCode = novel.getNovelStatus().getGenderType().getCode();
+		this.novelStatusCode = novel.getNovelStatus().getNovelStatusType().getCode();
 		this.genders = genderToString(novel.getGenders());
 		this.synopsis = novel.getSynopsis();
 		this.imageUri = novel.getImageUri();

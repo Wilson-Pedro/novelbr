@@ -4,9 +4,9 @@ import java.util.stream.Stream;
 
 public enum NovelStatusType {
 
-	IN_COURSE(1, "em curso"),
-	FINISHED(2, "finalizado"),
-	HIATO(3, "hiato");
+	IN_COURSE(1, "Em curso"),
+	FINISHED(2, "Finalizado"),
+	HIATO(3, "Hiato");
 	
 	private Integer code;
 	

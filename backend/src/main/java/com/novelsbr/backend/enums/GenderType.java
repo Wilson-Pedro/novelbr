@@ -30,17 +30,17 @@ public enum GenderType {
 	POLITICAL(21, "Político");
 	
 	
-	private Integer cod;
+	private Integer code;
 	
 	private String type;
 	
-	private GenderType(Integer cod, String type) {
-		this.cod = cod;
+	private GenderType(Integer code, String type) {
+		this.code = code;
 		this.type = type;
 	}
 
-	public Integer getCod() {
-		return cod;
+	public Integer getCode() {
+		return code;
 	}
 
 	public String getType() {

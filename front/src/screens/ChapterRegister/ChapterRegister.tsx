@@ -4,10 +4,8 @@ import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navigate, useParams, useNavigate } from 'react-router-dom';
-import JoditEditor from "jodit-react";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Jodit } from 'jodit';
 
 import axios from 'axios';
 
@@ -25,26 +23,6 @@ export default function ChapterRegister() {
 
     // const location = useLocation();
     // const { isAuth } = location.state || {};
-
-    const config:{} = {
-        readonly: false,
-        height: 400,
-        enter: 'p',
-        cleanHTML: false,
-        useDefaultParser: true,
-        allowScriptTags: false,
-        toolbarButtonSize: 'medium',
-        buttons: [
-            'bold', 'italic', 'underline',
-            '|', 'ul', 'ol',
-            '|', 'outdent', 'indent',
-            '|', 'link', 'unlink',
-            '|', 'hr',
-            '|', 'undo', 'redo'
-        ],
-        removeButtons: ['source', 'brush', 'file', 'video', 'copyformat'],
-        toolbarSticky: false
-    }
 
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
@@ -73,13 +51,6 @@ export default function ChapterRegister() {
         navigate(`/novel/${novelId}`);
     }
 
-    const handleBlur = () => {
-        if (editor.current) {
-            const html = editor.current.getEditorValue();
-            setChapterText(html);
-        }
-    }
-
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
@@ -87,7 +58,7 @@ export default function ChapterRegister() {
                     userAuthenticate={true}
                 />
             </nav>
-            <form onSubmit={submitChapter} >
+            <form onSubmit={submitChapter} className={styles.main}>
                 <div className={styles.divTitle}>
                     <h1>Cadastrar Capítulo.</h1>
                 </div>

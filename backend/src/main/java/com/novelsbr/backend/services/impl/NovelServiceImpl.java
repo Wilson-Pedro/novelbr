@@ -14,6 +14,7 @@ import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
 import com.novelsbr.backend.exceptions.NotFoundException;
 import com.novelsbr.backend.repositories.AuthorRepository;
@@ -40,7 +41,8 @@ public class NovelServiceImpl implements NovelService {
 	public Novel save(NovelDTO novelDTO) {
 		validadeRegistration(novelDTO);
 		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
-		NovelStatus novelStatus = novelStatusService.findById(novelDTO.getNovelStatusCode());
+		//NovelStatus novelStatus = novelStatusService.findById(novelDTO.getNovelStatusCode());
+		NovelStatus novelStatus = novelStatusService.findByNovelStatusType(NovelStatusType.IN_COURSE);
 		Novel novel = new Novel(novelDTO);
 		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
 		novel.setGenders(stringsToGenders(novelDTO.getGenders()));
@@ -50,7 +52,7 @@ public class NovelServiceImpl implements NovelService {
 
 	private Set<Gender> stringsToGenders(List<String> gendersStr) {
 		List<Gender> gendersList = GenderType.stringToGender(gendersStr).stream()
-				.map(gender -> new Gender(gender.getCod(), gender))
+				.map(gender -> new Gender(gender))
 				.toList();
 		return new HashSet<>(gendersList);
 	}

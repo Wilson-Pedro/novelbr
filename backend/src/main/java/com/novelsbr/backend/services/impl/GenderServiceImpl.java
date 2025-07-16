@@ -36,7 +36,7 @@ public class GenderServiceImpl implements GenderService {
 	@Override
 	public List<Gender> findAllGenders() {
 		return genderRepository.findAllGenders().stream()
-				.map(x -> new Gender(x.getId(), x.getGenderType()))
+				.map(x -> new Gender(x.getGenderType()))
 				.toList();
 	}
 

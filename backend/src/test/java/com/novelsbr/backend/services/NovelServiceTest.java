@@ -71,7 +71,7 @@ class NovelServiceTest {
 		Integer id = 1;
 		
 		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(id, type));
+			genders.add(new Gender(type));
 			id++;
 		}
 		
@@ -108,7 +108,7 @@ class NovelServiceTest {
 		assertEquals("Jornada para o Além", novel.getNovelName());
 		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
 		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
-		assertEquals(NovelStatusType.IN_COURSE, novel.getNovelStatus().getGenderType());
+		assertEquals(NovelStatusType.IN_COURSE, novel.getNovelStatus().getNovelStatusType());
 		
 		assertEquals(1, novelRepository.count());
 	}

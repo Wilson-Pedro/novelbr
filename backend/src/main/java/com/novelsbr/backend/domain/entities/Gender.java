@@ -25,8 +25,8 @@ public class Gender implements Serializable {
 	public Gender() {
 	}
 
-	public Gender(Integer id, GenderType genderType) {
-		this.id = id;
+	public Gender(GenderType genderType) {
+		this.id = genderType.getCode();
 		this.genderType = genderType;
 	}
 	

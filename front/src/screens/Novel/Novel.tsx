@@ -16,6 +16,7 @@ const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 interface NovelInfo {
     imageUri:string;
     novelName:string;
+    novelStatus:string;
     username:string;
     year:number;
     synopsis:string;
@@ -111,7 +112,9 @@ const Novel: React.FC = () => {
                             <span>{gender}{(index+1) < genders.length ? <>, </> : <>.</>} </span>
                         ))}</p>
                         <p><strong>Ano:</strong> {novelInfo.year || '---'}</p>
-                        {/* <p><strong>Gênros:</strong> Aventura, Ação, Drama, Medieval, Magia.</p> */}
+                        
+                        <p><strong>Status:</strong> {novelInfo.novelStatus || '---'}</p>
+
                         <h4>Sinopse</h4>
                         <p className={styles.sinopse}>
                             {novelInfo.synopsis || '---'}

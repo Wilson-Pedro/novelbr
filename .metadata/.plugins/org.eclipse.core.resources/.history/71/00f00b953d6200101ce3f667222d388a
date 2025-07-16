@@ -1,0 +1,8 @@
+package com.novelsbr.backend.services;
+
+import com.novelsbr.backend.domain.entities.NovelStatus;
+
+public interface NovelStatusService {
+	
+	NovelStatus findById(Integer id);
+}
