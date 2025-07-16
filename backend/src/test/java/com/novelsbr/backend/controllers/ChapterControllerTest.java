@@ -8,7 +8,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -32,14 +34,16 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
-import com.novelsbr.backend.enums.NovelStatus;
+import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.NovelService;
@@ -71,6 +75,9 @@ class ChapterControllerTest {
 	GenderRepository genderRepository;
 	
 	@Autowired
+	NovelStatusRepository novelStatusRepository;
+	
+	@Autowired
 	AuthenticationManager authenticationManager;
 	
 	@Autowired
@@ -83,6 +90,9 @@ class ChapterControllerTest {
 	ObjectMapper objectMapper;
 	
 	Set<Gender> genders = new HashSet<>();
+	List<NovelStatus> novelStatsus = new ArrayList();
+	
+	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	static String URI = "/chapters";
 	
@@ -93,6 +103,7 @@ class ChapterControllerTest {
 	void preparingTestEnvironment() {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
+		novelStatusRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
 		Integer id = 1;
@@ -102,7 +113,13 @@ class ChapterControllerTest {
 			id++;
 		}
 		
+		for(NovelStatusType type : NovelStatusType.values()) {
+			novelStatsus.add(new NovelStatus(type));
+		}
+		
+		
 		genderRepository.saveAll(genders);
+		novelStatusRepository.saveAll(novelStatsus);
 	}
 	
 	void getToken() {
@@ -127,7 +144,7 @@ class ChapterControllerTest {
 		Novel novel = new Novel(null, 
 				"Jornada para o Além", 
 				author, 
-				NovelStatus.IN_COURSE,
+				new NovelStatus(NovelStatusType.IN_COURSE),
 				genders, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");

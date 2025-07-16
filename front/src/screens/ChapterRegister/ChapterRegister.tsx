@@ -87,7 +87,7 @@ export default function ChapterRegister() {
                     userAuthenticate={true}
                 />
             </nav>
-            <form onSubmit={submitChapter} className={styles.main}>
+            <form onSubmit={submitChapter} >
                 <div className={styles.divTitle}>
                     <h1>Cadastrar Capítulo.</h1>
                 </div>

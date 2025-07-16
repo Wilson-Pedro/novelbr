@@ -3,6 +3,7 @@ package com.novelsbr.backend.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -17,13 +18,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
-import com.novelsbr.backend.enums.NovelStatus;
+import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.NovelStatusRepository;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -31,6 +34,9 @@ class GenderServiceTest {
 	
 	@Autowired
 	NovelRepository novelRepository;
+	
+	@Autowired
+	NovelStatusRepository novelStatusRepository;
 	
 	@Autowired
 	AuthorRepository authorRepository;
@@ -45,13 +51,14 @@ class GenderServiceTest {
 	ChapterRepository chapterRepository;
 	
 	Set<Gender> genders = new HashSet<>();
+	List<NovelStatus> novelStatsus = new ArrayList();
 
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	Novel novel = new Novel(null, 
 			"Jornada para o Além", 
 			author,
-			NovelStatus.IN_COURSE,
+			new NovelStatus(NovelStatusType.IN_COURSE),
 			genders, 
 			"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 			"https://wallpapercave.com/wp/wp5044832.jpg");
@@ -70,6 +77,11 @@ class GenderServiceTest {
 			id++;
 		}
 		
+		for(NovelStatusType type : NovelStatusType.values()) {
+			novelStatsus.add(new NovelStatus(type));
+		}
+		
+		novelStatusRepository.saveAll(novelStatsus);
 		genderRepository.saveAll(genders);
 		authorRepository.save(author);
 		novelRepository.save(novel);

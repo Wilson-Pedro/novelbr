@@ -31,8 +31,9 @@ public interface NovelRepository extends JpaRepository<Novel, Long> {
 	List<CardNovelProjection> findNovelCardsByUsername(String username);
 	
 	@Query(nativeQuery = true, value = """
-			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.date_registrion, n.image_uri, n.synopsis 
+			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, ns.id AS novel_status_id, a.username, n.date_registrion, n.image_uri, n.synopsis 
 			FROM TBL_NOVEL AS n 
+			INNER JOIN TBL_NOVEL_STATUS ns ON ns.id = n.novel_status_id
 			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
 			WHERE n.id = :novelId
 			""")

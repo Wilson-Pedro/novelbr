@@ -6,7 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.MethodOrderer;
@@ -26,14 +28,16 @@ import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
-import com.novelsbr.backend.enums.NovelStatus;
+import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
 
 import jakarta.transaction.Transactional;
@@ -45,6 +49,9 @@ class GenderControllerTest {
 	
 	@Autowired
 	NovelRepository novelRepository;
+	
+	@Autowired
+	NovelStatusRepository novelStatusRepository;
 	
 	@Autowired
 	AuthorRepository authorRepository;
@@ -71,6 +78,7 @@ class GenderControllerTest {
 	MockMvc mockMvc;
 	
 	Set<Gender> genders = new HashSet<>();
+	List<NovelStatus> novelStatsus = new ArrayList();
 	
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
@@ -83,8 +91,15 @@ class GenderControllerTest {
 	void preparingTestEnvironment() {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
+		novelStatusRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
+		
+		for(NovelStatusType type : NovelStatusType.values()) {
+			novelStatsus.add(new NovelStatus(type));
+		}
+		
+		novelStatusRepository.saveAll(novelStatsus);
 	}
 	
 	@Test
@@ -135,7 +150,7 @@ class GenderControllerTest {
 		Novel novel = new Novel(null, 
 				"Jornada para o Além", 
 				author2, 
-				NovelStatus.IN_COURSE,
+				new NovelStatus(NovelStatusType.IN_COURSE),
 				genders, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");

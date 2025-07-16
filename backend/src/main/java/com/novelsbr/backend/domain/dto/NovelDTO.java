@@ -17,7 +17,7 @@ public class NovelDTO implements Serializable {
 	
 	private Long authorId;
 	
-	private String novelStatus;
+	private Integer novelStatusCode;
 	
 	private List<String> genders;
 	
@@ -34,18 +34,18 @@ public class NovelDTO implements Serializable {
 		this.id = novel.getId();
 		this.novelName = novel.getNovelName();
 		this.authorId = novel.getAuthor().getId();
-		this.novelStatus = novel.getNovelStatus().getStatus();
+		this.novelStatusCode = novel.getNovelStatus().getGenderType().getCode();
 		this.genders = genderToString(novel.getGenders());
 		this.synopsis = novel.getSynopsis();
 		this.imageUri = novel.getImageUri();
 		this.dateRegistrion = novel.getDateRegistrion();
 	}
 	
-	public NovelDTO(Long id, String novelName, Long authorId, String novelStatus, List<String> genders, String synopsis, String imageUri) {
+	public NovelDTO(Long id, String novelName, Long authorId, Integer novelStatusCode, List<String> genders, String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
 		this.authorId = authorId;
-		this.novelStatus = novelStatus;
+		this.novelStatusCode = novelStatusCode;
 		this.genders = genders;
 		this.synopsis = synopsis;
 		this.imageUri = imageUri;
@@ -81,12 +81,12 @@ public class NovelDTO implements Serializable {
 		this.authorId = authorId;
 	}
 
-	public String getNovelStatus() {
-		return novelStatus;
+	public Integer getNovelStatusCode() {
+		return novelStatusCode;
 	}
 
-	public void setNovelStatus(String novelStatus) {
-		this.novelStatus = novelStatus;
+	public void setNovelStatusCode(Integer novelStatusCode) {
+		this.novelStatusCode = novelStatusCode;
 	}
 
 	public List<String> getGenders() {

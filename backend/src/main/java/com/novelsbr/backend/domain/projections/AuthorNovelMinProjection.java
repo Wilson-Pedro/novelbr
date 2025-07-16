@@ -10,6 +10,8 @@ public interface AuthorNovelMinProjection {
 	
 	String getNovelName();
 	
+	Integer getNovelStatusId();
+	
 	String getUsername();
 	
 	String getImageUri();

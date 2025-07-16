@@ -1,0 +1,45 @@
+package com.novelsbr.backend.domain.entities;
+
+import java.io.Serializable;
+
+import com.novelsbr.backend.domain.dto.NovelStatusDTO;
+import com.novelsbr.backend.enums.NovelStatusType;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "TBL_NOVEL_STATUS")
+public class NovelStatus implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private Integer id;
+	
+	@Enumerated(EnumType.STRING)
+	private NovelStatusType genderType;
+	
+	public NovelStatus() {
+	}
+
+	public NovelStatus(NovelStatusType genderType) {
+		this.id = genderType.getCode();
+		this.genderType = genderType;
+	}
+
+	public NovelStatus(NovelStatusDTO dto) {
+		this.id = dto.getId();
+		this.genderType = NovelStatusType.toEnum(dto.getGenderType());
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public NovelStatusType getGenderType() {
+		return genderType;
+	}	
+}

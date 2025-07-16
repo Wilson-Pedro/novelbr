@@ -7,7 +7,7 @@ import java.util.Set;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
-import com.novelsbr.backend.enums.NovelStatus;
+import com.novelsbr.backend.enums.NovelStatusType;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -36,6 +36,8 @@ public class Novel implements Serializable {
 	@JoinColumn(name = "author_id")
 	private Author author;
 	
+	@ManyToOne
+	@JoinColumn(name = "novel_status_id")
 	private NovelStatus novelStatus;
 	
 	@ManyToMany
@@ -60,7 +62,7 @@ public class Novel implements Serializable {
 	
 	public Novel(NovelDTO novelDTO) {
 		this.novelName = novelDTO.getNovelName();
-		this.novelStatus = NovelStatus.toEnum(novelDTO.getNovelStatus());
+		//this.novelStatus = new NovelStatus(NovelStatusType.toEnum(novelDTO.getNovelStatus()));
 		this.synopsis = novelDTO.getSynopsis();
 		this.imageUri = novelDTO.getImageUri();
 		this.dateRegistrion = novelDTO.getDateRegistrion();

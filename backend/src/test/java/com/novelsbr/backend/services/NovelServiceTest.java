@@ -20,12 +20,15 @@ import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
-import com.novelsbr.backend.enums.NovelStatus;
+import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.NovelStatusRepository;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -41,7 +44,13 @@ class NovelServiceTest {
 	AuthorRepository authorRepository;
 	
 	@Autowired
+	NovelStatusRepository novelStatusRepository;
+	
+	@Autowired
 	GenderRepository genderRepository;
+	
+	@Autowired
+	ChapterRepository chapterRepository;
 	
 	Author author = new Author(null, "João", "All Star", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
@@ -49,11 +58,14 @@ class NovelServiceTest {
 	
 	Set<Gender> genders = new HashSet<>();
 	List<String> gendersStr = new ArrayList<>();
+	List<NovelStatus> novelStatsus = new ArrayList();
 
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
+		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
+		novelStatusRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
 		Integer id = 1;
@@ -67,7 +79,12 @@ class NovelServiceTest {
 			gendersStr.add(gender.getGenderType().getType());
 		}
 		
+		for(NovelStatusType type : NovelStatusType.values()) {
+			novelStatsus.add(new NovelStatus(type));
+		}
+		
 		genderRepository.saveAll(genders);
+		novelStatusRepository.saveAll(novelStatsus);
 		authorRepository.save(author);
 	}
 	
@@ -80,7 +97,7 @@ class NovelServiceTest {
 		novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
 				authorId, 
-				"em curso",
+				1,
 				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
@@ -91,7 +108,7 @@ class NovelServiceTest {
 		assertEquals("Jornada para o Além", novel.getNovelName());
 		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
 		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
-		assertEquals(NovelStatus.IN_COURSE, novel.getNovelStatus());
+		assertEquals(NovelStatusType.IN_COURSE, novel.getNovelStatus().getGenderType());
 		
 		assertEquals(1, novelRepository.count());
 	}

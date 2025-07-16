@@ -12,12 +12,14 @@ import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
 import com.novelsbr.backend.exceptions.NotFoundException;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.services.NovelStatusService;
 
 import jakarta.transaction.Transactional;
 
@@ -29,15 +31,20 @@ public class NovelServiceImpl implements NovelService {
 	
 	@Autowired
 	private AuthorRepository authorRepository;
+	
+	@Autowired
+	private NovelStatusService novelStatusService;
 
 	@Override
 	@Transactional
 	public Novel save(NovelDTO novelDTO) {
 		validadeRegistration(novelDTO);
 		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
+		NovelStatus novelStatus = novelStatusService.findById(novelDTO.getNovelStatusCode());
 		Novel novel = new Novel(novelDTO);
 		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
 		novel.setGenders(stringsToGenders(novelDTO.getGenders()));
+		novel.setNovelStatus(novelStatus);
 		return novelRepository.save(novel);
 	}
 

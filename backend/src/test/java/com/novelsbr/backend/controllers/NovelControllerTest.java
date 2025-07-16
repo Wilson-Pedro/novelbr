@@ -31,14 +31,16 @@ import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
-import com.novelsbr.backend.enums.NovelStatus;
+import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
 
 @SpringBootTest
@@ -49,6 +51,9 @@ class NovelControllerTest {
 	
 	@Autowired
 	NovelRepository novelRepository;
+	
+	@Autowired
+	NovelStatusRepository novelStatusRepository;
 	
 	@Autowired
 	AuthorRepository authorRepository;
@@ -78,6 +83,7 @@ class NovelControllerTest {
 	
 	Set<Gender> genders = new HashSet<>();
 	List<String> gendersStr = new ArrayList<>();
+	List<NovelStatus> novelStatsus = new ArrayList();
 	
 	static String URI = "/novels";
 	
@@ -88,6 +94,7 @@ class NovelControllerTest {
 	void preparingTestEnvironment() {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
+		novelStatusRepository.deleteAll();
 		genderRepository.deleteAll();
 		authorRepository.deleteAll();
 		Integer id = 1;
@@ -97,6 +104,11 @@ class NovelControllerTest {
 			id++;
 		}
 		
+		for(NovelStatusType type : NovelStatusType.values()) {
+			novelStatsus.add(new NovelStatus(type));
+		}
+		
+		novelStatusRepository.saveAll(novelStatsus);
 		genderRepository.saveAll(genders);
 	}
 	
@@ -129,7 +141,7 @@ class NovelControllerTest {
 		NovelDTO novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
 				authorId, 
-				"em curso",
+				1,
 				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
