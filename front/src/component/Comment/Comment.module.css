@@ -1,0 +1,10 @@
+.comment {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.commentImageContainer img {
+  width: 30px;
+  height: auto; 
+}
