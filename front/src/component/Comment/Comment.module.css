@@ -2,9 +2,14 @@
     display: flex;
     justify-content: left;
     align-items: center;
+    width: 100%;
 }
 
 .commentImageContainer img {
   width: 30px;
   height: auto; 
+}
+
+.replies {
+  margin-left: 5%;
 }
