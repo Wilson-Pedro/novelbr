@@ -37,3 +37,11 @@ export const createComment = async (text:string, parentId:string | null = null) 
         createdAt: new Date().toISOString(),
     };
 };
+
+export const updateComment = async (text:string) => {
+  return { text };
+};
+
+export const deleteComment = async (commentId:string) => {
+  return {};
+};

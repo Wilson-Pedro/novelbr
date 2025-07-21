@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { getComments, createComment } from '../apiComments/getComments';
+import { getComments, createComment, deleteComment as deleteCommentApi } from '../apiComments/getComments';
 import Comment from '../Comment/Comment';
 import CommentForm from '../CommentForm/CommentForm';
+import styles from './Comments.module.css';
 
 interface CommentsProps {
     currentUserId:string;
@@ -31,13 +32,7 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
                 new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         );
     };
-
-    useEffect(() => {
-        getComments().then((data) => {
-            setBackendComments(data);
-        });
-    }, []);
-
+    
     const addComment = (text:string, parentId:string) => {
         console.log("addComment", text, parentId);
         createComment(text, parentId).then(comment => {
@@ -45,20 +40,38 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
         })
     };
 
+    const deleteComment = (commentId:string) => {
+        if(window.confirm('Delete this comment?')) {
+            deleteCommentApi(commentId).then(() => {
+                const updateBackendComments = backendComments.filter(
+                    (backendComment) => backendComment.id !== commentId
+                );
+                setBackendComments(updateBackendComments);
+            });
+        }
+    }
+
+    useEffect(() => {
+        getComments().then((data) => {
+            setBackendComments(data);
+        });
+    }, []);
+
     return(
-        <div className='comments'>
-            <h3 className="comments-title">Comments</h3>
-            <div className="comment-form-title">Write Comment</div>
+        <div className={styles.comments}>
+            <h3 className={styles.commentsTitle}>Comments</h3>
+            <div className={styles.commentsFormTitle}>Write Comment</div>
             <CommentForm submitLabel="Write" handleSubmit={addComment}/>
-            <div className="comments-container">
+            <div className={styles.commentsContainer}>
                 {rootComments.map((rootComment) => (
                     <>
                         <Comment 
                             key={rootComment.id}
                             comment={rootComment}
                             replies={getReplies(rootComment.id)}
+                            currentUserId={currentUserId}
+                            deleteComment={deleteComment}
                         />
-                        <br />
                     </>
                 ))}
             </div>

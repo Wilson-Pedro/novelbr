@@ -1,4 +1,5 @@
 import React,{ useState, useEffect } from 'react';
+import styles from './CommentForm.module.css';
 
 interface CommentFormProp {
     handleSubmit: any
@@ -16,11 +17,11 @@ const CommentForm: React.FC<CommentFormProp> = ({ handleSubmit, submitLabel }) =
     return(
         <form onSubmit={onSubmit}>
             <textarea 
-                className='comment-form-textarea' 
+                className={styles.commentFormTextarea} 
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             />
-            <button className='comment-form-button' disabled={isTextAreaDisabled}>{submitLabel}</button>
+            <button className={styles.commentFormButton} disabled={isTextAreaDisabled}>{submitLabel}</button>
         </form>
     );
 }
