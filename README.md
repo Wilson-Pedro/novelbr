@@ -24,8 +24,9 @@ Here you describe how to run your project locally
 
 Here you list all prerequisites necessary for running your project. For example:
 
-- [Java]([https://github.com/](https://www.azul.com/downloads/?version=java-17-lts&package=jdk#zulu))
-- [Git]([https://github.com](https://git-scm.com))
+- [Java](https://www.oracle.com/java/technologies/downloads/)
+- [Git](https://git-scm.com/downloads)
+- [Nodejs](https://nodejs.org/pt)
 
 <h3>Cloning</h3>
 
