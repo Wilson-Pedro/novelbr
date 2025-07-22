@@ -23,6 +23,16 @@
   margin-top: 8px;
 }
 
+.commentContent {
+  display: flex;
+}
+
+.commentAuthor {
+  margin-right: 8px;
+  font-size: 20px;
+  color: rgb(59, 130, 246);
+}
+
 .commentAction {
   margin-right: 8px;
 }

@@ -4,10 +4,19 @@ import styles from './CommentForm.module.css';
 interface CommentFormProp {
     handleSubmit: any
     submitLabel: any
+    hasCancelButton?:any
+    initialText?: string
+    handleCancel: any
 }
 
-const CommentForm: React.FC<CommentFormProp> = ({ handleSubmit, submitLabel }) => {
-    const [text, setText] = useState("");
+const CommentForm: React.FC<CommentFormProp> = ({ 
+    handleSubmit, 
+    submitLabel, 
+    hasCancelButton = false, 
+    initialText = "",
+    handleCancel
+    }) => {
+    const [text, setText] = useState(initialText);
     const isTextAreaDisabled = text.length === 0;
     const onSubmit = (e:any) => {
         e.preventDefault();
@@ -22,6 +31,13 @@ const CommentForm: React.FC<CommentFormProp> = ({ handleSubmit, submitLabel }) =
                 onChange={(e) => setText(e.target.value)}
             />
             <button className={styles.commentFormButton} disabled={isTextAreaDisabled}>{submitLabel}</button>
+            {hasCancelButton && (
+                <button 
+                    type="button"
+                    className={[styles.commentFormButton, styles.commentFormCancelButton].join(' ')}
+                    onClick={handleCancel}
+                > Cancel </button>
+            )}
         </form>
     );
 }

@@ -23,3 +23,7 @@
     opacity: 0.7;
     cursor: default;
 }
+
+.commentFormCancelButton {
+    margin-left: 10px;
+}

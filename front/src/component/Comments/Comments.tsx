@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getComments, createComment, deleteComment as deleteCommentApi } from '../apiComments/getComments';
+import { getComments, createComment, deleteComment as deleteCommentApi, updateComment as updateCommentApi } from '../apiComments/getComments';
 import Comment from '../Comment/Comment';
 import CommentForm from '../CommentForm/CommentForm';
 import styles from './Comments.module.css';
@@ -17,9 +17,17 @@ export interface BackendCommentsI {
     createdAt: string
 }
 
+export interface ActiveCommentI {
+    activeComment: {
+        text: string
+        parantId: any
+    }
+}
+
 const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
 
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
+    const [activeComment, setActiveComment] = useState(null);
     const rootComments = backendComments.filter(
         (backendComment) => backendComment.parentId === null
     );
@@ -36,7 +44,21 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
     const addComment = (text:string, parentId:string) => {
         console.log("addComment", text, parentId);
         createComment(text, parentId).then(comment => {
-            setBackendComments([comment, ...backendComments])
+            setBackendComments([comment, ...backendComments]);
+            setActiveComment(null);
+        })
+    };
+
+    const updateComment = (text:string, commentId:string) => {
+        updateCommentApi(text, commentId).then(() => {
+            const updateBackendComments = backendComments.map((backendComment) => {
+                if(backendComment.id === commentId) {
+                    return { ...backendComment, body: text }
+                }
+                return backendComment
+            })
+            setBackendComments(updateBackendComments);
+            setActiveComment(null);
         })
     };
 
@@ -61,7 +83,11 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
         <div className={styles.comments}>
             <h3 className={styles.commentsTitle}>Comments</h3>
             <div className={styles.commentsFormTitle}>Write Comment</div>
-            <CommentForm submitLabel="Write" handleSubmit={addComment}/>
+            <CommentForm 
+                submitLabel="Write" 
+                handleSubmit={addComment}
+                handleCancel
+            />
             <div className={styles.commentsContainer}>
                 {rootComments.map((rootComment) => (
                     <>
@@ -71,6 +97,11 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
                             replies={getReplies(rootComment.id)}
                             currentUserId={currentUserId}
                             deleteComment={deleteComment}
+                            updateComment={updateComment}
+                            activeComment={activeComment}
+                            setActiveComment={setActiveComment}
+                            parentId={rootComment.id}
+                            addComment={addComment}
                         />
                     </>
                 ))}

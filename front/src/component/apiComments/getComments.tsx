@@ -38,7 +38,7 @@ export const createComment = async (text:string, parentId:string | null = null) 
     };
 };
 
-export const updateComment = async (text:string) => {
+export const updateComment = async (text:string, commentId:any) => {
   return { text };
 };
 
