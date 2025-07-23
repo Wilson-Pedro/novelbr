@@ -10,7 +10,7 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Comment;
 import com.novelsbr.backend.domain.entities.CommentChapter;
 import com.novelsbr.backend.domain.entities.CommentNovel;
-import com.novelsbr.backend.enums.CommentType;
+import com.novelsbr.backend.enums.CommentBy;
 import com.novelsbr.backend.exceptions.EntityNullException;
 import com.novelsbr.backend.exceptions.NotFoundException;
 import com.novelsbr.backend.exceptions.TypeNotFoundException;
@@ -54,12 +54,14 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public List<Comment> findAll() {
-		return commentRepository.findAll();
+		return commentRepository.findAll().stream()
+				.filter(x -> x.getCommentFather() == null)
+				.toList();
 	}
 
 	private Comment preparingCommentToSave(CommentDTO commentDTO) {
 		Author author = authorService.findById(commentDTO.getAuthorId());
-		CommentType commentType = CommentType.toEnum(commentDTO.getCommentCode());
+		CommentBy commentType = CommentBy.toEnum(commentDTO.getCommentByCode());
 		
 		Comment comment;
 		

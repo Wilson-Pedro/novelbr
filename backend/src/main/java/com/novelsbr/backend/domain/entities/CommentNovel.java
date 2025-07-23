@@ -3,7 +3,7 @@ package com.novelsbr.backend.domain.entities;
 import java.time.LocalDateTime;
 
 import com.novelsbr.backend.domain.dto.CommentDTO;
-import com.novelsbr.backend.enums.CommentType;
+import com.novelsbr.backend.enums.CommentBy;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
@@ -27,8 +27,8 @@ public class CommentNovel extends Comment {
 		super(commentDTO);
 	}
 
-	public CommentNovel(Long id, Author author, CommentType commentType, String text, LocalDateTime dateRegistration, Novel novel) {
-		super(id, author, commentType, text, dateRegistration);
+	public CommentNovel(Long id, Author author, CommentBy commentBy, String text, LocalDateTime dateRegistration, Novel novel) {
+		super(id, author, commentBy, text, dateRegistration);
 		this.novel = novel;
 	}
 

@@ -26,7 +26,7 @@ export default function UserRegister() {
                 email,
                 password,
             });
-            console.log(response)
+            //console.log(response)
             navigate('/login');
         } catch(error) {
             console.error(error)

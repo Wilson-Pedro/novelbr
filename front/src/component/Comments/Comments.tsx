@@ -4,6 +4,10 @@ import Comment from '../Comment/Comment';
 import CommentForm from '../CommentForm/CommentForm';
 import styles from './Comments.module.css';
 
+import axios from 'axios';
+
+const API_URL = process.env.REACT_APP_API;
+
 interface CommentsProps {
     currentUserId:string;
 }
@@ -26,6 +30,12 @@ export interface ActiveCommentI {
 
 const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
 
+    const [authorId, setAuthorId] = useState<number>(1);
+    const [commentByCode, setCommentByCode] = useState<number>(1);
+    const [entityId, setEntityId] = useState<number>(2);
+    const [commentFatherId, setCommentFatherId] = useState<number | null>(null);
+    const [textBody, setTextBody] = useState<string>("");
+
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
     const [activeComment, setActiveComment] = useState(null);
     const rootComments = backendComments.filter(
@@ -40,13 +50,20 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
                 new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
         );
     };
-    
+
     const addComment = (text:string, parentId:string) => {
-        console.log("addComment", text, parentId);
-        createComment(text, parentId).then(comment => {
-            setBackendComments([comment, ...backendComments]);
-            setActiveComment(null);
-        })
+        try {
+            axios.post(`${API_URL}/comments/`, {
+                authorId,
+                commentByCode,
+                entityId,
+                commentFatherId,
+                text
+
+            });
+        } catch(error) {
+            console.log("Error ao adicionar comentário", error);
+        }
     };
 
     const updateComment = (text:string, commentId:string) => {

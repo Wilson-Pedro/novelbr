@@ -16,7 +16,7 @@ public class CommentDTO implements Serializable {
 	
 	private Long authorId;
 	
-	private Integer commentCode;
+	private Integer commentByCode;
 	
 	private Long entityId;
 	
@@ -25,9 +25,9 @@ public class CommentDTO implements Serializable {
 	@Column(columnDefinition = "TEXT")
 	private String text;
 	
-	private List<CommentMinDTO> comments = new ArrayList<>();
-	
 	private LocalDateTime dateRegistration;
+	
+	private List<CommentMinDTO> comments = new ArrayList<>();
 	
 	public CommentDTO() {
 	}
@@ -35,7 +35,7 @@ public class CommentDTO implements Serializable {
 	public CommentDTO(Comment comment) {
 		this.id = comment.getId();
 		this.authorId = comment.getAuthor().getId();
-		this.commentCode = comment.getCommentType().getCode();
+		this.commentByCode = comment.getCommentBy().getCode();
 		this.commentFatherId = comment.getCommentFather() == null ? null : comment.getCommentFather().getId();
 		this.text = comment.getText();
 		this.dateRegistration = comment.getDateRegistration();
@@ -44,7 +44,7 @@ public class CommentDTO implements Serializable {
 	public CommentDTO(Long id, Long authorId, Integer commentCode, Long entityId, String text, LocalDateTime dateRegistration) {
 		this.id = id;
 		this.authorId = authorId;
-		this.commentCode = commentCode;
+		this.commentByCode = commentCode;
 		this.entityId = entityId;
 		this.text = text;
 		this.dateRegistration = dateRegistration;
@@ -66,12 +66,12 @@ public class CommentDTO implements Serializable {
 		this.authorId = authorId;
 	}
 
-	public Integer getCommentCode() {
-		return commentCode;
+	public Integer getCommentByCode() {
+		return commentByCode;
 	}
 
-	public void setCommentCode(Integer commentCode) {
-		this.commentCode = commentCode;
+	public void setCommentByCode(Integer commentByCode) {
+		this.commentByCode = commentByCode;
 	}
 
 	public Long getEntityId() {

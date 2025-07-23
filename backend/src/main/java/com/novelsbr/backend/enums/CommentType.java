@@ -4,8 +4,8 @@ import java.util.stream.Stream;
 
 public enum CommentType {
 
-	NOVEL(1, "Novel"),
-	CHAPTER(2, "chapter");
+	COMMENT(1, "comentário"),
+	ANSWER(2, "resposta");
 	
 	private Integer code;
 	

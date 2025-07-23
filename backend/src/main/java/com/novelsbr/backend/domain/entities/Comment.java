@@ -11,7 +11,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.novelsbr.backend.domain.dto.CommentDTO;
-import com.novelsbr.backend.enums.CommentType;
+import com.novelsbr.backend.enums.CommentBy;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -44,7 +44,7 @@ public abstract class Comment implements Serializable {
 	private Author author;
 	
 	@Enumerated(EnumType.STRING)
-	private CommentType commentType;
+	private CommentBy commentBy;
 	
 	@Column(columnDefinition = "TEXT")
 	private String text;
@@ -66,22 +66,22 @@ public abstract class Comment implements Serializable {
 	
 	public Comment(CommentDTO commentDTO) {
 		this.id = commentDTO.getId() == null ? null : commentDTO.getId();
-		this.commentType = CommentType.toEnum(commentDTO.getCommentCode());
+		this.commentBy = CommentBy.toEnum(commentDTO.getCommentByCode());
 		this.text = commentDTO.getText();
 		this.dateRegistration = commentDTO.getDateRegistration();
 	}
 
-	public Comment(Long id, Author author, CommentType commentType, String text, LocalDateTime dateRegistration) {
+	public Comment(Long id, Author author, CommentBy commentBy, String text, LocalDateTime dateRegistration) {
 		this.id = id;
 		this.author = author;
-		this.commentType = commentType;
+		this.commentBy = commentBy;
 		this.text = text;
 		this.dateRegistration = dateRegistration;
 	}
 
-	public Comment(Long id, Author author, CommentType commentType, String text, Comment commentFather,
+	public Comment(Long id, Author author, CommentBy commentBy, String text, Comment commentFather,
 			LocalDateTime dateRegistration) {
-		this(id, author, commentType, text, dateRegistration);
+		this(id, author, commentBy, text, dateRegistration);
 		this.commentFather = commentFather == null ? null : commentFather;
 	}
 
@@ -101,12 +101,12 @@ public abstract class Comment implements Serializable {
 		this.author = author;
 	}
 
-	public CommentType getCommentType() {
-		return commentType;
+	public CommentBy getCommentBy() {
+		return commentBy;
 	}
 
-	public void setCommentType(CommentType commentType) {
-		this.commentType = commentType;
+	public void setCommentBy(CommentBy commentBy) {
+		this.commentBy = commentBy;
 	}
 
 	public String getText() {
@@ -138,25 +138,25 @@ public abstract class Comment implements Serializable {
 	}
 	
 	public boolean isNovel() {
-		return this.commentType.equals(CommentType.NOVEL);
+		return this.commentBy.equals(CommentBy.NOVEL);
 	}
 	
 	public boolean isChapter() {
-		return this.commentType.equals(CommentType.CHAPTER);
+		return this.commentBy.equals(CommentBy.CHAPTER);
 	}
 	
 	public abstract Long getEntityId();
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", author=" + author + ", commentType=" + commentType + ", text=" + text
+		return "Comment [id=" + id + ", author=" + author + ", commentType=" + commentBy + ", text=" + text
 				+ ", commentFather=" + commentFather + ", comments=" + comments + ", dateRegistration="
 				+ dateRegistration + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, commentType, dateRegistration, id, text);
+		return Objects.hash(author, commentBy, dateRegistration, id, text);
 	}
 
 	@Override
@@ -168,7 +168,7 @@ public abstract class Comment implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Comment other = (Comment) obj;
-		return Objects.equals(author, other.author) && commentType == other.commentType
+		return Objects.equals(author, other.author) && commentBy == other.commentBy
 				&& Objects.equals(dateRegistration, other.dateRegistration) && Objects.equals(id, other.id)
 				&& Objects.equals(text, other.text);
 	}
