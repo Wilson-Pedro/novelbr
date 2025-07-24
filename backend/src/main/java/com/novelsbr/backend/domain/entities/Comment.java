@@ -47,7 +47,7 @@ public abstract class Comment implements Serializable {
 	private CommentBy commentBy;
 	
 	@Column(columnDefinition = "TEXT")
-	private String text;
+	private String bodyText;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "comment_father_id")
@@ -67,15 +67,15 @@ public abstract class Comment implements Serializable {
 	public Comment(CommentDTO commentDTO) {
 		this.id = commentDTO.getId() == null ? null : commentDTO.getId();
 		this.commentBy = CommentBy.toEnum(commentDTO.getCommentByCode());
-		this.text = commentDTO.getText();
-		this.dateRegistration = commentDTO.getDateRegistration();
+		this.bodyText = commentDTO.getBodyText();
+		this.dateRegistration = commentDTO.getCreatedAt();
 	}
 
-	public Comment(Long id, Author author, CommentBy commentBy, String text, LocalDateTime dateRegistration) {
+	public Comment(Long id, Author author, CommentBy commentBy, String bodyText, LocalDateTime dateRegistration) {
 		this.id = id;
 		this.author = author;
 		this.commentBy = commentBy;
-		this.text = text;
+		this.bodyText = bodyText;
 		this.dateRegistration = dateRegistration;
 	}
 
@@ -109,12 +109,12 @@ public abstract class Comment implements Serializable {
 		this.commentBy = commentBy;
 	}
 
-	public String getText() {
-		return text;
+	public String getBodyText() {
+		return bodyText;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setBodyText(String bodyText) {
+		this.bodyText = bodyText;
 	}
 
 	public Comment getCommentFather() {
@@ -149,14 +149,14 @@ public abstract class Comment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", author=" + author + ", commentType=" + commentBy + ", text=" + text
+		return "Comment [id=" + id + ", author=" + author + ", commentType=" + commentBy + ", text=" + bodyText
 				+ ", commentFather=" + commentFather + ", comments=" + comments + ", dateRegistration="
 				+ dateRegistration + "]";
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(author, commentBy, dateRegistration, id, text);
+		return Objects.hash(author, commentBy, dateRegistration, id, bodyText);
 	}
 
 	@Override
@@ -170,6 +170,6 @@ public abstract class Comment implements Serializable {
 		Comment other = (Comment) obj;
 		return Objects.equals(author, other.author) && commentBy == other.commentBy
 				&& Objects.equals(dateRegistration, other.dateRegistration) && Objects.equals(id, other.id)
-				&& Objects.equals(text, other.text);
+				&& Objects.equals(bodyText, other.bodyText);
 	}
 }

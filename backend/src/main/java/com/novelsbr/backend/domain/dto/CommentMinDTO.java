@@ -12,11 +12,13 @@ public class CommentMinDTO implements Serializable {
 	
 	private Long authorId;
 	
-	private Long commentFatherId;
+	private String username;
 	
-	private String text;
+	private Long parentId;
 	
-	private LocalDateTime dateRegistration;
+	private String bodyText;
+	
+	private LocalDateTime createdAt;
 	
 	public CommentMinDTO() {
 	}
@@ -24,16 +26,18 @@ public class CommentMinDTO implements Serializable {
 	public CommentMinDTO(Comment comment) {
 		this.id = comment.getId();
 		this.authorId = comment.getAuthor().getId();
-		this.commentFatherId = comment.getId() == null ? null : comment.getId();
-		this.text = comment.getText();
-		this.dateRegistration = comment.getDateRegistration();
+		this.username = comment.getAuthor().getName();
+		this.parentId = comment.getId() == null ? null : comment.getId();
+		this.bodyText = comment.getBodyText();
+		this.createdAt = comment.getDateRegistration();
 	}
 
-	public CommentMinDTO(Long id, Long authorId, Integer commentCode, Long entityId, String text, LocalDateTime dateRegistration) {
+	public CommentMinDTO(Long id, Long authorId, String username, Integer commentCode, Long entityId, String bodyText, LocalDateTime createdAt) {
 		this.id = id;
 		this.authorId = authorId;
-		this.text = text;
-		this.dateRegistration = dateRegistration;
+		this.username = username;
+		this.bodyText = bodyText;
+		this.createdAt = createdAt;
 	}
 
 	public Long getId() {
@@ -52,27 +56,35 @@ public class CommentMinDTO implements Serializable {
 		this.authorId = authorId;
 	}
 
-	public Long getCommentFatherId() {
-		return commentFatherId == null ? null : commentFatherId;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setCommenFathertId(Long commentFatherId) {
-		this.commentFatherId = commentFatherId;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public String getText() {
-		return text;
+	public Long getParentId() {
+		return parentId == null ? null : parentId;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
-	public LocalDateTime getDateRegistration() {
-		return dateRegistration;
+	public String getBodyText() {
+		return bodyText;
 	}
 
-	public void setDateRegistration(LocalDateTime dateRegistration) {
-		this.dateRegistration = dateRegistration;
+	public void setBodyText(String bodyText) {
+		this.bodyText = bodyText;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 }

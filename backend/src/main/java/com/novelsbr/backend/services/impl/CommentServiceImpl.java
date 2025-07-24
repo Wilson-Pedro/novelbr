@@ -36,15 +36,15 @@ public class CommentServiceImpl implements CommentService {
 	private AuthorService authorService;
 
 	@Override
-	public void save(CommentDTO commentDTO) {
+	public Comment save(CommentDTO commentDTO) {
 		Comment commentSaved = preparingCommentToSave(commentDTO);
 		if(commentSaved == null) throw new EntityNullException();
 		
-		if(commentDTO.getCommentFatherId() != null) {
-			Comment commentFather = findById(commentDTO.getCommentFatherId());
+		if(commentDTO.getParentId() != null) {
+			Comment commentFather = findById(commentDTO.getParentId());
 			commentSaved.setCommentFather(commentFather);
 		}
-		commentRepository.save(commentSaved);
+		return commentRepository.save(commentSaved);
 	}
 	
 	public Comment findById(Long id) {
@@ -57,6 +57,13 @@ public class CommentServiceImpl implements CommentService {
 		return commentRepository.findAll().stream()
 				.filter(x -> x.getCommentFather() == null)
 				.toList();
+	}
+	
+	@Override
+	public Comment update(CommentDTO commentDTO, Long id) {
+		Comment commentUpdated= findById(id);
+		commentUpdated.setBodyText(commentDTO.getBodyText());
+		return commentRepository.save(commentUpdated);
 	}
 
 	private Comment preparingCommentToSave(CommentDTO commentDTO) {

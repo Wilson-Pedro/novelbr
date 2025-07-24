@@ -10,12 +10,14 @@ import { updateComment } from '../apiComments/getComments';
 
 interface CommentProps {
     comment: {
-        id: string,
-        body: string,
-        username:string,
-        userId:string,
-        parentId:string | null,
-        createdAt: string,
+        id: number
+        authorId: number
+        username: string
+        comentByCode: number
+        entityId: number
+        parentId: number | null
+        bodyText: string
+        createdAt: string
     }
     replies: BackendCommentsI[]
     currentUserId: string
@@ -41,8 +43,8 @@ const Comment: React.FC<CommentProps> =
     const fiveMinutes = 300000;
     const timePassed = new Date().getTime() - new Date(comment.createdAt).getTime() > fiveMinutes;
     const canReply = Boolean(currentUserId);
-    const canEdit = currentUserId === comment.userId && !timePassed;
-    const canDelete = currentUserId === comment.userId && !timePassed;
+    const canEdit = parseInt(currentUserId) === comment.authorId && !timePassed;
+    const canDelete = parseInt(currentUserId) === comment.authorId && !timePassed;
     const createdAt = new Date(comment.createdAt).toLocaleDateString();
 
     const isReplying = 
@@ -67,12 +69,12 @@ const Comment: React.FC<CommentProps> =
                     <div className={styles.commentAuthor}>{comment.username}</div>
                     <div>{comment.createdAt}</div>
                 </div>
-                {!isEditing && <div className={styles.commentText}>{comment.body}</div>}
+                {!isEditing && <div className={styles.commentText}>{comment.bodyText}</div>}
                 {isEditing && (
                     <CommentForm 
                         submitLabel="Update"
                         hasCancelButton
-                        initialText={comment.body}
+                        initialText={comment.bodyText}
                         handleSubmit={(text:string) => updateComment(text, comment.id)}
                         handleCancel={() => setActiveComment(null)}
                     />
@@ -103,7 +105,7 @@ const Comment: React.FC<CommentProps> =
                         handleSubmit={(text:string) => addComment(text, replyId)}
                         hasCancelButton
                         handleCancel={() => {setActiveComment(null)}}
-                        initialText={comment.body}
+                        initialText={comment.bodyText}
                     />
                 )}
                 {replies.length > 0 && (

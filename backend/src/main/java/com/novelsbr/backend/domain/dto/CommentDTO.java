@@ -7,8 +7,6 @@ import java.util.List;
 
 import com.novelsbr.backend.domain.entities.Comment;
 
-import jakarta.persistence.Column;
-
 public class CommentDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -16,16 +14,17 @@ public class CommentDTO implements Serializable {
 	
 	private Long authorId;
 	
+	private String username;
+	
 	private Integer commentByCode;
 	
 	private Long entityId;
 	
-	private Long commentFatherId;
+	private Long parentId;
 	
-	@Column(columnDefinition = "TEXT")
-	private String text;
+	private String bodyText;
 	
-	private LocalDateTime dateRegistration;
+	private LocalDateTime createdAt;
 	
 	private List<CommentMinDTO> comments = new ArrayList<>();
 	
@@ -35,19 +34,21 @@ public class CommentDTO implements Serializable {
 	public CommentDTO(Comment comment) {
 		this.id = comment.getId();
 		this.authorId = comment.getAuthor().getId();
+		this.username = comment.getAuthor().getName();
 		this.commentByCode = comment.getCommentBy().getCode();
-		this.commentFatherId = comment.getCommentFather() == null ? null : comment.getCommentFather().getId();
-		this.text = comment.getText();
-		this.dateRegistration = comment.getDateRegistration();
+		this.parentId = comment.getCommentFather() == null ? null : comment.getCommentFather().getId();
+		this.bodyText = comment.getBodyText();
+		this.createdAt = comment.getDateRegistration();
 	}
 
-	public CommentDTO(Long id, Long authorId, Integer commentCode, Long entityId, String text, LocalDateTime dateRegistration) {
+	public CommentDTO(Long id, Long authorId, String username, Integer commentCode, Long entityId, String bodyText, LocalDateTime createdAt) {
 		this.id = id;
 		this.authorId = authorId;
+		this.username = username;
 		this.commentByCode = commentCode;
 		this.entityId = entityId;
-		this.text = text;
-		this.dateRegistration = dateRegistration;
+		this.bodyText = bodyText;
+		this.createdAt = createdAt;
 	}
 
 	public Long getId() {
@@ -66,6 +67,14 @@ public class CommentDTO implements Serializable {
 		this.authorId = authorId;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public Integer getCommentByCode() {
 		return commentByCode;
 	}
@@ -82,20 +91,20 @@ public class CommentDTO implements Serializable {
 		this.entityId = entityId;
 	}
 
-	public Long getCommentFatherId() {
-		return commentFatherId == null ? null : commentFatherId;
+	public Long getParentId() {
+		return parentId == null ? null : parentId;
 	}
 
-	public void setCommenFathertId(Long commentFatherId) {
-		this.commentFatherId = commentFatherId;
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
-	public String getText() {
-		return text;
+	public String getBodyText() {
+		return bodyText;
 	}
 
-	public void setText(String text) {
-		this.text = text;
+	public void setBodyText(String bodyText) {
+		this.bodyText = bodyText;
 	}
 
 	public List<CommentMinDTO> getComments() {
@@ -106,11 +115,11 @@ public class CommentDTO implements Serializable {
 		this.comments = comments;
 	}
 
-	public LocalDateTime getDateRegistration() {
-		return dateRegistration;
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
 	}
 
-	public void setDateRegistration(LocalDateTime dateRegistration) {
-		this.dateRegistration = dateRegistration;
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
 	}
 }

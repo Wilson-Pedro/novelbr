@@ -1,0 +1,90 @@
+package com.novelsbr.backend.domain.dto;
+
+import java.io.Serializable;
+import java.time.LocalDateTime;
+
+import com.novelsbr.backend.domain.entities.Comment;
+
+public class CommentMinDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private Long id;
+	
+	private Long authorId;
+	
+	private String username;
+	
+	private Long commentFatherId;
+	
+	private String text;
+	
+	private LocalDateTime dateRegistration;
+	
+	public CommentMinDTO() {
+	}
+	
+	public CommentMinDTO(Comment comment) {
+		this.id = comment.getId();
+		this.authorId = comment.getAuthor().getId();
+		this.username = comment.getAuthor().getName();
+		this.commentFatherId = comment.getId() == null ? null : comment.getId();
+		this.text = comment.getText();
+		this.dateRegistration = comment.getDateRegistration();
+	}
+
+	public CommentMinDTO(Long id, Long authorId, String username, Integer commentCode, Long entityId, String text, LocalDateTime dateRegistration) {
+		this.id = id;
+		this.authorId = authorId;
+		this.username = username;
+		this.text = text;
+		this.dateRegistration = dateRegistration;
+	}
+
+	public Long getId() {
+		return id == null ? null : id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getAuthorId() {
+		return authorId;
+	}
+
+	public void setAuthorId(Long authorId) {
+		this.authorId = authorId;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Long getCommentFatherId() {
+		return commentFatherId == null ? null : commentFatherId;
+	}
+
+	public void setCommenFathertId(Long commentFatherId) {
+		this.commentFatherId = commentFatherId;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public LocalDateTime getDateRegistration() {
+		return dateRegistration;
+	}
+
+	public void setDateRegistration(LocalDateTime dateRegistration) {
+		this.dateRegistration = dateRegistration;
+	}
+}

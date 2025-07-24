@@ -13,11 +13,13 @@ interface CommentsProps {
 }
 
 export interface BackendCommentsI {
-    id: string
-    body: string
-    username:string
-    userId:string
-    parentId:string | null
+    id: number
+    authorId: number
+    username: string
+    comentByCode: number
+    entityId: number
+    parentId: number | null
+    bodyText: string
     createdAt: string
 }
 
@@ -34,15 +36,15 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
     const [commentByCode, setCommentByCode] = useState<number>(1);
     const [entityId, setEntityId] = useState<number>(2);
     const [commentFatherId, setCommentFatherId] = useState<number | null>(null);
-    const [textBody, setTextBody] = useState<string>("");
 
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
     const [activeComment, setActiveComment] = useState(null);
+
     const rootComments = backendComments.filter(
         (backendComment) => backendComment.parentId === null
     );
 
-    const getReplies = (commentId:string) => {
+    const getReplies = (commentId:number) => {
         return backendComments
         .filter((backendComment) => backendComment.parentId === commentId)
         .sort(
@@ -51,26 +53,29 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
         );
     };
 
-    const addComment = (text:string, parentId:string) => {
+    const addComment = async (bodyText:string, parentId:number) => {
         try {
-            axios.post(`${API_URL}/comments/`, {
+            const response = await axios.post(`${API_URL}/comments/`, {
                 authorId,
                 commentByCode,
                 entityId,
-                commentFatherId,
-                text
+                parentId: parentId ? parentId : null,
+                bodyText
 
             });
+            const newComment = response.data;
+            setBackendComments(comments => [newComment, ...comments]);
+
         } catch(error) {
             console.log("Error ao adicionar comentário", error);
         }
     };
 
-    const updateComment = (text:string, commentId:string) => {
+    const updateComment = (text:string, commentId:number) => {
         updateCommentApi(text, commentId).then(() => {
             const updateBackendComments = backendComments.map((backendComment) => {
                 if(backendComment.id === commentId) {
-                    return { ...backendComment, body: text }
+                    return { ...backendComment, bodyText: text }
                 }
                 return backendComment
             })
@@ -79,7 +84,7 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
         })
     };
 
-    const deleteComment = (commentId:string) => {
+    const deleteComment = (commentId:number) => {
         if(window.confirm('Delete this comment?')) {
             deleteCommentApi(commentId).then(() => {
                 const updateBackendComments = backendComments.filter(
@@ -91,9 +96,15 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
     }
 
     useEffect(() => {
-        getComments().then((data) => {
-            setBackendComments(data);
-        });
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/comments`);
+                setBackendComments(response.data)
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        fetchComments();
     }, []);
 
     return(

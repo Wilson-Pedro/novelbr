@@ -7,7 +7,9 @@ import com.novelsbr.backend.domain.entities.Comment;
 
 public interface CommentService {
 
-	void save(CommentDTO commentDTO);
+	Comment save(CommentDTO commentDTO);
 	
 	List<Comment> findAll();
+	
+	Comment update(CommentDTO commentDTO, Long id);
 }
