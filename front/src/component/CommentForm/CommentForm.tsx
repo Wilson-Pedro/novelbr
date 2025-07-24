@@ -30,14 +30,16 @@ const CommentForm: React.FC<CommentFormProp> = ({
                 value={text}
                 onChange={(e) => setText(e.target.value)}
             />
-            <button className={styles.commentFormButton} disabled={isTextAreaDisabled}>{submitLabel}</button>
-            {hasCancelButton && (
-                <button 
-                    type="button"
-                    className={[styles.commentFormButton, styles.commentFormCancelButton].join(' ')}
-                    onClick={handleCancel}
-                > Cancel </button>
-            )}
+            <div>
+                <button className={styles.commentFormButton} disabled={isTextAreaDisabled}>{submitLabel}</button>
+                {hasCancelButton && (
+                    <button 
+                        type="button"
+                        className={[styles.commentFormButton, styles.commentFormCancelButton].join(' ')}
+                        onClick={handleCancel}
+                    > Cancel </button>
+                )}
+            </div>
         </form>
     );
 }

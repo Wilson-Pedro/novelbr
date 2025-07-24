@@ -67,7 +67,7 @@ const Comment: React.FC<CommentProps> =
             <div className={styles.commentRightPart}>
                 <div className={styles.commentContent}>
                     <div className={styles.commentAuthor}>{comment.username}</div>
-                    <div>{comment.createdAt}</div>
+                    <div>{createdAt}</div>
                 </div>
                 {!isEditing && <div className={styles.commentText}>{comment.bodyText}</div>}
                 {isEditing && (

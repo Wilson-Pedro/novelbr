@@ -71,17 +71,24 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
         }
     };
 
-    const updateComment = (text:string, commentId:number) => {
-        updateCommentApi(text, commentId).then(() => {
-            const updateBackendComments = backendComments.map((backendComment) => {
-                if(backendComment.id === commentId) {
-                    return { ...backendComment, bodyText: text }
-                }
-                return backendComment
+    const updateComment = async (bodyText:string, commentId:number) => {
+
+        try {
+            const response = await axios.put(`${API_URL}/comments/${commentId}`, {
+                    bodyText
             })
-            setBackendComments(updateBackendComments);
-            setActiveComment(null);
+        } catch(error) {
+            console.log(error)
+        }
+
+        const updateBackendComments = backendComments.map((backendComment) => {
+            if(backendComment.id === commentId) {
+                return { ...backendComment, bodyText: bodyText }
+            }
+            return backendComment
         })
+        setBackendComments(updateBackendComments);
+        setActiveComment(null);
     };
 
     const deleteComment = (commentId:number) => {
