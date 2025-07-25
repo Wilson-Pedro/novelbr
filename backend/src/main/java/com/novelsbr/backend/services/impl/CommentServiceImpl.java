@@ -65,6 +65,12 @@ public class CommentServiceImpl implements CommentService {
 		commentUpdated.setBodyText(commentDTO.getBodyText());
 		return commentRepository.save(commentUpdated);
 	}
+	
+	@Override
+	public void delete(Long id) {
+		Comment comment = findById(id);
+		commentRepository.delete(comment);
+	}
 
 	private Comment preparingCommentToSave(CommentDTO commentDTO) {
 		Author author = authorService.findById(commentDTO.getAuthorId());

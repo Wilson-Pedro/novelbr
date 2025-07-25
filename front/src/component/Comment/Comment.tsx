@@ -6,7 +6,6 @@ import styles from './Comment.module.css';
 
 import { BackendCommentsI } from '../Comments/Comments';
 import CommentForm from '../CommentForm/CommentForm';
-import { updateComment } from '../apiComments/getComments';
 
 interface CommentProps {
     comment: {

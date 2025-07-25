@@ -47,6 +47,7 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.GET, "/chapters/**").permitAll()
 						.requestMatchers(HttpMethod.POST, "/comments/").permitAll()
 						.requestMatchers(HttpMethod.PUT, "/comments/{id}").permitAll()
+						.requestMatchers(HttpMethod.DELETE, "/comments/{id}").permitAll()
 						.requestMatchers(HttpMethod.GET, "/comments").permitAll()
 						.requestMatchers("/upload/**").hasRole("AUTHOR")
 						//.requestMatchers(HttpMethod.GET, "/chapters/novelsTile/author/**").permitAll()

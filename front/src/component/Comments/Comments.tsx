@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { getComments, createComment, deleteComment as deleteCommentApi, updateComment as updateCommentApi } from '../apiComments/getComments';
 import Comment from '../Comment/Comment';
 import CommentForm from '../CommentForm/CommentForm';
 import styles from './Comments.module.css';
@@ -35,7 +34,6 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
     const [authorId, setAuthorId] = useState<number>(1);
     const [commentByCode, setCommentByCode] = useState<number>(1);
     const [entityId, setEntityId] = useState<number>(2);
-    const [commentFatherId, setCommentFatherId] = useState<number | null>(null);
 
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
     const [activeComment, setActiveComment] = useState(null);
@@ -74,7 +72,7 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
     const updateComment = async (bodyText:string, commentId:number) => {
 
         try {
-            const response = await axios.put(`${API_URL}/comments/${commentId}`, {
+            await axios.put(`${API_URL}/comments/${commentId}`, {
                     bodyText
             })
         } catch(error) {
@@ -92,14 +90,17 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
     };
 
     const deleteComment = (commentId:number) => {
-        if(window.confirm('Delete this comment?')) {
-            deleteCommentApi(commentId).then(() => {
-                const updateBackendComments = backendComments.filter(
-                    (backendComment) => backendComment.id !== commentId
-                );
-                setBackendComments(updateBackendComments);
-            });
+        try {
+            if(window.confirm('Delete this comment?')) {
+                axios.delete(`${API_URL}/comments/${commentId}`);
+            }
+        } catch(error) {
+            console.log(error)
         }
+        const updateBackendComments = backendComments.filter((backendComment) => 
+            backendComment.id !== commentId
+        );
+        setBackendComments(updateBackendComments);
     }
 
     useEffect(() => {

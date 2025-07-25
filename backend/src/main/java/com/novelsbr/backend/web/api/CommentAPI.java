@@ -23,4 +23,6 @@ public interface CommentAPI {
 	
 	@PutMapping("/${id}")
 	public ResponseEntity<CommentDTO> update(@RequestBody CommentDTO commentDTO, @PathVariable Long id);
+
+	public ResponseEntity<Void> delete(@PathVariable Long id);
 }
