@@ -1,0 +1,22 @@
+package com.novelsbr.backend.services.strategy;
+
+import java.util.Map;
+
+import org.springframework.stereotype.Component;
+
+import com.novelsbr.backend.enums.CommentBy;
+import com.novelsbr.backend.services.CommentStrategy;
+
+@Component
+public class CommentStrategyProvider {
+
+	private Map<CommentBy, CommentStrategy> mapStrategy = Map.of(
+			CommentBy.NOVEL, new CommentNovelStrategy(),
+			CommentBy.CHAPTER, new CommentChapterStrategy()
+	);
+	
+	public CommentStrategy getStrategy(CommentBy commentBy) {
+		CommentStrategy commentStrategy = mapStrategy.get(commentBy);
+		return commentStrategy;
+	}
+}

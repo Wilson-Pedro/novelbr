@@ -1,0 +1,5 @@
+package com.novelsbr.backend.strategy;
+
+public interface CommentStrategy {
+
+}

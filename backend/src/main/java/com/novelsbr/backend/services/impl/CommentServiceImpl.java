@@ -6,34 +6,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.novelsbr.backend.domain.dto.CommentDTO;
-import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Comment;
-import com.novelsbr.backend.domain.entities.CommentChapter;
-import com.novelsbr.backend.domain.entities.CommentNovel;
 import com.novelsbr.backend.enums.CommentBy;
 import com.novelsbr.backend.exceptions.EntityNullException;
 import com.novelsbr.backend.exceptions.NotFoundException;
-import com.novelsbr.backend.exceptions.TypeNotFoundException;
 import com.novelsbr.backend.repositories.CommentRepository;
-import com.novelsbr.backend.services.AuthorService;
-import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.CommentService;
-import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.services.strategy.CommentStrategyProvider;
 
 @Service
 public class CommentServiceImpl implements CommentService {
+	
+	@Autowired
+	private CommentStrategyProvider commentStrategyProvider;
 
 	@Autowired
 	private CommentRepository commentRepository;
-	
-	@Autowired
-	private ChapterService chapterService;
-	
-	@Autowired
-	private NovelService novelService;
-	
-	@Autowired
-	private AuthorService authorService;
 
 	@Override
 	public Comment save(CommentDTO commentDTO) {
@@ -73,26 +61,9 @@ public class CommentServiceImpl implements CommentService {
 	}
 
 	private Comment preparingCommentToSave(CommentDTO commentDTO) {
-		Author author = authorService.findById(commentDTO.getAuthorId());
+		
 		CommentBy commentType = CommentBy.toEnum(commentDTO.getCommentByCode());
 		
-		Comment comment;
-		
-		switch (commentType) {
-			case NOVEL -> {
-				CommentNovel commentNovel = new CommentNovel(commentDTO);
-				commentNovel.setNovel(novelService.findById(commentDTO.getEntityId()));
-				commentNovel.setAuthor(author);
-				comment = commentNovel;
-			}
-			case CHAPTER -> {
-				CommentChapter commentChapter = new CommentChapter(commentDTO);
-				commentChapter.setChapter(chapterService.findById(commentDTO.getEntityId()));
-				commentChapter.setAuthor(author);
-				comment = commentChapter;
-			}
-			default -> throw new TypeNotFoundException("Comment Type Not Found, verify the commentCode.");
-		}
-		return comment;
+		return commentStrategyProvider.getStrategy(commentType).getNewComment(commentDTO);
 	}
 }

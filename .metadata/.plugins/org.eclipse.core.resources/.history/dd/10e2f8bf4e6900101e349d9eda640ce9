@@ -1,0 +1,15 @@
+package com.novelsbr.backend.services.strategy;
+
+import com.novelsbr.backend.domain.dto.CommentDTO;
+import com.novelsbr.backend.domain.entities.Comment;
+import com.novelsbr.backend.services.CommentStrategy;
+
+public class CommentNovelStrategy implements CommentStrategy {
+
+	@Override
+	public Comment getNewComment(CommentDTO commentDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

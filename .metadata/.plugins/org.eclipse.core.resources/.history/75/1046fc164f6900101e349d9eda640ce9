@@ -1,0 +1,25 @@
+package com.novelsbr.backend.services.strategy;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.novelsbr.backend.domain.dto.CommentDTO;
+import com.novelsbr.backend.domain.entities.Comment;
+import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.services.ChapterService;
+import com.novelsbr.backend.services.CommentStrategy;
+
+public class CommentChapterStrategy implements CommentStrategy {
+	
+	@Autowired
+	private AuthorService authorService;
+	
+	@Autowired
+	private ChapterService chapterService;
+
+	@Override
+	public Comment getNewComment(CommentDTO commentDTO) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
