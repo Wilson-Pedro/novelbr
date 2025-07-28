@@ -22,12 +22,12 @@ export interface BackendCommentsI {
     createdAt: string
 }
 
-export interface ActiveCommentI {
-    activeComment: {
-        text: string
-        parantId: any
-    }
-}
+// export interface ActiveCommentI {
+//     activeComment: {
+//         text: string
+//         parantId: any
+//     }
+// }
 
 const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
 
@@ -67,6 +67,11 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
         } catch(error) {
             console.log("Error ao adicionar comentário", error);
         }
+    };
+
+    const replyComment = async (bodyText:string, parentId:number) => {
+        addComment(bodyText, parentId);
+        setActiveComment(null);
     };
 
     const updateComment = async (bodyText:string, commentId:number) => {
@@ -138,6 +143,7 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId }) => {
                             setActiveComment={setActiveComment}
                             parentId={rootComment.id}
                             addComment={addComment}
+                            replyComment={replyComment}
                         />
                     </>
                 ))}

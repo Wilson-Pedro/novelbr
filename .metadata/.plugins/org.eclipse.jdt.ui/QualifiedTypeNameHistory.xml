@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
-    <fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
     <fullyQualifiedTypeName name="org.owasp.html.PolicyFactory"/>
     <fullyQualifiedTypeName name="org.owasp.html.HtmlSanitizer"/>
@@ -53,11 +51,13 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelService"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.NovelStatusRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.NotFoundException"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelStatusService"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.NovelStatus"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.NovelStatusType"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.CommentDTO"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
 </qualifiedTypeNameHistroy>

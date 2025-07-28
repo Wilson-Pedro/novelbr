@@ -26,6 +26,7 @@ interface CommentProps {
     setActiveComment:any
     parentId:any | null
     addComment:any
+    replyComment?:any
 }
 
 const Comment: React.FC<CommentProps> = 
@@ -37,7 +38,8 @@ const Comment: React.FC<CommentProps> =
     activeComment, 
     setActiveComment, 
     parentId,
-    addComment
+    addComment,
+    replyComment
 }) => {
     const fiveMinutes = 300000;
     const timePassed = new Date().getTime() - new Date(comment.createdAt).getTime() > fiveMinutes;
@@ -79,12 +81,12 @@ const Comment: React.FC<CommentProps> =
                     />
                 )}
                 <div className={styles.commentActions}>
-                    {canReply && 
+                    {canReply && (
                         <div className={styles.commentAction} 
                             onClick={() => setActiveComment({ id: comment.id, type: 'replying' })}>
                             Reply
                         </div> 
-                    }
+                    )}
                     {canEdit && 
                         <div className={styles.commentAction}
                             onClick={() => setActiveComment({ id: comment.id, type: 'editing' })}>
@@ -101,10 +103,10 @@ const Comment: React.FC<CommentProps> =
                 {isReplying && (
                     <CommentForm 
                         submitLabel="Reply"
-                        handleSubmit={(text:string) => addComment(text, replyId)}
+                        handleSubmit={(text:string) => replyComment(text, replyId)}
                         hasCancelButton
                         handleCancel={() => {setActiveComment(null)}}
-                        initialText={comment.bodyText}
+                        initialText={""}
                     />
                 )}
                 {replies.length > 0 && (
@@ -121,6 +123,7 @@ const Comment: React.FC<CommentProps> =
                                 setActiveComment={setActiveComment}
                                 parentId={comment.id}
                                 addComment={addComment}
+                                replyComment={replyComment}
                             />
                         ))}
                     </div>

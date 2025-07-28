@@ -42,9 +42,7 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public List<Comment> findAll() {
-		return commentRepository.findAll().stream()
-				.filter(x -> x.getCommentFather() == null)
-				.toList();
+		return commentRepository.findAll();
 	}
 	
 	@Override
