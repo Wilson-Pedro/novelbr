@@ -1,0 +1,14 @@
+package com.novelsbr.backend.repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.novelsbr.backend.domain.entities.Comment;
+import com.novelsbr.backend.enums.CommentBy;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+	
+	List<Comment> findAllByCommentBy(CommentBy commentBy);
+
+}

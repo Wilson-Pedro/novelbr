@@ -18,11 +18,19 @@ public interface CommentAPI {
 	@PostMapping("/")
 	ResponseEntity<CommentDTO> save(@RequestBody CommentDTO commentDTO);
 	
+	@GetMapping("/novel/{novelId}")
+	public ResponseEntity<List<CommentDTO>> findAllNovelsCommentsByNovelId(
+			@PathVariable Long novelId);
+	
+	@GetMapping("/chapters/{chapterId}")
+	public ResponseEntity<List<CommentDTO>> findAllChaptersCommentsByNovelId(
+			@PathVariable Long chapterId);
+	
 	@GetMapping
-	public ResponseEntity<List<CommentDTO>> findAll();
+	ResponseEntity<List<CommentDTO>> findAll();
 	
 	@PutMapping("/${id}")
-	public ResponseEntity<CommentDTO> update(@RequestBody CommentDTO commentDTO, @PathVariable Long id);
+	ResponseEntity<CommentDTO> update(@RequestBody CommentDTO commentDTO, @PathVariable Long id);
 
-	public ResponseEntity<Void> delete(@PathVariable Long id);
+	ResponseEntity<Void> delete(@PathVariable Long id);
 }

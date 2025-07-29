@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.novelsbr.backend.domain.entities.Comment;
+import com.novelsbr.backend.domain.projections.CommentProjection;
+import com.novelsbr.backend.enums.CommentBy;
 
 public class CommentDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -39,6 +41,17 @@ public class CommentDTO implements Serializable {
 		this.parentId = comment.getCommentFather() == null ? null : comment.getCommentFather().getId();
 		this.bodyText = comment.getBodyText();
 		this.createdAt = comment.getDateRegistration();
+	}
+	
+	public CommentDTO(CommentProjection projection) {
+		this.id = projection.getCommentId();
+		this.authorId = projection.getAuthorId();
+		this.username = projection.getAuthorName();
+		this.commentByCode = CommentBy.toEnum(projection.getCommentBy().toLowerCase()).getCode();
+		this.entityId = projection.getEntityId();
+		this.parentId = projection.getCommentFatherId() == null ? null : projection.getCommentFatherId();
+		this.bodyText = projection.getBodyText();
+		this.createdAt = projection.getDateRegistration();
 	}
 
 	public CommentDTO(Long id, Long authorId, String username, Integer commentCode, Long entityId, String bodyText, LocalDateTime createdAt) {

@@ -1,0 +1,20 @@
+package com.novelsbr.backend.domain.projections;
+
+import java.time.LocalDateTime;
+
+public interface CommentProjection {
+
+	Long getCommentId();
+	
+	Long getAuthorId();
+	
+	String getAuthorName();
+	
+	Long getCommentFatherId();
+	
+	LocalDateTime getDateRegistration();
+	
+	Long getNovelId();
+	
+	String getBodyText();
+}

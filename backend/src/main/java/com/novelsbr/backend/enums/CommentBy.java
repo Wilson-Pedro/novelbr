@@ -4,7 +4,7 @@ import java.util.stream.Stream;
 
 public enum CommentBy {
 
-	NOVEL(1, "Novel"),
+	NOVEL(1, "novel"),
 	CHAPTER(2, "chapter");
 	
 	private Integer code;

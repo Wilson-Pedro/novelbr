@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.CommentDTO;
 import com.novelsbr.backend.domain.entities.Comment;
+import com.novelsbr.backend.domain.projections.CommentProjection;
 import com.novelsbr.backend.services.CommentService;
 import com.novelsbr.backend.utils.mapper.CommentMapper;
 import com.novelsbr.backend.web.api.CommentAPI;
@@ -30,6 +31,22 @@ public class CommentController implements CommentAPI {
 	public ResponseEntity<List<CommentDTO>> findAll() {
 		List<Comment> comments = commentService.findAll();
 		List<CommentDTO> dtos = comments.stream().map(x -> CommentMapper.toDTO(x)).toList();
+		return ResponseEntity.ok(dtos);
+	}
+	
+	@GetMapping("/novels/{novelId}")
+	public ResponseEntity<List<CommentDTO>> findAllNovelsCommentsByNovelId(
+			@PathVariable Long novelId) {
+		List<CommentProjection> comments = commentService.findAllNovelsByEntityId(novelId);
+		List<CommentDTO> dtos = comments.stream().map(CommentDTO::new).toList();
+		return ResponseEntity.ok(dtos);
+	}
+	
+	@GetMapping("/chapters/{chapterId}")
+	public ResponseEntity<List<CommentDTO>> findAllChaptersCommentsByNovelId(
+			@PathVariable Long chapterId) {
+		List<CommentProjection> comments = commentService.findAllChaptersByEntityId(chapterId);
+		List<CommentDTO> dtos = comments.stream().map(CommentDTO::new).toList();
 		return ResponseEntity.ok(dtos);
 	}
 	

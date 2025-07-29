@@ -1,0 +1,18 @@
+package com.novelsbr.backend.domain.projections;
+
+public interface CommentProjection {
+
+	Long getCommentId();
+	
+	Long getAuthorId();
+	
+	String getAuthorName();
+	
+	Long getCommentFatherId();
+	
+	String getDateRegistration();
+	
+	Long getNovelId();
+	
+	String getBodyText();
+}

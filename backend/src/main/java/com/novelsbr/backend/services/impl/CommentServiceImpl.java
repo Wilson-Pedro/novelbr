@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.novelsbr.backend.domain.dto.CommentDTO;
 import com.novelsbr.backend.domain.entities.Comment;
+import com.novelsbr.backend.domain.projections.CommentProjection;
 import com.novelsbr.backend.enums.CommentBy;
 import com.novelsbr.backend.exceptions.EntityNullException;
 import com.novelsbr.backend.exceptions.NotFoundException;
@@ -43,6 +44,16 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<Comment> findAll() {
 		return commentRepository.findAll();
+	}
+	
+	@Override
+	public List<CommentProjection> findAllNovelsByEntityId(Long entityId) {
+		return commentRepository.findAllNovelsByEntityId(entityId);
+	}
+	
+	@Override
+	public List<CommentProjection> findAllChaptersByEntityId(Long entityId) {
+		return commentRepository.findAllChaptersByEntityId(entityId);
 	}
 	
 	@Override
