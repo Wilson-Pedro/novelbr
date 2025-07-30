@@ -11,7 +11,7 @@ import com.novelsbr.backend.domain.projections.CommentProjection;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 	
 	@Query(nativeQuery = true, value = """
-		SELECT cn.id as comment_id, cn.author_id, a.name as author_name, cn.comment_father_id, 
+		SELECT cn.id as comment_id, cn.author_id, a.username, cn.comment_father_id, 
 		cn.date_registration, cn.novel_id as entity_id, cn.body_text, cn.comment_by 
 		FROM TBL_COMMENT_NOVEL cn 
 		INNER JOIN TBL_AUTHOR a ON a.id = cn.author_id
@@ -20,7 +20,7 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 	List<CommentProjection> findAllNovelsByEntityId(Long entityId);
 	
 	@Query(nativeQuery = true, value = """
-			SELECT cc.id as comment_id, cc.author_id, a.name as author_name, cc.comment_father_id, 
+			SELECT cc.id as comment_id, cc.author_id, a.username, cc.comment_father_id, 
 			cc.date_registration, cc.chapter_id as entity_id, cc.body_text, cc.comment_by 
 			FROM TBL_COMMENT_CHAPTER cc
 			INNER JOIN TBL_AUTHOR a ON a.id = cc.author_id

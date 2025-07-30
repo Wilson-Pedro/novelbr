@@ -8,7 +8,7 @@ public interface CommentProjection {
 	
 	Long getAuthorId();
 	
-	String getAuthorName();
+	String getUsername();
 	
 	Long getCommentFatherId();
 	

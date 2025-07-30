@@ -4,7 +4,7 @@ import userIcon from '../../assets/user-icon_2.png';
 
 import styles from './Comment.module.css';
 
-import { BackendCommentsI } from '../Comments/Comments';
+import { BackendCommentsI } from '../../screens/Novel/Novel';
 import CommentForm from '../CommentForm/CommentForm';
 
 interface CommentProps {
@@ -19,7 +19,7 @@ interface CommentProps {
         createdAt: string
     }
     replies: BackendCommentsI[]
-    currentUserId: string
+    currentUserId: number
     deleteComment:any
     updateComment:any
     activeComment:any
@@ -44,8 +44,8 @@ const Comment: React.FC<CommentProps> =
     const fiveMinutes = 300000;
     const timePassed = new Date().getTime() - new Date(comment.createdAt).getTime() > fiveMinutes;
     const canReply = Boolean(currentUserId);
-    const canEdit = parseInt(currentUserId) === comment.authorId && !timePassed;
-    const canDelete = parseInt(currentUserId) === comment.authorId && !timePassed;
+    const canEdit = currentUserId === comment.authorId && !timePassed;
+    const canDelete = currentUserId === comment.authorId && !timePassed;
     const createdAt = new Date(comment.createdAt).toLocaleDateString();
 
     const isReplying = 

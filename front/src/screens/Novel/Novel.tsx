@@ -5,6 +5,7 @@ import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
 import axios from 'axios';
+import Comments from '../../component/Comments/Comments';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,6 +13,17 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
+
+export interface BackendCommentsI {
+    id: number
+    authorId: number
+    username: string
+    comentByCode: number
+    entityId: number
+    parentId: number | null
+    bodyText: string
+    createdAt: string
+}
 
 interface NovelInfo {
     imageUri:string;
@@ -38,6 +50,7 @@ const Novel: React.FC = () => {
     const [novelInfo, setNovelInfo] = useState<NovelInfo>({} as NovelInfo);
     const [genders, setGenders] = useState([]);
     const [chapterTiles, setChapterTitles] = useState<ChapterTiles[]>([]);
+    const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
     const [novelName, setNovelName] = useState<string>('');
     const [authorId, setAuthorId] = useState<number>(0);
 
@@ -80,10 +93,33 @@ const Novel: React.FC = () => {
             }
         }
 
+        const fetchComments = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/comments/novels/${novelId}`);
+                setBackendComments(response.data)
+            } catch(error) {
+                console.log(error)
+            }
+        }
+
+        fetchComments();
         fetchNovelsChapterTitles(); 
         fetchNovelInfo();
         fetchNovelGenders(); 
     }, [novelId, novelName]);
+
+    const onAddComment = (comment: BackendCommentsI) => {
+        setBackendComments(c => [comment, ...c])
+    };
+
+    const handleUpdateComment = (comment: BackendCommentsI, commentId: number) => {
+        handleDeleteComment(commentId);
+        onAddComment(comment);
+    }
+
+    const handleDeleteComment = (commentId: number) => {
+        setBackendComments(c => c.filter(c => c.id !== commentId));
+    }
 
     function goToChapter(chapterNumber:number) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });
@@ -150,6 +186,18 @@ const Novel: React.FC = () => {
                         </ul>
                     ) }
                     
+                </div>
+                <div className={styles.commentsDiv}>
+                    {token && (
+                        <Comments 
+                            currentUserId={authorId}
+                            comments={backendComments}
+                            entityId={novelId}
+                            onAddComment={onAddComment}
+                            handleDeleteComment={handleDeleteComment}
+                            handleUpdateComment={handleUpdateComment}
+                        />
+                    )}
                 </div>
             </div>
             <Footer />

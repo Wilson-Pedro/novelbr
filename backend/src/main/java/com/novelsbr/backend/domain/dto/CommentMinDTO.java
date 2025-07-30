@@ -26,7 +26,7 @@ public class CommentMinDTO implements Serializable {
 	public CommentMinDTO(Comment comment) {
 		this.id = comment.getId();
 		this.authorId = comment.getAuthor().getId();
-		this.username = comment.getAuthor().getName();
+		this.username = comment.getAuthor().getUsername();
 		this.parentId = comment.getId() == null ? null : comment.getId();
 		this.bodyText = comment.getBodyText();
 		this.createdAt = comment.getDateRegistration();

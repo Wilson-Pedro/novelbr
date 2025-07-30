@@ -38,7 +38,7 @@ public class CommentController implements CommentAPI {
 	public ResponseEntity<List<CommentDTO>> findAllNovelsCommentsByNovelId(
 			@PathVariable Long novelId) {
 		List<CommentProjection> comments = commentService.findAllNovelsByEntityId(novelId);
-		List<CommentDTO> dtos = comments.stream().map(CommentDTO::new).toList();
+		List<CommentDTO> dtos = comments.stream().map(x -> new CommentDTO(x)).toList();
 		return ResponseEntity.ok(dtos);
 	}
 	
@@ -46,7 +46,7 @@ public class CommentController implements CommentAPI {
 	public ResponseEntity<List<CommentDTO>> findAllChaptersCommentsByNovelId(
 			@PathVariable Long chapterId) {
 		List<CommentProjection> comments = commentService.findAllChaptersByEntityId(chapterId);
-		List<CommentDTO> dtos = comments.stream().map(CommentDTO::new).toList();
+		List<CommentDTO> dtos = comments.stream().map(x -> new CommentDTO(x)).toList();
 		return ResponseEntity.ok(dtos);
 	}
 	

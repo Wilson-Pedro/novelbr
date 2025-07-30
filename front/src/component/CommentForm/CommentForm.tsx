@@ -37,7 +37,7 @@ const CommentForm: React.FC<CommentFormProp> = ({
                         type="button"
                         className={[styles.commentFormButton, styles.commentFormCancelButton].join(' ')}
                         onClick={handleCancel}
-                    > Cancel </button>
+                    > Cancelar </button>
                 )}
             </div>
         </form>

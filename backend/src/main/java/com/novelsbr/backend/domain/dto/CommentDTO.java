@@ -36,7 +36,7 @@ public class CommentDTO implements Serializable {
 	public CommentDTO(Comment comment) {
 		this.id = comment.getId();
 		this.authorId = comment.getAuthor().getId();
-		this.username = comment.getAuthor().getName();
+		this.username = comment.getAuthor().getUsername();
 		this.commentByCode = comment.getCommentBy().getCode();
 		this.parentId = comment.getCommentFather() == null ? null : comment.getCommentFather().getId();
 		this.bodyText = comment.getBodyText();
@@ -46,7 +46,7 @@ public class CommentDTO implements Serializable {
 	public CommentDTO(CommentProjection projection) {
 		this.id = projection.getCommentId();
 		this.authorId = projection.getAuthorId();
-		this.username = projection.getAuthorName();
+		this.username = projection.getUsername();
 		this.commentByCode = CommentBy.toEnum(projection.getCommentBy().toLowerCase()).getCode();
 		this.entityId = projection.getEntityId();
 		this.parentId = projection.getCommentFatherId() == null ? null : projection.getCommentFatherId();
