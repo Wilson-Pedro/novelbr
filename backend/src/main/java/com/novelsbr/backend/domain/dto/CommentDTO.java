@@ -54,14 +54,13 @@ public class CommentDTO implements Serializable {
 		this.createdAt = projection.getDateRegistration();
 	}
 
-	public CommentDTO(Long id, Long authorId, String username, Integer commentCode, Long entityId, String bodyText, LocalDateTime createdAt) {
+	public CommentDTO(Long id, Long authorId, String username, Integer commentCode, Long entityId, String bodyText) {
 		this.id = id;
 		this.authorId = authorId;
 		this.username = username;
 		this.commentByCode = commentCode;
 		this.entityId = entityId;
 		this.bodyText = bodyText;
-		this.createdAt = createdAt;
 	}
 
 	public Long getId() {

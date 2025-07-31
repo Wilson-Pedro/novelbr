@@ -1,0 +1,180 @@
+package com.novelsbr.backend.services;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import com.novelsbr.backend.domain.dto.*;
+import com.novelsbr.backend.domain.entities.*;
+import com.novelsbr.backend.domain.projections.CommentProjection;
+import com.novelsbr.backend.enums.CommentBy;
+import com.novelsbr.backend.repositories.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.NovelStatusType;
+import com.novelsbr.backend.enums.UserRole;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+@SpringBootTest
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class CommentServiceTest {
+
+    @Autowired
+    ChapterRepository chapterRepository;
+
+    @Autowired
+    NovelRepository novelRepository;
+
+    @Autowired
+    NovelStatusRepository novelStatusRepository;
+
+    @Autowired
+    AuthorRepository authorRepository;
+
+    @Autowired
+    GenderRepository genderRepository;
+
+    @Autowired
+    CommentRepository commentRepository;
+
+    @Autowired
+    CommentService commentService;
+
+    Set<Gender> genders = new HashSet<>();
+    List<NovelStatus> novelStatsus = new ArrayList();
+
+    Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+
+    Novel novel = new Novel(null,
+          "Jornada para o Além",
+          author,
+          new NovelStatus(NovelStatusType.IN_COURSE),
+          genders,
+          "Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
+          "https://wallpapercave.com/wp/wp5044832.jpg");
+
+    Chapter chapter = new Chapter(null, "Começo", "Excelente começo!", novel);
+
+    CommentNovel commentNovel = new CommentNovel(null, author, CommentBy.NOVEL, "História Incrível", LocalDateTime.now(), novel);
+    CommentChapter commentChapter = new CommentChapter(null, author, CommentBy.CHAPTER, "História Incrível", LocalDateTime.now(), chapter);
+
+
+
+    @Test
+    @Order(1)
+    void preparingTestEnvironment() {
+       chapterRepository.deleteAll();
+       novelRepository.deleteAll();
+       novelStatusRepository.deleteAll();
+       genderRepository.deleteAll();
+       authorRepository.deleteAll();
+       Integer id = 1;
+
+       for(GenderType type : GenderType.values()) {
+          genders.add(new Gender(type));
+          id++;
+       }
+
+       for(NovelStatusType type : NovelStatusType.values()) {
+          novelStatsus.add(new NovelStatus(type));
+       }
+
+       novelStatusRepository.saveAll(novelStatsus);
+       genderRepository.saveAll(genders);
+       authorRepository.save(author);
+       novelRepository.save(novel);
+       chapterRepository.save(chapter);
+    }
+
+    @Test
+    @Order(2)
+    void save() {
+
+       CommentDTO commentNovelDTO = new CommentDTO(commentNovel);
+       CommentDTO commentChapterDTO = new CommentDTO(commentChapter);
+
+       Long authorId = authorRepository.findAll().get(0).getId();
+       
+       System.out.println("=====================================");
+       System.out.println("AuthorId: " + authorId);
+       System.out.println("AuthorId: " + commentNovelDTO.getAuthorId());
+
+       Comment commentNovelSaved = commentService.save(commentNovelDTO);
+       assertEquals(CommentBy.NOVEL, commentNovelSaved.getCommentBy());
+       assertEquals("História Incrível", commentNovelSaved.getBodyText());
+       assertEquals(author.getId(), authorId);
+
+       Comment commentChapterSaved = commentService.save(commentChapterDTO);
+       assertEquals(CommentBy.CHAPTER, commentChapterSaved.getCommentBy());
+       assertEquals("História Incrível", commentChapterSaved.getBodyText());
+       assertEquals(author.getId(), authorId);
+
+       assertEquals(2, commentRepository.count());
+    }
+
+//    @Test
+//    @Order(3)
+//    void findAll() {
+//
+//       List<Comment> comments = commentService.findAll();
+//
+//        assertFalse(comments.isEmpty());
+//       assertEquals(commentRepository.count(), comments.size());
+//
+//    }
+//
+//    @Test
+//    @Order(4)
+//    void findAllNovelsByEntityId() {
+//
+//       Long novelId = novelRepository.findAll().get(0).getId();
+//
+//       List<CommentProjection> commentsByNovel = commentService.findAllNovelsByEntityId(novelId);
+//
+//       assertEquals(1, commentsByNovel.size());
+//    }
+//
+//    @Test
+//    @Order(5)
+//    void findAllChaptersByEntityId() {
+//
+//       Long chapterId = chapterRepository.findAll().get(0).getId();
+//
+//       List<CommentProjection> commentsByChapter = commentService.findAllNovelsByEntityId(chapterId);
+//
+//       assertEquals(1, commentsByChapter.size());
+//    }
+//
+//    @Test
+//    @Order(6)
+//    void update() {
+//
+//       Comment comment = commentRepository.findAll().get(0);
+//
+//       CommentDTO commentChapterDTO = new CommentDTO(comment);
+//       commentChapterDTO.setBodyText("Obra prima");
+//
+//       Comment commentUpdated = commentService.update(commentChapterDTO, comment.getId());
+//       assertEquals("Obra prima", commentUpdated.getBodyText());
+//    }
+//
+//    @Test
+//    @Order(7)
+//    void delete() {
+//
+//       Long commentId = commentRepository.findAll().get(0).getId();
+//
+//       commentService.delete(commentId);
+//       
+//       assertEquals(1, commentRepository.count());
+//    }
+}

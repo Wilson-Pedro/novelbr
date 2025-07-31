@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CommentServiceTest" project="backend" tests="2" started="2" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.services.CommentServiceTest" time="2.703" displayname="CommentServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.CommentServiceTest" time="1.538" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.CommentServiceTest" time="1.163" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:save()]"/>
+  </testsuite>
+</testrun>
