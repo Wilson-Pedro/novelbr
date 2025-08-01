@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CommentControllerTest" project="backend" tests="6" started="6" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.controllers.CommentControllerTest" time="5.841" displayname="CommentControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="2.205" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="3.011" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:save()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.097" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAll()]"/>
+    <testcase name="findAllNovelsCommentsByNovelId" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.139" displayname="findAllNovelsCommentsByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAllNovelsCommentsByNovelId()]"/>
+    <testcase name="findAllChaptersCommentsByNovelId" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.195" displayname="findAllChaptersCommentsByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAllChaptersCommentsByNovelId()]"/>
+    <testcase name="update" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.175" displayname="update()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:update()]"/>
+  </testsuite>
+</testrun>

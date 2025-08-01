@@ -77,27 +77,28 @@ class CommentServiceTest {
     @Test
     @Order(1)
     void preparingTestEnvironment() {
-       chapterRepository.deleteAll();
-       novelRepository.deleteAll();
-       novelStatusRepository.deleteAll();
-       genderRepository.deleteAll();
-       authorRepository.deleteAll();
-       Integer id = 1;
+    	commentRepository.deleteAll();
+    	chapterRepository.deleteAll();
+    	novelRepository.deleteAll();
+    	novelStatusRepository.deleteAll();
+    	genderRepository.deleteAll();
+    	authorRepository.deleteAll();
+    	Integer id = 1;
 
-       for(GenderType type : GenderType.values()) {
-          genders.add(new Gender(type));
-          id++;
-       }
+    	for(GenderType type : GenderType.values()) {
+    		genders.add(new Gender(type));
+    		id++;
+    	}
 
-       for(NovelStatusType type : NovelStatusType.values()) {
-          novelStatsus.add(new NovelStatus(type));
-       }
+    	for(NovelStatusType type : NovelStatusType.values()) {
+    		novelStatsus.add(new NovelStatus(type));
+    	}
 
-       novelStatusRepository.saveAll(novelStatsus);
-       genderRepository.saveAll(genders);
-       author = authorRepository.save(author);
-       novelRepository.save(novel);
-       chapterRepository.save(chapter);
+    	novelStatusRepository.saveAll(novelStatsus);
+    	genderRepository.saveAll(genders);
+    	author = authorRepository.save(author);
+    	novelRepository.save(novel);
+    	chapterRepository.save(chapter);
     }
 
     @Test
@@ -110,8 +111,6 @@ class CommentServiceTest {
     	
 		CommentDTO commentNovelDTO = new CommentDTO(null, authorId, author.getUsername(), 1, novelId, "História Incrível");
 		CommentDTO commentChapterDTO = new CommentDTO(null, authorId, author.getUsername(), 2, chapterId, "História Incrível");
-	   
-		System.out.println("=====================================");
 	
 		Comment commentNovelSaved = commentService.save(commentNovelDTO);
 		assertEquals(CommentBy.NOVEL, commentNovelSaved.getCommentBy());
@@ -172,14 +171,14 @@ class CommentServiceTest {
        assertEquals("Obra prima", commentUpdated.getBodyText());
     }
 
-//    @Test
-//    @Order(7)
-//    void delete() {
-//
-//       Long commentId = commentRepository.findAll().get(0).getId();
-//
-//       commentService.delete(commentId);
-//       
-//       assertEquals(1, commentRepository.count());
-//    }
+    @Test
+    @Order(7)
+    void delete() {
+
+       Long commentId = commentRepository.findAll().get(0).getId();
+
+       commentService.delete(commentId);
+       
+       assertEquals(1, commentRepository.count());
+    }
 }

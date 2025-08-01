@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="CommentControllerTest" project="backend" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.controllers.CommentControllerTest" time="5.772" displayname="CommentControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="2.891" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="2.25" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:save()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.127" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAll()]"/>
+    <testcase name="findAllNovelsCommentsByNovelId" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.188" displayname="findAllNovelsCommentsByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAllNovelsCommentsByNovelId()]"/>
+    <testcase name="findAllChaptersCommentsByNovelId" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.117" displayname="findAllChaptersCommentsByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAllChaptersCommentsByNovelId()]"/>
+  </testsuite>
+</testrun>
