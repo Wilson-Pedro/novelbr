@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="CommentControllerTest" project="backend" tests="3" started="3" failures="0" errors="0" ignored="0">
-  <testsuite name="com.novelsbr.backend.controllers.CommentControllerTest" time="5.011" displayname="CommentControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]">
-    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="3.178" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:preparingTestEnvironment()]"/>
-    <testcase name="save" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="1.707" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:save()]"/>
-    <testcase name="findAll" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.12" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAll()]"/>
-  </testsuite>
-</testrun>

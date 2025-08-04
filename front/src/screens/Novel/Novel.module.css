@@ -108,6 +108,11 @@
     margin-bottom: 2%;
 }
 
+.spa {
+    width: 100%;
+    padding: 5%;
+}
+
 .capitulos {
     width: 100%;
     text-align: center;

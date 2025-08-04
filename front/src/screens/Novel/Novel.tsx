@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
 import axios from 'axios';
 import Comments from '../../component/Comments/Comments';
+import { Tabs, Tab } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -26,23 +27,23 @@ export interface BackendCommentsI {
 }
 
 interface NovelInfo {
-    imageUri:string;
-    novelName:string;
-    novelStatus:string;
-    username:string;
-    year:number;
-    synopsis:string;
-    authorId:number;
+    imageUri: string;
+    novelName: string;
+    novelStatus: string;
+    username: string;
+    year: number;
+    synopsis: string;
+    authorId: number;
 }
 
 interface ChapterTiles {
-    title:String;
+    title: String;
 }
 
 const Novel: React.FC = () => {
 
     const params = useParams();
-    const novelId =  parseInt(params.novelId || '');
+    const novelId = parseInt(params.novelId || '');
 
     const location = useLocation();
     const { isAuth } = location.state || {};
@@ -57,7 +58,7 @@ const Novel: React.FC = () => {
     const navigate = useNavigate();
 
     const token = localStorage.getItem('token');
-    const[userAuthenticate, setUserAuthenticate] = useState(isAuth);
+    const [userAuthenticate, setUserAuthenticate] = useState(isAuth);
 
     useEffect(() => {
 
@@ -70,7 +71,7 @@ const Novel: React.FC = () => {
                 setNovelInfo(response.data);
                 setNovelName(response.data.novelName);
 
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         }
@@ -79,7 +80,7 @@ const Novel: React.FC = () => {
             try {
                 const response = await axios.get(`${API_URL}/genders/novel/${novelId}`);
                 setGenders(response.data);
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         }
@@ -88,7 +89,7 @@ const Novel: React.FC = () => {
             try {
                 const response = await axios.get(`${API_URL}/chapters/novelsTile/novel/${novelId}`);
                 setChapterTitles(response.data)
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         }
@@ -97,15 +98,15 @@ const Novel: React.FC = () => {
             try {
                 const response = await axios.get(`${API_URL}/comments/novels/${novelId}`);
                 setBackendComments(response.data)
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         }
 
         fetchComments();
-        fetchNovelsChapterTitles(); 
+        fetchNovelsChapterTitles();
         fetchNovelInfo();
-        fetchNovelGenders(); 
+        fetchNovelGenders();
     }, [novelId, novelName]);
 
     const onAddComment = (comment: BackendCommentsI) => {
@@ -121,7 +122,7 @@ const Novel: React.FC = () => {
         setBackendComments(c => c.filter(c => c.id !== commentId));
     }
 
-    function goToChapter(chapterNumber:number) {
+    function goToChapter(chapterNumber: number) {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });
     }
 
@@ -129,15 +130,15 @@ const Novel: React.FC = () => {
         navigate(`/chapterRegister/${novelId}`);
     }
 
-    return(
-        <div className={styles.container}> 
+    return (
+        <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar 
+                <Navbar
                     userAuthenticate={userAuthenticate}
                 />
             </nav>
             <div className={styles.main}>
-                <div className={styles.mainHead}> 
+                <div className={styles.mainHead}>
                     <div className={styles.containerImage}>
                         <img className="img-fluid" src={`${IMG_PATH}/${novelInfo.imageUri}` || imagePath} />
                     </div>
@@ -145,10 +146,10 @@ const Novel: React.FC = () => {
                         <h1>{novelInfo.novelName || '---'}</h1>
                         <p><strong>Autor:</strong> {novelInfo.username || '---'}</p>
                         <p><strong>Gêneros:</strong> {genders.map((gender, index) => (
-                            <span>{gender}{(index+1) < genders.length ? <>, </> : <>.</>} </span>
+                            <span>{gender}{(index + 1) < genders.length ? <>, </> : <>.</>} </span>
                         ))}</p>
                         <p><strong>Ano:</strong> {novelInfo.year || '---'}</p>
-                        
+
                         <p><strong>Status:</strong> {novelInfo.novelStatus || '---'}</p>
 
                         <h4>Sinopse</h4>
@@ -160,44 +161,53 @@ const Novel: React.FC = () => {
                 {token != null && authorId === novelInfo.authorId ? (
                     <>
                         <div className={styles.div_btn}>
-                            <button 
+                            <button
                                 onClick={goToChapterRegister}
-                                type="button" 
+                                type="button"
                                 className="btn btn-warning"
                             >Cadastrar Capítulo</button>
                         </div>
                     </>
-                ): (
+                ) : (
                     <></>
                 )}
-                <hr />
-                <div className={styles.capitulos}>
-                    <h1>Capítulos</h1>
-                    {chapterTiles.length === 0 ? (
-                        <>
-                            <br/>
-                            <p>Nenhum capítulo foi registrado.</p>
-                        </>
-                    ) : (
-                        <ul>
-                            {chapterTiles.map((data, index) => (
-                                <li onClick={() => goToChapter(index+1)}>{index+1}º {data.title}</li>
-                            ))}
-                        </ul>
-                    ) }
-                    
-                </div>
-                <div className={styles.commentsDiv}>
-                    {token && (
-                        <Comments 
-                            currentUserId={authorId}
-                            comments={backendComments}
-                            entityId={novelId}
-                            onAddComment={onAddComment}
-                            handleDeleteComment={handleDeleteComment}
-                            handleUpdateComment={handleUpdateComment}
-                        />
-                    )}
+                <div className={styles.spa}>
+                    <div >
+                        <Tabs defaultActiveKey="secao1" id="tabs-example" className="mb-3">
+                            <Tab eventKey="secao1" title="Capítulos">
+                                <div className={styles.capitulos}>
+                                    <h1>Capítulos</h1>
+                                    {chapterTiles.length === 0 ? (
+                                        <>
+                                            <br />
+                                            <p>Nenhum capítulo foi registrado.</p>
+                                        </>
+                                    ) : (
+                                        <ul>
+                                            {chapterTiles.map((data, index) => (
+                                                <li onClick={() => goToChapter(index + 1)}>{index + 1}º {data.title}</li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            </Tab>
+                            <Tab eventKey="secao2" title="Comentários">
+                                <div className={styles.commentsDiv}>
+                                    {token && (
+                                        <Comments
+                                            currentUserId={authorId}
+                                            comments={backendComments}
+                                            entityId={novelId}
+                                            onAddComment={onAddComment}
+                                            handleDeleteComment={handleDeleteComment}
+                                            handleUpdateComment={handleUpdateComment}
+                                        />
+                                    )}
+                                </div>
+                            </Tab>
+                        </Tabs>
+                    </div>
+
                 </div>
             </div>
             <Footer />

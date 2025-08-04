@@ -99,8 +99,8 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId, comments, entityId, 
 
     return(
         <div className={styles.comments}>
-            <h3 className={styles.commentsTitle}>Comments</h3>
-            <div className={styles.commentsFormTitle}>Write Comment</div>
+            <h3 className={styles.commentsTitle}>Commentários</h3>
+            <div className={styles.commentsFormTitle}>Escreva um comentário</div>
             <CommentForm 
                 submitLabel="Comentar" 
                 handleSubmit={addComment}

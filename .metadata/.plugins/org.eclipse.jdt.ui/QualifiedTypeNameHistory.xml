@@ -8,13 +8,11 @@
     <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.CommentRepository"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
     <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.web.api.CommentAPI"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.services.CommentService"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Inheritance"/>
     <fullyQualifiedTypeName name="jakarta.persistence.InheritanceType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
@@ -52,7 +50,6 @@
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
     <fullyQualifiedTypeName name="java.util.List"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.Query"/>
@@ -60,4 +57,7 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.projections.CommentProjection"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.CommentDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.CommentBy"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.services.CommentService"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.CommentRepository"/>
 </qualifiedTypeNameHistroy>
