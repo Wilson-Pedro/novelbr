@@ -54,6 +54,7 @@ const Novel: React.FC = () => {
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
     const [novelName, setNovelName] = useState<string>('');
     const [authorId, setAuthorId] = useState<number>(0);
+    const [commentByCode, setCommentByCode] = useState<number>(1);
 
     const navigate = useNavigate();
 
@@ -108,6 +109,65 @@ const Novel: React.FC = () => {
         fetchNovelInfo();
         fetchNovelGenders();
     }, [novelId, novelName]);
+
+    // COMMENTS
+
+    const postComment = async (bodyText:string, parentId:number) => {
+        try {
+            const response = await axios.post(`${API_URL}/comments/`, {
+                authorId: authorId,
+                commentByCode,
+                entityId: novelId,
+                parentId: parentId ? parentId : null,
+                bodyText
+
+            }, 
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
+            const newComment = response.data;
+            onAddComment(newComment);
+
+        } catch(error) {
+            console.log("Error ao adicionar comentário", error);
+        }
+    };
+
+    const updateComment = async (bodyText:string, commentId:number) => {
+
+        try {
+            const response = await axios.put(`${API_URL}/comments/${commentId}`, {
+                bodyText
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+
+            const commentUpdated = response.data;
+            handleUpdateComment(commentUpdated, commentId);
+        } catch(error) {
+            console.log(error)
+        }
+    };
+
+    const deleteComment = (commentId:number) => {
+        try {
+            if(window.confirm('Delete this comment?')) {
+                axios.delete(`${API_URL}/comments/${commentId}`, {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
+            }
+        } catch(error) {
+            console.log(error)
+        }
+        handleDeleteComment(commentId)
+    }
 
     const onAddComment = (comment: BackendCommentsI) => {
         setBackendComments(c => [comment, ...c])
@@ -172,7 +232,7 @@ const Novel: React.FC = () => {
                     <></>
                 )}
                 <div className={styles.spa}>
-                    <div >
+                    <div className="container">
                         <Tabs defaultActiveKey="secao1" id="tabs-example" className="mb-3">
                             <Tab eventKey="secao1" title="Capítulos">
                                 <div className={styles.capitulos}>
@@ -193,16 +253,14 @@ const Novel: React.FC = () => {
                             </Tab>
                             <Tab eventKey="secao2" title="Comentários">
                                 <div className={styles.commentsDiv}>
-                                    {token && (
-                                        <Comments
-                                            currentUserId={authorId}
-                                            comments={backendComments}
-                                            entityId={novelId}
-                                            onAddComment={onAddComment}
-                                            handleDeleteComment={handleDeleteComment}
-                                            handleUpdateComment={handleUpdateComment}
-                                        />
-                                    )}
+                                    <Comments
+                                        currentUserId={authorId}
+                                        comments={backendComments}
+                                        postComment={postComment}
+                                        putComment={updateComment}
+                                        deleteComment={deleteComment}
+                                        token={token}
+                                    />
                                 </div>
                             </Tab>
                         </Tabs>

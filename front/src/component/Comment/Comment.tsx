@@ -27,6 +27,7 @@ interface CommentProps {
     parentId:any | null
     addComment:any
     replyComment?:any
+    token:string | null
 }
 
 const Comment: React.FC<CommentProps> = 
@@ -39,24 +40,27 @@ const Comment: React.FC<CommentProps> =
     setActiveComment, 
     parentId,
     addComment,
-    replyComment
+    replyComment,
+    token
 }) => {
     const fiveMinutes = 300000;
     const timePassed = new Date().getTime() - new Date(comment.createdAt).getTime() > fiveMinutes;
-    const canReply = Boolean(currentUserId);
-    const canEdit = currentUserId === comment.authorId && !timePassed;
-    const canDelete = currentUserId === comment.authorId && !timePassed;
+    const canReply = Boolean(currentUserId) && token !== null;
+    const canEdit = currentUserId === comment.authorId && !timePassed && token !== null;
+    const canDelete = currentUserId === comment.authorId && !timePassed && token !== null;
     const createdAt = new Date(comment.createdAt).toLocaleDateString();
 
     const isReplying = 
         activeComment &&
         activeComment.type === "replying" && 
-        activeComment.id === comment.id;
+        activeComment.id === comment.id  && 
+        token !== null;
 
     const isEditing = 
         activeComment &&
         activeComment.type === "editing" && 
-        activeComment.id === comment.id;
+        activeComment.id === comment.id  && 
+        token !== null;
 
     const replyId = parentId ? parentId : comment.id;
     
@@ -124,6 +128,7 @@ const Comment: React.FC<CommentProps> =
                                 parentId={comment.id}
                                 addComment={addComment}
                                 replyComment={replyComment}
+                                token={token}
                             />
                         ))}
                     </div>

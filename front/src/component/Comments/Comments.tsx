@@ -5,22 +5,26 @@ import styles from './Comments.module.css';
 
 import { BackendCommentsI } from '../../screens/Novel/Novel';
 
-import axios from 'axios';
-
 const API_URL = process.env.REACT_APP_API;
 
 interface CommentsProps {
     currentUserId:number;
     comments:BackendCommentsI[];
-    entityId:number
-    onAddComment:any;
-    handleDeleteComment:any;
-    handleUpdateComment:any;
+    postComment:any;
+    putComment:any;
+    deleteComment:any;
+    token:string | null;
 }
 
-const Comments: React.FC<CommentsProps> = ({ currentUserId, comments, entityId, onAddComment, handleDeleteComment, handleUpdateComment }) => {
+const Comments: React.FC<CommentsProps> = ({ 
+    currentUserId, 
+    comments,
+    postComment,
+    putComment,
+    deleteComment,
+    token
+}) => {
 
-    const [commentByCode, setCommentByCode] = useState<number>(1);
     const [activeComment, setActiveComment] = useState(null);
 
     const rootComments = comments.filter(
@@ -37,21 +41,7 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId, comments, entityId, 
     };
 
     const addComment = async (bodyText:string, parentId:number) => {
-        try {
-            const response = await axios.post(`${API_URL}/comments/`, {
-                authorId: currentUserId,
-                commentByCode,
-                entityId,
-                parentId: parentId ? parentId : null,
-                bodyText
-
-            });
-            const newComment = response.data;
-            onAddComment(newComment);
-
-        } catch(error) {
-            console.log("Error ao adicionar comentário", error);
-        }
+        postComment(bodyText, parentId);
     };
 
     const replyComment = async (bodyText:string, parentId:number) => {
@@ -60,52 +50,27 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId, comments, entityId, 
     };
 
     const updateComment = async (bodyText:string, commentId:number) => {
-
-        try {
-            const response = await axios.put(`${API_URL}/comments/${commentId}`, {
-                    bodyText
-            })
-
-            const commentUpdated = response.data;
-            handleUpdateComment(commentUpdated, commentId);
-        } catch(error) {
-            console.log(error)
-        }
+        putComment(bodyText, commentId)
         setActiveComment(null);
     };
 
-    const deleteComment = (commentId:number) => {
-        try {
-            if(window.confirm('Delete this comment?')) {
-                axios.delete(`${API_URL}/comments/${commentId}`);
-            }
-        } catch(error) {
-            console.log(error)
-        }
-        handleDeleteComment(commentId)
+    const deleteThisComment = (commentId:number) => {
+        deleteComment(commentId)
     }
-
-    // useEffect(() => {
-    //     const fetchComments = async () => {
-    //         try {
-    //             const response = await axios.get(`${API_URL}/comments`);
-    //             setBackendComments(response.data)
-    //         } catch(error) {
-    //             console.log(error)
-    //         }
-    //     }
-    //     fetchComments();
-    // }, []);
 
     return(
         <div className={styles.comments}>
             <h3 className={styles.commentsTitle}>Commentários</h3>
-            <div className={styles.commentsFormTitle}>Escreva um comentário</div>
-            <CommentForm 
-                submitLabel="Comentar" 
-                handleSubmit={addComment}
-                handleCancel
-            />
+            {token && (
+                <>
+                    <div className={styles.commentsFormTitle}>Escreva um comentário</div>
+                    <CommentForm 
+                        submitLabel="Comentar" 
+                        handleSubmit={addComment}
+                        handleCancel
+                    />
+                </>
+            )}
             <div className={styles.commentsContainer}>
                 {rootComments.map((rootComment) => (
                     <>
@@ -114,13 +79,14 @@ const Comments: React.FC<CommentsProps> = ({ currentUserId, comments, entityId, 
                             comment={rootComment}
                             replies={getReplies(rootComment.id)}
                             currentUserId={currentUserId}
-                            deleteComment={deleteComment}
+                            deleteComment={deleteThisComment}
                             updateComment={updateComment}
                             activeComment={activeComment}
                             setActiveComment={setActiveComment}
                             parentId={rootComment.id}
                             addComment={addComment}
                             replyComment={replyComment}
+                            token={token}
                         />
                     </>
                 ))}

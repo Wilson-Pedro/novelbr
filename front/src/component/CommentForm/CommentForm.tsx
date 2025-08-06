@@ -2,11 +2,11 @@ import React,{ useState, useEffect } from 'react';
 import styles from './CommentForm.module.css';
 
 interface CommentFormProp {
-    handleSubmit: any
-    submitLabel: any
-    hasCancelButton?:any
-    initialText?: string
-    handleCancel: any
+    handleSubmit: any;
+    submitLabel: any;
+    hasCancelButton?:any;
+    initialText?: string;
+    handleCancel: any;
 }
 
 const CommentForm: React.FC<CommentFormProp> = ({ 
@@ -14,7 +14,7 @@ const CommentForm: React.FC<CommentFormProp> = ({
     submitLabel, 
     hasCancelButton = false, 
     initialText = "",
-    handleCancel
+    handleCancel,
     }) => {
     const [text, setText] = useState(initialText);
     const isTextAreaDisabled = text.length === 0;
