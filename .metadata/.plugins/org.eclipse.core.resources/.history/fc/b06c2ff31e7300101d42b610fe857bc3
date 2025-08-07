@@ -2,7 +2,6 @@ package com.novelsbr.backend.controllers;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -23,14 +22,11 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.dto.CommentDTO;
-import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
@@ -144,21 +140,6 @@ class CommentControllerTest {
 	       	chapterRepository.save(chapter);
 	}
 	
-	void getToken() {
-		Author author = new Author(null, "João", "Blue", "joao@gmail.com", "1234", UserRole.AUTHOR);
-		authorService.save(new AuthorDTO(author));
-		
-		LoginRequest login = new LoginRequest("Blue", "1234");
-		
-		var usernamePassword = new UsernamePasswordAuthenticationToken(login.getLogin(), login.getPassword());		
-		var authentication = authenticationManager.authenticate(usernamePassword);
-		
-		String token = tokenService.generateToken((Author) authentication.getPrincipal());
-		assertNotNull(token);
-		
-		TOKEN = token;
-	}
-	
 	@Test
 	@Order(2)
 	void save() throws Exception {
@@ -169,13 +150,10 @@ class CommentControllerTest {
 		CommentDTO commentNovelDTO = new CommentDTO(null, authorId, author.getUsername(), 1, novelId, "História Incrível");
 		
 		String jsonRequestCommentNovel = objectMapper.writeValueAsString(commentNovelDTO);
-		
-		getToken();
 			
 		mockMvc.perform(post(URI + "/")
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(jsonRequestCommentNovel)
-				.header("Authorization", "Bearer " + TOKEN))
+				.content(jsonRequestCommentNovel))
 				.andExpect(status().isCreated())
 				.andExpect(jsonPath("$.username", equalTo(author.getUsername())))
 				.andExpect(jsonPath("$.bodyText", equalTo(commentNovelDTO.getBodyText())));
@@ -231,8 +209,7 @@ class CommentControllerTest {
 			
 		mockMvc.perform(put(URI + "/{id}", commentId)
 				.contentType(MediaType.APPLICATION_JSON)
-				.content(jsonRequestCommentNovel)
-				.header("Authorization", "Bearer " + TOKEN))
+				.content(jsonRequestCommentNovel))
 				.andExpect(status().isOk())
 				.andExpect(jsonPath("$.username", equalTo(author.getUsername())))
 				.andExpect(jsonPath("$.bodyText", equalTo("Obra prima")));
@@ -246,9 +223,8 @@ class CommentControllerTest {
 		
 		Long commentId = commentRepository.findAll().get(0).getId();
 			
-		mockMvc.perform(MockMvcRequestBuilders.delete(URI + "/{id}", commentId)
-				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isNoContent());
+		mockMvc.perform(MockMvcRequestBuilders.delete(URI + "/{id}", commentId))
+		.andExpect(status().isNoContent());
 		
 		assertEquals(0, commentRepository.count());
 	}

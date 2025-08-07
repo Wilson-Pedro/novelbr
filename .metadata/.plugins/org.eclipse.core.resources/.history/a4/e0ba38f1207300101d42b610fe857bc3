@@ -246,9 +246,8 @@ class CommentControllerTest {
 		
 		Long commentId = commentRepository.findAll().get(0).getId();
 			
-		mockMvc.perform(MockMvcRequestBuilders.delete(URI + "/{id}", commentId)
-				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isNoContent());
+		mockMvc.perform(MockMvcRequestBuilders.delete(URI + "/{id}", commentId))
+		.andExpect(status().isNoContent());
 		
 		assertEquals(0, commentRepository.count());
 	}

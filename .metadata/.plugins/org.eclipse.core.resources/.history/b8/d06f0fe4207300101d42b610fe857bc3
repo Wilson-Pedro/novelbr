@@ -212,6 +212,7 @@ class CommentControllerTest {
 		Long chapterId = chapterRepository.findAll().get(0).getId();
     					
 		mockMvc.perform(get(URI + "/chapters/{chapterId}", chapterId)
+				.header("Authorization", "Bearer " + TOKEN)
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 		
@@ -246,9 +247,8 @@ class CommentControllerTest {
 		
 		Long commentId = commentRepository.findAll().get(0).getId();
 			
-		mockMvc.perform(MockMvcRequestBuilders.delete(URI + "/{id}", commentId)
-				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isNoContent());
+		mockMvc.perform(MockMvcRequestBuilders.delete(URI + "/{id}", commentId))
+		.andExpect(status().isNoContent());
 		
 		assertEquals(0, commentRepository.count());
 	}
