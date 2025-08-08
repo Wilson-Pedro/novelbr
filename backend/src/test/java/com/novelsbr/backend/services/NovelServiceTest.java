@@ -114,6 +114,18 @@ class NovelServiceTest {
 	}
 	
 	@Test
+	@Order(3)
+	void changeNovelStatus() {
+		Long novelId = novelRepository.findAll().get(0).getId();
+		
+		Novel novel = novelService.findById(novelId);
+		assertEquals(novel.getNovelStatus().getNovelStatusType(), NovelStatusType.IN_COURSE);
+		novelService.changeNovelStatus(novelId, 2);
+		novel = novelService.findById(novelId);
+		assertEquals(novel.getNovelStatus().getNovelStatusType(), NovelStatusType.FINISHED);
+	}
+	
+	@Test
 	void findNovelCards() {
 		
 		List<CardNovelDTO> list = novelService.findNovelCards();

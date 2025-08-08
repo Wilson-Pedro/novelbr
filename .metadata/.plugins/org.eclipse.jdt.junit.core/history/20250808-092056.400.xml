@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelServiceTest" project="backend" tests="9" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="NovelServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:save()]"/>
+    <testcase name="changeNovelStatus" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="changeNovelStatus()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:changeNovelStatus()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findAll()]"/>
+    <testcase name="searchNovel" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="searchNovel()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:searchNovel()]"/>
+    <testcase name="findNovelById" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="findNovelById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelById()]"/>
+    <testcase name="findNovelInfoByNovelId" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="findNovelInfoByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelInfoByNovelId()]"/>
+    <testcase name="findNovelCardsByUsername" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="findNovelCardsByUsername()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelCardsByUsername()]"/>
+    <testcase name="findNovelCards" classname="com.novelsbr.backend.services.NovelServiceTest" incomplete="true" displayname="findNovelCards()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelCards()]"/>
+  </testsuite>
+</testrun>

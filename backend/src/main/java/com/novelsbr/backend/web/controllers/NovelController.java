@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +16,7 @@ import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.records.ChangeStatusNovelRequest;
 import com.novelsbr.backend.services.NovelService;
 import com.novelsbr.backend.web.api.NovelAPI;
 
@@ -58,5 +60,11 @@ public class NovelController implements NovelAPI {
 		List<NovelDTO> novlesDTO = novelService.searchNovel(novelName)
 				.stream().map(x -> new NovelDTO(x)).toList();
 		return ResponseEntity.ok(novlesDTO);
+	}
+	
+	@PatchMapping("/changeNovelStatus")
+	public ResponseEntity<Void> changeNovelStatus(@RequestBody ChangeStatusNovelRequest request) {
+		novelService.changeNovelStatus(request.novelId(), request.novelStatusId());
+		return ResponseEntity.noContent().build();
 	}
 }

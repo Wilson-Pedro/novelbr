@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -31,7 +32,9 @@ import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
+import com.novelsbr.backend.domain.records.ChangeStatusNovelRequest;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
@@ -158,7 +161,28 @@ class NovelControllerTest {
 	}
 	
 	@Test
-	@Order(3)
+	@Order(4)
+	void changeNovelStatus() throws Exception {
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		
+		ChangeStatusNovelRequest request = new ChangeStatusNovelRequest(novelId, 2);
+		
+		String jsonRequest = objectMapper.writeValueAsString(request);
+			
+		mockMvc.perform(patch(URI + "/changeNovelStatus")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonRequest)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isNoContent());
+		
+		
+		Novel novel = novelRepository.findById(novelId).get();
+		
+		assertEquals(novel.getNovelStatus().getNovelStatusType(), NovelStatusType.FINISHED);
+	}
+	
+	@Test
 	void findAll() throws Exception {
 		
 		mockMvc.perform(get(URI)
@@ -167,7 +191,6 @@ class NovelControllerTest {
 	}
 	
 	@Test
-	@Order(4)
 	void findNovelCards() throws Exception {
 		
 		mockMvc.perform(get(URI + "/novelCards")

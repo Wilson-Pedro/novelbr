@@ -1,0 +1,5 @@
+package com.novelsbr.backend.domain.records;
+
+public record ChangeStatusRequest() {
+
+}

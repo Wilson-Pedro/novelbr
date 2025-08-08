@@ -24,4 +24,6 @@ public interface NovelService {
 	AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId);
 	
 	boolean existsByNovelName(String novelName);
+	
+	void changeNovelStatus(Long novelId, Integer novelStatusId);
 }
