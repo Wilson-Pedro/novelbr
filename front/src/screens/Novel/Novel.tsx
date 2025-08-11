@@ -10,6 +10,9 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 const API_URL = process.env.REACT_APP_API;
@@ -60,6 +63,9 @@ const Novel: React.FC = () => {
 
     const token = localStorage.getItem('token');
     const [userAuthenticate, setUserAuthenticate] = useState(isAuth);
+
+    const [showModal, setShowModal] = useState<boolean>(false);
+
 
     useEffect(() => {
 
@@ -190,6 +196,9 @@ const Novel: React.FC = () => {
         navigate(`/chapterRegister/${novelId}`);
     }
 
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     return (
         <div className={styles.container}>
             <nav className={styles.navbar}>
@@ -218,6 +227,25 @@ const Novel: React.FC = () => {
                         </p>
                     </div>
                 </div>
+                {showModal && (
+                        <Modal show={showModal} onHide={handleClose}>
+                            <Modal.Header closeButton>
+                            <Modal.Title>Mudar Status da Novel</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <form className={styles.formModal} action="">
+                                    <button className="btn btn-primary">Em Curso</button>
+                                    <button className="btn btn-primary">Finalizado</button>
+                                    <button className="btn btn-primary">Hiato</button>
+                                </form>
+                            </Modal.Body>
+                            <Modal.Footer>
+                            <Button variant="secondary" onClick={handleClose}>
+                                Close
+                            </Button>
+                            </Modal.Footer>
+                        </Modal>
+                )}
                 {token != null && authorId === novelInfo.authorId ? (
                     <>
                         <div className={styles.div_btn}>
@@ -226,6 +254,10 @@ const Novel: React.FC = () => {
                                 type="button"
                                 className="btn btn-warning"
                             >Cadastrar Capítulo</button>
+
+                            <Button variant="warning" onClick={handleShow}>
+                                Status da Novel
+                            </Button>
                         </div>
                     </>
                 ) : (

@@ -8570,3 +8570,5 @@ Caused by: java.lang.Exception: Resource '/backend/pom.xml' does not exist.
 2025-08-08 09:40:24,670 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
 2025-08-08 09:40:24,675 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\spring-react\novelbr\backend\src\test\resources
 2025-08-08 09:42:09,505 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-08 09:42:09,506 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - Copying 0 resource from src\main\resources to target\classes
+2025-08-08 09:42:09,511 [Worker-27: Building] INFO  o.a.m.s.f.DefaultMavenResourcesFiltering - skip non existing resourceDirectory C:\spring-react\novelbr\backend\src\test\resources

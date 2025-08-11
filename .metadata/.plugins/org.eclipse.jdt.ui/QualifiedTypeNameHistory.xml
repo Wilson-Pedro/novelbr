@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="jakarta.transaction.Transactional"/>
-    <fullyQualifiedTypeName name="org.hibernate.annotations.CreationTimestamp"/>
     <fullyQualifiedTypeName name="java.io.Serializable"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Table"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Id"/>
     <fullyQualifiedTypeName name="jakarta.persistence.GeneratedValue"/>
     <fullyQualifiedTypeName name="org.springframework.data.jpa.repository.JpaRepository"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestMapping"/>
-    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
-    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RestController"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.web.api.CommentAPI"/>
     <fullyQualifiedTypeName name="jakarta.persistence.Inheritance"/>
@@ -45,7 +41,6 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.NotFoundException"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelStatusService"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.NovelStatus"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.enums.NovelStatusType"/>
     <fullyQualifiedTypeName name="java.util.Optional"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PutMapping"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
@@ -60,4 +55,9 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.CommentService"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.CommentRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.enums.NovelStatusType"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PatchMapping"/>
+    <fullyQualifiedTypeName name="org.springframework.http.ResponseEntity"/>
+    <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestBody"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.domain.records.ChangeStatusNovelRequest"/>
 </qualifiedTypeNameHistroy>
