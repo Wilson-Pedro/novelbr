@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Search.module.css';
-import { FaSearch } from "react-icons/fa";
+import { FaSearch as FaSearchIcon } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
@@ -11,6 +11,8 @@ interface NovelsFinded {
     id:number;
     novelName:string;
 }
+
+const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
 const Search: React.FC = () => {
 
@@ -53,7 +55,7 @@ const Search: React.FC = () => {
                 placeholder='Buscar...'
                 onChange={(e) => setNovelName(e.target.value)}
             />
-            <FaSearch className={styles.searchIncon} />
+            <SearchIcon className={styles.searchIncon} />
             {novelsFinded.length > 0 && (
                 <ul className={styles.ul}>
                     {novelsFinded.map((novel) => (

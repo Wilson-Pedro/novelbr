@@ -58,6 +58,7 @@ const Novel: React.FC = () => {
     const [novelName, setNovelName] = useState<string>('');
     const [authorId, setAuthorId] = useState<number>(0);
     const [commentByCode, setCommentByCode] = useState<number>(1);
+    const [novelStatusId, setNovelStatusId] = useState<number>(1);
 
     const navigate = useNavigate();
 
@@ -66,6 +67,26 @@ const Novel: React.FC = () => {
 
     const [showModal, setShowModal] = useState<boolean>(false);
 
+    const changeNovelStatusSubmit = async () => {
+        try {
+            await axios.patch(`${API_URL}/novels/changeNovelStatus`, {
+                novelId,
+                novelStatusId,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const changeNovelStatus = (statusId: number) => {
+        setNovelStatusId(statusId);
+        changeNovelStatusSubmit();
+    }
 
     useEffect(() => {
 
@@ -118,7 +139,7 @@ const Novel: React.FC = () => {
 
     // COMMENTS
 
-    const postComment = async (bodyText:string, parentId:number) => {
+    const postComment = async (bodyText: string, parentId: number) => {
         try {
             const response = await axios.post(`${API_URL}/comments/`, {
                 authorId: authorId,
@@ -127,49 +148,49 @@ const Novel: React.FC = () => {
                 parentId: parentId ? parentId : null,
                 bodyText
 
-            }, 
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                });
             const newComment = response.data;
             onAddComment(newComment);
 
-        } catch(error) {
+        } catch (error) {
             console.log("Error ao adicionar comentário", error);
         }
     };
 
-    const updateComment = async (bodyText:string, commentId:number) => {
+    const updateComment = async (bodyText: string, commentId: number) => {
 
         try {
             const response = await axios.put(`${API_URL}/comments/${commentId}`, {
                 bodyText
             },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
 
             const commentUpdated = response.data;
             handleUpdateComment(commentUpdated, commentId);
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
     };
 
-    const deleteComment = (commentId:number) => {
+    const deleteComment = (commentId: number) => {
         try {
-            if(window.confirm('Delete this comment?')) {
+            if (window.confirm('Delete this comment?')) {
                 axios.delete(`${API_URL}/comments/${commentId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
                 });
             }
-        } catch(error) {
+        } catch (error) {
             console.log(error)
         }
         handleDeleteComment(commentId)
@@ -228,36 +249,49 @@ const Novel: React.FC = () => {
                     </div>
                 </div>
                 {showModal && (
-                        <Modal show={showModal} onHide={handleClose}>
-                            <Modal.Header closeButton>
+                    <Modal show={showModal} onHide={handleClose}>
+                        <Modal.Header closeButton>
                             <Modal.Title>Mudar Status da Novel</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <form className={styles.formModal} action="">
-                                    <button className="btn btn-primary">Em Curso</button>
-                                    <button className="btn btn-primary">Finalizado</button>
-                                    <button className="btn btn-primary">Hiato</button>
-                                </form>
-                            </Modal.Body>
-                            <Modal.Footer>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form onSubmit={changeNovelStatusSubmit} className={styles.formModal}>
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => changeNovelStatus(1)}>Em Curso
+                                </button>
+
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => changeNovelStatus(2)}>Finalizado
+                                </button>
+
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => changeNovelStatus(3)}>Hiato
+                                </button>
+                            </form>
+                        </Modal.Body>
+                        <Modal.Footer>
                             <Button variant="secondary" onClick={handleClose}>
                                 Close
                             </Button>
-                            </Modal.Footer>
-                        </Modal>
+                        </Modal.Footer>
+                    </Modal>
                 )}
                 {token != null && authorId === novelInfo.authorId ? (
                     <>
                         <div className={styles.div_btn}>
                             <button
                                 onClick={goToChapterRegister}
-                                type="button"
                                 className="btn btn-warning"
                             >Cadastrar Capítulo</button>
 
-                            <Button variant="warning" onClick={handleShow}>
+
+                            <button
+                                onClick={handleShow}
+                                className="btn btn-warning">
                                 Status da Novel
-                            </Button>
+                            </button>
                         </div>
                     </>
                 ) : (
