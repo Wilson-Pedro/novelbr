@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="java" project="backend" tests="69" started="69" failures="1" errors="11" ignored="0">
+  <testsuite name="com.novelsbr.backend.BackendApplicationTests" time="1.258" displayname="BackendApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]">
+    <testcase name="contextLoads" classname="com.novelsbr.backend.BackendApplicationTests" time="1.258" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.BackendApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.exceptions.AuthorExceptionsTest" time="0.221" displayname="AuthorExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.AuthorExceptionsTest]">
+    <testcase name="existingAuthorExceptionTest" classname="com.novelsbr.backend.exceptions.AuthorExceptionsTest" time="0.221" displayname="existingAuthorExceptionTest()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.AuthorExceptionsTest]/[method:existingAuthorExceptionTest()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.344" displayname="NovelExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.248" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="novelNotFound_WithIdNonexistent" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.02" displayname="novelNotFound_WithIdNonexistent()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:novelNotFound_WithIdNonexistent()]"/>
+    <testcase name="existingNovelException_With_existingNovelName" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.023" displayname="existingNovelException_With_existingNovelName()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:existingNovelException_With_existingNovelName()]"/>
+    <testcase name="novelInfoNotFound_WithIdNonexistent" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.03" displayname="novelInfoNotFound_WithIdNonexistent()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:novelInfoNotFound_WithIdNonexistent()]"/>
+    <testcase name="nullEntityException_When_NovelIsNull" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.015" displayname="nullEntityException_When_NovelIsNull()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:nullEntityException_When_NovelIsNull()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.GenderServiceTest" time="0.956" displayname="GenderServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.GenderServiceTest" time="0.207" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.services.GenderServiceTest" time="0.69" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]/[method:findAll()]"/>
+    <testcase name="findGendersByNovelId" classname="com.novelsbr.backend.services.GenderServiceTest" time="0.055" displayname="findGendersByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.GenderServiceTest]/[method:findGendersByNovelId()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.AuthorServiceTest" time="0.247" displayname="AuthorServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]">
+    <testcase name="setUp" classname="com.novelsbr.backend.services.AuthorServiceTest" time="0.09" displayname="setUp()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:setUp()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.AuthorServiceTest" time="0.138" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:save()]"/>
+    <testcase name="findById" classname="com.novelsbr.backend.services.AuthorServiceTest" time="0.015" displayname="findById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.AuthorServiceTest]/[method:findById()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.NovelServiceTest" time="0.369" displayname="NovelServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.147" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.036" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:save()]">
+      <error>com.novelsbr.backend.exceptions.NullFieldException: One or morem fields are blank.&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl.validadeRegistration(NovelServiceImpl.java:118)&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl.save(NovelServiceImpl.java:44)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)&#13;
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl$$SpringCGLIB$$0.save(&lt;generated&gt;)&#13;
+	at com.novelsbr.backend.services.NovelServiceTest.save(NovelServiceTest.java:107)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="changeNovelStatus" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.016" displayname="changeNovelStatus()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:changeNovelStatus()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.services.NovelServiceTest.changeNovelStatus(NovelServiceTest.java:119)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findAll" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.016" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findAll()]"/>
+    <testcase name="searchNovel" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.025" displayname="searchNovel()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:searchNovel()]"/>
+    <testcase name="findNovelById" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.015" displayname="findNovelById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelById()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.services.NovelServiceTest.findNovelById(NovelServiceTest.java:139)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findNovelInfoByNovelId" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.017" displayname="findNovelInfoByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelInfoByNovelId()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.services.NovelServiceTest.findNovelInfoByNovelId(NovelServiceTest.java:158)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findNovelCardsByUsername" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.037" displayname="findNovelCardsByUsername()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelCardsByUsername()]"/>
+    <testcase name="findNovelCards" classname="com.novelsbr.backend.services.NovelServiceTest" time="0.043" displayname="findNovelCards()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelServiceTest]/[method:findNovelCards()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.NovelStatusServiceTest" time="0.118" displayname="NovelStatusServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelStatusServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.NovelStatusServiceTest" time="0.099" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelStatusServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="findById" classname="com.novelsbr.backend.services.NovelStatusServiceTest" time="0.015" displayname="findById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.NovelStatusServiceTest]/[method:findById()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.ChapterServiceTest" time="0.267" displayname="ChapterServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.133" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.033" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:save()]"/>
+    <testcase name="findAllNovelsChapterTitleByNovelId" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.045" displayname="findAllNovelsChapterTitleByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:findAllNovelsChapterTitleByNovelId()]"/>
+    <testcase name="findMaxChapterNumber" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.015" displayname="findMaxChapterNumber()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:findMaxChapterNumber()]"/>
+    <testcase name="findLastChapters" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.015" displayname="findLastChapters()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:findLastChapters()]"/>
+    <testcase name="findChapterText" classname="com.novelsbr.backend.services.ChapterServiceTest" time="0.021" displayname="findChapterText()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.ChapterServiceTest]/[method:findChapterText()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.services.CommentServiceTest" time="0.52" displayname="CommentServiceTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.services.CommentServiceTest" time="0.189" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.services.CommentServiceTest" time="0.105" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:save()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.services.CommentServiceTest" time="0.018" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:findAll()]"/>
+    <testcase name="findAllNovelsByEntityId" classname="com.novelsbr.backend.services.CommentServiceTest" time="0.022" displayname="findAllNovelsByEntityId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:findAllNovelsByEntityId()]"/>
+    <testcase name="findAllChaptersByEntityId" classname="com.novelsbr.backend.services.CommentServiceTest" time="0.025" displayname="findAllChaptersByEntityId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:findAllChaptersByEntityId()]"/>
+    <testcase name="update" classname="com.novelsbr.backend.services.CommentServiceTest" time="0.083" displayname="update()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:update()]"/>
+    <testcase name="delete" classname="com.novelsbr.backend.services.CommentServiceTest" time="0.073" displayname="delete()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.services.CommentServiceTest]/[method:delete()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.637" displayname="ChapterControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.227" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.127" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:save()]">
+      <error>com.novelsbr.backend.exceptions.NullFieldException: One or morem fields are blank.&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl.validadeRegistration(NovelServiceImpl.java:118)&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl.save(NovelServiceImpl.java:44)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)&#13;
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl$$SpringCGLIB$$0.save(&lt;generated&gt;)&#13;
+	at com.novelsbr.backend.controllers.ChapterControllerTest.save(ChapterControllerTest.java:151)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findAllNovelsChapterTitleByNovelId" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.011" displayname="findAllNovelsChapterTitleByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findAllNovelsChapterTitleByNovelId()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.controllers.ChapterControllerTest.findAllNovelsChapterTitleByNovelId(ChapterControllerTest.java:176)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findMaxChapterNumberByNovelId" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.011" displayname="findMaxChapterNumberByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findMaxChapterNumberByNovelId()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.controllers.ChapterControllerTest.findMaxChapterNumberByNovelId(ChapterControllerTest.java:190)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findLastChapters" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.242" displayname="findLastChapters()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findLastChapters()]"/>
+    <testcase name="findChapterText" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.012" displayname="findChapterText()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findChapterText()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 1 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.controllers.ChapterControllerTest.findChapterText(ChapterControllerTest.java:200)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.GenderControllerTest" time="0.785" displayname="GenderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.182" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.379" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:getToken()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.164" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findAll()]"/>
+    <testcase name="findGendersByNovelId" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.056" displayname="findGendersByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findGendersByNovelId()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" time="0.551" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.102" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.205" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.125" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]">
+      <failure>java.lang.AssertionError: Status expected:&lt;201&gt; but was:&lt;400&gt;&#13;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)&#13;
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)&#13;
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:640)&#13;
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)&#13;
+	at com.novelsbr.backend.controllers.NovelControllerTest.save(NovelControllerTest.java:158)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</failure>
+    </testcase>
+    <testcase name="changeNovelStatus" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.01" displayname="changeNovelStatus()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:changeNovelStatus()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.controllers.NovelControllerTest.changeNovelStatus(NovelControllerTest.java:167)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.015" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]"/>
+    <testcase name="searchNovel" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.025" displayname="searchNovel()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:searchNovel()]"/>
+    <testcase name="findNovelInfoByNovelId" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.01" displayname="findNovelInfoByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelInfoByNovelId()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.controllers.NovelControllerTest.findNovelInfoByNovelId(NovelControllerTest.java:214)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findNovelCardsByUsername" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.01" displayname="findNovelCardsByUsername()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelCardsByUsername()]">
+      <error>java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:64)&#13;
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckIndex(Preconditions.java:70)&#13;
+	at java.base/jdk.internal.util.Preconditions.checkIndex(Preconditions.java:266)&#13;
+	at java.base/java.util.Objects.checkIndex(Objects.java:359)&#13;
+	at java.base/java.util.ArrayList.get(ArrayList.java:427)&#13;
+	at com.novelsbr.backend.controllers.NovelControllerTest.findNovelCardsByUsername(NovelControllerTest.java:203)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</error>
+    </testcase>
+    <testcase name="findNovelCards" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.036" displayname="findNovelCards()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelCards()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthControllerTest" time="0.398" displayname="AuthControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]">
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.276" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:save()]"/>
+    <testcase name="login" classname="com.novelsbr.backend.controllers.AuthControllerTest" time="0.121" displayname="login()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthControllerTest]/[method:login()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.359" displayname="AuthorControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]">
+    <testcase name="deleteAll" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.016" displayname="deleteAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:deleteAll()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.202" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:getToken()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.114" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:save()]"/>
+    <testcase name="findById" classname="com.novelsbr.backend.controllers.AuthorControllerTest" time="0.022" displayname="findById()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.AuthorControllerTest]/[method:findById()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.controllers.CommentControllerTest" time="0.644" displayname="CommentControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.138" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.262" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:save()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.036" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAll()]"/>
+    <testcase name="findAllNovelsCommentsByNovelId" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.035" displayname="findAllNovelsCommentsByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAllNovelsCommentsByNovelId()]"/>
+    <testcase name="findAllChaptersCommentsByNovelId" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.024" displayname="findAllChaptersCommentsByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:findAllChaptersCommentsByNovelId()]"/>
+    <testcase name="update" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.093" displayname="update()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:update()]"/>
+    <testcase name="delete" classname="com.novelsbr.backend.controllers.CommentControllerTest" time="0.047" displayname="delete()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.CommentControllerTest]/[method:delete()]"/>
+  </testsuite>
+</testrun>

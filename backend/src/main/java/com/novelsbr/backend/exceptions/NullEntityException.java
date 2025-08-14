@@ -1,0 +1,9 @@
+package com.novelsbr.backend.exceptions;
+
+public class NullEntityException extends RuntimeException {
+	private static final long serialVersionUID = 1L;
+
+	public NullEntityException(String msg) {
+		super(msg);
+	}
+}

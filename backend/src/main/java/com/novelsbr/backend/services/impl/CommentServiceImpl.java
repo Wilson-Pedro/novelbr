@@ -9,8 +9,8 @@ import com.novelsbr.backend.domain.dto.CommentDTO;
 import com.novelsbr.backend.domain.entities.Comment;
 import com.novelsbr.backend.domain.projections.CommentProjection;
 import com.novelsbr.backend.enums.CommentBy;
-import com.novelsbr.backend.exceptions.EntityNullException;
 import com.novelsbr.backend.exceptions.NotFoundException;
+import com.novelsbr.backend.exceptions.NullEntityException;
 import com.novelsbr.backend.repositories.CommentRepository;
 import com.novelsbr.backend.services.CommentService;
 import com.novelsbr.backend.services.strategy.CommentStrategyProvider;
@@ -27,7 +27,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public Comment save(CommentDTO commentDTO) {
 		Comment commentSaved = preparingCommentToSave(commentDTO);
-		if(commentSaved == null) throw new EntityNullException();
+		if(commentSaved == null) throw new NullEntityException("Comment cannot be null.");
 		
 		if(commentDTO.getParentId() != null) {
 			Comment commentFather = findById(commentDTO.getParentId());

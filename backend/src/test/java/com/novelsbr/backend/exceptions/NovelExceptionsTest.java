@@ -54,6 +54,7 @@ class NovelExceptionsTest {
 	
 	Set<Gender> genders = new HashSet<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
+	List<String> gendersStr = new ArrayList<>();
 	
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
@@ -67,7 +68,7 @@ class NovelExceptionsTest {
 	
 	@Test
 	@Order(1)
-	void setUp() {
+	void preparingTestEnvironment() {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		genderRepository.deleteAll();
@@ -83,6 +84,8 @@ class NovelExceptionsTest {
 			novelStatsus.add(new NovelStatus(type));
 		}
 		
+		gendersStr = genders.stream().map(g -> g.getGenderType().getType()).toList();
+		
 		novelStatusRepository.saveAll(novelStatsus);
 		genderRepository.saveAll(genders);
 		authorRepository.save(author);
@@ -90,17 +93,40 @@ class NovelExceptionsTest {
 	}
 
 	@Test
-	void entityNotFoundException01() {
-		assertThrows(NotFoundException.class, () -> novelService.findById(70L));
+	void novelNotFound_WithIdNonexistent() {
+		assertThrows(NotFoundException.class, () -> novelService.findById(700L));
 	}
 
 	@Test
-	void entityNotFoundException02() {
-		assertThrows(NotFoundException.class, () -> novelService.findNovelInfoByNovelId(70L));
+	void novelInfoNotFound_WithIdNonexistent() {
+		assertThrows(NotFoundException.class, () -> novelService.findNovelInfoByNovelId(700L));
 	}
 	
 	@Test
-	void existingNovelException() {
-		assertThrows(ExistingNovelException.class, () -> novelService.save(new NovelDTO(novel)));
+	void existingNovelException_With_existingNovelName() {
+		assertThrows(ExistingNovelException.class, () -> novelService.save(new NovelDTO(this.novel)));
+	}
+	
+	@Test
+	void nullEntityException_When_NovelIsNull() {
+		assertThrows(NullEntityException.class, () -> novelService.save(null));
+	}
+	
+	@Test
+	void nullFildException_When_NovelNameIsBlank() {
+		NovelDTO novelDto = new NovelDTO(null, "", this.author.getId(), 1, gendersStr, "synopsis", "imageUri");
+		assertThrows(NullFieldException.class, () -> novelService.save(novelDto));
+	}
+	
+	@Test
+	void nullFildException_When_SynopsisIsBlank() {
+		NovelDTO novelDto = new NovelDTO(null, "NovelTest", this.author.getId(), 1, gendersStr, "", "imageUri");
+		assertThrows(NullFieldException.class, () -> novelService.save(novelDto));
+	}
+	
+	@Test
+	void nullFildException_When_ImageUriIsBlank() {
+		NovelDTO novelDto = new NovelDTO(null, "NovelTest", this.author.getId(), 1, gendersStr, "synopsis", "");
+		assertThrows(NullFieldException.class, () -> novelService.save(novelDto));
 	}
 }

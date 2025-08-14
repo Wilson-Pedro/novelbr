@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelExceptionsTest.nullEntityException_With_authorNull" project="backend" tests="1" started="1" failures="1" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="2.064" displayname="NovelExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]">
+    <testcase name="nullEntityException_With_authorNull" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="2.064" displayname="nullEntityException_With_authorNull()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:nullEntityException_With_authorNull()]">
+      <failure>
+        <expected>class com.novelsbr.backend.exceptions.NullEntityException</expected>
+        <actual>class java.lang.NullPointerException</actual>
+        org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: &lt;com.novelsbr.backend.exceptions.NullEntityException&gt; but was: &lt;java.lang.NullPointerException&gt;&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)&#13;
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)&#13;
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)&#13;
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)&#13;
+	at com.novelsbr.backend.exceptions.NovelExceptionsTest.nullEntityException_With_authorNull(NovelExceptionsTest.java:121)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: java.lang.NullPointerException: Cannot invoke "com.novelsbr.backend.domain.entities.Author.getId()" because the return value of "com.novelsbr.backend.domain.entities.Novel.getAuthor()" is null&#13;
+	at com.novelsbr.backend.domain.dto.NovelDTO.&lt;init&gt;(NovelDTO.java:36)&#13;
+	at com.novelsbr.backend.exceptions.NovelExceptionsTest.lambda$4(NovelExceptionsTest.java:121)&#13;
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)&#13;
+	... 6 more&#13;
+&#13;
+
+      </failure>
+    </testcase>
+  </testsuite>
+</testrun>

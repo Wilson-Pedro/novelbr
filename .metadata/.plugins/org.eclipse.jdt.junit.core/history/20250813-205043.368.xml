@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelExceptionsTest" project="backend" tests="6" started="6" failures="1" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="2.695" displayname="NovelExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="2.184" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="nullEntityException_With_NovelNull" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.036" displayname="nullEntityException_With_NovelNull()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:nullEntityException_With_NovelNull()]"/>
+    <testcase name="novelNotFound_WithIdNonexistent" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.02" displayname="novelNotFound_WithIdNonexistent()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:novelNotFound_WithIdNonexistent()]"/>
+    <testcase name="existingNovelException_With_existingNovelName" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.052" displayname="existingNovelException_With_existingNovelName()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:existingNovelException_With_existingNovelName()]"/>
+    <testcase name="nullEntityException_With_authorNull" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.188" displayname="nullEntityException_With_authorNull()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:nullEntityException_With_authorNull()]">
+      <failure>
+        <expected>class com.novelsbr.backend.exceptions.NullEntityException</expected>
+        <actual>class org.springframework.dao.InvalidDataAccessApiUsageException</actual>
+        org.opentest4j.AssertionFailedError: Unexpected exception type thrown, expected: &lt;com.novelsbr.backend.exceptions.NullEntityException&gt; but was: &lt;org.springframework.dao.InvalidDataAccessApiUsageException&gt;&#13;
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)&#13;
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:67)&#13;
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:35)&#13;
+	at org.junit.jupiter.api.Assertions.assertThrows(Assertions.java:3128)&#13;
+	at com.novelsbr.backend.exceptions.NovelExceptionsTest.nullEntityException_With_authorNull(NovelExceptionsTest.java:125)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+Caused by: org.springframework.dao.InvalidDataAccessApiUsageException: The given id must not be null&#13;
+	at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible(EntityManagerFactoryUtils.java:371)&#13;
+	at org.springframework.orm.jpa.vendor.HibernateJpaDialect.translateExceptionIfPossible(HibernateJpaDialect.java:246)&#13;
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.translateExceptionIfPossible(AbstractEntityManagerFactoryBean.java:560)&#13;
+	at org.springframework.dao.support.ChainedPersistenceExceptionTranslator.translateExceptionIfPossible(ChainedPersistenceExceptionTranslator.java:61)&#13;
+	at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java:343)&#13;
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:160)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.data.jpa.repository.support.CrudMethodMetadataPostProcessor$CrudMethodMetadataPopulatingMethodInterceptor.invoke(CrudMethodMetadataPostProcessor.java:165)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:223)&#13;
+	at jdk.proxy2/jdk.proxy2.$Proxy145.findById(Unknown Source)&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl.save(NovelServiceImpl.java:47)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMethodInvocation.java:196)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:163)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)&#13;
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.aop.framework.CglibAopProxy$DynamicAdvisedInterceptor.intercept(CglibAopProxy.java:727)&#13;
+	at com.novelsbr.backend.services.impl.NovelServiceImpl$$SpringCGLIB$$0.save(&lt;generated&gt;)&#13;
+	at com.novelsbr.backend.exceptions.NovelExceptionsTest.lambda$5(NovelExceptionsTest.java:125)&#13;
+	at org.junit.jupiter.api.AssertThrows.assertThrows(AssertThrows.java:53)&#13;
+	... 6 more&#13;
+Caused by: java.lang.IllegalArgumentException: The given id must not be null&#13;
+	at org.springframework.util.Assert.notNull(Assert.java:181)&#13;
+	at org.springframework.data.jpa.repository.support.SimpleJpaRepository.findById(SimpleJpaRepository.java:313)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:359)&#13;
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker$RepositoryFragmentMethodInvoker.lambda$new$0(RepositoryMethodInvoker.java:277)&#13;
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.doInvoke(RepositoryMethodInvoker.java:170)&#13;
+	at org.springframework.data.repository.core.support.RepositoryMethodInvoker.invoke(RepositoryMethodInvoker.java:158)&#13;
+	at org.springframework.data.repository.core.support.RepositoryComposition$RepositoryFragments.invoke(RepositoryComposition.java:515)&#13;
+	at org.springframework.data.repository.core.support.RepositoryComposition.invoke(RepositoryComposition.java:284)&#13;
+	at org.springframework.data.repository.core.support.RepositoryFactorySupport$ImplementationMethodExecutionInterceptor.invoke(RepositoryFactorySupport.java:731)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.doInvoke(QueryExecutorMethodInterceptor.java:174)&#13;
+	at org.springframework.data.repository.core.support.QueryExecutorMethodInterceptor.invoke(QueryExecutorMethodInterceptor.java:149)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.data.projection.DefaultMethodInvokingMethodInterceptor.invoke(DefaultMethodInvokingMethodInterceptor.java:69)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.transaction.interceptor.TransactionAspectSupport.invokeWithinTransaction(TransactionAspectSupport.java:380)&#13;
+	at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInterceptor.java:119)&#13;
+	at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvocation.java:184)&#13;
+	at org.springframework.dao.support.PersistenceExceptionTranslationInterceptor.invoke(PersistenceExceptionTranslationInterceptor.java:138)&#13;
+	... 26 more&#13;
+&#13;
+
+      </failure>
+    </testcase>
+    <testcase name="novelInfoNotFound_WithIdNonexistent" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.101" displayname="novelInfoNotFound_WithIdNonexistent()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:novelInfoNotFound_WithIdNonexistent()]"/>
+  </testsuite>
+</testrun>

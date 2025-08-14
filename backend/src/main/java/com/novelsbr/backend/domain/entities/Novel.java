@@ -61,7 +61,6 @@ public class Novel implements Serializable {
 	
 	public Novel(NovelDTO novelDTO) {
 		this.novelName = novelDTO.getNovelName();
-		//this.novelStatus = new NovelStatus(NovelStatusType.toEnum(novelDTO.getNovelStatus()));
 		this.synopsis = novelDTO.getSynopsis();
 		this.imageUri = novelDTO.getImageUri();
 		this.dateRegistrion = novelDTO.getDateRegistrion();

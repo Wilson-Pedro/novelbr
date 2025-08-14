@@ -8,10 +8,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.novelsbr.backend.domain.dto.ProblamDTO;
-import com.novelsbr.backend.exceptions.EntityNullException;
 import com.novelsbr.backend.exceptions.ExistingAuthorException;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
 import com.novelsbr.backend.exceptions.NotFoundException;
+import com.novelsbr.backend.exceptions.NullEntityException;
+import com.novelsbr.backend.exceptions.NullFieldException;
 import com.novelsbr.backend.exceptions.TypeNotFoundException;
 
 @ControllerAdvice
@@ -47,11 +48,20 @@ public class ApiExceptionHandler {
 		return ResponseEntity.status(status).body(problamDTO);
 	}
 	
-	@ExceptionHandler(EntityNullException.class)
-	public ResponseEntity<ProblamDTO> entityNullException() {
+	@ExceptionHandler(NullEntityException.class)
+	public ResponseEntity<ProblamDTO> nullEntityException() {
 		HttpStatus status = HttpStatus.BAD_REQUEST;
 		
-		ProblamDTO problamDTO = new ProblamDTO("Entity is null", status.value(), Instant.now());
+		ProblamDTO problamDTO = new ProblamDTO("Entity cannot be null", status.value(), Instant.now());
+
+		return ResponseEntity.status(status).body(problamDTO);
+	}
+	
+	@ExceptionHandler(NullFieldException.class)
+	public ResponseEntity<ProblamDTO> nullFieldException() {
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ProblamDTO problamDTO = new ProblamDTO("Field cannot be is null", status.value(), Instant.now());
 
 		return ResponseEntity.status(status).body(problamDTO);
 	}

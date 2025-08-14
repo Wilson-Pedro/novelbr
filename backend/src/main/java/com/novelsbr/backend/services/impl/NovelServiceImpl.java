@@ -17,6 +17,8 @@ import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
 import com.novelsbr.backend.exceptions.NotFoundException;
+import com.novelsbr.backend.exceptions.NullEntityException;
+import com.novelsbr.backend.exceptions.NullFieldException;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
@@ -104,7 +106,20 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	public void validadeRegistration(NovelDTO novelDTO) {
-		if(existsByNovelName(novelDTO.getNovelName())) throw new ExistingNovelException(
-				"There is already a Novel with this name.");
+		if(novelDTO == null) {
+			throw new NullEntityException("Novel cannot be null.");
+			
+		} else if(existsByNovelName(novelDTO.getNovelName())) {
+			throw new ExistingNovelException("There is already a Novel with this name.");
+			
+		} else if(novelDTO.getNovelName().isBlank()) {
+			throw new NullFieldException("Novel Name cannot be blank.");	
+			
+		} else if(novelDTO.getSynopsis().isBlank()) {
+			throw new NullFieldException("Synopsis cannot be blank.");	
+			
+		} else if(novelDTO.getImageUri().isBlank()) {
+			throw new NullFieldException("ImageUri cannot be blank.");		
+		}
 	}
 }

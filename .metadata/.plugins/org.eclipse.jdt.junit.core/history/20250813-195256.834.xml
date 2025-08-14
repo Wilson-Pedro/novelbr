@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="com.novelsbr.backend.exceptions" project="backend" tests="5" started="5" failures="0" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.exceptions.AuthorExceptionsTest" time="23.057" displayname="AuthorExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.AuthorExceptionsTest]">
+    <testcase name="existingAuthorExceptionTest" classname="com.novelsbr.backend.exceptions.AuthorExceptionsTest" time="23.057" displayname="existingAuthorExceptionTest()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.AuthorExceptionsTest]/[method:existingAuthorExceptionTest()]"/>
+  </testsuite>
+  <testsuite name="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.808" displayname="NovelExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]">
+    <testcase name="setUp" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.673" displayname="setUp()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:setUp()]"/>
+    <testcase name="existingNovelException" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.03" displayname="existingNovelException()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:existingNovelException()]"/>
+    <testcase name="entityNotFoundException01" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.035" displayname="entityNotFoundException01()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:entityNotFoundException01()]"/>
+    <testcase name="entityNotFoundException02" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" time="0.055" displayname="entityNotFoundException02()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:entityNotFoundException02()]"/>
+  </testsuite>
+</testrun>
