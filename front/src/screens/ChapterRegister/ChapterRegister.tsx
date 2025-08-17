@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styles from './ChapterRegister.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
@@ -15,20 +15,36 @@ export default function ChapterRegister() {
 
     const navigate = useNavigate();
     const params = useParams();
-    const novelId = parseInt(params.novelId || '');
+    const novelName = params.novelName || '';
+    const [novelId, setNovelId] = useState<number>(0);
     const editor = useRef<any | null>(null);
     
     const [title, setTitle] = useState<string>('');
     const [chapterText, setChapterText] = useState<string>('');
 
-    // const location = useLocation();
-    // const { isAuth } = location.state || {};
+    useEffect(() => {
 
-    const token = localStorage.getItem('token');
-    if(!token) return <Navigate to="/login"/>
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+            navigate('/login');
+            return;
+        }
+
+        const fecthNovelName = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/novels/${novelName}`);
+                setNovelId(response.data.id);
+            } catch(error) {
+                console.log(error)
+            }
+        }
+        fecthNovelName();
+    }, [novelId, novelName]);
 
     const submitChapter = async (e:any) => { 
         e.preventDefault();
+        const token = localStorage.getItem('token');
         try {
             const response = await axios.post(`${API_URL}/chapters/`, {
                 title,
@@ -41,14 +57,14 @@ export default function ChapterRegister() {
                 }
             });
 
-            navigate(`/novel/${novelId}`, { replace: true });
+            navigate(`/novel/${novelName}`, { replace: true });
         } catch(error) {
             console.log(error);
         }
     }
 
     function goToNovel() {
-        navigate(`/novel/${novelId}`);
+        navigate(`/novel/${novelName}`);
     }
 
     return(

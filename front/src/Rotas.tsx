@@ -22,9 +22,9 @@ const Rotas: React.FC = () => {
                 <Route path="/profile/:username" element={ <Profile /> } />
                 <Route path="/homeUser" element={ <HomeUser /> } />
                 <Route path="/novelRegister" element={ <NovelRegister /> } />
-                <Route path="/novel/:novelId" element={ <Novel /> } />
+                <Route path="/novel/:novelName" element={ <Novel /> } />
                 <Route path="/novel/:novelName/chapter/:chapterNumber" element={ <Chapter /> } />
-                <Route path="/chapterRegister/:novelId" element={ <ChapterRegister /> } />
+                <Route path="/chapterRegister/:novelName" element={ <ChapterRegister /> } />
                 <Route path="/comments/test" element={ <CommentArea/> } />
             </Routes>
         </BrowserRouter>

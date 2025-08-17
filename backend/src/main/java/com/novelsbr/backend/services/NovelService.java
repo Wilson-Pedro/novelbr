@@ -13,6 +13,8 @@ public interface NovelService {
 	
 	Novel findById(Long id);
 	
+	Novel findNovelByNovelName(String novelName);
+	
 	List<Novel> findAll();
 	
 	List<Novel> searchNovel(String novelName);

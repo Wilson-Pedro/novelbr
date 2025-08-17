@@ -93,6 +93,12 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
+	public Novel findNovelByNovelName(String novelName) {
+		return novelRepository.findNovelByNovelName(novelName).orElseThrow(
+				() -> new NotFoundException("Novel not foundwith name: " + novelName));
+	}
+	
+	@Override
 	public void changeNovelStatus(Long novelId, Integer novelStatusId) {
 		NovelStatus novelStatus = novelStatusService.findById(novelStatusId);
 		Novel novel = findById(novelId);

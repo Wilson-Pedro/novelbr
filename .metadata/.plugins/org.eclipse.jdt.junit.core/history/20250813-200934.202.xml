@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelExceptionsTest" project="backend" tests="5" started="1" failures="0" errors="0" ignored="0">
-  <testsuite name="com.novelsbr.backend.exceptions.NovelExceptionsTest" incomplete="true" displayname="NovelExceptionsTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]">
-    <testcase name="setUp" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" incomplete="true" displayname="setUp()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:setUp()]"/>
-    <testcase name="nullEntityException" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" incomplete="true" displayname="nullEntityException()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:nullEntityException()]"/>
-    <testcase name="existingNovelException" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" incomplete="true" displayname="existingNovelException()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:existingNovelException()]"/>
-    <testcase name="entityNotFoundException01" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" incomplete="true" displayname="entityNotFoundException01()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:entityNotFoundException01()]"/>
-    <testcase name="entityNotFoundException02" classname="com.novelsbr.backend.exceptions.NovelExceptionsTest" incomplete="true" displayname="entityNotFoundException02()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.exceptions.NovelExceptionsTest]/[method:entityNotFoundException02()]"/>
-  </testsuite>
-</testrun>

@@ -46,7 +46,7 @@ interface ChapterTiles {
 const Novel: React.FC = () => {
 
     const params = useParams();
-    const novelId = parseInt(params.novelId || '');
+    const novelName = params.novelName || '';
 
     const location = useLocation();
     const { isAuth } = location.state || {};
@@ -55,7 +55,8 @@ const Novel: React.FC = () => {
     const [genders, setGenders] = useState([]);
     const [chapterTiles, setChapterTitles] = useState<ChapterTiles[]>([]);
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
-    const [novelName, setNovelName] = useState<string>('');
+    //const [novelName, setNovelName] = useState<string>('');
+    const [novelId, setNovelId] = useState<number>(0);
     const [authorId, setAuthorId] = useState<number>(0);
     const [commentByCode, setCommentByCode] = useState<number>(1);
     const [novelStatusId, setNovelStatusId] = useState<number>(1);
@@ -93,11 +94,20 @@ const Novel: React.FC = () => {
         const userId = parseInt(localStorage.getItem('userId') || '');
         setAuthorId(userId);
 
+        const fecthNovelName = async () => {
+            try {
+                const response = await axios.get(`${API_URL}/novels/${novelName}`);
+                setNovelId(response.data.id);
+            } catch(error) {
+                console.log(error)
+            }
+        }
+
         const fetchNovelInfo = async () => {
             try {
                 const response = await axios.get(`${API_URL}/novels/novelCards/${novelId}`);
                 setNovelInfo(response.data);
-                setNovelName(response.data.novelName);
+                //setNovelName(response.data.novelName);
 
             } catch (error) {
                 console.log(error)
@@ -131,6 +141,7 @@ const Novel: React.FC = () => {
             }
         }
 
+        fecthNovelName();
         fetchComments();
         fetchNovelsChapterTitles();
         fetchNovelInfo();
@@ -214,7 +225,7 @@ const Novel: React.FC = () => {
     }
 
     function goToChapterRegister() {
-        navigate(`/chapterRegister/${novelId}`);
+        navigate(`/chapterRegister/${novelName}`);
     }
 
     const handleClose = () => setShowModal(false);

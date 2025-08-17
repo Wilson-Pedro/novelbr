@@ -117,7 +117,7 @@ export default function Profile() {
                                     authorId={card.authorId}
                                     novelId={card.novelId}
                                     imagePath={card.imageUri}
-                                    title={card.novelName}
+                                    novelName={card.novelName}
                                     author={card.username}
                                     userAuthenticate={true}
                                 />

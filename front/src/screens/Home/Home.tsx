@@ -64,7 +64,7 @@ export default function Home() {
                             authorId={novelCard.authorId}
                             novelId={novelCard.novelId}
                             imagePath={novelCard.imageUri}
-                            title={novelCard.novelName}
+                            novelName={novelCard.novelName}
                             author={novelCard.username}
                             userAuthenticate={false}
                         />

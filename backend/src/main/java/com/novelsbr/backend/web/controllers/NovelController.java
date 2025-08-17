@@ -55,6 +55,12 @@ public class NovelController implements NovelAPI {
 		return ResponseEntity.ok(novelService.findNovelInfoByNovelId(novelId));
 	}
 	
+	@GetMapping("/{novelName}")
+	public ResponseEntity<NovelDTO> findNovelByNovelName(@PathVariable String novelName) {
+		Novel novel = novelService.findNovelByNovelName(novelName);
+		return ResponseEntity.ok(new NovelDTO(novel));
+	}
+	
 	@GetMapping("/search/{novelName}")
 	public ResponseEntity<List<NovelDTO>> searchNovel(@PathVariable String novelName) {
 		List<NovelDTO> novlesDTO = novelService.searchNovel(novelName)

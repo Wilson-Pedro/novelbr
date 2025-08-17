@@ -8,14 +8,14 @@ const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 interface CardProps {
     index?:number;
     imagePath?:string;
-    title?:string;
+    novelName:string;
     author?:string;
     userAuthenticate?:boolean;
-    authorId:number;
-    novelId:number;
+    authorId?:number;
+    novelId?:number;
 }
 
-const Card: React.FC<CardProps> = ({ imagePath, title, author, userAuthenticate, authorId, novelId }) => {
+const Card: React.FC<CardProps> = ({ imagePath, novelName, author, userAuthenticate, authorId, novelId }) => {
 
     const navigate = useNavigate();
     
@@ -24,7 +24,7 @@ const Card: React.FC<CardProps> = ({ imagePath, title, author, userAuthenticate,
     const srcPath = `${IMG_PATH}/${imagePath}`;
 
     function navigateToNovel() {
-        navigate(`/novel/${novelId}`, { state: userAuth });
+        navigate(`/novel/${novelName}`, { state: userAuth });
     }
 
     return(
@@ -34,7 +34,7 @@ const Card: React.FC<CardProps> = ({ imagePath, title, author, userAuthenticate,
                 <img className={styles.responsiveImage} src={srcPath}/>
             </div>
             <div className={styles.containerInfo}>
-                <h3><abbr title={title}>{title}</abbr></h3>
+                <h3><abbr title={novelName}>{novelName}</abbr></h3>
                 <p>by {author}</p>
             </div>
         </div>

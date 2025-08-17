@@ -2,4 +2,6 @@ metadata/
 
 node_modules/
 
+front/.env
+
 gitignore

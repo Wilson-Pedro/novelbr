@@ -34,6 +34,9 @@ public interface NovelAPI {
 	@GetMapping("/novelCards/{novelId}")
 	public ResponseEntity<AuthorNovelInfoDTO> findNovelInfoByNovelId(@PathVariable Long novelId);
 
+	@GetMapping("/{novelName}")
+	public ResponseEntity<NovelDTO> findNovelByNovelName(@PathVariable String novelName);
+	
 	@GetMapping("/search")
 	public ResponseEntity<List<NovelDTO>> searchNovel(@PathVariable String novelName);
 	
