@@ -40,7 +40,15 @@ interface NovelInfo {
 }
 
 interface ChapterTiles {
-    title: String;
+    title: string;
+}
+
+interface Page<T> {
+    content: T[];
+    totalPages: number;
+    totalElements: number;
+    number: number;
+    size: number;
 }
 
 const Novel: React.FC = () => {
@@ -60,6 +68,8 @@ const Novel: React.FC = () => {
     const [authorId, setAuthorId] = useState<number>(0);
     const [commentByCode, setCommentByCode] = useState<number>(1);
     const [novelStatusId, setNovelStatusId] = useState<number>(1);
+    const [page, setPage] = useState<number>(0);
+    const [totalPages, setTolalPages] = useState<number>(0);
 
     const navigate = useNavigate();
 
@@ -137,16 +147,30 @@ const Novel: React.FC = () => {
                 const response = await axios.get(`${API_URL}/comments/novels/${novelId}`);
                 setBackendComments(response.data)
             } catch (error) {
-                console.log(error)
+                console.log(error);
             }
         }
 
+        const fetchPageChapters = async (page:number) => {
+            try {
+                const response = await axios.get<Page<ChapterTiles>>(
+                    `${API_URL}/chapters/pages/novelsTile/${novelId}?page=${page}&size=3`
+                );
+                setChapterTitles(response.data.content)
+                setTolalPages(response.data.totalPages)
+
+            } catch(error) {
+                console.log(error);
+            }
+        }
+
+        fetchPageChapters(page);
         fecthNovelName();
         fetchComments();
         fetchNovelsChapterTitles();
         fetchNovelInfo();
         fetchNovelGenders();
-    }, [novelId, novelName]);
+    }, [novelId, novelName, page]);
 
     // COMMENTS
 

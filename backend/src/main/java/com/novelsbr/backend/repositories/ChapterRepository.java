@@ -2,10 +2,13 @@ package com.novelsbr.backend.repositories;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import com.novelsbr.backend.domain.entities.Chapter;
+import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.projections.ChapterTextProjection;
 import com.novelsbr.backend.domain.projections.LastChaptersProjection;
 import com.novelsbr.backend.domain.projections.NovelsChapterTitleProjection;
@@ -43,4 +46,6 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 			WHERE c.chapter_number = :chapterNumber AND n.novel_name = :novelName
 			""")
 	ChapterTextProjection findChapterText(Integer chapterNumber, String novelName);
+	
+	Page<Chapter> findAllByNovel(Novel novel, Pageable pageable);
 }

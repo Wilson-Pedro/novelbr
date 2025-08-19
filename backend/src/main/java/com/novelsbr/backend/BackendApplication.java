@@ -112,9 +112,31 @@ public class BackendApplication implements CommandLineRunner {
 		novelService.save(novelDTO3);
 		novelService.save(novelDTO4);
 
-		ChapterDTO chapterDTO = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter1 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter2 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter3 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter4 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter5 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter6 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter7 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter8 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter10 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter11 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter12 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
+		ChapterDTO chapter13 = new ChapterDTO(null, "Começo", "Era uma vez...", 1L);
 		
-		chapterService.save(chapterDTO);
+		chapterService.save(chapter1);
+		chapterService.save(chapter2);
+		chapterService.save(chapter3);
+		chapterService.save(chapter4);
+		chapterService.save(chapter5);
+		chapterService.save(chapter6);
+		chapterService.save(chapter7);
+		chapterService.save(chapter8);
+		chapterService.save(chapter10);
+		chapterService.save(chapter11);
+		chapterService.save(chapter12);
+		chapterService.save(chapter13);
 	}
 
 }

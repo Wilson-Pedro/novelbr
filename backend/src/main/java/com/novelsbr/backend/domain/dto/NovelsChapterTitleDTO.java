@@ -1,5 +1,6 @@
 package com.novelsbr.backend.domain.dto;
 
+import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.projections.NovelsChapterTitleProjection;
 
 public class NovelsChapterTitleDTO {
@@ -20,6 +21,13 @@ public class NovelsChapterTitleDTO {
 		this.novelId = projection.getNovelId();
 		this.authorId = projection.getAuthorId();
 		this.title = projection.getTitle();
+	}
+	
+	public NovelsChapterTitleDTO(Chapter chapter) {
+		this.chapterId = chapter.getId();
+		this.novelId = chapter.getNovel().getId();
+		this.authorId = chapter.getNovel().getAuthor().getId();
+		this.title = chapter.getTitle();
 	}
 
 	public Long getChapterId() {

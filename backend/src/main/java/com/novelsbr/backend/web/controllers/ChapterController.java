@@ -3,12 +3,14 @@ package com.novelsbr.backend.web.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
@@ -37,6 +39,17 @@ public class ChapterController implements ChapterAPI {
 	public ResponseEntity<List<NovelsChapterTitleDTO>> findNovelsChapterTilte(
 			@PathVariable Long novelId) {
 		return ResponseEntity.ok(chapterService.findAllNovelsChapterTitleByNovelId(novelId));
+	}
+	
+	@GetMapping("/pages/novelsTile/{novelId}")
+	public ResponseEntity<List<NovelsChapterTitleDTO>> chapterPagesByNovel(
+			@PathVariable Long novelId,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "2") int size) {
+		List<NovelsChapterTitleDTO> pagesDto = 
+				chapterService.findChapterPagesByNovel(page, size, novelId)
+				.stream().map(x -> new NovelsChapterTitleDTO(x)).toList();
+		return ResponseEntity.ok(pagesDto);
 	}
 	
 	@GetMapping("/{novelName}/{chapterNumber}") 

@@ -2,6 +2,8 @@ package com.novelsbr.backend.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
 import com.novelsbr.backend.domain.dto.LastChaptersDTO;
@@ -15,6 +17,8 @@ public interface ChapterService {
 	Chapter findById(Long id);
 	
 	ChapterTextDTO findChapterText(Integer chapterNumber, String novelName);
+	
+	Page<Chapter> findChapterPagesByNovel(int page, int size, Long novelId);
 	
 	List<NovelsChapterTitleDTO> findAllNovelsChapterTitleByNovelId(Long novelId);
 	

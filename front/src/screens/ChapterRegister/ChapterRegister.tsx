@@ -1,9 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './ChapterRegister.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Navigate, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -17,7 +17,6 @@ export default function ChapterRegister() {
     const params = useParams();
     const novelName = params.novelName || '';
     const [novelId, setNovelId] = useState<number>(0);
-    const editor = useRef<any | null>(null);
     
     const [title, setTitle] = useState<string>('');
     const [chapterText, setChapterText] = useState<string>('');
@@ -46,7 +45,7 @@ export default function ChapterRegister() {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post(`${API_URL}/chapters/`, {
+            await axios.post(`${API_URL}/chapters/`, {
                 title,
                 chapterText,
                 novelId
