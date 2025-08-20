@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="ChapterControllerTest" project="backend" tests="7" started="7" failures="1" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.controllers.ChapterControllerTest" time="3.882" displayname="ChapterControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="1.388" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="1.935" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:save()]"/>
+    <testcase name="findAllNovelsChapterTitleByNovelId" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.159" displayname="findAllNovelsChapterTitleByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findAllNovelsChapterTitleByNovelId()]"/>
+    <testcase name="findMaxChapterNumberByNovelId" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.148" displayname="findMaxChapterNumberByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findMaxChapterNumberByNovelId()]"/>
+    <testcase name="findChapterText" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.055" displayname="findChapterText()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findChapterText()]"/>
+    <testcase name="findLastChapters" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.036" displayname="findLastChapters()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:findLastChapters()]"/>
+    <testcase name="chapterPagesByNovel" classname="com.novelsbr.backend.controllers.ChapterControllerTest" time="0.135" displayname="chapterPagesByNovel()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.ChapterControllerTest]/[method:chapterPagesByNovel()]">
+      <failure>java.lang.AssertionError: JSON path "$.length()" expected:&lt;2&gt; but was:&lt;1&gt;&#13;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)&#13;
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)&#13;
+	at org.springframework.test.util.JsonPathExpectationsHelper.assertValue(JsonPathExpectationsHelper.java:172)&#13;
+	at org.springframework.test.web.servlet.result.JsonPathResultMatchers.lambda$value$2(JsonPathResultMatchers.java:112)&#13;
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)&#13;
+	at com.novelsbr.backend.controllers.ChapterControllerTest.chapterPagesByNovel(ChapterControllerTest.java:237)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</failure>
+    </testcase>
+  </testsuite>
+</testrun>

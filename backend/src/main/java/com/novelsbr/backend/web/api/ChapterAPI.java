@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
@@ -24,6 +25,12 @@ public interface ChapterAPI {
 	@GetMapping("/novelsTile/novel/{novelId}")
 	public ResponseEntity<List<NovelsChapterTitleDTO>> findNovelsChapterTilte(
 			@PathVariable Long novelId);
+	
+	@GetMapping("/pages/novelsTile/{novelId}")
+	public ResponseEntity<List<NovelsChapterTitleDTO>> chapterPagesByNovel(
+			@PathVariable Long novelId,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "2") int size);
 	
 	@GetMapping("/{novelName}/{chapterNumber}")
 	public ResponseEntity<ChapterTextDTO> findChapterText(

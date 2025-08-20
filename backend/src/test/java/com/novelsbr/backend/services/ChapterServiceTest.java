@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 
 import com.novelsbr.backend.domain.dto.ChapterDTO;
 import com.novelsbr.backend.domain.dto.ChapterTextDTO;
@@ -140,6 +141,7 @@ class ChapterServiceTest {
 	}
 	
 	@Test
+	@Order(5)
 	void findChapterText() {
 		
 		Chapter chapter = chapterRepository.findAll().get(1);
@@ -154,9 +156,36 @@ class ChapterServiceTest {
 	}
 	
 	@Test
+	@Order(6)
 	void findLastChapters() {
 		List<LastChaptersDTO> lastChapters = chapterService.findLastChapters();
 		
 		assertEquals(lastChapters.size(), 2);
+	}
+	
+	@Test
+	@Order(7)
+	void findById() {
+		Long chapterId = chapterRepository.findAll().get(0).getId();;
+		Long novelId = novelRepository.findAll().get(0).getId();
+		
+		Chapter chapter = chapterService.findById(chapterId);
+		assertEquals("Hellifen", chapter.getTitle());
+		assertEquals("Em uma pequena vila...", chapter.getChapterText());
+		assertNotNull(chapter.getId());
+		assertEquals(novelId, chapter.getNovel().getId());
+	}
+	
+	@Test
+	@Order(8)
+	void findChapterPagesByNovel() {
+		Long novelId = novelRepository.findAll().get(0).getId();
+		ChapterDTO chapter1 = new ChapterDTO(null, "Começo", "Era uma vez...", novelId);
+		ChapterDTO chapter2 = new ChapterDTO(null, "Começo", "Era uma vez...", novelId);
+		chapterService.save(chapter1);
+		chapterService.save(chapter2);
+		
+		Page<Chapter> pages = chapterService.findChapterPagesByNovel(1, 3, novelId);
+		assertEquals(3, pages.getSize());
 	}
 }

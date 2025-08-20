@@ -1,10 +1,11 @@
-package com.novelsbr.backend.controllers;
+ package com.novelsbr.backend.controllers;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -33,7 +34,6 @@ import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
-import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.NovelStatusType;
@@ -90,6 +90,7 @@ class ChapterControllerTest {
 	ObjectMapper objectMapper;
 	
 	Set<Gender> genders = new HashSet<>();
+	List<String> gendersStr = new ArrayList<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 	
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
@@ -112,6 +113,11 @@ class ChapterControllerTest {
 			genders.add(new Gender(type));
 			id++;
 		}
+		
+		for(Gender gender : genders) {
+			gendersStr.add(gender.getGenderType().getType());
+		}
+		
 		
 		for(NovelStatusType type : NovelStatusType.values()) {
 			novelStatsus.add(new NovelStatus(type));
@@ -141,22 +147,22 @@ class ChapterControllerTest {
 		Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 		author = authorService.save(new AuthorDTO(author));
 		
-		Novel novel = new Novel(null, 
+		NovelDTO novelDTO = new NovelDTO(null, 
 				"Jornada para o Além", 
-				author, 
-				new NovelStatus(NovelStatusType.IN_COURSE),
-				genders, 
+				author.getId(), 
+				1,
+				gendersStr, 
 				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
 				"https://wallpapercave.com/wp/wp5044832.jpg");
-		novelService.save(new NovelDTO(novel));
+		novelService.save(novelDTO);
 		
 		getToken();
 		
 		assertEquals(0, chapterRepository.count());
 		
-		Long novel_id = novelRepository.findAll().get(0).getId();
+		Long novelId = novelRepository.findAll().get(0).getId();
 		
-		ChapterDTO chapterDTO = new ChapterDTO(null, "Hellifen", "Em uma pequena vila...", novel_id);
+		ChapterDTO chapterDTO = new ChapterDTO(null, "Hellifen", "Em uma pequena vila...", novelId);
 		
 		String jsonRequest = objectMapper.writeValueAsString(chapterDTO);
 			
@@ -195,6 +201,7 @@ class ChapterControllerTest {
 	}
 	
 	@Test
+	@Order(5)
 	void findChapterText() throws Exception { 
 		
 		Chapter chapter = chapterRepository.findAll().get(1);
@@ -212,9 +219,26 @@ class ChapterControllerTest {
 	}
 	
 	@Test
+	@Order(6)
 	void findLastChapters() throws Exception {
 			
 		mockMvc.perform(get(URI + "/lastChapters"))
 				.andExpect(status().isOk());
 	}
+	
+//	@Test
+//	@Order(7)
+//	void chapterPagesByNovel() throws Exception {
+//		
+//		Long novelId = novelRepository.findAll().get(0).getId();
+//		chapterService.save(new ChapterDTO(null, "Começo1", "Era uma vez...", novelId));
+//		chapterService.save(new ChapterDTO(null, "Começo2", "Era uma vez...", novelId));
+//			
+//		mockMvc.perform(get(URI + "/pages/novelsTile/" + novelId + "?page=1&size=2")
+//				.param("page", "1")
+//				.param("size", "2"))
+//				.andExpect(status().isOk())
+//				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//				.andExpect(jsonPath("$.length()").value(2));
+//	}
 }
