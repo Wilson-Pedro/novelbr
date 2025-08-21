@@ -145,6 +145,17 @@ class NovelServiceTest {
 	}
 	
 	@Test
+	void findNovelByNovelName() {
+		
+		String novelName = novelRepository.findAll().get(0).getNovelName();
+		
+		Novel novel = novelService.findNovelByNovelName(novelName);
+		assertEquals("Jornada para o Além", novel.getNovelName());
+		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
+		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
+	}
+	
+	@Test
 	void findNovelCardsByUsername() {
 		
 		List<CardNovelDTO> list = novelService.findNovelCardsByUsername("All Star");

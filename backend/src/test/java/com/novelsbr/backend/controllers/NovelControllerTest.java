@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -187,7 +188,9 @@ class NovelControllerTest {
 		
 		mockMvc.perform(get(URI)
 				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(1));
 	}
 	
 	@Test
@@ -195,7 +198,9 @@ class NovelControllerTest {
 		
 		mockMvc.perform(get(URI + "/novelCards")
 				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(1));
 	}
 	
 	@Test
@@ -205,8 +210,9 @@ class NovelControllerTest {
 
 		mockMvc.perform(get(URI + "/novelCards/author/" + username)
 				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isOk());
-
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(1));
 	}
 
 	@Test
@@ -234,7 +240,8 @@ class NovelControllerTest {
 
 		mockMvc.perform(get(URI + "/search/" + name)
 				.header("Authorization", "Bearer " + TOKEN))
-				.andExpect(status().isOk());
-
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(1));
 	}
 }

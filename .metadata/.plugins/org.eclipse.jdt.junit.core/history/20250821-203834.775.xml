@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="NovelControllerTest" project="backend" tests="9" started="9" failures="1" errors="0" ignored="0">
+  <testsuite name="com.novelsbr.backend.controllers.NovelControllerTest" time="3.875" displayname="NovelControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]">
+    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="1.556" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:preparingTestEnvironment()]"/>
+    <testcase name="getToken" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.396" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:getToken()]"/>
+    <testcase name="save" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="1.313" displayname="save()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:save()]"/>
+    <testcase name="changeNovelStatus" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.087" displayname="changeNovelStatus()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:changeNovelStatus()]"/>
+    <testcase name="findAll" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.206" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findAll()]">
+      <failure>java.lang.AssertionError: JSON path "$.length()" expected:&lt;2&gt; but was:&lt;1&gt;&#13;
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)&#13;
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)&#13;
+	at org.springframework.test.util.JsonPathExpectationsHelper.assertValue(JsonPathExpectationsHelper.java:172)&#13;
+	at org.springframework.test.web.servlet.result.JsonPathResultMatchers.lambda$value$2(JsonPathResultMatchers.java:112)&#13;
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)&#13;
+	at com.novelsbr.backend.controllers.NovelControllerTest.findAll(NovelControllerTest.java:193)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)&#13;
+&#13;
+</failure>
+    </testcase>
+    <testcase name="searchNovel" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.092" displayname="searchNovel()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:searchNovel()]"/>
+    <testcase name="findNovelInfoByNovelId" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.141" displayname="findNovelInfoByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelInfoByNovelId()]"/>
+    <testcase name="findNovelCardsByUsername" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.043" displayname="findNovelCardsByUsername()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelCardsByUsername()]"/>
+    <testcase name="findNovelCards" classname="com.novelsbr.backend.controllers.NovelControllerTest" time="0.023" displayname="findNovelCards()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.NovelControllerTest]/[method:findNovelCards()]"/>
+  </testsuite>
+</testrun>

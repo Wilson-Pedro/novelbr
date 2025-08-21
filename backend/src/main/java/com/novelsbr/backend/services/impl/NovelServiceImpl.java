@@ -7,6 +7,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
@@ -42,12 +43,14 @@ public class NovelServiceImpl implements NovelService {
 	@Transactional
 	public Novel save(NovelDTO novelDTO) {
 		validadeRegistration(novelDTO);
-		if(novelDTO.getImageUri() == null) novelDTO.setImageUri("");
+		
 		NovelStatus novelStatus = novelStatusService.findByNovelStatusType(NovelStatusType.IN_COURSE);
 		Novel novel = new Novel(novelDTO);
+		
 		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
 		novel.setGenders(stringsToGenders(novelDTO.getGenders()));
 		novel.setNovelStatus(novelStatus);
+		
 		return novelRepository.save(novel);
 	}
 
@@ -112,19 +115,27 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	public void validadeRegistration(NovelDTO novelDTO) {
-		if(novelDTO == null) {
+		if(!Objects.nonNull(novelDTO)) {
 			throw new NullEntityException("Novel cannot be null.");
 			
-		} else if(existsByNovelName(novelDTO.getNovelName())) {
+		} 
+		
+		if(existsByNovelName(novelDTO.getNovelName())) {
 			throw new ExistingNovelException("There is already a Novel with this name.");
 			
-		} else if(novelDTO.getNovelName().isBlank()) {
+		} 
+		
+		if(novelDTO.getNovelName().isBlank() || novelDTO.getNovelName() == null) {
 			throw new NullFieldException("Novel Name cannot be blank.");	
 			
-		} else if(novelDTO.getSynopsis().isBlank()) {
+		} 
+		
+		if(novelDTO.getSynopsis().isBlank() || novelDTO.getSynopsis() == null) {
 			throw new NullFieldException("Synopsis cannot be blank.");	
 			
-		} else if(novelDTO.getImageUri().isBlank()) {
+		} 
+		
+		if(novelDTO.getImageUri().isBlank()) {
 			throw new NullFieldException("ImageUri cannot be blank.");		
 		}
 	}

@@ -185,7 +185,8 @@ class ChapterControllerTest {
 		chapterService.save(chapterDTO);
 			
 		mockMvc.perform(get(URI + "/novelsTile/novel/" + novelId))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 		
 		assertEquals(2, chapterRepository.count());
 	}
@@ -197,6 +198,7 @@ class ChapterControllerTest {
 			
 		mockMvc.perform(get(URI + "/chapterNumber/novel/" + novelId))
 				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.chapterNumber", equalTo(2)));
 	}
 	
@@ -210,6 +212,7 @@ class ChapterControllerTest {
 			
 		mockMvc.perform(get(URI + "/" + novelName + "/" + chapterNumber))
 				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.chapterNumber", equalTo(chapter.getChapterNumber())))
 				.andExpect(jsonPath("$.title", equalTo(chapter.getTitle())))
 				.andExpect(jsonPath("$.chapterText", equalTo(chapter.getChapterText())))
@@ -223,22 +226,24 @@ class ChapterControllerTest {
 	void findLastChapters() throws Exception {
 			
 		mockMvc.perform(get(URI + "/lastChapters"))
-				.andExpect(status().isOk());
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(2));
 	}
 	
-//	@Test
-//	@Order(7)
-//	void chapterPagesByNovel() throws Exception {
-//		
-//		Long novelId = novelRepository.findAll().get(0).getId();
-//		chapterService.save(new ChapterDTO(null, "Começo1", "Era uma vez...", novelId));
-//		chapterService.save(new ChapterDTO(null, "Começo2", "Era uma vez...", novelId));
-//			
-//		mockMvc.perform(get(URI + "/pages/novelsTile/" + novelId + "?page=1&size=2")
-//				.param("page", "1")
-//				.param("size", "2"))
-//				.andExpect(status().isOk())
-//				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-//				.andExpect(jsonPath("$.length()").value(2));
-//	}
+	@Test
+	@Order(7)
+	void chapterPagesByNovel() throws Exception {
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		chapterService.save(new ChapterDTO(null, "Começo1", "Era uma vez...", novelId));
+		chapterService.save(new ChapterDTO(null, "Começo2", "Era uma vez...", novelId));
+			
+		mockMvc.perform(get(URI + "/pages/novelsTile/" + novelId + "?page=1&size=2")
+				.param("page", "1")
+				.param("size", "2"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(2));
+	}
 }

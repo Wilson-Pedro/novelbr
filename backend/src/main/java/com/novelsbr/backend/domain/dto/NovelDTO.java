@@ -23,7 +23,7 @@ public class NovelDTO implements Serializable {
 	
 	private String synopsis;
 	
-	private String imageUri;
+	private String imageUri = "";
 	
 	private LocalDateTime dateRegistrion;
 	
@@ -49,12 +49,6 @@ public class NovelDTO implements Serializable {
 		this.genders = genders;
 		this.synopsis = synopsis;
 		this.imageUri = imageUri;
-	}
-
-	@Override
-	public String toString() {
-		return "NovelDTO [id=" + id + ", novelName=" + novelName + ", authorId=" + authorId + ", genders=" + genders
-				+ ", synopsis=" + synopsis + ", imageUri=" + imageUri + ", dateRegistrion=" + dateRegistrion + "]";
 	}
 
 	public Long getId() {

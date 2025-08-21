@@ -1,0 +1,245 @@
+package com.novelsbr.backend.controllers;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.test.web.servlet.MockMvc;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.novelsbr.backend.domain.dto.AuthorDTO;
+import com.novelsbr.backend.domain.dto.LoginRequest;
+import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Author;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.entities.NovelStatus;
+import com.novelsbr.backend.domain.records.ChangeStatusNovelRequest;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.NovelStatusType;
+import com.novelsbr.backend.enums.UserRole;
+import com.novelsbr.backend.infra.security.TokenService;
+import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.ChapterRepository;
+import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.repositories.NovelStatusRepository;
+import com.novelsbr.backend.services.AuthorService;
+
+@SpringBootTest
+@AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+class NovelControllerTest {
+
+	
+	@Autowired
+	NovelRepository novelRepository;
+	
+	@Autowired
+	NovelStatusRepository novelStatusRepository;
+	
+	@Autowired
+	AuthorRepository authorRepository;
+	
+	@Autowired
+	AuthorService authorService;
+	
+	@Autowired
+	GenderRepository genderRepository;
+	
+	@Autowired
+	AuthenticationManager authenticationManager;
+	
+	@Autowired
+	ChapterRepository chapterRepository;
+	
+	@Autowired
+	TokenService tokenService;
+	
+	@Autowired
+	MockMvc mockMvc;
+	
+	@Autowired
+	ObjectMapper objectMapper;
+	
+	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+	
+	Set<Gender> genders = new HashSet<>();
+	List<String> gendersStr = new ArrayList<>();
+	List<NovelStatus> novelStatsus = new ArrayList();
+	
+	static String URI = "/novels";
+	
+	static String TOKEN = "";
+	
+	@Test
+	@Order(1)
+	void preparingTestEnvironment() {
+		chapterRepository.deleteAll();
+		novelRepository.deleteAll();
+		novelStatusRepository.deleteAll();
+		genderRepository.deleteAll();
+		authorRepository.deleteAll();
+		Integer id = 1;
+		
+		for(GenderType type : GenderType.values()) {
+			genders.add(new Gender(type));
+			id++;
+		}
+		
+		for(NovelStatusType type : NovelStatusType.values()) {
+			novelStatsus.add(new NovelStatus(type));
+		}
+		
+		novelStatusRepository.saveAll(novelStatsus);
+		genderRepository.saveAll(genders);
+	}
+	
+	@Test
+	@Order(2)
+	void getToken() {
+		author = authorService.save(new AuthorDTO(author));
+		LoginRequest login = new LoginRequest("AllStar", "1234");
+		
+		var usernamePassword = new UsernamePasswordAuthenticationToken(login.getLogin(), login.getPassword());		
+		var authentication = authenticationManager.authenticate(usernamePassword);
+		
+		String token = tokenService.generateToken((Author) authentication.getPrincipal());
+		assertNotNull(token);
+		
+		TOKEN = token;
+	}
+	
+	@Test
+	@Order(3)
+	void save() throws Exception {
+		
+		Long authorId = authorRepository.findAll().get(0).getId();
+		for(Gender gender : genders) {
+			gendersStr.add(gender.getGenderType().getType());
+		}
+		
+		assertEquals(0, novelRepository.count());
+		
+		NovelDTO novelDTO = new NovelDTO(null, 
+				"Jornada para o Além", 
+				authorId, 
+				1,
+				gendersStr, 
+				"Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...",
+				"https://wallpapercave.com/wp/wp5044832.jpg");
+		
+		String jsonRequest = objectMapper.writeValueAsString(novelDTO);
+			
+		mockMvc.perform(post(URI + "/")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonRequest)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isCreated());
+		
+		assertEquals(1, novelRepository.count());
+	}
+	
+	@Test
+	@Order(4)
+	void changeNovelStatus() throws Exception {
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		
+		ChangeStatusNovelRequest request = new ChangeStatusNovelRequest(novelId, 2);
+		
+		String jsonRequest = objectMapper.writeValueAsString(request);
+			
+		mockMvc.perform(patch(URI + "/changeNovelStatus")
+				.contentType(MediaType.APPLICATION_JSON)
+				.content(jsonRequest)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isNoContent());
+		
+		
+		Novel novel = novelRepository.findById(novelId).get();
+		
+		assertEquals(novel.getNovelStatus().getNovelStatusType(), NovelStatusType.FINISHED);
+	}
+	
+	@Test
+	void findAll() throws Exception {
+		
+		mockMvc.perform(get(URI)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(1));
+	}
+	
+	@Test
+	void findNovelCards() throws Exception {
+		
+		mockMvc.perform(get(URI + "/novelCards")
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.length()").value(1));
+	}
+	
+	@Test
+	void findNovelCardsByUsername() throws Exception {
+		String username = novelRepository.findAll().get(0).getAuthor().getUsername();
+
+
+		mockMvc.perform(get(URI + "/novelCards/author/" + username)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	void findNovelInfoByNovelId() throws Exception {
+		Long novelId = novelRepository.findAll().get(0).getId();
+		String novelName = novelRepository.findAll().get(0).getNovelName();
+		String username = novelRepository.findAll().get(0).getAuthor().getUsername();
+		String imageUri = novelRepository.findAll().get(0).getImageUri();
+		String synopsis = novelRepository.findAll().get(0).getSynopsis();
+
+
+		mockMvc.perform(get(URI + "/novelCards/" + novelId)
+						.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.novelName", equalTo(novelName)))
+				.andExpect(jsonPath("$.username", equalTo(username)))
+				.andExpect(jsonPath("$.imageUri", equalTo(imageUri)))
+				.andExpect(jsonPath("$.synopsis", equalTo(synopsis)));
+
+	}
+	
+	@Test
+	void searchNovel() throws Exception {
+		String name = "Jornada";
+
+		mockMvc.perform(get(URI + "/search/" + name)
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isOk());
+
+	}
+}

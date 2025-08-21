@@ -74,10 +74,4 @@ public class ChapterDTO implements Serializable{
 	public void setNovelId(Long novelId) {
 		this.novelId = novelId;
 	}
-
-	@Override
-	public String toString() {
-		return "ChapterDTO [id=" + id + ", title=" + title + ", chapterNumber=" + chapterNumber + ", chapterText="
-				+ chapterText + ", novelId=" + novelId + "]";
-	}
 }
