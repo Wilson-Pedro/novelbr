@@ -184,7 +184,7 @@ class ChapterControllerTest {
 		
 		chapterService.save(chapterDTO);
 			
-		mockMvc.perform(get(URI + "/novelsTile/novel/" + novelId))
+		mockMvc.perform(get(URI + "/novelsTitle/novel/" + novelId))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON));
 		
@@ -239,7 +239,7 @@ class ChapterControllerTest {
 		chapterService.save(new ChapterDTO(null, "Começo1", "Era uma vez...", novelId));
 		chapterService.save(new ChapterDTO(null, "Começo2", "Era uma vez...", novelId));
 			
-		mockMvc.perform(get(URI + "/pages/novelsTile/" + novelId + "?page=1&size=2")
+		mockMvc.perform(get(URI + "/pages/novelsTitle/" + novelId + "?page=1&size=2")
 				.param("page", "1")
 				.param("size", "2"))
 				.andExpect(status().isOk())

@@ -13,6 +13,8 @@ public class NovelsChapterTitleDTO {
 	
 	private String title;
 	
+	private Integer totalPages;
+	
 	public NovelsChapterTitleDTO() {
 	}
 
@@ -21,6 +23,11 @@ public class NovelsChapterTitleDTO {
 		this.novelId = projection.getNovelId();
 		this.authorId = projection.getAuthorId();
 		this.title = projection.getTitle();
+	}
+	
+	public NovelsChapterTitleDTO(Chapter chapter, Integer totalPages) {
+		this(chapter);
+		this.totalPages = totalPages;
 	}
 	
 	public NovelsChapterTitleDTO(Chapter chapter) {
@@ -44,5 +51,9 @@ public class NovelsChapterTitleDTO {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public Integer getTotalPages() {
+		return totalPages;
 	}
 }

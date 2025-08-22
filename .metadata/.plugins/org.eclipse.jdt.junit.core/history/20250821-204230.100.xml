@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?><testrun name="GenderControllerTest" project="backend" tests="4" started="4" failures="0" errors="0" ignored="0">
-  <testsuite name="com.novelsbr.backend.controllers.GenderControllerTest" time="4.585" displayname="GenderControllerTest" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]">
-    <testcase name="preparingTestEnvironment" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="2.174" displayname="preparingTestEnvironment()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:preparingTestEnvironment()]"/>
-    <testcase name="getToken" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.481" displayname="getToken()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:getToken()]"/>
-    <testcase name="findAll" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="1.76" displayname="findAll()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findAll()]"/>
-    <testcase name="findGendersByNovelId" classname="com.novelsbr.backend.controllers.GenderControllerTest" time="0.165" displayname="findGendersByNovelId()" uniqueid="[engine:junit-jupiter]/[class:com.novelsbr.backend.controllers.GenderControllerTest]/[method:findGendersByNovelId()]"/>
-  </testsuite>
-</testrun>

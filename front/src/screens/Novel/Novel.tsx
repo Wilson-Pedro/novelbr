@@ -41,6 +41,7 @@ interface NovelInfo {
 
 interface ChapterTiles {
     title: string;
+    totalPages: number;
 }
 
 interface Page<T> {
@@ -100,10 +101,6 @@ const Novel: React.FC = () => {
     }
 
     useEffect(() => {
-
-        const userId = parseInt(localStorage.getItem('userId') || '');
-        setAuthorId(userId);
-
         const fecthNovelName = async () => {
             try {
                 const response = await axios.get(`${API_URL}/novels/${novelName}`);
@@ -113,63 +110,36 @@ const Novel: React.FC = () => {
             }
         }
 
-        const fetchNovelInfo = async () => {
+        fecthNovelName();
+    }, [novelId]);
+
+    useEffect(() => {
+
+        if(!novelId) return;
+        const userId = parseInt(localStorage.getItem('userId') || '');
+        setAuthorId(userId);
+
+        const fecthData = async () => {
             try {
-                const response = await axios.get(`${API_URL}/novels/novelCards/${novelId}`);
-                setNovelInfo(response.data);
-                //setNovelName(response.data.novelName);
-
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        const fetchNovelGenders = async () => {
-            try {
-                const response = await axios.get(`${API_URL}/genders/novel/${novelId}`);
-                setGenders(response.data);
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        const fetchNovelsChapterTitles = async () => {
-            try {
-                const response = await axios.get(`${API_URL}/chapters/novelsTile/novel/${novelId}`);
-                setChapterTitles(response.data)
-            } catch (error) {
-                console.log(error)
-            }
-        }
-
-        const fetchComments = async () => {
-            try {
-                const response = await axios.get(`${API_URL}/comments/novels/${novelId}`);
-                setBackendComments(response.data)
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        const fetchPageChapters = async (page:number) => {
-            try {
-                const response = await axios.get<Page<ChapterTiles>>(
-                    `${API_URL}/chapters/pages/novelsTile/${novelId}?page=${page}&size=3`
-                );
-                setChapterTitles(response.data.content)
-                setTolalPages(response.data.totalPages)
-
+                const [infoRes, gendersRes, chapterTitlesRes, commentsRes, chapterPagesRes] = 
+                await Promise.all([
+                    axios.get(`${API_URL}/novels/novelCards/${novelId}`),
+                    axios.get(`${API_URL}/genders/novel/${novelId}`),
+                    axios.get(`${API_URL}/chapters/novelsTitle/novel/${novelId}`),
+                    axios.get(`${API_URL}/comments/novels/${novelId}`),
+                    axios.get(`${API_URL}/chapters/pages/novelsTitle/${novelId}?page=${page}&size=3`)
+                ]);
+                setNovelInfo(infoRes.data);
+                setGenders(gendersRes.data);
+                setChapterTitles(chapterTitlesRes.data);
+                setBackendComments(commentsRes.data);
+                setChapterTitles(chapterPagesRes.data);
+                setTolalPages(chapterPagesRes.data.totalPages)
             } catch(error) {
                 console.log(error);
             }
         }
-
-        fetchPageChapters(page);
-        fecthNovelName();
-        fetchComments();
-        fetchNovelsChapterTitles();
-        fetchNovelInfo();
-        fetchNovelGenders();
+        fecthData();
     }, [novelId, novelName, page]);
 
     // COMMENTS
