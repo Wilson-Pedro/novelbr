@@ -85,11 +85,11 @@ const Novel: React.FC = () => {
                 novelId,
                 novelStatusId,
             },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
         } catch (error) {
             console.log(error)
         }
@@ -105,7 +105,7 @@ const Novel: React.FC = () => {
             try {
                 const response = await axios.get(`${API_URL}/novels/${novelName}`);
                 setNovelId(response.data.id);
-            } catch(error) {
+            } catch (error) {
                 console.log(error)
             }
         }
@@ -115,31 +115,47 @@ const Novel: React.FC = () => {
 
     useEffect(() => {
 
-        if(!novelId) return;
+        if (!novelId) return;
         const userId = parseInt(localStorage.getItem('userId') || '');
         setAuthorId(userId);
 
         const fecthData = async () => {
             try {
-                const [infoRes, gendersRes, chapterTitlesRes, commentsRes, chapterPagesRes] = 
-                await Promise.all([
+                const  [infoRes, gendersRes, chapterTitlesRes, commentsRes, chapterPagesRes] = await Promise.allSettled([
                     axios.get(`${API_URL}/novels/novelCards/${novelId}`),
                     axios.get(`${API_URL}/genders/novel/${novelId}`),
                     axios.get(`${API_URL}/chapters/novelsTitle/novel/${novelId}`),
                     axios.get(`${API_URL}/comments/novels/${novelId}`),
                     axios.get(`${API_URL}/chapters/pages/novelsTitle/${novelId}?page=${page}&size=3`)
                 ]);
-                setNovelInfo(infoRes.data);
-                setGenders(gendersRes.data);
-                setChapterTitles(chapterTitlesRes.data);
-                setBackendComments(commentsRes.data);
-                setChapterTitles(chapterPagesRes.data);
-                setTolalPages(chapterPagesRes.data.totalPages)
-            } catch(error) {
+
+                if (infoRes.status === "fulfilled") {
+                    setNovelInfo(infoRes.value.data);
+                }
+
+                if (gendersRes.status === "fulfilled") {
+                    setGenders(gendersRes.value.data);
+                }
+
+                if (chapterTitlesRes.status === "fulfilled") {
+                     setChapterTitles(chapterTitlesRes.value.data);
+                }
+
+                if (commentsRes.status === "fulfilled") {
+                    setBackendComments(commentsRes.value.data);
+                }
+
+                if (chapterPagesRes.status === "fulfilled") {
+                    setChapterTitles(chapterPagesRes.value.data);
+                setTolalPages(chapterPagesRes.value.data.totalPages);
+                }
+
+            } catch (error) {
                 console.log(error);
             }
         }
         fecthData();
+
     }, [novelId, novelName, page]);
 
     // COMMENTS
