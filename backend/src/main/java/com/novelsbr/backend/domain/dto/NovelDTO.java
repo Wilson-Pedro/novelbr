@@ -29,7 +29,7 @@ public class NovelDTO implements Serializable {
 	
 	public NovelDTO() {
 	}
-
+	
 	public NovelDTO(Novel novel) {
 		this.id = novel.getId();
 		this.novelName = novel.getNovelName();

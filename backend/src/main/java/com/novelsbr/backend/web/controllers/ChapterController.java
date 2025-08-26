@@ -42,14 +42,14 @@ public class ChapterController implements ChapterAPI {
 	}
 	
 	@GetMapping("/pages/novelsTitle/{novelId}")
-	public ResponseEntity<List<NovelsChapterTitleDTO>> chapterPagesByNovel(
+	public Page<NovelsChapterTitleDTO> chapterPagesByNovel(
 			@PathVariable Long novelId,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "2") int size) {
 		Page<Chapter> pages = chapterService.findChapterPagesByNovel(page, size, novelId);
-		List<NovelsChapterTitleDTO> pagesDto = pages
-				.stream().map(x -> new NovelsChapterTitleDTO(x, pages.getTotalPages())).toList();
-		return ResponseEntity.ok(pagesDto);
+		Page<NovelsChapterTitleDTO> pagesDto = pages
+				.map(x -> new NovelsChapterTitleDTO(x, pages.getTotalPages()));
+		return pagesDto;
 	}
 	
 	@GetMapping("/{novelName}/{chapterNumber}") 

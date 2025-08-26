@@ -2,6 +2,7 @@ package com.novelsbr.backend.web.api;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,7 @@ public interface ChapterAPI {
 			@PathVariable Long novelId);
 	
 	@GetMapping("/pages/novelsTile/{novelId}")
-	public ResponseEntity<List<NovelsChapterTitleDTO>> chapterPagesByNovel(
+	public Page<NovelsChapterTitleDTO> chapterPagesByNovel(
 			@PathVariable Long novelId,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "2") int size);

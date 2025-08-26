@@ -185,7 +185,7 @@ class ChapterServiceTest {
 		chapterService.save(chapter1);
 		chapterService.save(chapter2);
 		
-		Page<Chapter> pages = chapterService.findChapterPagesByNovel(1, 3, novelId);
+		Page<Chapter> pages = chapterService.findChapterPagesByNovel(0, 3, novelId);
 		assertEquals(3, pages.getSize());
 	}
 }

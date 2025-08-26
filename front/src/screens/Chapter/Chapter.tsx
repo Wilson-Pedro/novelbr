@@ -32,7 +32,7 @@ export default function Chapter() {
     const navigate = useNavigate();
 
     function goToNovel() {
-        navigate(`/novel/${chapterInfo.novelId}`);
+        navigate(`/novel/${novelName}`);
     }
 
     useEffect(() => {

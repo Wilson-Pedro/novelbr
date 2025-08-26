@@ -34,6 +34,7 @@ import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
 import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.NovelStatusType;
@@ -93,7 +94,7 @@ class ChapterControllerTest {
 	List<String> gendersStr = new ArrayList<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 	
-	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
+	//Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	static String URI = "/chapters";
 	
@@ -236,14 +237,15 @@ class ChapterControllerTest {
 	void chapterPagesByNovel() throws Exception {
 		
 		Long novelId = novelRepository.findAll().get(0).getId();
+		
 		chapterService.save(new ChapterDTO(null, "Começo1", "Era uma vez...", novelId));
 		chapterService.save(new ChapterDTO(null, "Começo2", "Era uma vez...", novelId));
 			
-		mockMvc.perform(get(URI + "/pages/novelsTitle/" + novelId + "?page=1&size=2")
-				.param("page", "1")
+		mockMvc.perform(get(URI + "/pages/novelsTitle/" + novelId + "?page=0&size=2")
+				.param("page", "0")
 				.param("size", "2"))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(2));
+				.andExpect(jsonPath("$.content.length()").value(2));
 	}
 }

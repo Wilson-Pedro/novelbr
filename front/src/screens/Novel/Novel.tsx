@@ -13,7 +13,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
+import { FaSearch as FaSearchIcon } from "react-icons/fa";
+
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
+
+const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
@@ -41,15 +45,15 @@ interface NovelInfo {
 
 interface ChapterTiles {
     title: string;
-    totalPages: number;
+    chapterNumber:number;
 }
 
 interface Page<T> {
     content: T[];
     totalPages: number;
     totalElements: number;
-    number: number;
     size: number;
+    number: number;
 }
 
 const Novel: React.FC = () => {
@@ -64,12 +68,12 @@ const Novel: React.FC = () => {
     const [genders, setGenders] = useState([]);
     const [chapterTiles, setChapterTitles] = useState<ChapterTiles[]>([]);
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
-    //const [novelName, setNovelName] = useState<string>('');
     const [novelId, setNovelId] = useState<number>(0);
     const [authorId, setAuthorId] = useState<number>(0);
     const [commentByCode, setCommentByCode] = useState<number>(1);
     const [novelStatusId, setNovelStatusId] = useState<number>(1);
     const [page, setPage] = useState<number>(0);
+    const [pageSeacrh, setPageSeacrh] = useState<number>(0);
     const [totalPages, setTolalPages] = useState<number>(0);
 
     const navigate = useNavigate();
@@ -85,11 +89,12 @@ const Novel: React.FC = () => {
                 novelId,
                 novelStatusId,
             },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
+            handleClose();
         } catch (error) {
             console.log(error)
         }
@@ -121,13 +126,14 @@ const Novel: React.FC = () => {
 
         const fecthData = async () => {
             try {
-                const  [infoRes, gendersRes, chapterTitlesRes, commentsRes, chapterPagesRes] = await Promise.allSettled([
-                    axios.get(`${API_URL}/novels/novelCards/${novelId}`),
-                    axios.get(`${API_URL}/genders/novel/${novelId}`),
-                    axios.get(`${API_URL}/chapters/novelsTitle/novel/${novelId}`),
-                    axios.get(`${API_URL}/comments/novels/${novelId}`),
-                    axios.get(`${API_URL}/chapters/pages/novelsTitle/${novelId}?page=${page}&size=3`)
-                ]);
+                const [infoRes, gendersRes, chapterTitlesRes, commentsRes, chapterPagesRes] =
+                    await Promise.allSettled([
+                        axios.get(`${API_URL}/novels/novelCards/${novelId}`),
+                        axios.get(`${API_URL}/genders/novel/${novelId}`),
+                        axios.get(`${API_URL}/chapters/novelsTitle/novel/${novelId}`),
+                        axios.get(`${API_URL}/comments/novels/${novelId}`),
+                        axios.get(`${API_URL}/chapters/pages/novelsTitle/${novelId}?page=${page}&size=10`)
+                    ]);
 
                 if (infoRes.status === "fulfilled") {
                     setNovelInfo(infoRes.value.data);
@@ -138,7 +144,7 @@ const Novel: React.FC = () => {
                 }
 
                 if (chapterTitlesRes.status === "fulfilled") {
-                     setChapterTitles(chapterTitlesRes.value.data);
+                    setChapterTitles(chapterTitlesRes.value.data);
                 }
 
                 if (commentsRes.status === "fulfilled") {
@@ -146,14 +152,16 @@ const Novel: React.FC = () => {
                 }
 
                 if (chapterPagesRes.status === "fulfilled") {
-                    setChapterTitles(chapterPagesRes.value.data);
-                setTolalPages(chapterPagesRes.value.data.totalPages);
+                    const pageData: Page<ChapterTiles> = chapterPagesRes.value.data;
+                    setChapterTitles(pageData.content);
+                    setTolalPages(pageData.totalPages);
                 }
 
             } catch (error) {
                 console.log(error);
             }
         }
+
         fecthData();
 
     }, [novelId, novelName, page]);
@@ -236,6 +244,14 @@ const Novel: React.FC = () => {
 
     function goToChapterRegister() {
         navigate(`/chapterRegister/${novelName}`);
+    }
+
+    function pageSeacrValid(pag:number, max:number) {
+        if(pag >= 0 && pag <= max) {
+            setPage(pag);
+        } else {
+            setPage(page);
+        }
     }
 
     const handleClose = () => setShowModal(false);
@@ -330,11 +346,61 @@ const Novel: React.FC = () => {
                                             <p>Nenhum capítulo foi registrado.</p>
                                         </>
                                     ) : (
-                                        <ul>
-                                            {chapterTiles.map((data, index) => (
-                                                <li onClick={() => goToChapter(index + 1)}>{index + 1}º {data.title}</li>
-                                            ))}
-                                        </ul>
+                                        <>
+                                            <div>
+                                                <ul className={styles.cursorDefault}>
+                                                    {chapterTiles.map((data, index) => (
+                                                        <li >{data.chapterNumber}º 
+                                                            <span 
+                                                            className={styles.cursorPointer}
+                                                            onClick={() => goToChapter(index + 1)}>
+                                                                {data.title}
+                                                            </span>
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </div>
+                                            <div className={styles.div_btn}>
+                                                <button
+                                                    disabled={page === 0}
+                                                    className="btn btn-warning"
+                                                    onClick={() => setPage(0)}
+                                                >&#60;&#60;&#60;</button>
+                                                <button
+                                                    disabled={page === 0}
+                                                    className="btn btn-warning"
+                                                    onClick={() => setPage(page - 1)}
+                                                >Anterior</button>
+
+                                                <button 
+                                                    disabled={page === totalPages - 1}
+                                                    className="btn btn-warning"
+                                                    onClick={() => setPage(page + 1)}
+                                                >Próxima</button>
+
+                                                <button 
+                                                    disabled={page === totalPages - 1}
+                                                    className="btn btn-warning"
+                                                    onClick={() => setPage(totalPages - 1)}
+                                                >&#62;&#62;&#62;</button> <br/><br/>
+                                            </div>
+                                            <div>
+                                                Buscar: 
+                                                <input 
+                                                    type="number" 
+                                                    value={pageSeacrh}
+                                                    onChange={(e) => setPageSeacrh(parseInt(e.target.value))}
+                                                    min={1} 
+                                                    max={totalPages} 
+                                                />
+                                                <button
+                                                onClick={() => pageSeacrValid(pageSeacrh - 1, totalPages - 1)}
+                                                ><SearchIcon className={styles.searchIncon} /></button> 
+                                            </div>
+                                            <div>
+                                                <p>Página {page + 1} de {totalPages}</p>
+                                            </div>
+                                        </>
                                     )}
                                 </div>
                             </Tab>

@@ -1,8 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.novelsbr.backend.controllers.AuthControllerTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 4.871 s <<< FAILURE! -- in com.novelsbr.backend.controllers.AuthControllerTest
-com.novelsbr.backend.controllers.AuthControllerTest.save -- Time elapsed: 0.155 s <<< ERROR!
+Tests run: 2, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 7.321 s <<< FAILURE! -- in com.novelsbr.backend.controllers.AuthControllerTest
+com.novelsbr.backend.controllers.AuthControllerTest.save -- Time elapsed: 0.183 s <<< ERROR!
 org.springframework.dao.DataIntegrityViolationException: 
 could not execute statement [Referential integrity constraint violation: "FKHPVQ0GSFE3OJ63L3SWGHVW9RF: PUBLIC.TBL_CHAPTER FOREIGN KEY(NOVEL_ID) REFERENCES PUBLIC.TBL_NOVEL(ID) (CAST(1 AS BIGINT))"; SQL statement:
 delete from tbl_novel where id=? [23503-232]] [delete from tbl_novel where id=?]; SQL [delete from tbl_novel where id=?]; constraint [FKHPVQ0GSFE3OJ63L3SWGHVW9RF: PUBLIC.TBL_CHAPTER FOREIGN KEY(NOVEL_ID) REFERENCES PUBLIC.TBL_NOVEL(ID) (CAST(1 AS BIGINT)); SQL statement:
@@ -76,7 +76,7 @@ delete from tbl_novel where id=? [23503-232]
 	at org.hibernate.engine.jdbc.internal.ResultSetReturnImpl.executeUpdate(ResultSetReturnImpl.java:194)
 	... 36 more
 
-com.novelsbr.backend.controllers.AuthControllerTest.login -- Time elapsed: 0.812 s <<< FAILURE!
+com.novelsbr.backend.controllers.AuthControllerTest.login -- Time elapsed: 0.901 s <<< FAILURE!
 java.lang.AssertionError: Status expected:<200> but was:<403>
 	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:61)
 	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:128)
