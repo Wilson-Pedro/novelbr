@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
@@ -71,6 +73,15 @@ public class NovelController implements NovelAPI {
 	@PatchMapping("/changeNovelStatus")
 	public ResponseEntity<Void> changeNovelStatus(@RequestBody ChangeStatusNovelRequest request) {
 		novelService.changeNovelStatus(request.novelId(), request.novelStatusId());
+		return ResponseEntity.noContent().build();
+	}
+	
+	@PatchMapping("/changeNovelImageUri")
+	public ResponseEntity<Void> changeNovelImageUri(
+			@RequestParam("file") MultipartFile file,
+			@RequestParam("novelId") Long novelId,
+			@RequestParam("imageUri") String imageUri) {
+		novelService.changeNovelImageUri(novelId, imageUri, file);
 		return ResponseEntity.noContent().build();
 	}
 }

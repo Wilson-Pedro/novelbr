@@ -6,6 +6,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Objects;
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
@@ -24,6 +25,7 @@ import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
 import com.novelsbr.backend.services.NovelStatusService;
+import com.novelsbr.backend.services.UploadService;
 
 import jakarta.transaction.Transactional;
 
@@ -38,6 +40,9 @@ public class NovelServiceImpl implements NovelService {
 	
 	@Autowired
 	private NovelStatusService novelStatusService;
+	
+	@Autowired
+	private UploadService uploadService;
 
 	@Override
 	@Transactional
@@ -106,6 +111,14 @@ public class NovelServiceImpl implements NovelService {
 		NovelStatus novelStatus = novelStatusService.findById(novelStatusId);
 		Novel novel = findById(novelId);
 		novel.setNovelStatus(novelStatus);
+		novelRepository.save(novel);
+	}
+	
+	@Override
+	public void changeNovelImageUri(Long novelId, String imageUri, MultipartFile file) {
+		uploadService.upload(file);
+		Novel novel = findById(novelId);
+		novel.setImageUri(imageUri);
 		novelRepository.save(novel);
 	}
 

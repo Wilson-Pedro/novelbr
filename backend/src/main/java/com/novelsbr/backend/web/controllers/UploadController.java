@@ -17,12 +17,10 @@ public class UploadController implements UploadAPI {
 	
 	@Autowired
 	UploadService uploadService;
-	
-	private final String folder = "C:\\spring-react\\novelbr\\front\\public\\imagens";
 
 	@PostMapping("/image")
 	public ResponseEntity<Void> uploadImage(@RequestParam("file") MultipartFile file) {
-		uploadService.upload(folder, file);
+		uploadService.upload(file);
 		return ResponseEntity.ok().build();
 	}
 }

@@ -81,11 +81,13 @@ export default function NovelRegister() {
 
     const uploadImage = async (e:any) => {
         e.preventDefault();
+        const token = localStorage.getItem('token');
         const formData = new FormData();
         formData.append("file", selectFile);
         try {
             await axios.post(`${API_URL}/upload/image`, formData, {
                 headers: {
+                    Authorization: `Bearer ${token}`,
                     'Content-Type': 'multipart/form-data'
                 }
             })

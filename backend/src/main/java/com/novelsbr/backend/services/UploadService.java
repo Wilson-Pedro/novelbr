@@ -4,5 +4,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface UploadService {
 
-	String upload(String folder, MultipartFile file);
+	String upload(MultipartFile file);
 }

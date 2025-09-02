@@ -8,6 +8,7 @@
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
 		<list key="findhistory">
+			<item value="upload"/>
 			<item value="start"/>
 			<item value="OncePerRequestFilter"/>
 			<item value="builder"/>

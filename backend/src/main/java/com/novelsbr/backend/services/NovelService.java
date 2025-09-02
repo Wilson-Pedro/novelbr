@@ -2,6 +2,8 @@ package com.novelsbr.backend.services;
 
 import java.util.List;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
@@ -28,4 +30,6 @@ public interface NovelService {
 	boolean existsByNovelName(String novelName);
 	
 	void changeNovelStatus(Long novelId, Integer novelStatusId);
+	
+	void changeNovelImageUri(Long novelId, String imageUri, MultipartFile file);
 }

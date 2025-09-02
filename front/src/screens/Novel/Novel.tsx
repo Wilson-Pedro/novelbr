@@ -75,13 +75,17 @@ const Novel: React.FC = () => {
     const [page, setPage] = useState<number>(0);
     const [pageSeacrh, setPageSeacrh] = useState<number>(0);
     const [totalPages, setTolalPages] = useState<number>(0);
+    const [imageUri, setImageUri] = useState('')
+    const [selectFile, setSelectFile] = useState<any>(null);
 
     const navigate = useNavigate();
 
     const token = localStorage.getItem('token');
     const [userAuthenticate, setUserAuthenticate] = useState(isAuth);
 
-    const [showModal, setShowModal] = useState<boolean>(false);
+    const [showModalConfig, setShowModalConfig] = useState<boolean>(false);
+    const [showModalImage, setShowModalImage] = useState<boolean>(false);
+    const [showModalNovelStatus, setShowModalNovelStatus] = useState<boolean>(false);
 
     const changeNovelStatusSubmit = async () => {
         try {
@@ -94,7 +98,27 @@ const Novel: React.FC = () => {
                     Authorization: `Bearer ${token}`
                 }
             })
-            handleClose();
+            handleCloseConfig();
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const chageNovelImageUri = async (e:any) => {
+        e.preventDefault();
+        const formaData = new FormData();
+        formaData.append("file", selectFile);
+        formaData.append("novelId", novelId.toString());
+        formaData.append("imageUri", imageUri);
+        try {
+            await axios.patch(`${API_URL}/novels/changeNovelImageUri`, formaData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            goToNovel();
+            handleCloseImage();
         } catch (error) {
             console.log(error)
         }
@@ -164,7 +188,7 @@ const Novel: React.FC = () => {
 
         fecthData();
 
-    }, [novelId, novelName, page]);
+    }, [novelId, novelName, page, imageUri]);
 
     // COMMENTS
 
@@ -246,6 +270,10 @@ const Novel: React.FC = () => {
         navigate(`/chapterRegister/${novelName}`);
     }
 
+    function goToNovel() {
+        navigate(`/novel/${novelId}`);
+    }
+
     function pageSeacrValid(pag:number, max:number) {
         if(pag >= 0 && pag <= max) {
             setPage(pag);
@@ -254,8 +282,28 @@ const Novel: React.FC = () => {
         }
     }
 
-    const handleClose = () => setShowModal(false);
-    const handleShow = () => setShowModal(true);
+    const handleCloseConfig = () => setShowModalConfig(false);
+    const handleShowConfig = () => setShowModalConfig(true);
+
+    const handleCloseImage = () => setShowModalImage(false);
+    const handleShowImage = () => {
+        setShowModalConfig(false);
+        setShowModalImage(true);
+    }
+
+    const handleCloseNovelStatus = () => setShowModalNovelStatus(false);
+
+    const handleShowNovelStatus= () => {
+        setShowModalConfig(false);
+        setShowModalNovelStatus(true);
+    }
+    
+    const handleFileChange = async (e:any) => {
+        if(e.target.files[0] != null) {
+            setSelectFile(e.target.files[0]);
+            setImageUri(e.target.files[0].name);
+        }
+    }
 
     return (
         <div className={styles.container}>
@@ -285,52 +333,113 @@ const Novel: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                {showModal && (
-                    <Modal show={showModal} onHide={handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title>Mudar Status da Novel</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <form onSubmit={changeNovelStatusSubmit} className={styles.formModal}>
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={() => changeNovelStatus(1)}>Em Curso
-                                </button>
+                {showModalConfig && (
+                    <>
+                        <Modal show={showModalConfig} onHide={handleCloseConfig}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Configurações</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <div className={styles.divModalBtn}>
+                                    <button
+                                        onClick={goToChapterRegister}
+                                        className="btn btn-warning"
+                                    >Cadastrar Capítulo</button>
 
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={() => changeNovelStatus(2)}>Finalizado
-                                </button>
+                                    <button
+                                        onClick={handleShowNovelStatus}
+                                        className="btn btn-warning">
+                                        Status da Novel
+                                    </button>
 
-                                <button
-                                    className="btn btn-primary"
-                                    onClick={() => changeNovelStatus(3)}>Hiato
-                                </button>
-                            </form>
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Close
-                            </Button>
-                        </Modal.Footer>
-                    </Modal>
+                                    <button
+                                        onClick={handleShowImage}
+                                        className="btn btn-warning">
+                                        Mudar Capa da Novel
+                                    </button>
+                                </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseConfig}>
+                                    Fechar
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </>
+                )}
+                {showModalNovelStatus && (
+                    <>
+                        <Modal show={showModalNovelStatus} onHide={handleCloseNovelStatus}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Mudar Status da Novel</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <form onSubmit={changeNovelStatusSubmit} className={styles.formModal}>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={() => changeNovelStatus(1)}>Em Curso
+                                    </button>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={() => changeNovelStatus(2)}>Finalizado
+                                    </button>
+                                    <button
+                                        className="btn btn-primary"
+                                        onClick={() => changeNovelStatus(3)}>Hiato
+                                    </button>
+                                </form>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseNovelStatus}>
+                                    Fechar
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </>
+                )}
+                {showModalImage && (
+                    <>
+                        <Modal show={showModalImage} onHide={handleCloseImage}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Mudar Capa da Novel</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <form onSubmit={chageNovelImageUri} className={styles.formModal}>
+                                    <div className="input-group">
+                                        <input 
+                                            type="file" 
+                                            className="form-control" 
+                                            id="inputGroupFile04" 
+                                            aria-describedby="inputGroupFileAddon04" 
+                                            aria-label="Upload" 
+                                            onChange={handleFileChange}
+                                            required
+                                        />
+                                        <button 
+                                            className="btn btn-outline-secondary" 
+                                            type="submit" 
+                                            id="inputGroupFileAddon04">Enviar</button>
+                                    </div>
+                                </form>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseImage}>
+                                    Fechar
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </>
                 )}
                 {token != null && authorId === novelInfo.authorId ? (
-                    <>
-                        <div className={styles.div_btn}>
-                            <button
-                                onClick={goToChapterRegister}
-                                className="btn btn-warning"
-                            >Cadastrar Capítulo</button>
 
+                    <div className={styles.div_btn}>
+                        <button
+                            onClick={handleShowConfig}
+                            className="btn btn-warning">
+                            Configurações
+                        </button>
+                    </div>
 
-                            <button
-                                onClick={handleShow}
-                                className="btn btn-warning">
-                                Status da Novel
-                            </button>
-                        </div>
-                    </>
                 ) : (
                     <></>
                 )}

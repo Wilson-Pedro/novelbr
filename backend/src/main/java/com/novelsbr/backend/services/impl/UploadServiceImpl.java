@@ -13,13 +13,15 @@ import com.novelsbr.backend.services.UploadService;
 @Service
 public class UploadServiceImpl implements UploadService {
 	
-	public String upload(String folder, MultipartFile file) {
+	private static final String FOLDER = "C:\\spring-react\\novelbr\\front\\public\\imagens";
+	
+	public String upload(MultipartFile file) {
 		String fileName = "";
 		
 		try {
 			
 			fileName = file.getOriginalFilename();
-			Path filePath = Paths.get(folder, fileName);
+			Path filePath = Paths.get(FOLDER, fileName);
 			
 			Files.createDirectories(filePath.getParent());
 			Files.write(filePath, file.getBytes());

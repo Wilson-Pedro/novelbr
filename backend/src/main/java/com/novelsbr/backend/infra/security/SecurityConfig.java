@@ -40,6 +40,8 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.GET, "/novels/search/{novelName}").permitAll()
 						.requestMatchers(HttpMethod.GET, "/novels/novelCards/**").permitAll()	
 						.requestMatchers(HttpMethod.PATCH, "/novels/changeNovelStatus").hasRole("AUTHOR")
+						.requestMatchers(HttpMethod.PATCH, "/novels/changeNovelImageUri").hasRole("AUTHOR")
+						.requestMatchers(HttpMethod.POST, "/upload/image").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.POST, "/authors/").permitAll()
 						.requestMatchers(HttpMethod.GET, "/authors").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.GET, "/authors/username/{username}").hasRole("AUTHOR")
