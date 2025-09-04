@@ -3,17 +3,9 @@ import styles from './Card.module.css';
 
 import { useNavigate } from 'react-router-dom';
 
-const IMG_PATH = process.env.REACT_APP_IMG_PATH;
+import { CardProps } from '../../interfaces/OtherInterfaces';
 
-interface CardProps {
-    index?:number;
-    imagePath?:string;
-    novelName:string;
-    author?:string;
-    userAuthenticate?:boolean;
-    authorId?:number;
-    novelId?:number;
-}
+const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
 const Card: React.FC<CardProps> = ({ imagePath, novelName, author, userAuthenticate, authorId, novelId }) => {
 

@@ -1,13 +1,7 @@
 import React,{ useState, useEffect } from 'react';
 import styles from './CommentForm.module.css';
 
-interface CommentFormProp {
-    handleSubmit: any;
-    submitLabel: any;
-    hasCancelButton?:any;
-    initialText?: string;
-    handleCancel: any;
-}
+import { CommentFormProp } from '../../interfaces/CommentInterfaces';
 
 const CommentForm: React.FC<CommentFormProp> = ({ 
     handleSubmit, 

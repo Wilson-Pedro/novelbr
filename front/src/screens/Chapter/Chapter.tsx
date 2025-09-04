@@ -4,17 +4,11 @@ import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { ChapterInfo } from '../../interfaces/ChapterInterfaces';
 
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
-
-interface ChapterInfo {
-    title:string;
-    novelId:number;
-    novelName:string;
-    chapterText:string;
-}
 
 export default function Chapter() {
 

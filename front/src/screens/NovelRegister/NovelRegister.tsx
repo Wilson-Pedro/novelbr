@@ -6,13 +6,11 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
+import { GendersBackend } from '../../interfaces/NovelInterfaces';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const API_URL = process.env.REACT_APP_API;
-
-interface GendersBackend {
-    genderType:string;
-}
 
 export default function NovelRegister() {
 

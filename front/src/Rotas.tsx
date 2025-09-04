@@ -10,7 +10,6 @@ import NovelRegister from './screens/NovelRegister/NovelRegister';
 import Novel from './screens/Novel/Novel';
 import Chapter from './screens/Chapter/Chapter';
 import ChapterRegister from './screens/ChapterRegister/ChapterRegister';
-import CommentArea from './component/CommentArea/CommentArea';
 
 const Rotas: React.FC = () => {
     return(
@@ -25,7 +24,6 @@ const Rotas: React.FC = () => {
                 <Route path="/novel/:novelName" element={ <Novel /> } />
                 <Route path="/novel/:novelName/chapter/:chapterNumber" element={ <Chapter /> } />
                 <Route path="/chapterRegister/:novelName" element={ <ChapterRegister /> } />
-                <Route path="/comments/test" element={ <CommentArea/> } />
             </Routes>
         </BrowserRouter>
     );

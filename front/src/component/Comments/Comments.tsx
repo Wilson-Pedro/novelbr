@@ -3,18 +3,9 @@ import Comment from '../Comment/Comment';
 import CommentForm from '../CommentForm/CommentForm';
 import styles from './Comments.module.css';
 
-import { BackendCommentsI } from '../../screens/Novel/Novel';
+import { CommentsProps } from '../../interfaces/CommentInterfaces';
 
 const API_URL = process.env.REACT_APP_API;
-
-interface CommentsProps {
-    currentUserId:number;
-    comments:BackendCommentsI[];
-    postComment:any;
-    putComment:any;
-    deleteComment:any;
-    token:string | null;
-}
 
 const Comments: React.FC<CommentsProps> = ({ 
     currentUserId, 

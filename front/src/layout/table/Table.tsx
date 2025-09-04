@@ -3,17 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './Table.module.css';
 import { useNavigate } from 'react-router-dom';
 
+import { LastChapters } from '../../interfaces/ChapterInterfaces';
+
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
-
-interface LastChapters {
-    index?:number;
-    novelName:string;
-    chapterNumber:number;
-    title:string;
-    dateRegistration:string
-}
 
 const Table: React.FC = () => {
 

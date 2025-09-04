@@ -7,24 +7,12 @@ import { Link, Navigate, useParams, useNavigate } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+import { NovelCard } from '../../interfaces/NovelInterfaces';
+import { Author } from '../../interfaces/AuthorInterfaces';
+
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
-
-interface Author {
-    name:string;
-    username:string;
-    email:string;
-}
-
-interface NovelCard {
-    index?:number;
-    authorId:number;
-    novelId:number;
-    imageUri:string;
-    novelName:string;
-    username:string;
-}
 
 export default function Profile() {
 

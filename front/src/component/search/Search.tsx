@@ -5,12 +5,9 @@ import { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API;
+import  { NovelsFinded } from '../../interfaces/NovelInterfaces';
 
-interface NovelsFinded {
-    id:number;
-    novelName:string;
-}
+const API_URL = process.env.REACT_APP_API;
 
 const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 

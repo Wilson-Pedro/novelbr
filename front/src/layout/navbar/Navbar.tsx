@@ -7,14 +7,13 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 import Dropdown from 'react-bootstrap/Dropdown';
 
-import  { Link, useNavigate } from 'react-router-dom';
+import  { useNavigate } from 'react-router-dom';
+
+import { NavbarProp } from '../../interfaces/OtherInterfaces';
 
 import axios from 'axios';
-const API_URL = process.env.REACT_APP_API;
 
-interface NavbarProp {
-    userAuthenticate?:boolean;
-}
+const API_URL = process.env.REACT_APP_API;
 
 const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
 

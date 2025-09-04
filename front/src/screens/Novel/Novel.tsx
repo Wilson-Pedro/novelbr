@@ -17,44 +17,14 @@ import { FaSearch as FaSearchIcon } from "react-icons/fa";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
+import { BackendCommentsI } from '../../interfaces/CommentInterfaces';
+import { NovelInfo } from '../../interfaces/NovelInterfaces';
+import { ChapterTiles, Page } from '../../interfaces/ChapterInterfaces';
+
 const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
-
-export interface BackendCommentsI {
-    id: number
-    authorId: number
-    username: string
-    comentByCode: number
-    entityId: number
-    parentId: number | null
-    bodyText: string
-    createdAt: string
-}
-
-interface NovelInfo {
-    imageUri: string;
-    novelName: string;
-    novelStatus: string;
-    username: string;
-    year: number;
-    synopsis: string;
-    authorId: number;
-}
-
-interface ChapterTiles {
-    title: string;
-    chapterNumber:number;
-}
-
-interface Page<T> {
-    content: T[];
-    totalPages: number;
-    totalElements: number;
-    size: number;
-    number: number;
-}
 
 const Novel: React.FC = () => {
 

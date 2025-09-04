@@ -4,31 +4,8 @@ import userIcon from '../../assets/user-icon_2.png';
 
 import styles from './Comment.module.css';
 
-import { BackendCommentsI } from '../../screens/Novel/Novel';
+import { CommentProps } from '../../interfaces/CommentInterfaces';
 import CommentForm from '../CommentForm/CommentForm';
-
-interface CommentProps {
-    comment: {
-        id: number
-        authorId: number
-        username: string
-        comentByCode: number
-        entityId: number
-        parentId: number | null
-        bodyText: string
-        createdAt: string
-    }
-    replies: BackendCommentsI[]
-    currentUserId: number
-    deleteComment:any
-    updateComment:any
-    activeComment:any
-    setActiveComment:any
-    parentId:any | null
-    addComment:any
-    replyComment?:any
-    token:string | null
-}
 
 const Comment: React.FC<CommentProps> = 
 ({ comment, 
