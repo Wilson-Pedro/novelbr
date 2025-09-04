@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
@@ -126,14 +129,7 @@ class NovelServiceTest {
 	}
 	
 	@Test
-	void findNovelCards() {
-		
-		List<CardNovelDTO> list = novelService.findNovelCards();
-		
-		assertEquals(list.size(), novelRepository.findNovelCards().size());
-	}
-	
-	@Test
+	@Order(4)
 	void findNovelById() {
 		
 		Long novelId = novelRepository.findAll().get(0).getId();
@@ -145,6 +141,7 @@ class NovelServiceTest {
 	}
 	
 	@Test
+	@Order(5)
 	void findNovelByNovelName() {
 		
 		String novelName = novelRepository.findAll().get(0).getNovelName();
@@ -156,14 +153,7 @@ class NovelServiceTest {
 	}
 	
 	@Test
-	void findNovelCardsByUsername() {
-		
-		List<CardNovelDTO> list = novelService.findNovelCardsByUsername("All Star");
-		
-		assertEquals(list.size(), novelRepository.findNovelCards().size());
-	}
-	
-	@Test
+	@Order(6)
 	void findNovelInfoByNovelId() {
 		
 		Long novelId = novelRepository.findAll().get(0).getId();
@@ -178,6 +168,22 @@ class NovelServiceTest {
 	}
 	
 	@Test
+	void findNovelCardsByUsername() {
+		
+		List<CardNovelDTO> list = novelService.findNovelCardsByUsername("All Star");
+		
+		assertEquals(list.size(), novelRepository.findNovelCards().size());
+	}
+	
+	@Test
+	void findNovelCards() {
+		
+		List<CardNovelDTO> list = novelService.findNovelCards();
+		
+		assertEquals(list.size(), novelRepository.findNovelCards().size());
+	}
+	
+	@Test
 	void findAll() {
 		
 		List<Novel> novels = novelService.findAll();
@@ -187,6 +193,31 @@ class NovelServiceTest {
 	
 	@Test
 	void searchNovel() {
+		
+		String name = "Jornada";
+		List<Novel> novels = novelService.searchNovel(name);
+		assertEquals(novels.size(), novelRepository.count());
+	}
+	
+	@Test
+	void changeNovelImageUri() {
+		
+		byte[] imageContent = "1_CAPA.jpg".getBytes();
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		String imageUri = "1_CAPA.jpg";
+		
+		MockMultipartFile file = new MockMultipartFile(
+				"file",
+				imageUri,
+				MediaType.IMAGE_JPEG_VALUE,
+				imageContent);
+		
+		novelService.changeNovelImageUri(novelId, imageUri, file);
+		
+		Novel novel = novelService.findById(novelId);
+		
+		assertEquals(novel.getImageUri(), imageUri);
 		
 		String name = "Jornada";
 		List<Novel> novels = novelService.searchNovel(name);

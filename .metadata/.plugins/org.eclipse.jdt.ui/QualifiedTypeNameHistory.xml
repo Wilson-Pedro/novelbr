@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.web.api.CommentAPI"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.Inheritance"/>
-    <fullyQualifiedTypeName name="jakarta.persistence.InheritanceType"/>
     <fullyQualifiedTypeName name="jakarta.persistence.ManyToOne"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.CommentNovel"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.entities.CommentChapter"/>
@@ -58,6 +55,9 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.NovelDTO"/>
     <fullyQualifiedTypeName name="com.google.common.base.Objects"/>
     <fullyQualifiedTypeName name="java.util.Objects"/>
-    <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
     <fullyQualifiedTypeName name="org.springframework.data.domain.Page"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="org.springframework.mock.web.MockMultipartFile"/>
+    <fullyQualifiedTypeName name="org.springframework.http.MediaType"/>
 </qualifiedTypeNameHistroy>

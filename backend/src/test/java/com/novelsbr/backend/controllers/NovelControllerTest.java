@@ -3,13 +3,17 @@ package com.novelsbr.backend.controllers;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -23,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.test.web.servlet.MockMvc;
@@ -243,5 +248,35 @@ class NovelControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(jsonPath("$.length()").value(1));
+	}
+	
+	@Test
+	void changeNovelImageUri() throws Exception {
+		byte[] imageContent = "1_CAPA.jpg".getBytes();
+		
+		Long novelId = novelRepository.findAll().get(0).getId();
+		String imageUri = "1_CAPA.jpg";
+		
+		Novel novel = novelRepository.findById(novelId).get();
+		
+		assertTrue(novel.getImageUri() != imageUri);
+		
+		MockMultipartFile file = new MockMultipartFile(
+				"file",
+				imageUri,
+				MediaType.IMAGE_JPEG_VALUE,
+				imageContent);
+
+		mockMvc.perform(multipart(URI + "/changeNovelImageUri")
+				.file(file)
+				.param("novelId", novelId.toString())
+				.param("imageUri", imageUri)
+				.with(request -> { request.setMethod("PATCH"); return request; })
+				.header("Authorization", "Bearer " + TOKEN))
+				.andExpect(status().isNoContent());
+		
+		novel = novelRepository.findById(novelId).get();
+		
+		assertEquals(novel.getImageUri(), imageUri);
 	}
 }
