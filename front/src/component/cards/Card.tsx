@@ -22,7 +22,6 @@ const Card: React.FC<CardProps> = ({ imagePath, novelName, author, userAuthentic
     return(
         <div className={styles.containerCard} onClick={navigateToNovel}>
             <div className={styles.containerImage}>
-                {/* <img className={styles.responsiveImage} src={imagePath} /> */}
                 <img className={styles.responsiveImage} src={srcPath}/>
             </div>
             <div className={styles.containerInfo}>

@@ -6,6 +6,7 @@ import styles from './Comment.module.css';
 
 import { CommentProps } from '../../interfaces/CommentInterfaces';
 import CommentForm from '../CommentForm/CommentForm';
+import { useNavigate } from 'react-router-dom';
 
 const Comment: React.FC<CommentProps> = 
 ({ comment, 
@@ -40,6 +41,12 @@ const Comment: React.FC<CommentProps> =
         token !== null;
 
     const replyId = parentId ? parentId : comment.id;
+
+    const navigate = useNavigate();
+
+    function goToAuthorNovels() {
+        navigate(`/author/${comment.username}/novels`);
+    }
     
     return(
         <div className={styles.comment}>
@@ -48,7 +55,9 @@ const Comment: React.FC<CommentProps> =
             </div>
             <div className={styles.commentRightPart}>
                 <div className={styles.commentContent}>
-                    <div className={styles.commentAuthor}>{comment.username}</div>
+                    <div className={styles.commentAuthor} onClick={goToAuthorNovels}>
+                        {comment.username}
+                    </div>
                     <div>{createdAt}</div>
                 </div>
                 {!isEditing && <div className={styles.commentText}>{comment.bodyText}</div>}

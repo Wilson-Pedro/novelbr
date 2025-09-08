@@ -244,6 +244,10 @@ const Novel: React.FC = () => {
         navigate(`/novel/${novelId}`);
     }
 
+        function goToAuthorNovels(username:string) {
+        navigate(`/author/${username}/novels`);
+    }
+
     function pageSeacrValid(pag:number, max:number) {
         if(pag >= 0 && pag <= max) {
             setPage(pag);
@@ -289,7 +293,11 @@ const Novel: React.FC = () => {
                     </div>
                     <div className={styles.containerInfo}>
                         <h1>{novelInfo.novelName || '---'}</h1>
-                        <p><strong>Autor:</strong> {novelInfo.username || '---'}</p>
+                        <p><strong>Autor:</strong> { novelInfo.username !== null ? 
+                            <span className={styles.authorSpan} onClick={() => goToAuthorNovels(novelInfo.username)}>
+                                {novelInfo.username}
+                            </span>
+                         : (<>'---'</>)}</p>
                         <p><strong>Gêneros:</strong> {genders.map((gender, index) => (
                             <span>{gender}{(index + 1) < genders.length ? <>, </> : <>.</>} </span>
                         ))}</p>

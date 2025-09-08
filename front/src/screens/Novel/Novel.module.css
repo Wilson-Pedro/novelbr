@@ -187,6 +187,15 @@
     cursor: pointer;
 }
 
+.authorSpan {
+    font-family: var(--fonte3);
+    cursor: pointer;
+}
+
+.authorSpan:hover {
+    color: black;
+}
+
 @media (max-width: 1300px) {
     .mainHead {
         flex-direction: column;

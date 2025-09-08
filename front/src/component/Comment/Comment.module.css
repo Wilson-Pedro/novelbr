@@ -31,6 +31,11 @@
   margin-right: 8px;
   font-size: 20px;
   color: rgb(59, 130, 246);
+  cursor: pointer;
+}
+
+.commentAuthor:hover {
+  color: rgb(59, 110, 140);
 }
 
 .commentAction {

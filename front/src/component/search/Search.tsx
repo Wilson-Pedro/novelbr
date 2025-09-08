@@ -39,10 +39,10 @@ const Search: React.FC = () => {
         return () => clearTimeout(delay);
     }, [novelName]);
 
-    function goToNovel(novelId:number) {
+    function goToNovel(novelName:string) {
         setNovelName('');
         setNovelsFinded([]);
-        navigate(`/novel/${novelId}`);
+        navigate(`/novel/${novelName}`);
     }
 
     return (
@@ -58,7 +58,7 @@ const Search: React.FC = () => {
                     {novelsFinded.map((novel) => (
                         <li 
                         className={styles.li} 
-                        onClick={() => goToNovel(novel.id)} 
+                        onClick={() => goToNovel(novel.novelName)} 
                         key={novel.id}>{novel.novelName}</li>
                     ))}
                 </ul>

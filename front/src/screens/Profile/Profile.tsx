@@ -65,6 +65,10 @@ export default function Profile() {
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
 
+    function goToAuthorNovels(username:String) {
+        navigate(`/author/${username}/novels`);
+    }
+
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
@@ -76,7 +80,10 @@ export default function Profile() {
                 <div className={styles.divMain}>
                     <h1>Informações do Usuário ℹ️</h1>
                     <h4>Nome: <span className={styles.noWeight}>{author.name}</span></h4>
-                    <h4>Pseudônimo: <span className={styles.noWeight}>{author.username}</span></h4>
+                    <h4>Pseudônimo: <span className={styles.authorSpan} onClick={() => goToAuthorNovels(author.username)}>
+                        {author.username}
+                        </span>
+                    </h4>
                     <h4>Email: <span className={styles.noWeight}>{author.email}</span></h4>
                 </div>
 
