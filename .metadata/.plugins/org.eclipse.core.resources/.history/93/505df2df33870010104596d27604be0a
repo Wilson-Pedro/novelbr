@@ -1,5 +1,0 @@
-package com.novelsbr.backend.domain.records;
-
-public record ChangeImageUrilRequest(Long novelId, String imageUri) {
-
-}

@@ -45,7 +45,7 @@ public class ChapterController implements ChapterAPI {
 	public Page<NovelsChapterTitleDTO> chapterPagesByNovel(
 			@PathVariable Long novelId,
 			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "2") int size) {
+			@RequestParam(defaultValue = "12") int size) {
 		Page<Chapter> pages = chapterService.findChapterPagesByNovel(page, size, novelId);
 		Page<NovelsChapterTitleDTO> pagesDto = pages
 				.map(x -> new NovelsChapterTitleDTO(x, pages.getTotalPages()));

@@ -2,6 +2,7 @@ package com.novelsbr.backend.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
@@ -19,7 +20,7 @@ public interface NovelService {
 	
 	List<Novel> findAll();
 	
-	List<Novel> searchNovel(String novelName);
+	Page<Novel> searchNovel(String novelName, int page, int size);
 	
 	List<CardNovelDTO> findNovelCards();
 	

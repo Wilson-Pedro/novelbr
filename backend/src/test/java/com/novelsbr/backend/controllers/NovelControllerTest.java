@@ -247,7 +247,7 @@ class NovelControllerTest {
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(1));
+				.andExpect(jsonPath("$.content.length()").value(1));
 	}
 	
 	@Test

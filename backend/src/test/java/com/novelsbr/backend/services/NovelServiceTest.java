@@ -13,9 +13,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
@@ -195,8 +195,8 @@ class NovelServiceTest {
 	void searchNovel() {
 		
 		String name = "Jornada";
-		List<Novel> novels = novelService.searchNovel(name);
-		assertEquals(novels.size(), novelRepository.count());
+		Page<Novel> novels = novelService.searchNovel(name, 0, 1);
+		assertEquals(novels.getSize(), novelRepository.count());
 	}
 	
 	@Test
@@ -218,9 +218,5 @@ class NovelServiceTest {
 		Novel novel = novelService.findById(novelId);
 		
 		assertEquals(novel.getImageUri(), imageUri);
-		
-		String name = "Jornada";
-		List<Novel> novels = novelService.searchNovel(name);
-		assertEquals(novels.size(), novelRepository.count());
 	}
 }

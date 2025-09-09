@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import  { NovelsFinded } from '../../interfaces/NovelInterfaces';
+import { Page } from '../../interfaces/ChapterInterfaces';
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -14,8 +15,9 @@ const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 const Search: React.FC = () => {
 
     const [novelName, setNovelName] = useState<string>('');
-    const [novelId, setNovelId] = useState<number>(0);
     const [novelsFinded, setNovelsFinded] = useState<NovelsFinded[]>([]);
+    const page = 0;
+    const size = 20;
 
     const navigate = useNavigate();
 
@@ -27,8 +29,9 @@ const Search: React.FC = () => {
             }
 
             try {
-                const response = await axios.get(`${API_URL}/novels/search/${novelName}`);
-                setNovelsFinded(response.data);
+                const response = await axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`);
+                const pageData: Page<NovelsFinded> = response.data;
+                setNovelsFinded(pageData.content);
             } catch(error) {
                 console.log('Error ao tentar buscar novels ', error);
             }

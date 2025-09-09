@@ -2,6 +2,7 @@ package com.novelsbr.backend.web.api;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
@@ -37,8 +39,11 @@ public interface NovelAPI {
 	@GetMapping("/{novelName}")
 	public ResponseEntity<NovelDTO> findNovelByNovelName(@PathVariable String novelName);
 	
-	@GetMapping("/search")
-	public ResponseEntity<List<NovelDTO>> searchNovel(@PathVariable String novelName);
+	@GetMapping("/search/{novelName}")
+	public ResponseEntity<Page<NovelDTO>> searchNovel(
+			@PathVariable String novelName,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size);
 	
 	@PatchMapping("/changeNovelStatus")
 	public ResponseEntity<Void> changeNovelStatus(@RequestBody ChangeStatusNovelRequest request);

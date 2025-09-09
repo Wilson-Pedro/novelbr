@@ -2,13 +2,17 @@ package com.novelsbr.backend.services.impl;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Objects;
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
@@ -72,8 +76,9 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
-	public List<Novel> searchNovel(String novelName) {
-		return novelRepository.findByNovelNameContainingIgnoreCase(novelName);
+	public Page<Novel> searchNovel(String novelName, int page, int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
+		return novelRepository.findByNovelNameContainingIgnoreCase(novelName, pageable);
 	}
 
 	@Override
