@@ -48,6 +48,14 @@ const Search: React.FC = () => {
         navigate(`/novel/${novelName}`);
     }
 
+    function goToNovels() {
+        if(novelName.replace(/\s+/g, '') !== '') {
+            setNovelName('');
+            setNovelsFinded([]);
+            navigate(`/novels/${novelName}`);
+        }
+    }
+
     return (
         <div className={styles.searchContainer} >
             <input 
@@ -55,7 +63,9 @@ const Search: React.FC = () => {
                 placeholder='Buscar...'
                 onChange={(e) => setNovelName(e.target.value)}
             />
-            <SearchIcon className={styles.searchIncon} />
+            <span onClick={() => goToNovels()}>
+                <SearchIcon className={styles.searchIncon} />
+            </span>
             {novelsFinded.length > 0 && (
                 <ul className={styles.ul}>
                     {novelsFinded.map((novel) => (

@@ -62,10 +62,6 @@ const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
         navigate(`/login`)
     }
 
-    function goToNovels() {
-        navigate(`/novels`)
-    }
-
     return(
         <>
             <div className={styles.divTitle}>
@@ -84,7 +80,6 @@ const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
 
                             <Dropdown.Menu className={styles.dropdownMenu}>
                                 <Dropdown.Item className={styles.dropdownItem} onClick={goToHome}>Home</Dropdown.Item>
-                                {/* <Dropdown.Item className={styles.dropdownItem} onClick={goToNovels}>Novels</Dropdown.Item> */}
                                 <Dropdown.Item className={styles.dropdownItem} onClick={goToProfile}>Perfil</Dropdown.Item>
                                 <Dropdown.Item className={styles.dropdownItem} href="/">Sair</Dropdown.Item>
                             </Dropdown.Menu>
@@ -98,7 +93,6 @@ const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu className={styles.dropdownMenu}>
-                                {/* <Dropdown.Item className={styles.dropdownItem} onClick={goToNovels}>Novels</Dropdown.Item> */}
                                 <Dropdown.Item className={styles.dropdownItem} onClick={goToRegister}>Cadastrar</Dropdown.Item>
                                 <Dropdown.Item className={styles.dropdownItem} onClick={goToLogin}>Login</Dropdown.Item>
                             </Dropdown.Menu>
