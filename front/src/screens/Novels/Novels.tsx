@@ -9,8 +9,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { NovelCard } from '../../interfaces/NovelInterfaces';
 import { Page } from '../../interfaces/ChapterInterfaces';
+import { FaSearch as FaSearchIcon } from "react-icons/fa";
 
 import axios from 'axios';
+
+const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -22,8 +25,10 @@ const Novels: React.FC = () => {
     const novelName = params.novelName || '';
 
     const [novelNameSearch, setNovelNameSearch] = useState<string>('');
-    const page = 0;
-    const size = 20;
+    const [page, setPage] = useState<number>(0);
+    const [pageSeacrh, setPageSeacrh] = useState<number>(0);
+    const [totalPages, setTolalPages] = useState<number>(0);
+    const size = 18;
     const [cards, setCards] = useState<NovelCard[]>([]);
 
     useEffect(() => {
@@ -34,6 +39,7 @@ const Novels: React.FC = () => {
                 const response = await axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`);
                 const pageData: Page<NovelCard> = response.data;
                 setCards(pageData.content);
+                setTolalPages(pageData.totalPages);
             } catch(error) {
                 console.log("Error ao buscar Card por Username: ", error);
             }
@@ -41,7 +47,7 @@ const Novels: React.FC = () => {
         }
 
         findNovelCards();
-    }, [novelName]);
+    }, [novelName, page]);
 
     useEffect(() => {
 
@@ -55,6 +61,14 @@ const Novels: React.FC = () => {
         }, 500); 
         return () => clearTimeout(findNovelCardsByNovelName);
     }, [novelNameSearch]);
+
+    function pageSeacrValid(pag:number, max:number) {
+        if(pag >= 0 && pag <= max) {
+            setPage(pag);
+        } else {
+            setPage(page);
+        }
+    }
 
     const token = localStorage.getItem('token');
     if(!token) return <Navigate to="/login"/>
@@ -93,18 +107,62 @@ const Novels: React.FC = () => {
                             <p className={styles.pCenter}>Nenhuma Novel cadastrada.</p>
                         </>
                     ) : (
-                        <div className={styles.cardContainer}>
-                            {cards.map((card, index) => (
-                                <Card
-                                    index={index}
-                                    authorId={card.authorId}
-                                    novelId={card.novelId}
-                                    imagePath={card.imageUri}
-                                    novelName={card.novelName}
-                                    author={card.username}
-                                    userAuthenticate={true}
+                        <div className={styles.novelsContainer}>
+                            <div className={styles.cardContainer}>
+                                {cards.map((card, index) => (
+                                    <Card
+                                        index={index}
+                                        authorId={card.authorId}
+                                        novelId={card.novelId}
+                                        imagePath={card.imageUri}
+                                        novelName={card.novelName}
+                                        author={card.username}
+                                        userAuthenticate={true}
+                                    />
+                                ))}
+                            </div>
+                            <div className={styles.div_btn}>
+                                <button
+                                    disabled={page === 0}
+                                    className="btn btn-warning"
+                                    onClick={() => setPage(0)}
+                                >&#60;&#60;&#60;</button>
+                                <button
+                                    disabled={page === 0}
+                                    className="btn btn-warning"
+                                    onClick={() => setPage(page - 1)}
+                                >Anterior</button>
+
+                                <button 
+                                    disabled={page === totalPages - 1}
+                                    className="btn btn-warning"
+                                    onClick={() => setPage(page + 1)}
+                                >Próxima</button>
+
+                                <button 
+                                    disabled={page === totalPages - 1}
+                                    className="btn btn-warning"
+                                    onClick={() => setPage(totalPages - 1)}
+                                >&#62;&#62;&#62;</button> <br/><br/>
+                            </div>
+                            
+                            <div>
+                                Buscar: 
+                                <input 
+                                    type="number" 
+                                    value={pageSeacrh}
+                                    onChange={(e) => setPageSeacrh(parseInt(e.target.value))}
+                                    min={1} 
+                                    max={totalPages} 
                                 />
-                            ))}
+                                <button
+                                onClick={() => pageSeacrValid(pageSeacrh - 1, totalPages - 1)}
+                                ><SearchIcon className={styles.searchIncon} /></button> 
+                            </div>
+                            <div>
+                                <p>Página {page + 1} de {totalPages}</p>
+                            </div>
+                            
                         </div>
                     )}
                     <br/><br/>
