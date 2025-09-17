@@ -137,9 +137,9 @@ const Novel: React.FC = () => {
                     setGenders(gendersRes.value.data);
                 }
 
-                if (chapterTitlesRes.status === "fulfilled") {
-                    setChapterTitles(chapterTitlesRes.value.data);
-                }
+                // if (chapterTitlesRes.status === "fulfilled") {
+                //     setChapterTitles(chapterTitlesRes.value.data);
+                // }
 
                 if (commentsRes.status === "fulfilled") {
                     setBackendComments(commentsRes.value.data);
@@ -440,7 +440,7 @@ const Novel: React.FC = () => {
                                                         <li >{data.chapterNumber}º 
                                                             <span 
                                                             className={styles.cursorPointer}
-                                                            onClick={() => goToChapter(index + 1)}>
+                                                            onClick={() => goToChapter(data.chapterNumber)}>
                                                                 {data.title}
                                                             </span>
                                                         </li>

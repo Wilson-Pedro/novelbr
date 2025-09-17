@@ -30,6 +30,7 @@ import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.NovelService;
 import com.novelsbr.backend.services.NovelStatusService;
 import com.novelsbr.backend.services.UploadService;
+import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
 
 import jakarta.transaction.Transactional;
 
@@ -56,6 +57,8 @@ public class NovelServiceImpl implements NovelService {
 		NovelStatus novelStatus = novelStatusService.findByNovelStatusType(NovelStatusType.IN_COURSE);
 		Novel novel = new Novel(novelDTO);
 		
+		novel.setNovelName(HtmlSanitizerUtil.sanitize(novelDTO.getNovelName()));
+		novel.setSynopsis(HtmlSanitizerUtil.sanitize(novelDTO.getSynopsis()));
 		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
 		novel.setGenders(stringsToGenders(novelDTO.getGenders()));
 		novel.setNovelStatus(novelStatus);

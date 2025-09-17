@@ -14,6 +14,7 @@ import com.novelsbr.backend.exceptions.NullEntityException;
 import com.novelsbr.backend.repositories.CommentRepository;
 import com.novelsbr.backend.services.CommentService;
 import com.novelsbr.backend.services.strategy.CommentStrategyProvider;
+import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -28,6 +29,8 @@ public class CommentServiceImpl implements CommentService {
 	public Comment save(CommentDTO commentDTO) {
 		Comment commentSaved = preparingCommentToSave(commentDTO);
 		if(commentSaved == null) throw new NullEntityException("Comment cannot be null.");
+		
+		commentSaved.setBodyText(HtmlSanitizerUtil.sanitize(commentDTO.getBodyText()));
 		
 		if(commentDTO.getParentId() != null) {
 			Comment commentFather = findById(commentDTO.getParentId());
@@ -59,7 +62,7 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public Comment update(CommentDTO commentDTO, Long id) {
 		Comment commentUpdated= findById(id);
-		commentUpdated.setBodyText(commentDTO.getBodyText());
+		commentUpdated.setBodyText(HtmlSanitizerUtil.sanitize(commentDTO.getBodyText()));
 		return commentRepository.save(commentUpdated);
 	}
 	

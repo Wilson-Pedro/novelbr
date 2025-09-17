@@ -7,6 +7,7 @@ import java.util.Set;
 import org.hibernate.annotations.CreationTimestamp;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -60,8 +61,8 @@ public class Novel implements Serializable {
 	}
 	
 	public Novel(NovelDTO novelDTO) {
-		this.novelName = novelDTO.getNovelName();
-		this.synopsis = novelDTO.getSynopsis();
+		this.novelName = HtmlSanitizerUtil.sanitize(novelDTO.getNovelName());
+		this.synopsis = HtmlSanitizerUtil.sanitize(novelDTO.getSynopsis());
 		this.imageUri = novelDTO.getImageUri();
 		this.dateRegistrion = novelDTO.getDateRegistrion();
 	}
