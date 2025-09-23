@@ -64,6 +64,16 @@ public class NovelController implements NovelAPI {
 		return ResponseEntity.ok(new NovelDTO(novel));
 	}
 	
+	@GetMapping("/genders")
+	public ResponseEntity<Page<CardNovelDTO>> findNovelCardsByGenders(
+			@RequestParam(required = false) List<String> genders,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		Page<CardNovelDTO> cardNovels = novelService.findNovelCardsByGenders(genders, page, size)
+				.map(x -> new CardNovelDTO(x));
+		return ResponseEntity.ok(cardNovels);
+	}
+	
 	@GetMapping("/search/{novelName}")
 	public ResponseEntity<Page<NovelDTO>> searchNovel(
 			@PathVariable String novelName,

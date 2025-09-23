@@ -37,14 +37,10 @@ export default function UserRegister() {
         navigate('/');
     }
 
-    // function goToHomeUser() {
-    //     navigate('/homeUser');  
-    // }
-
     return(
         <div className={styles.container}>
             <div className={styles.formContainer}>
-                <div className={styles.divLogin}>
+                <div className={styles.divUserRegister}>
                     <h3>CADASTRO</h3>
                 </div>
                 <form onSubmit={submitUser}>

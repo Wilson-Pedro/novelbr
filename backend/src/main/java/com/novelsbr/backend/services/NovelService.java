@@ -9,6 +9,7 @@ import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.projections.CardNovelProjection;
 
 public interface NovelService {
 
@@ -21,6 +22,8 @@ public interface NovelService {
 	List<Novel> findAll();
 	
 	Page<Novel> searchNovel(String novelName, int page, int size);
+	
+	Page<CardNovelProjection> findNovelCardsByGenders(List<String> genders, int page, int size);
 	
 	List<CardNovelDTO> findNovelCards();
 	

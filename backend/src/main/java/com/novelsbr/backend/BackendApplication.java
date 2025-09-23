@@ -76,6 +76,7 @@ public class BackendApplication implements CommandLineRunner {
 		novelStatusRepository.saveAll(novelStatsus);
 		
 		List<String> gendersStr = genders.stream().map(x -> x.getGenderType().getType()).toList();
+		List<String> gendersStr1 = List.of("Horror", "Mistério", "Suspense", "Terror");
 
 		List<Author> authors = List.of(
 				new Author(null, "João", "All Star", "joao@gmail.com", "1234", UserRole.AUTHOR),
@@ -89,7 +90,7 @@ public class BackendApplication implements CommandLineRunner {
 		Author author3 = authorService.save(new AuthorDTO(authors.get(2)));
 		Author author4 = authorService.save(new AuthorDTO(authors.get(3)));
 		
-		NovelDTO novelDTO1 = new NovelDTO(null, "A casa ao Lado", author1.getId(), 1, gendersStr, 
+		NovelDTO novelDTO1 = new NovelDTO(null, "A casa ao Lado", author1.getId(), 1, gendersStr1, 
 				"Ao se mudar para uma cidade pacata em busca de recomeço, Laura aluga uma casa simples ao lado de uma propriedade antiga e abandonada. Logo, começa a ouvir sussurros durante a noite e vê sombras se movendo pelas janelas da casa vizinha. Os moradores evitam o assunto, mas uma lenda local fala de desaparecimentos ligados àquela casa. À medida que Laura investiga, descobre que a casa não está vazia e nunca esteve...",
 				"A_casa_ao_lado.jpg");
 		
