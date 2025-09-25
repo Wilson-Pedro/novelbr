@@ -23,7 +23,6 @@
     <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.cfg.ConstructorDetector.SingleArgConstructor"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.NovelStatus"/>
     <fullyQualifiedTypeName name="jakarta.persistence.JoinColumn"/>
-    <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelService"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.NovelStatusRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.exceptions.NotFoundException"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelStatusService"/>
@@ -38,7 +37,6 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.projections.CommentProjection"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.CommentDTO"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.enums.CommentBy"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.services.CommentService"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.repositories.CommentRepository"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.AuthorDTO"/>
@@ -60,4 +58,6 @@
     <fullyQualifiedTypeName name="com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="com.novelsbr.backend.domain.dto.CardNovelDTO"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.novelsbr.backend.services.NovelService"/>
 </qualifiedTypeNameHistroy>

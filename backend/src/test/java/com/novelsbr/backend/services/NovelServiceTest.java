@@ -78,9 +78,8 @@ class NovelServiceTest {
 			id++;
 		}
 		
-		for(Gender gender : genders) {
-			gendersStr.add(gender.getGenderType().getType());
-		}
+		gendersStr.add("ADVENTURE");
+		gendersStr.add("ACTION");
 		
 		for(NovelStatusType type : NovelStatusType.values()) {
 			novelStatsus.add(new NovelStatus(type));
@@ -168,6 +167,25 @@ class NovelServiceTest {
 	}
 	
 	@Test
+	@Order(7)
+	void findNovelCardsByGenders() {
+		
+		Long authorId = authorRepository.findAll().get(0).getId();
+		
+		NovelDTO novelDTO = new NovelDTO(null, 
+				"Jornada para o Além 2", authorId, 
+				1, List.of("Fantasia"), "Na Terra de Fantasy",
+				"https://wallpapercave.com/wp/wp5044832.jpg");
+		
+		novelService.save(novelDTO);
+		
+		Page<CardNovelDTO> cards = novelService.findNovelCardsByGenders(List.of("FANTASY"), 0, 10);
+		
+		assertEquals(cards.getContent().size(), 1);
+		assertEquals(cards.getContent().get(0).getNovelName(), novelDTO.getNovelName());
+	}
+	
+	@Test
 	void findNovelCardsByUsername() {
 		
 		List<CardNovelDTO> list = novelService.findNovelCardsByUsername("All Star");
@@ -194,9 +212,9 @@ class NovelServiceTest {
 	@Test
 	void searchNovel() {
 		
-		String name = "Jornada";
+		String name = "Além 2";
 		Page<Novel> novels = novelService.searchNovel(name, 0, 1);
-		assertEquals(novels.getSize(), novelRepository.count());
+		assertEquals(novels.getSize(), 1);
 	}
 	
 	@Test

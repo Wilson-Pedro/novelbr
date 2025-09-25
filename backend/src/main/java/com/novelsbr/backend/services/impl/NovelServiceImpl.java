@@ -19,7 +19,6 @@ import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Gender;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.domain.projections.CardNovelProjection;
 import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
@@ -98,9 +97,9 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
-	public Page<CardNovelProjection> findNovelCardsByGenders(List<String> genders, int page, int size) {
+	public Page<CardNovelDTO> findNovelCardsByGenders(List<String> genders, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by("novel_name").ascending());
-		return novelRepository.findNovelCardsByGenders(genders, pageable);
+		return novelRepository.findNovelCardsByGenders(genders, pageable).map(x -> new CardNovelDTO(x));
 	}
 
 	@Override

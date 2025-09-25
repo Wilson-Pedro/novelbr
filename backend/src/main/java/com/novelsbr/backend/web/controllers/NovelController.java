@@ -69,8 +69,7 @@ public class NovelController implements NovelAPI {
 			@RequestParam(required = false) List<String> genders,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
-		Page<CardNovelDTO> cardNovels = novelService.findNovelCardsByGenders(genders, page, size)
-				.map(x -> new CardNovelDTO(x));
+		Page<CardNovelDTO> cardNovels = novelService.findNovelCardsByGenders(genders, page, size);
 		return ResponseEntity.ok(cardNovels);
 	}
 	

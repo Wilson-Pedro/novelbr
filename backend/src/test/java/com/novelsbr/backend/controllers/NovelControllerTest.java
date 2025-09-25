@@ -12,8 +12,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -51,6 +49,7 @@ import com.novelsbr.backend.repositories.GenderRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.services.NovelService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -60,6 +59,9 @@ class NovelControllerTest {
 	
 	@Autowired
 	NovelRepository novelRepository;
+	
+	@Autowired
+	NovelService novelService;
 	
 	@Autowired
 	NovelStatusRepository novelStatusRepository;
@@ -113,6 +115,9 @@ class NovelControllerTest {
 			id++;
 		}
 		
+		gendersStr.add("ADVENTURE");
+		gendersStr.add("ACTION");
+		
 		for(NovelStatusType type : NovelStatusType.values()) {
 			novelStatsus.add(new NovelStatus(type));
 		}
@@ -141,9 +146,6 @@ class NovelControllerTest {
 	void save() throws Exception {
 		
 		Long authorId = authorRepository.findAll().get(0).getId();
-		for(Gender gender : genders) {
-			gendersStr.add(gender.getGenderType().getType());
-		}
 		
 		assertEquals(0, novelRepository.count());
 		
@@ -189,13 +191,35 @@ class NovelControllerTest {
 	}
 	
 	@Test
+	@Order(5)
+	void findNovelCardsByGenders() throws Exception {
+		
+		Long authorId = authorRepository.findAll().get(0).getId();
+		
+		NovelDTO novelDTO = new NovelDTO(null, 
+				"Jornada para o Além 2", authorId, 
+				1, List.of("Fantasia"), "Na Terra de Fantasy",
+				"https://wallpapercave.com/wp/wp5044832.jpg");
+		
+		novelService.save(novelDTO);
+			
+		mockMvc.perform(get(URI + "/genders")
+				.param("genders", "FANTASY")
+				.param("page", "0")
+				.param("size", "10"))
+				.andExpect(status().isOk())
+				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.content.length()").value(1));
+	}
+	
+	@Test
 	void findAll() throws Exception {
 		
 		mockMvc.perform(get(URI)
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(1));
+				.andExpect(jsonPath("$.length()").value(2));
 	}
 	
 	@Test
@@ -205,7 +229,7 @@ class NovelControllerTest {
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(1));
+				.andExpect(jsonPath("$.length()").value(2));
 	}
 	
 	@Test
@@ -217,7 +241,7 @@ class NovelControllerTest {
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(1));
+				.andExpect(jsonPath("$.length()").value(2));
 	}
 
 	@Test
@@ -260,7 +284,7 @@ class NovelControllerTest {
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.content.length()").value(1));
+				.andExpect(jsonPath("$.content.length()").value(2));
 	}
 	
 	@Test

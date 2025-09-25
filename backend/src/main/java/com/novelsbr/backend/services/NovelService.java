@@ -23,7 +23,7 @@ public interface NovelService {
 	
 	Page<Novel> searchNovel(String novelName, int page, int size);
 	
-	Page<CardNovelProjection> findNovelCardsByGenders(List<String> genders, int page, int size);
+	Page<CardNovelDTO> findNovelCardsByGenders(List<String> genders, int page, int size);
 	
 	List<CardNovelDTO> findNovelCards();
 	
