@@ -21,6 +21,8 @@ public interface NovelService {
 	
 	List<Novel> findAll();
 	
+	Page<Novel> findAll(int page, int size);
+	
 	Page<Novel> searchNovel(String novelName, int page, int size);
 	
 	Page<CardNovelDTO> findNovelCardsByGenders(List<String> genders, int page, int size);

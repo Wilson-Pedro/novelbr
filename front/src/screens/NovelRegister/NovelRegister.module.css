@@ -68,7 +68,7 @@ form {
     border-radius: 4px;
 }
 
-.div_genders {
+.divGenders {
     padding-left: 3%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));

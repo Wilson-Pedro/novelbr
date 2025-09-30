@@ -137,7 +137,7 @@ export default function NovelRegister() {
                     <div className={styles.formDiv}>
                         <label>Gênros</label>
                     </div>
-                    <div className={styles.div_genders}>
+                    <div className={styles.divGenders}>
                         {gendersBackend.map((gender, index) => (
                             <div className="form-check" key={index}>
                                     <input className="form-check-input" type="checkbox" value={gender.genderType} onChange={(e) => addGenders(e)} />

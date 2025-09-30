@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.dto.PageResponseDTO;
 import com.novelsbr.backend.domain.records.ChangeStatusNovelRequest;
 
 @RequestMapping("/novels")
@@ -22,29 +23,34 @@ public interface NovelAPI {
 	
 	
 	@GetMapping()
-	public ResponseEntity<List<NovelDTO>> findAll();
+	ResponseEntity<List<NovelDTO>> findAll();
 	
 	@PostMapping("/")
-	public ResponseEntity<NovelDTO> save(@RequestBody NovelDTO novelDTO);
+	ResponseEntity<NovelDTO> save(@RequestBody NovelDTO novelDTO);
 	
 	@GetMapping("/novelCards")
-	public ResponseEntity<List<CardNovelDTO>> findNovelCards();
+	ResponseEntity<List<CardNovelDTO>> findNovelCards();
 
 	@GetMapping("/novelCards/author/{username}")
-	public ResponseEntity<List<CardNovelDTO>> findNovelCardsByUsername(@PathVariable String username);
+	ResponseEntity<List<CardNovelDTO>> findNovelCardsByUsername(@PathVariable String username);
 	
 	@GetMapping("/novelCards/{novelId}")
-	public ResponseEntity<AuthorNovelInfoDTO> findNovelInfoByNovelId(@PathVariable Long novelId);
+	ResponseEntity<AuthorNovelInfoDTO> findNovelInfoByNovelId(@PathVariable Long novelId);
 
 	@GetMapping("/{novelName}")
-	public ResponseEntity<NovelDTO> findNovelByNovelName(@PathVariable String novelName);
+	ResponseEntity<NovelDTO> findNovelByNovelName(@PathVariable String novelName);
 	
 	@GetMapping("/search/{novelName}")
-	public ResponseEntity<Page<NovelDTO>> searchNovel(
+	ResponseEntity<PageResponseDTO<CardNovelDTO>> searchNovel(
 			@PathVariable String novelName,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size);
 	
+	@GetMapping("/pages")
+	ResponseEntity<PageResponseDTO<CardNovelDTO>> pages(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size);
+	
 	@PatchMapping("/changeNovelStatus")
-	public ResponseEntity<Void> changeNovelStatus(@RequestBody ChangeStatusNovelRequest request);
+	ResponseEntity<Void> changeNovelStatus(@RequestBody ChangeStatusNovelRequest request);
 }

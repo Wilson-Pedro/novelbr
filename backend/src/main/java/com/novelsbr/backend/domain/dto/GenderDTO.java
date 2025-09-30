@@ -9,6 +9,8 @@ public class GenderDTO implements Serializable {
 
 	private Integer id;
 	
+	private String gender;
+	
 	private String genderType;
 	
 	public GenderDTO() {
@@ -16,11 +18,16 @@ public class GenderDTO implements Serializable {
 
 	public GenderDTO(Gender gender) {
 		this.id = gender.getId();
+		this.gender = gender.getGenderType().toString();
 		this.genderType = gender.getGenderType().getType();
 	}
 
 	public Integer getId() {
 		return id;
+	}
+
+	public String getGender() {
+		return gender;
 	}
 
 	public String getGenderType() {

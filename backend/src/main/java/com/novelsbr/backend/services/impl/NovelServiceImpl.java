@@ -79,6 +79,12 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
+	public Page<Novel> findAll(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
+		return novelRepository.findAll(pageable);
+	}
+	
+	@Override
 	public Page<Novel> searchNovel(String novelName, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
 		return novelRepository.findByNovelNameContainingIgnoreCase(novelName, pageable);

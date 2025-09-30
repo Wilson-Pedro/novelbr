@@ -118,6 +118,19 @@
     text-align: center;
 }
 
+.divGenders {
+    padding-left: 3%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.div_genders input {
+    border: 1px solid black;
+}
+
 @media (max-width: 1024px) {
     .navbar {
         flex-direction: column;

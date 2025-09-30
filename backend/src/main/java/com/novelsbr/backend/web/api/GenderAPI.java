@@ -13,8 +13,8 @@ import com.novelsbr.backend.domain.dto.GenderDTO;
 public interface GenderAPI {
 
 	@GetMapping
-	public ResponseEntity<List<GenderDTO>> findAll();
+	ResponseEntity<List<GenderDTO>> findAll();
 	
 	@GetMapping("/novel/{novelId}")
-	public ResponseEntity<List<String>> findGendersByNovelId(@PathVariable Long novelId);
+	ResponseEntity<List<String>> findGendersByNovelId(@PathVariable Long novelId);
 }
