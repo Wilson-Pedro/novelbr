@@ -21,7 +21,7 @@ import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
 
@@ -37,7 +37,7 @@ class AuthControllerTest {
 	AuthorRepository authorRepository;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	AuthorService authorService;
@@ -56,7 +56,7 @@ class AuthControllerTest {
 	@Order(1)
 	void save() throws Exception {
 		novelRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 		
 		assertEquals(0, authorRepository.count());

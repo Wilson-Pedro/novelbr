@@ -16,15 +16,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.novelsbr.backend.domain.entities.Author;
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.GenreType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 
@@ -42,15 +42,15 @@ class GenderServiceTest {
 	AuthorRepository authorRepository;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
-	GenderService genderService;
+	GenreService genreService;
 	
 	@Autowired
 	ChapterRepository chapterRepository;
 	
-	Set<Gender> genders = new HashSet<>();
+	Set<Genre> genders = new HashSet<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
@@ -68,12 +68,12 @@ class GenderServiceTest {
 	void preparingTestEnvironment() {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 		Integer id = 1;
 		
-		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(type));
+		for(GenreType type : GenreType.values()) {
+			genders.add(new Genre(type));
 			id++;
 		}
 		
@@ -82,22 +82,22 @@ class GenderServiceTest {
 		}
 		
 		novelStatusRepository.saveAll(novelStatsus);
-		genderRepository.saveAll(genders);
+		genreRepository.saveAll(genders);
 		authorRepository.save(author);
 		novelRepository.save(novel);
 	}
 	
 	@Test
 	void findAll() {
-		List<Gender> genders = genderService.findAll();
-		assertEquals(genders.size(), genderRepository.count());
+		List<Genre> genders = genreService.findAll();
+		assertEquals(genders.size(), genreRepository.count());
 	}
 	
 	@Test
 	void findGendersByNovelId() {
 		Long novelId = novelRepository.findAll().get(0).getId();
 		
-		List<String> gendersFinded = genderService.findGendersByNovelId(novelId);
+		List<String> gendersFinded = genreService.findGendersByNovelId(novelId);
 		assertNotNull(gendersFinded);
 	}
 }

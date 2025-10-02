@@ -29,16 +29,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.entities.Author;
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.GenreType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
@@ -63,7 +63,7 @@ class GenderControllerTest {
 	AuthorService authorService;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	ChapterRepository chapterRepository;
@@ -80,12 +80,12 @@ class GenderControllerTest {
 	@Autowired
 	MockMvc mockMvc;
 	
-	Set<Gender> genders = new HashSet<>();
+	Set<Genre> genders = new HashSet<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 	
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
-	static String URI = "/genders";
+	static String URI = "/genres";
 	
 	static String TOKEN = "";
 
@@ -95,7 +95,7 @@ class GenderControllerTest {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		novelStatusRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 		
 		for(NovelStatusType type : NovelStatusType.values()) {
@@ -126,24 +126,21 @@ class GenderControllerTest {
 	@Order(3)
 	void findAll() throws Exception {
 		
-		Integer id = 1;
-		
-		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(type));
-			id++;
+		for(GenreType type : GenreType.values()) {
+			genders.add(new Genre(type));
 		}
 		
-		genderRepository.saveAll(genders);
+		genreRepository.saveAll(genders);
 		
 		mockMvc.perform(get(URI)
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.length()").value(genderRepository.count()));
+				.andExpect(jsonPath("$.length()").value(genreRepository.count()));
 		
 		
-		assertTrue(genderRepository.count() > 0);
-		assertEquals(genders.size(), genderRepository.count());
+		assertTrue(genreRepository.count() > 0);
+		assertEquals(genders.size(), genreRepository.count());
 	}
 	
 	@Test

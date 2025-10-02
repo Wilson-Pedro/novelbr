@@ -1,0 +1,17 @@
+package com.novelsbr.backend.repositories;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import com.novelsbr.backend.domain.entities.Genre;
+import com.novelsbr.backend.domain.projections.GenreProjection;
+
+public interface GenreRepository extends JpaRepository<Genre, Integer>{
+	
+	@Query(nativeQuery = true, value = """
+			SELECT id, genre_type FROM TBL_GENRE ORDER BY GENRE_TYPE
+			""")
+	List<GenreProjection> findAllGenders();
+}

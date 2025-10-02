@@ -46,7 +46,7 @@ public class Novel implements Serializable {
 			joinColumns = @JoinColumn(name = "novel_id"), 
 			inverseJoinColumns = @JoinColumn(name = "genero_id")
 	)
-	private Set<Gender> genders;
+	private Set<Genre> genders;
 	
 	@Lob
 	@Column(columnDefinition = "TEXT")
@@ -67,7 +67,7 @@ public class Novel implements Serializable {
 		this.dateRegistrion = novelDTO.getDateRegistrion();
 	}
 
-	public Novel(Long id, String novelName, Author author, NovelStatus novelStatus, Set<Gender> genders,
+	public Novel(Long id, String novelName, Author author, NovelStatus novelStatus, Set<Genre> genders,
 			String synopsis, String imageUri) {
 		this.id = id;
 		this.novelName = novelName;
@@ -116,11 +116,11 @@ public class Novel implements Serializable {
 		this.novelStatus = novelStatus;
 	}
 
-	public Set<Gender> getGenders() {
+	public Set<Genre> getGenders() {
 		return genders;
 	}
 
-	public void setGenders(Set<Gender> genders) {
+	public void setGenders(Set<Genre> genders) {
 		this.genders = genders;
 	}
 

@@ -12,7 +12,7 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
 
@@ -26,7 +26,7 @@ class AuthorExceptionsTest {
 	AuthorRepository authorRepository;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	AuthorService authorService;
@@ -38,7 +38,7 @@ class AuthorExceptionsTest {
 	void setUp() {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 	}
 	

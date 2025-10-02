@@ -1,0 +1,62 @@
+package com.novelsbr.backend.repositories;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
+import com.novelsbr.backend.domain.projections.CardNovelProjection;
+
+public interface NovelRepository extends JpaRepository<Novel, Long> {
+	
+	boolean existsByNovelName(String novelName);
+
+	@Query(nativeQuery = true, value = """
+			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.image_uri
+			FROM TBL_NOVEL AS n 
+			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id
+			LIMIT 4
+			""")
+	List<CardNovelProjection> findNovelCards();
+	
+	@Query(nativeQuery = true, value = """
+			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.image_uri 
+			FROM TBL_NOVEL AS n 
+			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+			WHERE a.username = :username
+			""")
+	List<CardNovelProjection> findNovelCardsByUsername(String username);
+	
+	@Query(nativeQuery = true, value = """
+				SELECT n.id AS novel_id, a.id AS author_id, n.novel_name AS novelName, 
+						a.username, n.image_uri
+				FROM TBL_NOVEL AS n 
+				JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+				JOIN TBL_NOVEL_GENERO ng ON n.id = ng.novel_id
+				JOIN TBL_GENDER g ON g.id = ng.genero_id
+				WHERE g.gender_type IN :genders
+				GROUP BY n.id, n.novel_name, a.id, a.username, n.image_uri
+				HAVING COUNT(DISTINCT g.gender_type) = :#{#genders.size()}
+				ORDER BY n.novel_name ASC
+			""")
+	Page<CardNovelProjection> findNovelCardsByGenders(@Param("genders") List<String> genders, Pageable pageable);
+	
+	@Query(nativeQuery = true, value = """
+			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, ns.id AS novel_status_id, a.username, n.date_registrion, n.image_uri, n.synopsis 
+			FROM TBL_NOVEL AS n 
+			INNER JOIN TBL_NOVEL_STATUS ns ON ns.id = n.novel_status_id
+			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+			WHERE n.id = :novelId
+			""")
+	Optional<AuthorNovelMinProjection> findNovelInfoByNovelId(Long novelId);
+	
+	Page<Novel> findByNovelNameContainingIgnoreCase(String novelName, Pageable pageable);
+	
+	Optional<Novel> findNovelByNovelName(String novelName);
+}

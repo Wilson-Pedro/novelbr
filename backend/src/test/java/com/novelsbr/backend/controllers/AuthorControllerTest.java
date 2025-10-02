@@ -27,7 +27,7 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
 
@@ -46,7 +46,7 @@ class AuthorControllerTest {
 	AuthorService authorService;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
@@ -72,7 +72,7 @@ class AuthorControllerTest {
 	@Order(1)
 	void deleteAll() {
 		novelRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 	}
 	

@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 
 public class NovelDTO implements Serializable {
@@ -111,7 +111,7 @@ public class NovelDTO implements Serializable {
 		return dateRegistrion;
 	}
 	
-	public List<String> genderToString(Collection<Gender> genders) {
-		return genders.stream().map(x -> x.getGenderType().getType()).toList();
+	public List<String> genderToString(Collection<Genre> genders) {
+		return genders.stream().map(x -> x.getGenreType().getType()).toList();
 	}
 }

@@ -16,10 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.GenreType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.exceptions.ExistingNovelException;
 import com.novelsbr.backend.exceptions.NotFoundException;
@@ -66,9 +66,9 @@ public class NovelServiceImpl implements NovelService {
 		return novelRepository.save(novel);
 	}
 
-	private Set<Gender> stringsToGenders(List<String> gendersStr) {
-		List<Gender> gendersList = GenderType.stringToGender(gendersStr).stream()
-				.map(gender -> new Gender(gender))
+	private Set<Genre> stringsToGenders(List<String> gendersStr) {
+		List<Genre> gendersList = GenreType.stringToGender(gendersStr).stream()
+				.map(gender -> new Genre(gender))
 				.toList();
 		return new HashSet<>(gendersList);
 	}

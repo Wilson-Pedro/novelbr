@@ -1,0 +1,36 @@
+package com.novelsbr.backend.domain.dto;
+
+import java.io.Serializable;
+
+import com.novelsbr.backend.domain.entities.Genre;
+
+public class GenreDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	private Integer id;
+	
+	private String genre;
+	
+	private String genderType;
+	
+	public GenreDTO() {
+	}
+
+	public GenreDTO(Genre genre) {
+		this.id = genre.getId();
+		this.genre = genre.getGenderType().toString();
+		this.genderType = genre.getGenderType().getType();
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public String getGender() {
+		return genre;
+	}
+
+	public String getGenderType() {
+		return genderType;
+	}
+}

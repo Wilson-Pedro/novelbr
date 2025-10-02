@@ -21,15 +21,15 @@ import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.GenreType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 
@@ -50,7 +50,7 @@ class NovelServiceTest {
 	NovelStatusRepository novelStatusRepository;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	ChapterRepository chapterRepository;
@@ -59,7 +59,7 @@ class NovelServiceTest {
 	
 	NovelDTO novelDTO = new NovelDTO();
 	
-	Set<Gender> genders = new HashSet<>();
+	Set<Genre> genders = new HashSet<>();
 	List<String> gendersStr = new ArrayList<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 
@@ -69,12 +69,12 @@ class NovelServiceTest {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		novelStatusRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 		Integer id = 1;
 		
-		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(type));
+		for(GenreType type : GenreType.values()) {
+			genders.add(new Genre(type));
 			id++;
 		}
 		
@@ -85,7 +85,7 @@ class NovelServiceTest {
 			novelStatsus.add(new NovelStatus(type));
 		}
 		
-		genderRepository.saveAll(genders);
+		genreRepository.saveAll(genders);
 		novelStatusRepository.saveAll(novelStatsus);
 		authorRepository.save(author);
 	}

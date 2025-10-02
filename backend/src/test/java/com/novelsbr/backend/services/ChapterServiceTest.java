@@ -22,15 +22,15 @@ import com.novelsbr.backend.domain.dto.LastChaptersDTO;
 import com.novelsbr.backend.domain.dto.NovelsChapterTitleDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.GenreType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 
@@ -57,9 +57,9 @@ class ChapterServiceTest {
 	AuthorRepository authorRepository;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genderRepository;
 	
-	Set<Gender> genders = new HashSet<>();
+	Set<Genre> genders = new HashSet<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 	
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
@@ -82,8 +82,8 @@ class ChapterServiceTest {
 		authorRepository.deleteAll();
 		Integer id = 1;
 		
-		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(type));
+		for(GenreType type : GenreType.values()) {
+			genders.add(new Genre(type));
 			id++;
 		}
 		

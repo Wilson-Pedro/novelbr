@@ -34,17 +34,17 @@ import com.novelsbr.backend.domain.dto.CommentDTO;
 import com.novelsbr.backend.domain.dto.LoginRequest;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.domain.entities.Chapter;
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.GenreType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.CommentRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
@@ -82,7 +82,7 @@ class CommentControllerTest {
 	AuthorService authorService;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	NovelStatusRepository novelStatusRepository;
@@ -99,7 +99,7 @@ class CommentControllerTest {
 	@Autowired
 	ObjectMapper objectMapper;
 	
-	Set<Gender> genders = new HashSet<>();
+	Set<Genre> genders = new HashSet<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 	
 	Author author = new Author(null, "João", "AllStar", "joao@gmail.com", "1234", UserRole.AUTHOR);
@@ -125,12 +125,12 @@ class CommentControllerTest {
 			chapterRepository.deleteAll();
 			novelRepository.deleteAll();
 			novelStatusRepository.deleteAll();
-			genderRepository.deleteAll();
+			genreRepository.deleteAll();
 			authorRepository.deleteAll();
 			Integer id = 1;
 
-			for(GenderType type : GenderType.values()) {
-	    	  genders.add(new Gender(type));
+			for(GenreType type : GenreType.values()) {
+	    	  genders.add(new Genre(type));
 	          id++;
 	       }
 
@@ -139,7 +139,7 @@ class CommentControllerTest {
 	       	}
 
 	       	novelStatusRepository.saveAll(novelStatsus);
-	       	genderRepository.saveAll(genders);
+	       	genreRepository.saveAll(genders);
 	       	author = authorRepository.save(author);
 	       	novelRepository.save(novel);
 	       	chapterRepository.save(chapter);

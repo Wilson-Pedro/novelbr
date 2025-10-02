@@ -16,15 +16,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
-import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.GenreType;
 import com.novelsbr.backend.enums.NovelStatusType;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.NovelService;
@@ -44,7 +44,7 @@ class NovelExceptionsTest {
 	AuthorRepository authorRepository;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	NovelService novelService;
@@ -52,7 +52,7 @@ class NovelExceptionsTest {
 	@Autowired
 	ChapterRepository chapterRepository;
 	
-	Set<Gender> genders = new HashSet<>();
+	Set<Genre> genders = new HashSet<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 	List<String> gendersStr = new ArrayList<>();
 	
@@ -71,12 +71,12 @@ class NovelExceptionsTest {
 	void preparingTestEnvironment() {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 		Integer id = 1;
 		
-		for(GenderType type : GenderType.values()) {
-			genders.add(new Gender(type));
+		for(GenreType type : GenreType.values()) {
+			genders.add(new Genre(type));
 			id++;
 		}
 		
@@ -84,10 +84,10 @@ class NovelExceptionsTest {
 			novelStatsus.add(new NovelStatus(type));
 		}
 		
-		gendersStr = genders.stream().map(g -> g.getGenderType().getType()).toList();
+		gendersStr = genders.stream().map(g -> g.getGenreType().getType()).toList();
 		
 		novelStatusRepository.saveAll(novelStatsus);
-		genderRepository.saveAll(genders);
+		genreRepository.saveAll(genders);
 		authorRepository.save(author);
 		novelRepository.save(novel);
 	}

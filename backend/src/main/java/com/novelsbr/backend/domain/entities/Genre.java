@@ -1,0 +1,50 @@
+package com.novelsbr.backend.domain.entities;
+
+import java.io.Serializable;
+
+import com.novelsbr.backend.domain.dto.GenreDTO;
+import com.novelsbr.backend.enums.GenreType;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "TBL_GENRE")
+public class Genre implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	private Integer id;
+	
+	@Enumerated(EnumType.STRING)
+	private GenreType genreType;
+	
+	public Genre() {
+	}
+
+	public Genre(GenreType genreType) {
+		this.id = genreType.getCode();
+		this.genreType = genreType;
+	}
+	
+	public Genre(GenreDTO genreDTO) {
+		this.id = genreDTO.getId();
+		this.genreType = GenreType.toEnum(genreDTO.getGenreType());
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public GenreType getGenreType() {
+		return genreType;
+	}
+
+	@Override
+	public String toString() {
+		return "Gender [id=" + id + ", genreType=" + genreType + "]";
+	}
+}

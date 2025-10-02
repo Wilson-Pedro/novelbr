@@ -1,0 +1,175 @@
+package com.novelsbr.backend.services.impl;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
+import com.novelsbr.backend.domain.dto.CardNovelDTO;
+import com.novelsbr.backend.domain.dto.NovelDTO;
+import com.novelsbr.backend.domain.entities.Gender;
+import com.novelsbr.backend.domain.entities.Novel;
+import com.novelsbr.backend.domain.entities.NovelStatus;
+import com.novelsbr.backend.enums.GenderType;
+import com.novelsbr.backend.enums.NovelStatusType;
+import com.novelsbr.backend.exceptions.ExistingNovelException;
+import com.novelsbr.backend.exceptions.NotFoundException;
+import com.novelsbr.backend.exceptions.NullEntityException;
+import com.novelsbr.backend.exceptions.NullFieldException;
+import com.novelsbr.backend.repositories.AuthorRepository;
+import com.novelsbr.backend.repositories.NovelRepository;
+import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.services.NovelStatusService;
+import com.novelsbr.backend.services.UploadService;
+import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
+
+import jakarta.transaction.Transactional;
+
+@Service
+public class NovelServiceImpl implements NovelService {
+	
+	@Autowired
+	private NovelRepository novelRepository;
+	
+	@Autowired
+	private AuthorRepository authorRepository;
+	
+	@Autowired
+	private NovelStatusService novelStatusService;
+	
+	@Autowired
+	private UploadService uploadService;
+
+	@Override
+	@Transactional
+	public Novel save(NovelDTO novelDTO) {
+		validadeRegistration(novelDTO);
+		
+		NovelStatus novelStatus = novelStatusService.findByNovelStatusType(NovelStatusType.IN_COURSE);
+		Novel novel = new Novel(novelDTO);
+		
+		novel.setNovelName(HtmlSanitizerUtil.sanitize(novelDTO.getNovelName()));
+		novel.setSynopsis(HtmlSanitizerUtil.sanitize(novelDTO.getSynopsis()));
+		novel.setAuthor(authorRepository.findById(novelDTO.getAuthorId()).orElseThrow(NotFoundException::new));
+		novel.setGenders(stringsToGenders(novelDTO.getGenders()));
+		novel.setNovelStatus(novelStatus);
+		
+		return novelRepository.save(novel);
+	}
+
+	private Set<Gender> stringsToGenders(List<String> gendersStr) {
+		List<Gender> gendersList = GenderType.stringToGender(gendersStr).stream()
+				.map(gender -> new Gender(gender))
+				.toList();
+		return new HashSet<>(gendersList);
+	}
+
+	@Override
+	public List<Novel> findAll() {
+		return novelRepository.findAll();
+	}
+	
+	@Override
+	public Page<Novel> findAll(int page, int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
+		return novelRepository.findAll(pageable);
+	}
+	
+	@Override
+	public Page<Novel> searchNovel(String novelName, int page, int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
+		return novelRepository.findByNovelNameContainingIgnoreCase(novelName, pageable);
+	}
+
+	@Override
+	public List<CardNovelDTO> findNovelCards() {
+		return novelRepository.findNovelCards().stream()
+				.map(CardNovelDTO::new).toList();
+	}
+	
+	@Override
+	public List<CardNovelDTO> findNovelCardsByUsername(String username) {
+		return novelRepository.findNovelCardsByUsername(username).stream()
+				.map(CardNovelDTO::new).toList();
+	}
+	
+	@Override
+	public Page<CardNovelDTO> findNovelCardsByGenders(List<String> genders, int page, int size) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by("novel_name").ascending());
+		return novelRepository.findNovelCardsByGenders(genders, pageable).map(x -> new CardNovelDTO(x));
+	}
+
+	@Override
+	public AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId) {
+		return new AuthorNovelInfoDTO(novelRepository.findNovelInfoByNovelId(novelId)
+				.orElseThrow(() -> new NotFoundException("Novel Info not found.")));
+	}
+
+	@Override
+	public Novel findById(Long id) {
+		return novelRepository.findById(id).orElseThrow(
+				() -> new NotFoundException("Novel not found."));
+	}
+	
+	@Override
+	public Novel findNovelByNovelName(String novelName) {
+		return novelRepository.findNovelByNovelName(novelName).orElseThrow(
+				() -> new NotFoundException("Novel not foundwith name: " + novelName));
+	}
+	
+	@Override
+	public void changeNovelStatus(Long novelId, Integer novelStatusId) {
+		NovelStatus novelStatus = novelStatusService.findById(novelStatusId);
+		Novel novel = findById(novelId);
+		novel.setNovelStatus(novelStatus);
+		novelRepository.save(novel);
+	}
+	
+	@Override
+	public void changeNovelImageUri(Long novelId, String imageUri, MultipartFile file) {
+		uploadService.upload(file);
+		Novel novel = findById(novelId);
+		novel.setImageUri(imageUri);
+		novelRepository.save(novel);
+	}
+
+	@Override
+	public boolean existsByNovelName(String novelName) {
+		return novelRepository.existsByNovelName(novelName);
+	}
+	
+	public void validadeRegistration(NovelDTO novelDTO) {
+		if(!Objects.nonNull(novelDTO)) {
+			throw new NullEntityException("Novel cannot be null.");
+			
+		} 
+		
+		if(existsByNovelName(novelDTO.getNovelName())) {
+			throw new ExistingNovelException("There is already a Novel with this name.");
+			
+		} 
+		
+		if(novelDTO.getNovelName().isBlank() || novelDTO.getNovelName() == null) {
+			throw new NullFieldException("Novel Name cannot be blank.");	
+			
+		} 
+		
+		if(novelDTO.getSynopsis().isBlank() || novelDTO.getSynopsis() == null) {
+			throw new NullFieldException("Synopsis cannot be blank.");	
+			
+		} 
+		
+		if(novelDTO.getImageUri().isBlank()) {
+			throw new NullFieldException("ImageUri cannot be blank.");		
+		}
+	}
+}

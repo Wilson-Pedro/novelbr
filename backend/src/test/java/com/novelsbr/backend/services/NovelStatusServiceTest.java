@@ -3,9 +3,7 @@ package com.novelsbr.backend.services;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -14,19 +12,11 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
-import com.novelsbr.backend.domain.dto.CardNovelDTO;
-import com.novelsbr.backend.domain.dto.NovelDTO;
-import com.novelsbr.backend.domain.entities.Author;
-import com.novelsbr.backend.domain.entities.Gender;
-import com.novelsbr.backend.domain.entities.Novel;
 import com.novelsbr.backend.domain.entities.NovelStatus;
-import com.novelsbr.backend.enums.GenderType;
 import com.novelsbr.backend.enums.NovelStatusType;
-import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenderRepository;
+import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 
@@ -47,7 +37,7 @@ class NovelStatusServiceTest {
 	NovelStatusRepository novelStatusRepository;
 	
 	@Autowired
-	GenderRepository genderRepository;
+	GenreRepository genreRepository;
 	
 	@Autowired
 	ChapterRepository chapterRepository;
@@ -60,7 +50,7 @@ class NovelStatusServiceTest {
 		chapterRepository.deleteAll();
 		novelRepository.deleteAll();
 		novelStatusRepository.deleteAll();
-		genderRepository.deleteAll();
+		genreRepository.deleteAll();
 		authorRepository.deleteAll();
 		
 		for(NovelStatusType type : NovelStatusType.values()) {

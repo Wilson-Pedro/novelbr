@@ -39,10 +39,10 @@ public interface NovelRepository extends JpaRepository<Novel, Long> {
 				FROM TBL_NOVEL AS n 
 				JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
 				JOIN TBL_NOVEL_GENERO ng ON n.id = ng.novel_id
-				JOIN TBL_GENDER g ON g.id = ng.genero_id
-				WHERE g.gender_type IN :genders
+				JOIN TBL_GENRE g ON g.id = ng.genero_id
+				WHERE g.genre_type IN :genders
 				GROUP BY n.id, n.novel_name, a.id, a.username, n.image_uri
-				HAVING COUNT(DISTINCT g.gender_type) = :#{#genders.size()}
+				HAVING COUNT(DISTINCT g.genre_type) = :#{#genders.size()}
 				ORDER BY n.novel_name ASC
 			""")
 	Page<CardNovelProjection> findNovelCardsByGenders(@Param("genders") List<String> genders, Pageable pageable);
