@@ -11,35 +11,24 @@ import com.novelsbr.backend.domain.dto.AuthorDTO;
 import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.repositories.AuthorRepository;
-import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenreRepository;
-import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 class AuthorExceptionsTest {
 	
 	@Autowired
-	NovelRepository novelRepository;
-	
-	@Autowired
 	AuthorRepository authorRepository;
-	
-	@Autowired
-	GenreRepository genreRepository;
 	
 	@Autowired
 	AuthorService authorService;
 	
-	@Autowired
-	ChapterRepository chapterRepository;
+    @Autowired
+    TestUtil testUtil;
 	
 	@BeforeEach
 	void setUp() {
-		chapterRepository.deleteAll();
-		novelRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
+		testUtil.deleteAll();
 	}
 	
 	@Test

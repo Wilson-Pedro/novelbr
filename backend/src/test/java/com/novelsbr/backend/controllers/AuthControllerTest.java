@@ -24,6 +24,7 @@ import com.novelsbr.backend.repositories.AuthorRepository;
 import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -31,16 +32,10 @@ import com.novelsbr.backend.services.AuthorService;
 class AuthControllerTest {
 	
 	@Autowired
-	NovelRepository novelRepository;
-	
-	@Autowired
 	AuthorRepository authorRepository;
 	
-	@Autowired
-	GenreRepository genreRepository;
-	
-	@Autowired
-	AuthorService authorService;
+    @Autowired
+    TestUtil testUtil;
 	
 	@Autowired
 	ObjectMapper objectMapper;
@@ -55,9 +50,7 @@ class AuthControllerTest {
 	@Test
 	@Order(1)
 	void save() throws Exception {
-		novelRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
+		testUtil.deleteAll();
 		
 		assertEquals(0, authorRepository.count());
 		

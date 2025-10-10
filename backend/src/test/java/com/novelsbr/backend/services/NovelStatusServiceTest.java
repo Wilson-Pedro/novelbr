@@ -14,11 +14,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.novelsbr.backend.domain.entities.NovelStatus;
 import com.novelsbr.backend.enums.NovelStatusType;
-import com.novelsbr.backend.repositories.AuthorRepository;
-import com.novelsbr.backend.repositories.ChapterRepository;
-import com.novelsbr.backend.repositories.GenreRepository;
-import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -28,30 +25,17 @@ class NovelStatusServiceTest {
 	NovelStatusService novelStatusService;
 	
 	@Autowired
-	NovelRepository novelRepository;
-	
-	@Autowired
-	AuthorRepository authorRepository;
-	
-	@Autowired
 	NovelStatusRepository novelStatusRepository;
 	
-	@Autowired
-	GenreRepository genreRepository;
-	
-	@Autowired
-	ChapterRepository chapterRepository;
+    @Autowired
+    TestUtil testUtil;
 	
 	List<NovelStatus> novelStatsus = new ArrayList();
 
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
-		chapterRepository.deleteAll();
-		novelRepository.deleteAll();
-		novelStatusRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
+		testUtil.deleteAll();
 		
 		for(NovelStatusType type : NovelStatusType.values()) {
 			novelStatsus.add(new NovelStatus(type));

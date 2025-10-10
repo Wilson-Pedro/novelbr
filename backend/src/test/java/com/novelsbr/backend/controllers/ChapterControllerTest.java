@@ -47,6 +47,7 @@ import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -80,6 +81,9 @@ class ChapterControllerTest {
 	@Autowired
 	AuthenticationManager authenticationManager;
 	
+    @Autowired
+    TestUtil testUtil;
+	
 	@Autowired
 	TokenService tokenService;
 	
@@ -100,16 +104,10 @@ class ChapterControllerTest {
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
-		chapterRepository.deleteAll();
-		novelRepository.deleteAll();
-		novelStatusRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
-		Integer id = 1;
+		testUtil.deleteAll();
 		
 		for(GenreType type : GenreType.values()) {
 			genders.add(new Genre(type));
-			id++;
 		}
 		
 		for(Genre gender : genders) {

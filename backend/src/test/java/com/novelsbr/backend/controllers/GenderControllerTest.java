@@ -42,6 +42,7 @@ import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.utils.TestUtil;
 
 import jakarta.transaction.Transactional;
 
@@ -71,6 +72,9 @@ class GenderControllerTest {
 	@Autowired
 	AuthenticationManager authenticationManager;
 	
+    @Autowired
+    TestUtil testUtil;
+	
 	@Autowired
 	TokenService tokenService;
 	
@@ -92,11 +96,7 @@ class GenderControllerTest {
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
-		chapterRepository.deleteAll();
-		novelRepository.deleteAll();
-		novelStatusRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
+		testUtil.deleteAll();
 		
 		for(NovelStatusType type : NovelStatusType.values()) {
 			novelStatsus.add(new NovelStatus(type));

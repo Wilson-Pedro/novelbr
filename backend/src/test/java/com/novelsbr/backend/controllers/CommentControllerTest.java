@@ -51,6 +51,7 @@ import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.CommentService;
 import com.novelsbr.backend.services.NovelService;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -67,13 +68,7 @@ class CommentControllerTest {
 	ChapterRepository chapterRepository;
 	
 	@Autowired
-	ChapterService chapterService;
-	
-	@Autowired
 	NovelRepository novelRepository;
-	
-	@Autowired
-	NovelService novelService;
 	
 	@Autowired
 	AuthorRepository authorRepository;
@@ -89,6 +84,9 @@ class CommentControllerTest {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
+	
+    @Autowired
+    TestUtil testUtil;
 	
 	@Autowired
 	TokenService tokenService;
@@ -121,28 +119,21 @@ class CommentControllerTest {
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
-			commentRepository.deleteAll();
-			chapterRepository.deleteAll();
-			novelRepository.deleteAll();
-			novelStatusRepository.deleteAll();
-			genreRepository.deleteAll();
-			authorRepository.deleteAll();
-			Integer id = 1;
+		testUtil.deleteAll();
 
-			for(GenreType type : GenreType.values()) {
-	    	  genders.add(new Genre(type));
-	          id++;
-	       }
+		for(GenreType type : GenreType.values()) {
+    	  genders.add(new Genre(type));
+       }
 
-	       for(NovelStatusType type : NovelStatusType.values()) {
-	    	   novelStatsus.add(new NovelStatus(type));
-	       	}
+       for(NovelStatusType type : NovelStatusType.values()) {
+    	   novelStatsus.add(new NovelStatus(type));
+       	}
 
-	       	novelStatusRepository.saveAll(novelStatsus);
-	       	genreRepository.saveAll(genders);
-	       	author = authorRepository.save(author);
-	       	novelRepository.save(novel);
-	       	chapterRepository.save(chapter);
+       	novelStatusRepository.saveAll(novelStatsus);
+       	genreRepository.saveAll(genders);
+       	author = authorRepository.save(author);
+       	novelRepository.save(novel);
+       	chapterRepository.save(chapter);
 	}
 	
 	void getToken() {

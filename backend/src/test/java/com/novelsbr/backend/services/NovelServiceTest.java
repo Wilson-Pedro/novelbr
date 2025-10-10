@@ -32,6 +32,7 @@ import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -55,6 +56,9 @@ class NovelServiceTest {
 	@Autowired
 	ChapterRepository chapterRepository;
 	
+    @Autowired
+    TestUtil testUtil;
+	
 	Author author = new Author(null, "João", "All Star", "joao@gmail.com", "1234", UserRole.AUTHOR);
 	
 	NovelDTO novelDTO = new NovelDTO();
@@ -66,16 +70,10 @@ class NovelServiceTest {
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
-		chapterRepository.deleteAll();
-		novelRepository.deleteAll();
-		novelStatusRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
-		Integer id = 1;
+		testUtil.deleteAll();
 		
 		for(GenreType type : GenreType.values()) {
 			genders.add(new Genre(type));
-			id++;
 		}
 		
 		gendersStr.add("ADVENTURE");

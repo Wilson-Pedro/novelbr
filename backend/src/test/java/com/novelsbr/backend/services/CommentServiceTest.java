@@ -33,6 +33,7 @@ import com.novelsbr.backend.repositories.CommentRepository;
 import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -58,6 +59,9 @@ class CommentServiceTest {
 
     @Autowired
     CommentService commentService;
+    
+    @Autowired
+    TestUtil testUtil;
 
     Set<Genre> genders = new HashSet<>();
     List<NovelStatus> novelStatsus = new ArrayList();
@@ -77,17 +81,10 @@ class CommentServiceTest {
     @Test
     @Order(1)
     void preparingTestEnvironment() {
-    	commentRepository.deleteAll();
-    	chapterRepository.deleteAll();
-    	novelRepository.deleteAll();
-    	novelStatusRepository.deleteAll();
-    	genreRepository.deleteAll();
-    	authorRepository.deleteAll();
-    	Integer id = 1;
+    	testUtil.deleteAll();
 
     	for(GenreType type : GenreType.values()) {
     		genders.add(new Genre(type));
-    		id++;
     	}
 
     	for(NovelStatusType type : NovelStatusType.values()) {

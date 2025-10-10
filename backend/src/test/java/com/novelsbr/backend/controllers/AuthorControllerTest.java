@@ -27,17 +27,13 @@ import com.novelsbr.backend.domain.entities.Author;
 import com.novelsbr.backend.enums.UserRole;
 import com.novelsbr.backend.infra.security.TokenService;
 import com.novelsbr.backend.repositories.AuthorRepository;
-import com.novelsbr.backend.repositories.GenreRepository;
-import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.services.AuthorService;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class AuthorControllerTest {
-	
-	@Autowired
-	NovelRepository novelRepository;
 	
 	@Autowired
 	AuthorRepository authorRepository;
@@ -46,10 +42,10 @@ class AuthorControllerTest {
 	AuthorService authorService;
 	
 	@Autowired
-	GenreRepository genreRepository;
-	
-	@Autowired
 	AuthenticationManager authenticationManager;
+	
+    @Autowired
+    TestUtil testUtil;
 	
 	@Autowired
 	TokenService tokenService;
@@ -71,9 +67,7 @@ class AuthorControllerTest {
 	@Test
 	@Order(1)
 	void deleteAll() {
-		novelRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
+		testUtil.deleteAll();
 	}
 	
 	@Test

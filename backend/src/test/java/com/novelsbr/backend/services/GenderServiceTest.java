@@ -27,6 +27,7 @@ import com.novelsbr.backend.repositories.ChapterRepository;
 import com.novelsbr.backend.repositories.GenreRepository;
 import com.novelsbr.backend.repositories.NovelRepository;
 import com.novelsbr.backend.repositories.NovelStatusRepository;
+import com.novelsbr.backend.utils.TestUtil;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
@@ -50,6 +51,9 @@ class GenderServiceTest {
 	@Autowired
 	ChapterRepository chapterRepository;
 	
+    @Autowired
+    TestUtil testUtil;
+	
 	Set<Genre> genders = new HashSet<>();
 	List<NovelStatus> novelStatsus = new ArrayList();
 
@@ -66,15 +70,10 @@ class GenderServiceTest {
 	@Test
 	@Order(1)
 	void preparingTestEnvironment() {
-		chapterRepository.deleteAll();
-		novelRepository.deleteAll();
-		genreRepository.deleteAll();
-		authorRepository.deleteAll();
-		Integer id = 1;
+		testUtil.deleteAll();
 		
 		for(GenreType type : GenreType.values()) {
 			genders.add(new Genre(type));
-			id++;
 		}
 		
 		for(NovelStatusType type : NovelStatusType.values()) {
