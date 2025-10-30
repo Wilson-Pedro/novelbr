@@ -16,5 +16,5 @@ public interface GenderAPI {
 	ResponseEntity<List<GenreDTO>> findAll();
 	
 	@GetMapping("/novel/{novelId}")
-	ResponseEntity<List<String>> findGendersByNovelId(@PathVariable Long novelId);
+	ResponseEntity<List<GenreDTO>> findGendersByNovelId(@PathVariable Long novelId);
 }

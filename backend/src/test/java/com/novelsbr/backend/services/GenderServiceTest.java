@@ -96,7 +96,7 @@ class GenderServiceTest {
 	void findGendersByNovelId() {
 		Long novelId = novelRepository.findAll().get(0).getId();
 		
-		List<String> gendersFinded = genreService.findGendersByNovelId(novelId);
+		List<Genre> gendersFinded = genreService.findGendersByNovelId(novelId);
 		assertNotNull(gendersFinded);
 	}
 }

@@ -11,6 +11,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
@@ -31,8 +32,6 @@ import com.novelsbr.backend.services.NovelService;
 import com.novelsbr.backend.services.NovelStatusService;
 import com.novelsbr.backend.services.UploadService;
 import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
-
-import jakarta.transaction.Transactional;
 
 @Service
 public class NovelServiceImpl implements NovelService {
@@ -74,11 +73,13 @@ public class NovelServiceImpl implements NovelService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Novel> findAll() {
 		return novelRepository.findAll();
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Page<Novel> findAll(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
 		return novelRepository.findAll(pageable);

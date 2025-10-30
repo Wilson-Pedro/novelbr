@@ -3,7 +3,7 @@ import styles from './Novels.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Card from '../../component/cards/Card';
 import Footer from '../../layout/footer/Rodape';
-import { Link, Navigate, useParams, useNavigate } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,7 +24,7 @@ const API_URL = process.env.REACT_APP_API;
 const Novels: React.FC = () => {
 
     const params = useParams();
-    const navigate = useNavigate();
+    //const navigate = useNavigate();
 
     const novelName = params.novelName || '';
 
@@ -121,7 +121,7 @@ const Novels: React.FC = () => {
     }
 
     function addGenders(genderSelected:GendersBackend) {
-        const gender = genderSelected.gender;
+        const gender = genderSelected.genre;
         if(!genders.includes(gender)) {
             setGenders([...genders, gender]);
         } else {
@@ -235,9 +235,9 @@ const Novels: React.FC = () => {
                                         <input 
                                         className="form-check-input" 
                                         type="checkbox" 
-                                        value={gender.gender} onChange={() => addGenders(gender)} />
+                                        value={gender.genre} onChange={() => addGenders(gender)} />
                                         <label>
-                                            {gender.genderType}
+                                            {gender.genreType}
                                         </label>
                                 </div>
                             ))}
@@ -250,7 +250,7 @@ const Novels: React.FC = () => {
                                     <p className={styles.pCenter}>Nenhuma Foi Encontrada.</p>
                                 </>
                             ) : (
-                                <div className={styles.novelsContainer}>
+                                <div >
                                     <div className={styles.cardContainer}>
                                         {cardsPages.map((card, index) => (
                                             <Card

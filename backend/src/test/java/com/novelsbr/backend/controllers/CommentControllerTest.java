@@ -27,6 +27,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.AuthorDTO;
@@ -176,6 +177,7 @@ class CommentControllerTest {
 	}
 	
 	@Test
+	@Transactional(readOnly = true)
 	@Order(3)
 	void findAll() throws Exception {
     					

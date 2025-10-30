@@ -18,8 +18,8 @@ export interface NovelInfo {
 }
 
 export interface GendersBackend {
-    gender:string;
-    genderType:string;
+    genre:string;
+    genreType:string;
 }
 
 export interface NovelsFinded {

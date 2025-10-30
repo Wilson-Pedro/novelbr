@@ -26,6 +26,12 @@ const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
+interface Genre {
+    id: number;
+    genre: string;
+    genreType: string;
+}
+
 const Novel: React.FC = () => {
 
     const params = useParams();
@@ -35,7 +41,7 @@ const Novel: React.FC = () => {
     const { isAuth } = location.state || {};
     const userAuth = { isAuth: isAuth }
     const [novelInfo, setNovelInfo] = useState<NovelInfo>({} as NovelInfo);
-    const [genders, setGenders] = useState([]);
+    const [genrers, setGenrers] = useState<Genre[]>([]);
     const [chapterTiles, setChapterTitles] = useState<ChapterTiles[]>([]);
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
     const [novelId, setNovelId] = useState<number>(0);
@@ -123,7 +129,7 @@ const Novel: React.FC = () => {
                 const [infoRes, gendersRes, chapterTitlesRes, commentsRes, chapterPagesRes] =
                     await Promise.allSettled([
                         axios.get(`${API_URL}/novels/novelCards/${novelId}`),
-                        axios.get(`${API_URL}/genders/novel/${novelId}`),
+                        axios.get(`${API_URL}/genres/novel/${novelId}`),
                         axios.get(`${API_URL}/chapters/novelsTitle/novel/${novelId}`),
                         axios.get(`${API_URL}/comments/novels/${novelId}`),
                         axios.get(`${API_URL}/chapters/pages/novelsTitle/${novelId}?page=${page}&size=10`)
@@ -134,7 +140,7 @@ const Novel: React.FC = () => {
                 }
 
                 if (gendersRes.status === "fulfilled") {
-                    setGenders(gendersRes.value.data);
+                    setGenrers(gendersRes.value.data);
                 }
 
                 // if (chapterTitlesRes.status === "fulfilled") {
@@ -298,8 +304,8 @@ const Novel: React.FC = () => {
                                 {novelInfo.username}
                             </span>
                          : (<>'---'</>)}</p>
-                        <p><strong>Gêneros:</strong> {genders.map((gender, index) => (
-                            <span>{gender}{(index + 1) < genders.length ? <>, </> : <>.</>} </span>
+                        <p><strong>Gêneros:</strong> {genrers.map((genre, index) => (
+                            <span>{genre.genreType}{(index + 1) < genrers.length ? <>, </> : <>.</>} </span>
                         ))}</p>
                         <p><strong>Ano:</strong> {novelInfo.year || '---'}</p>
 

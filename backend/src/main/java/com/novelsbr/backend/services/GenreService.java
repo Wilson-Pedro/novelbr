@@ -8,7 +8,7 @@ public interface GenreService {
 
 	List<Genre> findAll();
 	
-	List<String> findGendersByNovelId(Long novelId);
+	List<Genre> findGendersByNovelId(Long novelId);
 	
 	List<Genre> findAllGenders();
 }

@@ -2,6 +2,7 @@ package com.novelsbr.backend.domain.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Set;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,7 @@ import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -40,13 +42,13 @@ public class Novel implements Serializable {
 	@JoinColumn(name = "novel_status_id")
 	private NovelStatus novelStatus;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(
 			name = "TBL_NOVEL_GENERO", 
 			joinColumns = @JoinColumn(name = "novel_id"), 
 			inverseJoinColumns = @JoinColumn(name = "genero_id")
 	)
-	private Set<Genre> genders;
+	private Set<Genre> genders = new HashSet<>();
 	
 	@Lob
 	@Column(columnDefinition = "TEXT")

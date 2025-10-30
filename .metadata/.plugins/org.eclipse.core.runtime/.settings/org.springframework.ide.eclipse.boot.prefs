@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
+org.springframework.ide.eclipse.boot.wizard.PopularityTracker.postgresql=1
 org.springframework.ide.eclipse.boot.wizard.PopularityTracker.security=2
 org.springframework.ide.eclipse.boot.wizard.initializr.url=https\://start.spring.io\n

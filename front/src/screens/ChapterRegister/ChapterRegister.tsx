@@ -5,6 +5,9 @@ import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useParams, useNavigate } from 'react-router-dom';
 
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from 'axios';
@@ -20,6 +23,10 @@ export default function ChapterRegister() {
     
     const [title, setTitle] = useState<string>('');
     const [chapterText, setChapterText] = useState<string>('');
+
+    const [modalMessage, setModalMessage] = useState("");
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [showModalError, setShowModalError] = useState<boolean>(false);
 
     useEffect(() => {
 
@@ -56,14 +63,24 @@ export default function ChapterRegister() {
                 }
             });
 
-            navigate(`/novel/${novelName}`, { replace: true });
+            
+            setShowModal(true);
+            setModalMessage("Capítulo cadastrado com sucesso.");
         } catch(error) {
             console.log(error);
+            setShowModalError(true);
+            setModalMessage("Error ao cadastrar capítulo.");
         }
     }
 
     function goToNovel() {
-        navigate(`/novel/${novelName}`);
+        navigate(`/novel/${novelName}`, { replace: true });
+    }
+
+    function closeModal() {
+        setShowModalError(false);
+        const username = localStorage.getItem('username');
+        navigate(`/novel/${novelName}`, { replace: true });
     }
 
     return(
@@ -103,12 +120,51 @@ export default function ChapterRegister() {
                     </textarea>
                 </div>
                 <div className={styles.divBtn}>
-                    <button type="submit" className="btn btn-primary">Criar</button>
+                    <button type="submit" className="btn btn-primary">Cadastrar</button>
                     <button type="button" className="btn btn-danger" onClick={() => goToNovel()}>
                         Cancelar
                     </button>
                 </div>
             </form>
+                        {showModal && (
+                            <>
+                                <Modal show={showModal} onHide={() => setShowModal(false)}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Sucesso</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div className={styles.divModalBtn}>
+                                            <h1>{modalMessage}</h1>
+                                        </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={() => closeModal()}>
+                                            Ok
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                            </>
+                        )}
+        
+                        {showModalError && (
+                            <>
+                                <Modal show={showModalError} onHide={() => setShowModalError(false)}>
+                                    <Modal.Header closeButton>
+                                        <Modal.Title>Error</Modal.Title>
+                                    </Modal.Header>
+                                    <Modal.Body>
+                                        <div className={styles.divModalBtn}>
+                                            <h1>{modalMessage}</h1>
+                                        </div>
+                                    </Modal.Body>
+                                    <Modal.Footer>
+                                        <Button variant="secondary" onClick={() => setShowModalError(false)}>
+                                            Ok
+                                        </Button>
+                                    </Modal.Footer>
+                                </Modal>
+                            </>
+                        )}
             <Footer />
         </div>
     );

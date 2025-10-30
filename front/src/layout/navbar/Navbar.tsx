@@ -81,7 +81,14 @@ const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
                             <Dropdown.Menu className={styles.dropdownMenu}>
                                 <Dropdown.Item className={styles.dropdownItem} onClick={goToHome}>Home</Dropdown.Item>
                                 <Dropdown.Item className={styles.dropdownItem} onClick={goToProfile}>Perfil</Dropdown.Item>
-                                <Dropdown.Item className={styles.dropdownItem} href="/">Sair</Dropdown.Item>
+                                <Dropdown.Item 
+                                className={styles.dropdownItem} 
+                                href="/" 
+                                onClick={() => {
+                                    localStorage.clear();
+                                    navigate("/");
+                                }}
+                                >Sair</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                     </>

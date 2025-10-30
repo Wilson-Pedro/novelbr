@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.GenreDTO;
+import com.novelsbr.backend.domain.entities.Genre;
 import com.novelsbr.backend.services.GenreService;
 import com.novelsbr.backend.web.api.GenderAPI;
 
@@ -28,8 +29,9 @@ public class GenderController implements GenderAPI {
 	}
 	
 	@GetMapping("/novel/{novelId}")
-	public ResponseEntity<List<String>> findGendersByNovelId(@PathVariable Long novelId) {
-		List<String> genders = genreService.findGendersByNovelId(novelId);
-		return ResponseEntity.ok(genders);
+	public ResponseEntity<List<GenreDTO>> findGendersByNovelId(@PathVariable Long novelId) {
+		List<Genre> genres = genreService.findGendersByNovelId(novelId);
+		List<GenreDTO> dtos = genres.stream().map(x ->  new GenreDTO(x)).toList();
+		return ResponseEntity.ok(dtos);
 	}
 }

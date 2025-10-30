@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import styles from './NovelRegister.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 import axios from 'axios';
 
@@ -21,9 +24,14 @@ export default function NovelRegister() {
     const [imageUri, setImageUri] = useState('')
     const [selectFile, setSelectFile] = useState<any>(null);
 
+    const [modalMessage, setModalMessage] = useState("");
+    const [showModal, setShowModal] = useState<boolean>(false);
+    const [showModalError, setShowModalError] = useState<boolean>(false);
+
     const navigate = useNavigate();
 
     const[gendersBackend, setGendersBackend] = useState<GendersBackend[]>([]);
+
 
     useEffect(() => {
 
@@ -40,7 +48,7 @@ export default function NovelRegister() {
 
         const fetchGenders = async () => {
             try {
-                const response = await axios.get(`${API_URL}/genders`, {
+                const response = await axios.get(`${API_URL}/genres`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -55,8 +63,9 @@ export default function NovelRegister() {
 
     const submitNovel = async (e:any) => {
         e.preventDefault();
+        console.log("Enviando novel...");
+
         const token = localStorage.getItem('token');
-        const username = localStorage.getItem('username');
         try {
             await axios.post(`${API_URL}/novels/`, {
                 novelName,
@@ -70,15 +79,19 @@ export default function NovelRegister() {
                     Authorization: `Bearer ${token}`
                 }
             })
+
+            await uploadImage();
+
+            setShowModal(true);
+            setModalMessage("Novel cadastarda com Sucesso.");
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            setShowModalError(true);
+            setModalMessage("Error ao cadastrar Novel");
         }
-        uploadImage(e);
-        navigate(`/profile/${username}`)
     }
 
-    const uploadImage = async (e:any) => {
-        e.preventDefault();
+    const uploadImage = async () => {
         const token = localStorage.getItem('token');
         const formData = new FormData();
         formData.append("file", selectFile);
@@ -90,7 +103,7 @@ export default function NovelRegister() {
                 }
             })
         } catch(error) {
-            console.log("Error ao fazer upload da imagem: ", error)
+            console.log("Error ao fazer upload da imagem: ", error);
         }
     }
 
@@ -102,6 +115,17 @@ export default function NovelRegister() {
         } else {
             setGenders(newGenders.filter(item => item !== gender));
         }
+    }
+
+    function goToProfile() {
+        const username = localStorage.getItem('username');
+        navigate(`/profile/${username}`);
+    }
+
+    function closeModal() {
+        setShowModalError(false);
+        const username = localStorage.getItem('username');
+        navigate(`/profile/${username}`);
     }
 
     const handleFileChange = async (e:any) => {
@@ -140,9 +164,9 @@ export default function NovelRegister() {
                     <div className={styles.divGenders}>
                         {gendersBackend.map((gender, index) => (
                             <div className="form-check" key={index}>
-                                    <input className="form-check-input" type="checkbox" value={gender.genderType} onChange={(e) => addGenders(e)} />
+                                    <input className={`form-check-input ${styles.checkBox}`} type="checkbox" value={gender.genreType} onChange={(e) => addGenders(e)} />
                                     <label>
-                                        {gender.genderType}
+                                        {gender.genreType}
                                     </label>
                             </div>
                         ))}
@@ -175,12 +199,51 @@ export default function NovelRegister() {
                     </div>
 
                     <div className={styles.divBtn}>
-                        <button type="submit" className="btn btn-primary">Criar</button>
-                        <button type="button" className="btn btn-danger">
-                            <Link className={styles.linkNone} to="/profile">Cancelar</Link>
+                        <button type="button" className="btn btn-primary" onClick={submitNovel}>Criar</button>
+                        <button type="button" className="btn btn-danger" onClick={() => goToProfile()}>
+                            Cancelar
                         </button>
                     </div>
                 </form>
+                {showModal && (
+                    <>
+                        <Modal show={showModal} onHide={() => setShowModal(false)}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Sucesso</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <div className={styles.divModalBtn}>
+                                    <h1>{modalMessage}</h1>
+                                </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={() => closeModal()}>
+                                    Ok
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </>
+                )}
+
+                {showModalError && (
+                    <>
+                        <Modal show={showModalError} onHide={() => setShowModalError(false)}>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Error</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <div className={styles.divModalBtn}>
+                                    <h1>{modalMessage}</h1>
+                                </div>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={() => setShowModalError(false)}>
+                                    Ok
+                                </Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </>
+                )}
             </div>
             <Footer />
         </div>

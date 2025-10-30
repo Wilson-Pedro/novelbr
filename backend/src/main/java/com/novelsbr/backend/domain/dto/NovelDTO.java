@@ -2,6 +2,7 @@ package com.novelsbr.backend.domain.dto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class NovelDTO implements Serializable {
 	
 	private Integer novelStatusCode;
 	
-	private List<String> genders;
+	private List<String> genders = new ArrayList<>();
 	
 	private String synopsis;
 	

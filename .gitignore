@@ -1,7 +1,6 @@
-metadata/
+/.metadata/
 
-node_modules/
+/node_modules/
 
-front/.env
+/front/node_modules/
 
-gitignore

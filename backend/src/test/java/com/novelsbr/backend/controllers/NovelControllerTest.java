@@ -29,6 +29,7 @@ import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.novelsbr.backend.domain.dto.AuthorDTO;
@@ -211,6 +212,7 @@ class NovelControllerTest {
 	}
 	
 	@Test
+	@Transactional(readOnly = true)
 	void findAll() throws Exception {
 		
 		mockMvc.perform(get(URI)
@@ -262,6 +264,7 @@ class NovelControllerTest {
 	}
 	
 	@Test
+	@Transactional(readOnly = true)
 	void findNovelByNovelName() throws Exception {
 		String novelName = novelRepository.findAll().get(0).getNovelName();
 		Long authorId = authorRepository.findAll().get(0).getId();

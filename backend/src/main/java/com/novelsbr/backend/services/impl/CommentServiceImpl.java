@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.novelsbr.backend.domain.dto.CommentDTO;
 import com.novelsbr.backend.domain.entities.Comment;
@@ -45,6 +46,7 @@ public class CommentServiceImpl implements CommentService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<Comment> findAll() {
 		return commentRepository.findAll();
 	}
