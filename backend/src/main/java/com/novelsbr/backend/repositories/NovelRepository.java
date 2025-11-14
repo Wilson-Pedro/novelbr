@@ -18,10 +18,11 @@ public interface NovelRepository extends JpaRepository<Novel, Long> {
 	boolean existsByNovelName(String novelName);
 
 	@Query(nativeQuery = true, value = """
-			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.image_uri
-			FROM TBL_NOVEL AS n 
-			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id
-			LIMIT 4
+				SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.image_uri
+				FROM TBL_NOVEL AS n 
+				INNER JOIN TBL_AUTHOR a ON a.id = n.author_id 
+				ORDER BY n.date_registrion DESC
+				LIMIT 4
 			""")
 	List<CardNovelProjection> findNovelCards();
 	

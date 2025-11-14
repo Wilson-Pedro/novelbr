@@ -17,6 +17,22 @@ export interface CommentFormProp {
     handleCancel: any;
 }
 
+export interface NovelConfigProp {
+    chageNovelImage: any;
+    changeNovelStatusSubmit: any;
+    handleFileChange: any;
+    setNovelStatusId:any;
+    novelName:any;
+    handleCloseConfig:any;
+    handleCloseImage:any;
+    handleShowImage:any;
+    handleCloseNovelStatus:any;
+    handleShowNovelStatus:any;
+    showModalConfig:any;
+    showModalNovelStatus:any;
+    showModalImage:any;
+}
+
 export interface CommentsProps {
     currentUserId:number;
     comments:BackendCommentsI[];

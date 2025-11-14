@@ -35,8 +35,57 @@ const Novels: React.FC = () => {
     const size = 18;
     const [cards, setCards] = useState<NovelCard[]>([]);
     const [cardsPages, setCardsPages] = useState<NovelCard[]>([]);
-    const[gendersBackend, setGendersBackend] = useState<GendersBackend[]>([]);
+    const [gendersBackend, setGendersBackend] = useState<GendersBackend[]>([]);
     const [genders, setGenders] = useState<string[]>([]);
+
+    useEffect(() => {
+
+        // const fetchData = async () => {
+        //     try {
+
+        //         const [fetchGenders, novelCardsPages, novelCards, novelByGenders] = 
+        //         await Promise.allSettled([
+        //             await axios.get(
+        //                 `${API_URL}/novels/genders?genders=${genders.join(",")}&page=${page}&size=${size}`
+        //             ),
+        //             axios.get(`${API_URL}/novels/pages?page=${page}&size=${size}`),
+        //             axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`),
+        //             await axios.get(
+        //                 `${API_URL}/novels/genders?genders=${genders.join(",")}&page=${page}&size=${size}`
+        //             )
+
+        //         ]);
+
+        //         if(fetchGenders.status === "fulfilled") {
+        //             setGendersBackend([fetchGenders.value.data]);
+        //         }
+
+        //         if(novelCardsPages.status === "fulfilled") {
+        //             const pageData: Page<NovelCard> = novelCardsPages.value.data;
+        //             setCardsPages(pageData.content);
+        //             setTolalPages(pageData.totalPages);
+        //         }
+
+        //         if(novelCards.status === "fulfilled") {
+        //             const pageData: Page<NovelCard> = novelCards.value.data;
+        //             setCards(pageData.content);
+        //             setTolalPages(pageData.totalPages);
+        //         }
+
+        //         if(novelByGenders.status === "fulfilled") {
+        //             const pageData: Page<NovelCard> = novelByGenders.value.data;
+        //             setCardsPages(pageData.content);
+        //             setTolalPages(pageData.totalPages);
+        //         }
+
+        //     } catch(error) {
+        //         console.log(error);
+        //     }
+        // }
+
+        // fetchData();
+    }, [novelName, page, genders])
+    
 
     useEffect(() => {
 
@@ -68,7 +117,7 @@ const Novels: React.FC = () => {
         
         const fetchGenders = async () => {
             try {
-                const response = await axios.get(`${API_URL}/genders`, {
+                const response = await axios.get(`${API_URL}/genres`, {
                     headers: {
                         Authorization: `Bearer ${token}`
                     }
@@ -250,7 +299,7 @@ const Novels: React.FC = () => {
                                     <p className={styles.pCenter}>Nenhuma Foi Encontrada.</p>
                                 </>
                             ) : (
-                                <div >
+                                <div className={styles.novelsContainer}>
                                     <div className={styles.cardContainer}>
                                         {cardsPages.map((card, index) => (
                                             <Card

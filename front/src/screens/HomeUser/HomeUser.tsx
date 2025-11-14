@@ -45,7 +45,7 @@ export default function HomeUser() {
             </section>
             <div className={styles.lastReleases}>
                 <div className={styles.divTitle}>
-                    <h1>MAIS POPULARES</h1>
+                    <h1>NOVAS HISTÓRIAS</h1>
                 </div>
                 <div className={styles.cardContainer}>
                     {novelCards.map((novelCard, index) => (

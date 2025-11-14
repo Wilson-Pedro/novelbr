@@ -74,19 +74,19 @@ const Comment: React.FC<CommentProps> =
                     {canReply && (
                         <div className={styles.commentAction} 
                             onClick={() => setActiveComment({ id: comment.id, type: 'replying' })}>
-                            Reply
+                            Responder
                         </div> 
                     )}
                     {canEdit && 
                         <div className={styles.commentAction}
                             onClick={() => setActiveComment({ id: comment.id, type: 'editing' })}>
-                                Edit
+                                Editar
                         </div> 
                     }
                     {canDelete && 
                         <div className={styles.commentAction} 
                             onClick={() => deleteComment(comment.id)}>
-                                Delete
+                                Deletar
                         </div> 
                     }
                 </div>

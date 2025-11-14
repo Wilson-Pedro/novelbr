@@ -10,9 +10,6 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-
 import { FaSearch as FaSearchIcon } from "react-icons/fa";
 
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
@@ -20,6 +17,8 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { BackendCommentsI } from '../../interfaces/CommentInterfaces';
 import { NovelInfo } from '../../interfaces/NovelInterfaces';
 import { ChapterTiles, Page } from '../../interfaces/ChapterInterfaces';
+
+import NovelConfig from '../../component/NovelConfig/NovelConfig';
 
 const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
@@ -126,11 +125,10 @@ const Novel: React.FC = () => {
 
         const fecthData = async () => {
             try {
-                const [infoRes, gendersRes, chapterTitlesRes, commentsRes, chapterPagesRes] =
+                const [infoRes, gendersRes, commentsRes, chapterPagesRes] =
                     await Promise.allSettled([
                         axios.get(`${API_URL}/novels/novelCards/${novelId}`),
                         axios.get(`${API_URL}/genres/novel/${novelId}`),
-                        axios.get(`${API_URL}/chapters/novelsTitle/novel/${novelId}`),
                         axios.get(`${API_URL}/comments/novels/${novelId}`),
                         axios.get(`${API_URL}/chapters/pages/novelsTitle/${novelId}?page=${page}&size=10`)
                     ]);
@@ -142,10 +140,6 @@ const Novel: React.FC = () => {
                 if (gendersRes.status === "fulfilled") {
                     setGenrers(gendersRes.value.data);
                 }
-
-                // if (chapterTitlesRes.status === "fulfilled") {
-                //     setChapterTitles(chapterTitlesRes.value.data);
-                // }
 
                 if (commentsRes.status === "fulfilled") {
                     setBackendComments(commentsRes.value.data);
@@ -317,103 +311,21 @@ const Novel: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                {showModalConfig && (
-                    <>
-                        <Modal show={showModalConfig} onHide={handleCloseConfig}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Configurações</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <div className={styles.divModalBtn}>
-                                    <button
-                                        onClick={goToChapterRegister}
-                                        className="btn btn-warning"
-                                    >Cadastrar Capítulo</button>
-
-                                    <button
-                                        onClick={handleShowNovelStatus}
-                                        className="btn btn-warning">
-                                        Status da Novel
-                                    </button>
-
-                                    <button
-                                        onClick={handleShowImage}
-                                        className="btn btn-warning">
-                                        Mudar Capa da Novel
-                                    </button>
-                                </div>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={handleCloseConfig}>
-                                    Fechar
-                                </Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </>
-                )}
-                {showModalNovelStatus && (
-                    <>
-                        <Modal show={showModalNovelStatus} onHide={handleCloseNovelStatus}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Mudar Status da Novel</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <form onSubmit={changeNovelStatusSubmit} className={styles.formModal}>
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={() => changeNovelStatus(1)}>Em Curso
-                                    </button>
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={() => changeNovelStatus(2)}>Finalizado
-                                    </button>
-                                    <button
-                                        className="btn btn-primary"
-                                        onClick={() => changeNovelStatus(3)}>Hiato
-                                    </button>
-                                </form>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={handleCloseNovelStatus}>
-                                    Fechar
-                                </Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </>
-                )}
-                {showModalImage && (
-                    <>
-                        <Modal show={showModalImage} onHide={handleCloseImage}>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Mudar Capa da Novel</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <form onSubmit={chageNovelImageUri} className={styles.formModal}>
-                                    <div className="input-group">
-                                        <input 
-                                            type="file" 
-                                            className="form-control" 
-                                            id="inputGroupFile04" 
-                                            aria-describedby="inputGroupFileAddon04" 
-                                            aria-label="Upload" 
-                                            onChange={handleFileChange}
-                                            required
-                                        />
-                                        <button 
-                                            className="btn btn-outline-secondary" 
-                                            type="submit" 
-                                            id="inputGroupFileAddon04">Enviar</button>
-                                    </div>
-                                </form>
-                            </Modal.Body>
-                            <Modal.Footer>
-                                <Button variant="secondary" onClick={handleCloseImage}>
-                                    Fechar
-                                </Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </>
-                )}
+                <NovelConfig 
+                    chageNovelImage={chageNovelImageUri}
+                    changeNovelStatusSubmit={changeNovelStatusSubmit}
+                    handleFileChange={handleFileChange}
+                    setNovelStatusId={setNovelStatusId}
+                    novelName={novelName}
+                    handleCloseConfig={handleCloseConfig}
+                    handleCloseImage={handleCloseImage}
+                    handleShowImage={handleShowImage}
+                    handleCloseNovelStatus={handleCloseNovelStatus}
+                    handleShowNovelStatus={handleShowNovelStatus}
+                    showModalConfig={showModalConfig}
+                    showModalNovelStatus={showModalNovelStatus}
+                    showModalImage={showModalImage}
+                />
                 {token != null && authorId === novelInfo.authorId ? (
 
                     <div className={styles.div_btn}>
