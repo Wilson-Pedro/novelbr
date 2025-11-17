@@ -26,3 +26,19 @@ export interface NovelsFinded {
     id:number;
     novelName:string;
 }
+
+export interface NovelConfigProp {
+    chageNovelImage: any;
+    changeNovelStatusSubmit: any;
+    handleFileChange: any;
+    setNovelStatusId:any;
+    novelName:any;
+    handleCloseConfig:any;
+    handleCloseImage:any;
+    handleShowImage:any;
+    handleCloseNovelStatus:any;
+    handleShowNovelStatus:any;
+    showModalConfig:any;
+    showModalNovelStatus:any;
+    showModalImage:any;
+}

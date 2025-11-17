@@ -17,6 +17,8 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 import axios from 'axios';
 
+import Pagination from '../../component/Pagination/Pagination';
+
 const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
 const API_URL = process.env.REACT_APP_API;
@@ -24,7 +26,6 @@ const API_URL = process.env.REACT_APP_API;
 const Novels: React.FC = () => {
 
     const params = useParams();
-    //const navigate = useNavigate();
 
     const novelName = params.novelName || '';
 
@@ -40,55 +41,6 @@ const Novels: React.FC = () => {
 
     useEffect(() => {
 
-        // const fetchData = async () => {
-        //     try {
-
-        //         const [fetchGenders, novelCardsPages, novelCards, novelByGenders] = 
-        //         await Promise.allSettled([
-        //             await axios.get(
-        //                 `${API_URL}/novels/genders?genders=${genders.join(",")}&page=${page}&size=${size}`
-        //             ),
-        //             axios.get(`${API_URL}/novels/pages?page=${page}&size=${size}`),
-        //             axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`),
-        //             await axios.get(
-        //                 `${API_URL}/novels/genders?genders=${genders.join(",")}&page=${page}&size=${size}`
-        //             )
-
-        //         ]);
-
-        //         if(fetchGenders.status === "fulfilled") {
-        //             setGendersBackend([fetchGenders.value.data]);
-        //         }
-
-        //         if(novelCardsPages.status === "fulfilled") {
-        //             const pageData: Page<NovelCard> = novelCardsPages.value.data;
-        //             setCardsPages(pageData.content);
-        //             setTolalPages(pageData.totalPages);
-        //         }
-
-        //         if(novelCards.status === "fulfilled") {
-        //             const pageData: Page<NovelCard> = novelCards.value.data;
-        //             setCards(pageData.content);
-        //             setTolalPages(pageData.totalPages);
-        //         }
-
-        //         if(novelByGenders.status === "fulfilled") {
-        //             const pageData: Page<NovelCard> = novelByGenders.value.data;
-        //             setCardsPages(pageData.content);
-        //             setTolalPages(pageData.totalPages);
-        //         }
-
-        //     } catch(error) {
-        //         console.log(error);
-        //     }
-        // }
-
-        // fetchData();
-    }, [novelName, page, genders])
-    
-
-    useEffect(() => {
-
         const findNovelCards = async () => {
 
             try {
@@ -96,7 +48,7 @@ const Novels: React.FC = () => {
                 const pageData: Page<NovelCard> = response.data;
                 setCards(pageData.content);
                 setTolalPages(pageData.totalPages);
-            } catch(error) {
+            } catch (error) {
                 console.log("Error ao buscar Card por Username: ", error);
             }
 
@@ -109,12 +61,12 @@ const Novels: React.FC = () => {
                 const pageData: Page<NovelCard> = response.data;
                 setCardsPages(pageData.content);
                 setTolalPages(pageData.totalPages);
-            } catch(error) {
+            } catch (error) {
                 console.log("Error ao buscar Card por Username: ", error);
             }
 
         }
-        
+
         const fetchGenders = async () => {
             try {
                 const response = await axios.get(`${API_URL}/genres`, {
@@ -123,7 +75,7 @@ const Novels: React.FC = () => {
                     }
                 })
                 setGendersBackend(response.data);
-            } catch(error) {
+            } catch (error) {
                 console.log("Error ao buscar gêneros: ", error)
             }
         };
@@ -137,7 +89,7 @@ const Novels: React.FC = () => {
                 const pageData: Page<NovelCard> = response.data;
                 setCardsPages(pageData.content);
                 setTolalPages(pageData.totalPages);
-            } catch(error) {
+            } catch (error) {
                 console.log("Error ao buscar Card por Username: ", error);
             }
         }
@@ -150,28 +102,28 @@ const Novels: React.FC = () => {
 
     useEffect(() => {
 
-        const findNovelCardsByNovelName = setTimeout(() =>{
+        const findNovelCardsByNovelName = setTimeout(() => {
             axios.get(`${API_URL}/novels/search/${novelNameSearch}?page=${page}&size=${size}`)
-            .then(response => {
-                const pageData: Page<NovelCard> = response.data;
-                setCards(pageData.content);
-            }).catch(error => console.log("Error ao buscar Card por Username: ", error));
+                .then(response => {
+                    const pageData: Page<NovelCard> = response.data;
+                    setCards(pageData.content);
+                }).catch(error => console.log("Error ao buscar Card por Username: ", error));
 
-        }, 500); 
+        }, 500);
         return () => clearTimeout(findNovelCardsByNovelName);
     }, [novelNameSearch]);
 
-    function pageSeacrValid(pag:number, max:number) {
-        if(pag >= 0 && pag <= max) {
+    function pageSearchValid(pag: number, max: number) {
+        if (pag >= 0 && pag <= max) {
             setPage(pag);
         } else {
             setPage(page);
         }
     }
 
-    function addGenders(genderSelected:GendersBackend) {
+    function addGenders(genderSelected: GendersBackend) {
         const gender = genderSelected.genre;
-        if(!genders.includes(gender)) {
+        if (!genders.includes(gender)) {
             setGenders([...genders, gender]);
         } else {
             setGenders(genders.filter(item => item !== gender));
@@ -179,12 +131,12 @@ const Novels: React.FC = () => {
     }
 
     const token = localStorage.getItem('token');
-    if(!token) return <Navigate to="/login"/>
+    if (!token) return <Navigate to="/login" />
 
-    return(
+    return (
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar 
+                <Navbar
                     userAuthenticate={true}
                 />
             </nav>
@@ -198,10 +150,10 @@ const Novels: React.FC = () => {
                         <div className={styles.searchNovel}>
                             <div className="input-group input-group-lg">
                                 <span className="input-group-text" id="inputGroup-sizing-lg">Buscar Novel</span>
-                                <input 
-                                    type="text" 
-                                    className="form-control" 
-                                    aria-label="Sizing example input" 
+                                <input
+                                    type="text"
+                                    className="form-control"
+                                    aria-label="Sizing example input"
                                     aria-describedby="inputGroup-sizing-lg"
                                     value={novelNameSearch}
                                     onChange={(e) => setNovelNameSearch(e.target.value)}
@@ -209,11 +161,11 @@ const Novels: React.FC = () => {
                             </div>
                         </div>
 
-                        
+
                         <div className={styles.divMain}>
                             {cards.length === 0 ? (
                                 <>
-                                    <br/>
+                                    <br />
                                     <p className={styles.pCenter}>Nenhuma Foi Encontrada.</p>
                                 </>
                             ) : (
@@ -231,48 +183,15 @@ const Novels: React.FC = () => {
                                             />
                                         ))}
                                     </div>
-                                    <div className={styles.div_btn}>
-                                        <button
-                                            disabled={page === 0}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(0)}
-                                        >&#60;&#60;&#60;</button>
-                                        <button
-                                            disabled={page === 0}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(page - 1)}
-                                        >Anterior</button>
+                                    <Pagination
+                                        page={page}
+                                        totalPages={totalPages}
+                                        setPage={setPage}
+                                        pageSeacrh={pageSeacrh}
+                                        setPageSeacrh={setPageSeacrh}
+                                        pageSearchValid={pageSearchValid}
+                                    />
 
-                                        <button 
-                                            disabled={page === totalPages - 1}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(page + 1)}
-                                        >Próxima</button>
-
-                                        <button 
-                                            disabled={page === totalPages - 1}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(totalPages - 1)}
-                                        >&#62;&#62;&#62;</button> <br/><br/>
-                                    </div>
-                                    
-                                    <div>
-                                        Buscar: 
-                                        <input 
-                                            type="number" 
-                                            value={pageSeacrh}
-                                            onChange={(e) => setPageSeacrh(parseInt(e.target.value))}
-                                            min={1} 
-                                            max={totalPages} 
-                                        />
-                                        <button
-                                        onClick={() => pageSeacrValid(pageSeacrh - 1, totalPages - 1)}
-                                        ><SearchIcon className={styles.searchIncon} /></button> 
-                                    </div>
-                                    <div>
-                                        <p>Página {page + 1} de {totalPages}</p>
-                                    </div>
-                                    
                                 </div>
                             )}
                         </div>
@@ -281,13 +200,13 @@ const Novels: React.FC = () => {
                         <div className={styles.divGenders}>
                             {gendersBackend.map((gender, index) => (
                                 <div className="form-check" key={index}>
-                                        <input 
-                                        className="form-check-input" 
-                                        type="checkbox" 
+                                    <input
+                                        className="form-check-input"
+                                        type="checkbox"
                                         value={gender.genre} onChange={() => addGenders(gender)} />
-                                        <label>
-                                            {gender.genreType}
-                                        </label>
+                                    <label>
+                                        {gender.genreType}
+                                    </label>
                                 </div>
                             ))}
                         </div>
@@ -295,7 +214,7 @@ const Novels: React.FC = () => {
                         <div className={styles.divMain}>
                             {cardsPages.length === 0 ? (
                                 <>
-                                    <br/>
+                                    <br />
                                     <p className={styles.pCenter}>Nenhuma Foi Encontrada.</p>
                                 </>
                             ) : (
@@ -313,48 +232,15 @@ const Novels: React.FC = () => {
                                             />
                                         ))}
                                     </div>
-                                    <div className={styles.div_btn}>
-                                        <button
-                                            disabled={page === 0}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(0)}
-                                        >&#60;&#60;&#60;</button>
-                                        <button
-                                            disabled={page === 0}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(page - 1)}
-                                        >Anterior</button>
+                                    <Pagination
+                                        page={page}
+                                        totalPages={totalPages}
+                                        setPage={setPage}
+                                        pageSeacrh={pageSeacrh}
+                                        setPageSeacrh={setPageSeacrh}
+                                        pageSearchValid={pageSearchValid}
+                                    />
 
-                                        <button 
-                                            disabled={page === totalPages - 1}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(page + 1)}
-                                        >Próxima</button>
-
-                                        <button 
-                                            disabled={page === totalPages - 1}
-                                            className="btn btn-warning"
-                                            onClick={() => setPage(totalPages - 1)}
-                                        >&#62;&#62;&#62;</button> <br/><br/>
-                                    </div>
-                                    
-                                    <div>
-                                        Buscar: 
-                                        <input 
-                                            type="number" 
-                                            value={pageSeacrh}
-                                            onChange={(e) => setPageSeacrh(parseInt(e.target.value))}
-                                            min={1} 
-                                            max={totalPages} 
-                                        />
-                                        <button
-                                        onClick={() => pageSeacrValid(pageSeacrh - 1, totalPages - 1)}
-                                        ><SearchIcon className={styles.searchIncon} /></button> 
-                                    </div>
-                                    <div>
-                                        <p>Página {page + 1} de {totalPages}</p>
-                                    </div>
-                                    
                                 </div>
                             )}
                         </div>

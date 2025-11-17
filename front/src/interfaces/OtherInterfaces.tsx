@@ -11,3 +11,12 @@ export interface CardProps {
     authorId?:number;
     novelId?:number;
 }
+
+export interface PaginationProp {
+    page:number;
+    totalPages:number;
+    setPage:any;
+    pageSeacrh:number;
+    setPageSeacrh:any;
+    pageSearchValid:any;
+}

@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
-import { NovelConfigProp } from '../../interfaces/CommentInterfaces';
+import { NovelConfigProp } from '../../interfaces/NovelInterfaces';
 
 const NovelConfig: React.FC<NovelConfigProp> =({
     chageNovelImage,

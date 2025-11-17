@@ -10,8 +10,6 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import { FaSearch as FaSearchIcon } from "react-icons/fa";
-
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 
 import { BackendCommentsI } from '../../interfaces/CommentInterfaces';
@@ -19,8 +17,8 @@ import { NovelInfo } from '../../interfaces/NovelInterfaces';
 import { ChapterTiles, Page } from '../../interfaces/ChapterInterfaces';
 
 import NovelConfig from '../../component/NovelConfig/NovelConfig';
+import Pagination from '../../component/Pagination/Pagination';
 
-const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
@@ -68,18 +66,18 @@ const Novel: React.FC = () => {
                 novelId,
                 novelStatusId,
             },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`
+                    }
+                })
             handleCloseConfig();
         } catch (error) {
             console.log(error)
         }
     }
 
-    const chageNovelImageUri = async (e:any) => {
+    const chageNovelImageUri = async (e: any) => {
         e.preventDefault();
         const formaData = new FormData();
         formaData.append("file", selectFile);
@@ -97,11 +95,6 @@ const Novel: React.FC = () => {
         } catch (error) {
             console.log(error)
         }
-    }
-
-    const changeNovelStatus = (statusId: number) => {
-        setNovelStatusId(statusId);
-        changeNovelStatusSubmit();
     }
 
     useEffect(() => {
@@ -236,20 +229,16 @@ const Novel: React.FC = () => {
         navigate(`/novel/${novelName}/chapter/${chapterNumber}`, { state: userAuth });
     }
 
-    function goToChapterRegister() {
-        navigate(`/chapterRegister/${novelName}`);
-    }
-
     function goToNovel() {
         navigate(`/novel/${novelId}`);
     }
 
-        function goToAuthorNovels(username:string) {
+    function goToAuthorNovels(username: string) {
         navigate(`/author/${username}/novels`);
     }
 
-    function pageSeacrValid(pag:number, max:number) {
-        if(pag >= 0 && pag <= max) {
+    function pageSearchValid(pag: number, max: number) {
+        if (pag >= 0 && pag <= max) {
             setPage(pag);
         } else {
             setPage(page);
@@ -267,13 +256,13 @@ const Novel: React.FC = () => {
 
     const handleCloseNovelStatus = () => setShowModalNovelStatus(false);
 
-    const handleShowNovelStatus= () => {
+    const handleShowNovelStatus = () => {
         setShowModalConfig(false);
         setShowModalNovelStatus(true);
     }
-    
-    const handleFileChange = async (e:any) => {
-        if(e.target.files[0] != null) {
+
+    const handleFileChange = async (e: any) => {
+        if (e.target.files[0] != null) {
             setSelectFile(e.target.files[0]);
             setImageUri(e.target.files[0].name);
         }
@@ -293,11 +282,11 @@ const Novel: React.FC = () => {
                     </div>
                     <div className={styles.containerInfo}>
                         <h1>{novelInfo.novelName || '---'}</h1>
-                        <p><strong>Autor:</strong> { novelInfo.username !== null ? 
+                        <p><strong>Autor:</strong> {novelInfo.username !== null ?
                             <span className={styles.authorSpan} onClick={() => goToAuthorNovels(novelInfo.username)}>
                                 {novelInfo.username}
                             </span>
-                         : (<>'---'</>)}</p>
+                            : (<>'---'</>)}</p>
                         <p><strong>Gêneros:</strong> {genrers.map((genre, index) => (
                             <span>{genre.genreType}{(index + 1) < genrers.length ? <>, </> : <>.</>} </span>
                         ))}</p>
@@ -311,7 +300,8 @@ const Novel: React.FC = () => {
                         </p>
                     </div>
                 </div>
-                <NovelConfig 
+
+                <NovelConfig
                     chageNovelImage={chageNovelImageUri}
                     changeNovelStatusSubmit={changeNovelStatusSubmit}
                     handleFileChange={handleFileChange}
@@ -326,6 +316,7 @@ const Novel: React.FC = () => {
                     showModalNovelStatus={showModalNovelStatus}
                     showModalImage={showModalImage}
                 />
+
                 {token != null && authorId === novelInfo.authorId ? (
 
                     <div className={styles.div_btn}>
@@ -355,56 +346,25 @@ const Novel: React.FC = () => {
                                             <div>
                                                 <ul className={styles.cursorDefault}>
                                                     {chapterTiles.map((data, index) => (
-                                                        <li >{data.chapterNumber}º 
-                                                            <span 
-                                                            className={styles.cursorPointer}
-                                                            onClick={() => goToChapter(data.chapterNumber)}>
+                                                        <li >{data.chapterNumber}º
+                                                            <span
+                                                                className={styles.cursorPointer}
+                                                                onClick={() => goToChapter(data.chapterNumber)}>
                                                                 {data.title}
                                                             </span>
                                                         </li>
                                                     ))}
                                                 </ul>
                                             </div>
-                                            <div className={styles.div_btn}>
-                                                <button
-                                                    disabled={page === 0}
-                                                    className="btn btn-warning"
-                                                    onClick={() => setPage(0)}
-                                                >&#60;&#60;&#60;</button>
-                                                <button
-                                                    disabled={page === 0}
-                                                    className="btn btn-warning"
-                                                    onClick={() => setPage(page - 1)}
-                                                >Anterior</button>
 
-                                                <button 
-                                                    disabled={page === totalPages - 1}
-                                                    className="btn btn-warning"
-                                                    onClick={() => setPage(page + 1)}
-                                                >Próxima</button>
-
-                                                <button 
-                                                    disabled={page === totalPages - 1}
-                                                    className="btn btn-warning"
-                                                    onClick={() => setPage(totalPages - 1)}
-                                                >&#62;&#62;&#62;</button> <br/><br/>
-                                            </div>
-                                            <div>
-                                                Buscar: 
-                                                <input 
-                                                    type="number" 
-                                                    value={pageSeacrh}
-                                                    onChange={(e) => setPageSeacrh(parseInt(e.target.value))}
-                                                    min={1} 
-                                                    max={totalPages} 
-                                                />
-                                                <button
-                                                onClick={() => pageSeacrValid(pageSeacrh - 1, totalPages - 1)}
-                                                ><SearchIcon className={styles.searchIncon} /></button> 
-                                            </div>
-                                            <div>
-                                                <p>Página {page + 1} de {totalPages}</p>
-                                            </div>
+                                            <Pagination 
+                                                    page={page}
+                                                    totalPages={totalPages}
+                                                    setPage={setPage}
+                                                    pageSeacrh={pageSeacrh}
+                                                    setPageSeacrh={setPageSeacrh}
+                                                    pageSearchValid={pageSearchValid}
+                                            />
                                         </>
                                     )}
                                 </div>
