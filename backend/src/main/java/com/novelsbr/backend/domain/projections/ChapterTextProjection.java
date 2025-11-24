@@ -1,6 +1,8 @@
 package com.novelsbr.backend.domain.projections;
 
 public interface ChapterTextProjection {
+	
+	Long getChapterId();
 
 	Integer getChapterNumber();
 	

@@ -51,7 +51,7 @@ const Comments: React.FC<CommentsProps> = ({
 
     return(
         <div className={styles.comments}>
-            <h3 className={styles.commentsTitle}>Commentários</h3>
+            <h3 className={styles.commentsTitle}>Commentários do Capítulo</h3>
             {token && (
                 <>
                     <div className={styles.commentsFormTitle}>Escreva um comentário</div>

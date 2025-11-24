@@ -1,4 +1,5 @@
 export interface ChapterInfo {
+    chapterId:number;
     title:string;
     novelId:number;
     novelName:string;

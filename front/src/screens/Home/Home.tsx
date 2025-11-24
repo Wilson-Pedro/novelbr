@@ -17,6 +17,8 @@ export default function Home() {
 
     const [novelCards, setNovelCards] = useState<NovelCard[]>([]);
 
+    localStorage.clear();
+
     useEffect(() => {
         const fetchNovelCards = async () => {
             try {

@@ -153,8 +153,8 @@ const Novel: React.FC = () => {
 
     }, [novelId, novelName, page, imageUri]);
 
-    // COMMENTS
 
+    // COMMENTS
     const postComment = async (bodyText: string, parentId: number) => {
         try {
             const response = await axios.post(`${API_URL}/comments/`, {
@@ -195,7 +195,7 @@ const Novel: React.FC = () => {
         } catch (error) {
             console.log(error)
         }
-    };
+    }
 
     const deleteComment = (commentId: number) => {
         try {
@@ -214,7 +214,7 @@ const Novel: React.FC = () => {
 
     const onAddComment = (comment: BackendCommentsI) => {
         setBackendComments(c => [comment, ...c])
-    };
+    }
 
     const handleUpdateComment = (comment: BackendCommentsI, commentId: number) => {
         handleDeleteComment(commentId);
@@ -346,7 +346,7 @@ const Novel: React.FC = () => {
                                             <div>
                                                 <ul className={styles.cursorDefault}>
                                                     {chapterTiles.map((data, index) => (
-                                                        <li >{data.chapterNumber}º
+                                                        <li >{data.chapterNumber}º <span></span>
                                                             <span
                                                                 className={styles.cursorPointer}
                                                                 onClick={() => goToChapter(data.chapterNumber)}>

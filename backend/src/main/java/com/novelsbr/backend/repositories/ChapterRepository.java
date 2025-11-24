@@ -40,7 +40,7 @@ public interface ChapterRepository extends JpaRepository<Chapter, Long> {
 	Integer findMaxChapterNumber(Long novelId);
 	
 	@Query(nativeQuery = true, value = """
-			SELECT c.title, c.chapter_number, c.chapter_text, c.novel_id, n.novel_name 
+			SELECT c.id AS chapter_id, c.title, c.chapter_number, c.chapter_text, c.novel_id, n.novel_name 
 			FROM TBL_CHAPTER c 
 			INNER JOIN TBL_NOVEL n ON n.id = c.novel_id 
 			WHERE c.chapter_number = :chapterNumber AND n.novel_name = :novelName

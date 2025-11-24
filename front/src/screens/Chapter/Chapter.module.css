@@ -43,6 +43,7 @@
     border-radius: 7px;
     padding-bottom: 5%;
     vertical-align: top;
+    margin-bottom: 5%;
     
 }
 
@@ -98,6 +99,20 @@
 
 .divChapter p {
     margin-top: 4%;
+}
+
+.spa {
+    box-shadow: 0px -4px 4px 0px rgba(0,0,0,0.21);
+    width: 100%;
+    padding: 5%;
+    background-attachment: fixed;
+}
+
+.commentsDiv {
+    width: 100%;
+    text-align: left;
+    color: rgb(63, 37, 0);
+    padding: 5%;
 }
 
 @media (max-width: 1024px) {

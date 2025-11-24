@@ -28,16 +28,16 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment save(CommentDTO commentDTO) {
-		Comment commentSaved = preparingCommentToSave(commentDTO);
-		if(commentSaved == null) throw new NullEntityException("Comment cannot be null.");
+		Comment comment = preparingCommentToSave(commentDTO);
+		if(comment == null) throw new NullEntityException("Comment cannot be null.");
 		
-		commentSaved.setBodyText(HtmlSanitizerUtil.sanitize(commentDTO.getBodyText()));
+		comment.setBodyText(HtmlSanitizerUtil.sanitize(commentDTO.getBodyText()));
 		
 		if(commentDTO.getParentId() != null) {
 			Comment commentFather = findById(commentDTO.getParentId());
-			commentSaved.setCommentFather(commentFather);
+			comment.setCommentFather(commentFather);
 		}
-		return commentRepository.save(commentSaved);
+		return commentRepository.save(comment);
 	}
 	
 	public Comment findById(Long id) {

@@ -16,6 +16,8 @@ export default function Login() {
 
     const navigate = useNavigate();
 
+    localStorage.clear();
+
     function goToHome() {
         navigate('/');
     }
