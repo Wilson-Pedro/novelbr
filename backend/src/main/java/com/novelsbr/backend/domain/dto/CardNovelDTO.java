@@ -21,6 +21,14 @@ public class CardNovelDTO implements Serializable {
 	public CardNovelDTO() {
 	}
 
+	public CardNovelDTO(Long novelId, Long authorId, String novelName, String username, String imageUri) {
+		this.authorId = authorId;
+		this.novelId = novelId;
+		this.novelName = novelName;
+		this.username = username;
+		this.imageUri = imageUri;
+	}
+
 	public CardNovelDTO(CardNovelProjection cardNovelProjection) {
 		this.novelId = cardNovelProjection.getNovelId();
 		this.authorId = cardNovelProjection.getAuthorId();

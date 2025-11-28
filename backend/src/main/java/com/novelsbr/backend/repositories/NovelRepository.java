@@ -3,6 +3,8 @@ package com.novelsbr.backend.repositories;
 import java.util.List;
 import java.util.Optional;
 
+import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
+import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,35 +12,45 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.novelsbr.backend.domain.entities.Novel;
-import com.novelsbr.backend.domain.projections.AuthorNovelMinProjection;
 import com.novelsbr.backend.domain.projections.CardNovelProjection;
 
 public interface NovelRepository extends JpaRepository<Novel, Long> {
 	
 	boolean existsByNovelName(String novelName);
 
-	@Query(nativeQuery = true, value = """
-				SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.image_uri
-				FROM TBL_NOVEL AS n 
-				INNER JOIN TBL_AUTHOR a ON a.id = n.author_id 
-				ORDER BY n.date_registrion DESC
-				LIMIT 4
+	@Query("""
+			SELECT new com.novelsbr.backend.domain.dto.CardNovelDTO(
+				n.id,
+				a.id,
+				n.novelName,
+				a.username,
+				n.imageUri
+			)
+			FROM Novel n
+			JOIN n.author a
+			ORDER BY n.dateRegistration DESC
 			""")
-	List<CardNovelProjection> findNovelCards();
+	List<CardNovelDTO> findNovelCards(Pageable pageable);
 	
-	@Query(nativeQuery = true, value = """
-			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, a.username, n.image_uri 
-			FROM TBL_NOVEL AS n 
-			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+	@Query("""
+			SELECT new com.novelsbr.backend.domain.dto.CardNovelDTO(
+				n.id,
+				a.id,
+				n.novelName,
+				a.username,
+				n.imageUri
+			)
+			FROM Novel n
+			JOIN n.author a
 			WHERE a.username = :username
 			""")
-	List<CardNovelProjection> findNovelCardsByUsername(String username);
+	List<CardNovelDTO> findNovelCardsByUsername(@Param("username") String username);
 	
 	@Query(nativeQuery = true, value = """
-				SELECT n.id AS novel_id, a.id AS author_id, n.novel_name AS novelName, 
+				SELECT n.id AS novel_id, a.id AS author_id, n.novel_name AS novelName,
 						a.username, n.image_uri
-				FROM TBL_NOVEL AS n 
-				JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+				FROM TBL_NOVEL AS n
+				JOIN TBL_AUTHOR AS a ON a.id = n.author_id
 				JOIN TBL_NOVEL_GENERO ng ON n.id = ng.novel_id
 				JOIN TBL_GENRE g ON g.id = ng.genero_id
 				WHERE g.genre_type IN :genders
@@ -48,14 +60,22 @@ public interface NovelRepository extends JpaRepository<Novel, Long> {
 			""")
 	Page<CardNovelProjection> findNovelCardsByGenders(@Param("genders") List<String> genders, Pageable pageable);
 	
-	@Query(nativeQuery = true, value = """
-			SELECT n.id AS novel_id, a.id AS author_id, n.novel_name, ns.id AS novel_status_id, a.username, n.date_registrion, n.image_uri, n.synopsis 
-			FROM TBL_NOVEL AS n 
-			INNER JOIN TBL_NOVEL_STATUS ns ON ns.id = n.novel_status_id
-			INNER JOIN TBL_AUTHOR AS a ON a.id = n.author_id 
+	@Query("""
+			SELECT new com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO(
+				n.id,
+				n.author.id,
+				n.novelName,
+				n.novelStatus,
+				a.username,
+				n.dateRegistration,
+				n.imageUri,
+				n.synopsis
+			)
+			FROM Novel n
+			JOIN n.author a
 			WHERE n.id = :novelId
 			""")
-	Optional<AuthorNovelMinProjection> findNovelInfoByNovelId(Long novelId);
+	Optional<AuthorNovelInfoDTO> findNovelInfoByNovelId(@Param("novelId") Long novelId);
 	
 	Page<Novel> findByNovelNameContainingIgnoreCase(String novelName, Pageable pageable);
 	

@@ -3,7 +3,7 @@ import styles from './AuthorNovel.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Card from '../../component/cards/Card';
 import Footer from '../../layout/footer/Rodape';
-import { Link, Navigate, useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -21,16 +21,14 @@ export default function AuthorNovel() {
     const params = useParams();
     const username = params.username;
 
-    const navigate = useNavigate();
-
     useEffect(() => {
 
         const token = localStorage.getItem('token');
 
-        if(!token) {
-            navigate('/login');
-            return;
-        } 
+        // if(!token) {
+        //     navigate('/login');
+        //     return;
+        // } 
 
         const fetchNovelCardByUsername = async () => {
 
@@ -60,10 +58,10 @@ export default function AuthorNovel() {
 
         fetchNovelCardByUsername();
         fetchAuthorInfo();
-    }, [username]);
+    }, [username]); 
 
-    const token = localStorage.getItem('token');
-    if(!token) return <Navigate to="/login"/>
+    // const token = localStorage.getItem('token');
+    // if(!token) return <Navigate to="/login"/>
 
     return(
         <div className={styles.container}>
@@ -82,7 +80,7 @@ export default function AuthorNovel() {
                     {cards.length === 0 ? (
                         <>
                             <br/>
-                            <p className={styles.pCenter}>{author.username} possui obras cadastradas.</p>
+                            <p className={styles.pCenter}>{author.username} não possui obras cadastradas.</p>
                         </>
                     ) : (
                         <div className={styles.cardContainer}>

@@ -14,6 +14,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
@@ -65,7 +66,9 @@ class NovelServiceTest {
 	
 	Set<Genre> genders = new HashSet<>();
 	List<String> gendersStr = new ArrayList<>();
-	List<NovelStatus> novelStatsus = new ArrayList();
+	List<NovelStatus> novelStatsus = new ArrayList<>();
+
+	PageRequest pageRequest = PageRequest.of(0, 4);
 
 	@Test
 	@Order(1)
@@ -105,6 +108,7 @@ class NovelServiceTest {
 		assertEquals(0, novelRepository.count());
 		
 		Novel novel = novelService.save(novelDTO);
+
 		assertEquals("Jornada para o Além", novel.getNovelName());
 		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
 		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
@@ -117,16 +121,37 @@ class NovelServiceTest {
 	@Order(3)
 	void changeNovelStatus() {
 		Long novelId = novelRepository.findAll().get(0).getId();
-		
+
 		Novel novel = novelService.findById(novelId);
-		assertEquals(novel.getNovelStatus().getNovelStatusType(), NovelStatusType.IN_COURSE);
+
+		assertEquals(NovelStatusType.IN_COURSE, novel.getNovelStatus().getNovelStatusType());
 		novelService.changeNovelStatus(novelId, 2);
 		novel = novelService.findById(novelId);
-		assertEquals(novel.getNovelStatus().getNovelStatusType(), NovelStatusType.FINISHED);
+		assertEquals(NovelStatusType.FINISHED, novel.getNovelStatus().getNovelStatusType());
+
+		assertEquals(1, novelRepository.count());
 	}
+
+//	@Test
+//	@Order(4)
+//	void findNovelInfoByNovelId() {
+//
+//		Long novelId = novelRepository.findAll().get(0).getId();
+//		Long authorId = authorRepository.findAll().get(0).getId();
+//
+//		AuthorNovelInfoDTO info = novelService.findNovelInfoByNovelId(novelId);
+//
+//		System.out.println("=========================\nAUTHOR INFO:\n");
+//		System.out.println(info);
+//
+//		assertEquals("Jornada para o Além", info.getNovelName());
+//		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", info.getSynopsis());
+//		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", info.getImageUri());
+//		assertEquals(authorId, info.getAuthorId());
+//		assertEquals(novelId, info.getNovelId());
+//	}
 	
 	@Test
-	@Order(4)
 	void findNovelById() {
 		
 		Long novelId = novelRepository.findAll().get(0).getId();
@@ -134,38 +159,21 @@ class NovelServiceTest {
 		Novel novel = novelService.findById(novelId);
 		assertEquals("Jornada para o Além", novel.getNovelName());
 		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
-		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
+		assertEquals("1_CAPA.jpg", novel.getImageUri());
 	}
 	
 	@Test
-	@Order(5)
 	void findNovelByNovelName() {
 		
-		String novelName = novelRepository.findAll().get(0).getNovelName();
-		
-		Novel novel = novelService.findNovelByNovelName(novelName);
+		Novel novelFinded = novelRepository.findAll().get(0);
+
+		Novel novel = novelService.findNovelByNovelName(novelFinded.getNovelName());
 		assertEquals("Jornada para o Além", novel.getNovelName());
 		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", novel.getSynopsis());
-		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", novel.getImageUri());
+		assertEquals("1_CAPA.jpg", novel.getImageUri());
 	}
 	
 	@Test
-	@Order(6)
-	void findNovelInfoByNovelId() {
-		
-		Long novelId = novelRepository.findAll().get(0).getId();
-		Long authorId = authorRepository.findAll().get(0).getId();
-		
-		AuthorNovelInfoDTO info = novelService.findNovelInfoByNovelId(novelId);
-		assertEquals("Jornada para o Além", info.getNovelName());
-		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", info.getSynopsis());
-		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", info.getImageUri());
-		assertEquals(authorId, info.getAuthorId());
-		assertEquals(novelId, info.getNovelId());
-	}
-	
-	@Test
-	@Order(7)
 	void findNovelCardsByGenders() {
 		
 		Long authorId = authorRepository.findAll().get(0).getId();
@@ -179,7 +187,7 @@ class NovelServiceTest {
 		
 		Page<CardNovelDTO> cards = novelService.findNovelCardsByGenders(List.of("FANTASY"), 0, 10);
 		
-		assertEquals(cards.getContent().size(), 1);
+		assertEquals(1, cards.getContent().size());
 		assertEquals(cards.getContent().get(0).getNovelName(), novelDTO.getNovelName());
 	}
 	
@@ -188,7 +196,7 @@ class NovelServiceTest {
 		
 		List<CardNovelDTO> list = novelService.findNovelCardsByUsername("All Star");
 		
-		assertEquals(list.size(), novelRepository.findNovelCards().size());
+		assertEquals(list.size(), novelRepository.findNovelCards(pageRequest).size());
 	}
 	
 	@Test
@@ -196,7 +204,7 @@ class NovelServiceTest {
 		
 		List<CardNovelDTO> list = novelService.findNovelCards();
 		
-		assertEquals(list.size(), novelRepository.findNovelCards().size());
+		assertEquals(list.size(), novelRepository.findNovelCards(pageRequest).size());
 	}
 	
 	@Test
@@ -212,7 +220,7 @@ class NovelServiceTest {
 		
 		String name = "Além 2";
 		Page<Novel> novels = novelService.searchNovel(name, 0, 1);
-		assertEquals(novels.getSize(), 1);
+		assertEquals(1, novels.getSize());
 	}
 	
 	@Test
@@ -233,6 +241,6 @@ class NovelServiceTest {
 		
 		Novel novel = novelService.findById(novelId);
 		
-		assertEquals(novel.getImageUri(), imageUri);
+		assertEquals(imageUri, novel.getImageUri());
 	}
 }

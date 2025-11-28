@@ -57,7 +57,7 @@ public class Novel implements Serializable {
 	private String imageUri;
 	
 	@CreationTimestamp
-	private LocalDateTime dateRegistrion;
+	private LocalDateTime dateRegistration;
 	
 	public Novel() {
 	}
@@ -66,7 +66,7 @@ public class Novel implements Serializable {
 		this.novelName = HtmlSanitizerUtil.sanitize(novelDTO.getNovelName());
 		this.synopsis = HtmlSanitizerUtil.sanitize(novelDTO.getSynopsis());
 		this.imageUri = novelDTO.getImageUri();
-		this.dateRegistrion = novelDTO.getDateRegistrion();
+		this.dateRegistration = novelDTO.getDateRegistrion();
 	}
 
 	public Novel(Long id, String novelName, Author author, NovelStatus novelStatus, Set<Genre> genders,
@@ -83,7 +83,7 @@ public class Novel implements Serializable {
 	@Override
 	public String toString() {
 		return "Novel [id=" + id + ", novelName=" + novelName + ", author=" + author + ", genders=" + genders
-				+ ", synopsis=" + synopsis + ", imageUri=" + imageUri + ", dateRegistrion=" + dateRegistrion + "]";
+				+ ", synopsis=" + synopsis + ", imageUri=" + imageUri + ", dateRegistrion=" + dateRegistration + "]";
 	}
 
 	public Long getId() {
@@ -142,8 +142,8 @@ public class Novel implements Serializable {
 		this.imageUri = imageUri;
 	}
 
-	public LocalDateTime getDateRegistrion() {
-		return dateRegistrion;
+	public LocalDateTime getDateRegistration() {
+		return dateRegistration;
 	}
 
 }

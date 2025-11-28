@@ -67,7 +67,7 @@ public class NovelServiceImpl implements NovelService {
 
 	private Set<Genre> stringsToGenders(List<String> gendersStr) {
 		List<Genre> gendersList = GenreType.stringToGender(gendersStr).stream()
-				.map(gender -> new Genre(gender))
+				.map(Genre::new)
 				.toList();
 		return new HashSet<>(gendersList);
 	}
@@ -93,26 +93,24 @@ public class NovelServiceImpl implements NovelService {
 
 	@Override
 	public List<CardNovelDTO> findNovelCards() {
-		return novelRepository.findNovelCards().stream()
-				.map(CardNovelDTO::new).toList();
+		return novelRepository.findNovelCards(PageRequest.of(0, 4));
 	}
 	
 	@Override
 	public List<CardNovelDTO> findNovelCardsByUsername(String username) {
-		return novelRepository.findNovelCardsByUsername(username).stream()
-				.map(CardNovelDTO::new).toList();
+		return novelRepository.findNovelCardsByUsername(username);
 	}
 	
 	@Override
 	public Page<CardNovelDTO> findNovelCardsByGenders(List<String> genders, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by("novel_name").ascending());
-		return novelRepository.findNovelCardsByGenders(genders, pageable).map(x -> new CardNovelDTO(x));
+		return novelRepository.findNovelCardsByGenders(genders, pageable).map(CardNovelDTO::new);
 	}
 
 	@Override
 	public AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId) {
-		return new AuthorNovelInfoDTO(novelRepository.findNovelInfoByNovelId(novelId)
-				.orElseThrow(() -> new NotFoundException("Novel Info not found.")));
+		return novelRepository.findNovelInfoByNovelId(novelId)
+				.orElseThrow(() -> new NotFoundException("Novel Info not found."));
 	}
 
 	@Override
@@ -124,7 +122,7 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	public Novel findNovelByNovelName(String novelName) {
 		return novelRepository.findNovelByNovelName(novelName).orElseThrow(
-				() -> new NotFoundException("Novel not foundwith name: " + novelName));
+				() -> new NotFoundException("Novel not found with name: " + novelName));
 	}
 	
 	@Override

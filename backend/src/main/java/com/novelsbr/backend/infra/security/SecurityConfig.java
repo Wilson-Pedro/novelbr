@@ -44,7 +44,7 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.POST, "/upload/image").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.POST, "/authors/").permitAll()
 						.requestMatchers(HttpMethod.GET, "/authors").hasRole("AUTHOR")
-						.requestMatchers(HttpMethod.GET, "/authors/username/{username}").hasRole("AUTHOR")
+						.requestMatchers(HttpMethod.GET, "/authors/username/{username}").permitAll()
 						.requestMatchers(HttpMethod.GET, "/genres").permitAll()
 						.requestMatchers(HttpMethod.GET, "/genres/novel/{novelId}").permitAll()
 						.requestMatchers(HttpMethod.POST, "/chapters/").hasRole("AUTHOR")

@@ -39,7 +39,7 @@ public class NovelDTO implements Serializable {
 		this.genders = genderToString(novel.getGenders());
 		this.synopsis = novel.getSynopsis();
 		this.imageUri = novel.getImageUri();
-		this.dateRegistrion = novel.getDateRegistrion();
+		this.dateRegistrion = novel.getDateRegistration();
 	}
 	
 	public NovelDTO(Long id, String novelName, Long authorId, Integer novelStatusCode, List<String> genders, String synopsis, String imageUri) {
