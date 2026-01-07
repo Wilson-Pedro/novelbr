@@ -18,11 +18,7 @@
 
 <h2 id="started">🚀 Getting started</h2>
 
-Here you describe how to run your project locally
-
 <h3>Prerequisites</h3>
-
-Here you list all prerequisites necessary for running your project. For example:
 
 - [Java](https://www.oracle.com/java/technologies/downloads/)
 - [Git](https://git-scm.com/downloads)
@@ -30,15 +26,11 @@ Here you list all prerequisites necessary for running your project. For example:
 
 <h3>Cloning</h3>
 
-How to clone your project
-
 ```bash
 git clone git@github.com:Wilson-Pedro/novelbr.git
 ```
 
 <h2 id="routes">📍 API Endpoints</h2>
-
-Here you can list the main routes of your API, and what are their expected request bodies.
 
 <h3 id="routes">User:</h3>
 
