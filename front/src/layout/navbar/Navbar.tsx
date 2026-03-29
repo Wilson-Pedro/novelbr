@@ -9,13 +9,11 @@ import Dropdown from 'react-bootstrap/Dropdown';
 
 import  { useNavigate } from 'react-router-dom';
 
-import { NavbarProp } from '../../interfaces/OtherInterfaces';
-
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
 
-const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
+const Navbar: React.FC = () => {
 
     const [username, setUsername] = useState<string>('');
     const navigate = useNavigate();
@@ -71,7 +69,7 @@ const Navbar: React.FC<NavbarProp> = ({ userAuthenticate=false }) => {
                 <Search />
             </div>
             <nav className="container-fluid">
-                {userAuthenticate !== false ? (
+                {localStorage.getItem('token') ? (
                     <>
                         <Dropdown>
                             <Dropdown.Toggle variant='Warning'>

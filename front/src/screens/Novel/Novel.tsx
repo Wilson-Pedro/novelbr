@@ -271,9 +271,7 @@ const Novel: React.FC = () => {
     return (
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar
-                    userAuthenticate={userAuthenticate}
-                />
+                <Navbar />
             </nav>
             <div className={styles.main}>
                 <div className={styles.mainHead}>

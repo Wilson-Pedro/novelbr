@@ -69,11 +69,7 @@ const Novels: React.FC = () => {
 
         const fetchGenders = async () => {
             try {
-                const response = await axios.get(`${API_URL}/genres`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+                const response = await axios.get(`${API_URL}/genres`)
                 setGendersBackend(response.data);
             } catch (error) {
                 console.log("Error ao buscar gêneros: ", error)
@@ -130,15 +126,10 @@ const Novels: React.FC = () => {
         }
     }
 
-    const token = localStorage.getItem('token');
-    if (!token) return <Navigate to="/login" />
-
     return (
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar
-                    userAuthenticate={true}
-                />
+                <Navbar />
             </nav>
             <div className={styles.main}>
                 <div className={styles.divMain}>

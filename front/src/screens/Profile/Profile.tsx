@@ -72,9 +72,7 @@ export default function Profile() {
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar 
-                    userAuthenticate={true}
-                />
+                <Navbar />
             </nav>
             <div className={styles.main}>
                 <div className={styles.divMain}>

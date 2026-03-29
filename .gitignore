@@ -1,6 +1,8 @@
-/.metadata/
+.metadata/
 
-/node_modules/
+front/node_modules/
 
-/front/node_modules/
+backend/target
+
+/front/.env
 

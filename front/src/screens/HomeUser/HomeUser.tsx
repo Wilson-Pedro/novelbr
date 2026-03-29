@@ -36,9 +36,7 @@ export default function HomeUser() {
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar 
-                    userAuthenticate={true}
-                /> 
+                <Navbar /> 
             </nav>
             <section>
                 <h1>Sua História começa aqui!</h1>

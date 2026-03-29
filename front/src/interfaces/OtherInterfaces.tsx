@@ -1,7 +1,3 @@
-export interface NavbarProp {
-    userAuthenticate?:boolean;
-}
-
 export interface CardProps {
     index?:number;
     imagePath?:string;

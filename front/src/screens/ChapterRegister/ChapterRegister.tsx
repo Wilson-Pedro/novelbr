@@ -86,9 +86,7 @@ export default function ChapterRegister() {
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar 
-                    userAuthenticate={true}
-                />
+                <Navbar />
             </nav>
             <form onSubmit={submitChapter} className={styles.main}>
                 <div className={styles.divTitle}>

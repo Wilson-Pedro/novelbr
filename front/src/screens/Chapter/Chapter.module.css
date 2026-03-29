@@ -88,6 +88,8 @@
     vertical-align: top;
     margin-top: 2%;
     text-align: left;
+
+    white-space: pre-line;
 }
 
 .divChapter * {

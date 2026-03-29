@@ -138,9 +138,7 @@ export default function NovelRegister() {
     return (
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar
-                    userAuthenticate={true}
-                />
+                <Navbar />
             </nav>
             <div className={styles.main}>
                 <form onSubmit={submitNovel} encType="multipart/form-data">

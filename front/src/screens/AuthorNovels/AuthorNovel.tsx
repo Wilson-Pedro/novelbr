@@ -60,15 +60,10 @@ export default function AuthorNovel() {
         fetchAuthorInfo();
     }, [username]); 
 
-    // const token = localStorage.getItem('token');
-    // if(!token) return <Navigate to="/login"/>
-
     return(
         <div className={styles.container}>
             <nav className={styles.navbar}>
-                <Navbar 
-                    userAuthenticate={true}
-                />
+                <Navbar />
             </nav>
             <div className={styles.main}>
                 <div className={styles.divMain}>
