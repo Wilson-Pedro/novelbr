@@ -54,7 +54,6 @@ const Novel: React.FC = () => {
     const navigate = useNavigate();
 
     const token = localStorage.getItem('token');
-    const [userAuthenticate, setUserAuthenticate] = useState(isAuth);
 
     const [showModalConfig, setShowModalConfig] = useState<boolean>(false);
     const [showModalImage, setShowModalImage] = useState<boolean>(false);
@@ -128,6 +127,7 @@ const Novel: React.FC = () => {
 
                 if (infoRes.status === "fulfilled") {
                     setNovelInfo(infoRes.value.data);
+                    console.log(infoRes.value.data)
                 }
 
                 if (gendersRes.status === "fulfilled") {
@@ -314,8 +314,7 @@ const Novel: React.FC = () => {
                     showModalNovelStatus={showModalNovelStatus}
                     showModalImage={showModalImage}
                 />
-
-                {token != null && authorId === novelInfo.authorId ? (
+                {token && authorId === novelInfo.authorId ? (
 
                     <div className={styles.div_btn}>
                         <button

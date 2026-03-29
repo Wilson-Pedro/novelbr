@@ -163,6 +163,10 @@
     color: rgb(0, 0, 0);
 }
 
+.sinopse {
+    white-space: pre-line;
+}
+
 .linkNone {
     text-decoration: none;
     color: inherit;

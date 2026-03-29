@@ -62,8 +62,8 @@ public interface NovelRepository extends JpaRepository<Novel, Long> {
 	
 	@Query("""
 			SELECT new com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO(
-				n.id,
 				n.author.id,
+				n.id,
 				n.novelName,
 				n.novelStatus,
 				a.username,

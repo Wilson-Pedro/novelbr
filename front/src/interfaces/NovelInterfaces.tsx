@@ -8,13 +8,14 @@ export interface NovelCard {
 }
 
 export interface NovelInfo {
-    imageUri: string;
+    authorId: number;
+    novelId: number;
     novelName: string;
     novelStatus: string;
     username: string;
+    imageUri: string;
     year: number;
     synopsis: string;
-    authorId: number;
 }
 
 export interface GendersBackend {
