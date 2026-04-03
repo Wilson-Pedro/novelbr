@@ -92,7 +92,7 @@ const Comment: React.FC<CommentProps> =
                 </div>
                 {isReplying && (
                     <CommentForm 
-                        submitLabel="Reply"
+                        submitLabel="Responder"
                         handleSubmit={(text:string) => replyComment(text, replyId)}
                         hasCancelButton
                         handleCancel={() => {setActiveComment(null)}}

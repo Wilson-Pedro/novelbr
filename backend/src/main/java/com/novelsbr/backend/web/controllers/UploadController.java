@@ -12,7 +12,7 @@ import com.novelsbr.backend.services.UploadService;
 import com.novelsbr.backend.web.api.UploadAPI;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class UploadController implements UploadAPI {
 	
 	@Autowired

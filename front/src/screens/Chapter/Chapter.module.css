@@ -44,6 +44,8 @@
     padding-bottom: 5%;
     vertical-align: top;
     margin-bottom: 5%;
+    min-height: 100%;
+    height: auto;
     
 }
 
@@ -88,6 +90,8 @@
     vertical-align: top;
     margin-top: 2%;
     text-align: left;
+    min-height: 100%;
+    height: auto;
 
     white-space: pre-line;
 }

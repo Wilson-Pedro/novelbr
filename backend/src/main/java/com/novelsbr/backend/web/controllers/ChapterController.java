@@ -23,7 +23,7 @@ import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.web.api.ChapterAPI;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class ChapterController implements ChapterAPI {
 	
 	@Autowired

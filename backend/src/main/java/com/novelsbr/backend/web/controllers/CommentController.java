@@ -21,7 +21,7 @@ import com.novelsbr.backend.utils.mapper.CommentMapper;
 import com.novelsbr.backend.web.api.CommentAPI;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class CommentController implements CommentAPI {
 	
 	@Autowired

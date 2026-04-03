@@ -25,7 +25,7 @@ import com.novelsbr.backend.services.NovelService;
 import com.novelsbr.backend.web.api.NovelAPI;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class NovelController implements NovelAPI {
 	
 	@Autowired

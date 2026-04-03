@@ -3,13 +3,12 @@ import styles from './Novels.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Card from '../../component/cards/Card';
 import Footer from '../../layout/footer/Rodape';
-import { Navigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { NovelCard } from '../../interfaces/NovelInterfaces';
 import { Page } from '../../interfaces/ChapterInterfaces';
-import { FaSearch as FaSearchIcon } from "react-icons/fa";
 
 import { GendersBackend } from '../../interfaces/NovelInterfaces';
 
@@ -18,8 +17,6 @@ import { Tabs, Tab } from 'react-bootstrap';
 import axios from 'axios';
 
 import Pagination from '../../component/Pagination/Pagination';
-
-const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
 const API_URL = process.env.REACT_APP_API;
 
