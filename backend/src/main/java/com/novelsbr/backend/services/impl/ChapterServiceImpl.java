@@ -21,6 +21,8 @@ import com.novelsbr.backend.services.ChapterService;
 import com.novelsbr.backend.services.NovelService;
 import com.novelsbr.backend.utils.htmlsanitizer.HtmlSanitizerUtil;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class ChapterServiceImpl implements ChapterService {
 	
@@ -52,6 +54,7 @@ public class ChapterServiceImpl implements ChapterService {
 	}
 	
 	@Override
+	@Transactional
 	public Page<Chapter> findChapterPagesByNovel(int page, int size, Long novelId) {
 		Novel novel = novelService.findById(novelId);
 		Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());

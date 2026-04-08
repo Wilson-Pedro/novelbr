@@ -266,15 +266,15 @@ class NovelControllerTest {
 	@Test
 	@Transactional(readOnly = true)
 	void findNovelByNovelName() throws Exception {
-		String novelName = novelRepository.findAll().get(0).getNovelName();
+		Novel novel = novelRepository.findAll().get(1);
 		Long authorId = authorRepository.findAll().get(0).getId();
 
-		mockMvc.perform(get(URI + "/" + novelName)
+		mockMvc.perform(get(URI + "/" + novel.getNovelName())
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk())
-				.andExpect(jsonPath("$.novelName", equalTo(novelName)))
+				.andExpect(jsonPath("$.novelName", equalTo(novel.getNovelName())))
 				.andExpect(jsonPath("$.authorId", equalTo(authorId.intValue())))
-				.andExpect(jsonPath("$.synopsis", equalTo("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...")));
+				.andExpect(jsonPath("$.synopsis", equalTo(novel.getSynopsis())));
 	}
 	
 	@Test

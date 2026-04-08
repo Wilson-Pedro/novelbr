@@ -86,6 +86,7 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public Page<Novel> searchNovel(String novelName, int page, int size) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
 		return novelRepository.findByNovelNameContainingIgnoreCase(novelName, pageable);
@@ -97,6 +98,7 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
+	@Transactional(readOnly = true)
 	public List<CardNovelDTO> findNovelCardsByUsername(String username) {
 		return novelRepository.findNovelCardsByUsername(username);
 	}
@@ -108,6 +110,7 @@ public class NovelServiceImpl implements NovelService {
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public AuthorNovelInfoDTO findNovelInfoByNovelId(Long novelId) {
 		return novelRepository.findNovelInfoByNovelId(novelId)
 				.orElseThrow(() -> new NotFoundException("Novel Info not found."));
@@ -120,6 +123,7 @@ public class NovelServiceImpl implements NovelService {
 	}
 	
 	@Override
+	@Transactional
 	public Novel findNovelByNovelName(String novelName) {
 		return novelRepository.findNovelByNovelName(novelName).orElseThrow(
 				() -> new NotFoundException("Novel not found with name: " + novelName));
