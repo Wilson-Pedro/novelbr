@@ -18,7 +18,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.mock.web.MockMultipartFile;
 
-import com.novelsbr.backend.domain.dto.AuthorNovelInfoDTO;
 import com.novelsbr.backend.domain.dto.CardNovelDTO;
 import com.novelsbr.backend.domain.dto.NovelDTO;
 import com.novelsbr.backend.domain.entities.Author;
@@ -131,25 +130,6 @@ class NovelServiceTest {
 
 		assertEquals(1, novelRepository.count());
 	}
-
-//	@Test
-//	@Order(4)
-//	void findNovelInfoByNovelId() {
-//
-//		Long novelId = novelRepository.findAll().get(0).getId();
-//		Long authorId = authorRepository.findAll().get(0).getId();
-//
-//		AuthorNovelInfoDTO info = novelService.findNovelInfoByNovelId(novelId);
-//
-//		System.out.println("=========================\nAUTHOR INFO:\n");
-//		System.out.println(info);
-//
-//		assertEquals("Jornada para o Além", info.getNovelName());
-//		assertEquals("Em um mundo medieval repleto de magia, criaturas ancestrais e civilizações esquecidas, a profecia do Grande Véu finalmente se concretiza...", info.getSynopsis());
-//		assertEquals("https://wallpapercave.com/wp/wp5044832.jpg", info.getImageUri());
-//		assertEquals(authorId, info.getAuthorId());
-//		assertEquals(novelId, info.getNovelId());
-//	}
 	
 	@Test
 	void findNovelById() {

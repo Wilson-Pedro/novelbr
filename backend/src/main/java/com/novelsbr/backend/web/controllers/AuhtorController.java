@@ -15,7 +15,7 @@ import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.web.api.AuthorAPI;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class AuhtorController implements AuthorAPI {
 
 	@Autowired

@@ -97,6 +97,12 @@ const Novel: React.FC = () => {
     }
 
     useEffect(() => {
+
+        setNovelInfo({} as NovelInfo);
+        setGenrers([]);
+        setBackendComments([]);
+        setChapterTitles([]);
+
         const fecthNovelName = async () => {
             try {
                 const response = await axios.get(`${API_URL}/novels/${novelName}`);
@@ -106,8 +112,11 @@ const Novel: React.FC = () => {
             }
         }
 
-        fecthNovelName();
-    }, [novelId]);
+        if(novelName) {
+            fecthNovelName();
+        }
+
+    }, [novelName]);
 
     useEffect(() => {
 

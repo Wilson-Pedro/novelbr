@@ -80,7 +80,7 @@ export default function Chapter() {
     const deleteComment = (commentId: number) => {
         const token = localStorage.getItem('token');
         try {
-            if (window.confirm('Delete this comment?')) {
+            if (window.confirm('Deletar Comentário?')) {
                 axios.delete(`${API_URL}/comments/${commentId}`, {
                     headers: {
                         Authorization: `Bearer ${token}`

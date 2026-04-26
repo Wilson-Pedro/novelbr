@@ -15,7 +15,7 @@ import com.novelsbr.backend.services.GenreService;
 import com.novelsbr.backend.web.api.GenderAPI;
 
 @RestController
-@CrossOrigin("http://localhost:3000")
+@CrossOrigin(origins = "${cors.allowed.origins}")
 public class GenderController implements GenderAPI {
 
 	@Autowired
