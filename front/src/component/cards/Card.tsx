@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CardProps } from '../../interfaces/OtherInterfaces';
 
-const IMG_PATH = process.env.REACT_APP_IMG_PATH;
+const { IMG_PATH } = process.env;
 
 const Card: React.FC<CardProps> = ({ imagePath, novelName, author, userAuthenticate, authorId, novelId }) => {
 
@@ -14,6 +14,7 @@ const Card: React.FC<CardProps> = ({ imagePath, novelName, author, userAuthentic
     const userAuth = { isAuth: userAuthenticate }
 
     const srcPath = `${IMG_PATH}/${imagePath}`;
+
 
     function navigateToNovel() {
         navigate(`/novel/${novelName}`, { state: userAuth });
