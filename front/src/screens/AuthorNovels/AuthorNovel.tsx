@@ -12,15 +12,16 @@ import { Author } from '../../interfaces/AuthorInterfaces';
 
 import axios from 'axios';
 
-const API_URL = process.env.REACT_APP_API;
 
 export default function AuthorNovel() {
-
+    
     const [cards, setCards] = useState<NovelCard[]>([]);
     const [author, setAuthor] = useState<Author>({} as Author);
     const params = useParams();
     const username = params.username;
-
+    
+    const API_URL = process.env.REACT_APP_API;
+    
     useEffect(() => {
 
         const token = localStorage.getItem('token');
