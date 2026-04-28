@@ -4,5 +4,7 @@ front/node_modules/
 
 backend/target
 
-front/.env
+front/env
+
+.gitignore
 
