@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { CardProps } from '../../interfaces/OtherInterfaces';
 
-const { IMG_PATH } = process.env;
+const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
 const Card: React.FC<CardProps> = ({ imagePath, novelName, author, userAuthenticate, authorId, novelId }) => {
 
