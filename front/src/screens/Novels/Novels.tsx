@@ -37,19 +37,19 @@ const Novels: React.FC = () => {
     const [genders, setGenders] = useState<string[]>([]);
 
     useEffect(() => {
-
-        const findNovelCards = async () => {
-
+        const fetchGenders = async () => {
             try {
-                const response = await axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`);
-                const pageData: Page<NovelCard> = response.data;
-                setCards(pageData.content);
-                setTolalPages(pageData.totalPages);
+                const response = await axios.get(`${API_URL}/genres`)
+                setGendersBackend(response.data);
             } catch (error) {
-                console.log("Error ao buscar Card por Username: ", error);
+                console.log("Error ao buscar gêneros: ", error)
             }
+        };
 
-        }
+        fetchGenders();
+    }, []);
+
+    useEffect(() => {
 
         const novelCardsPages = async () => {
 
@@ -64,14 +64,28 @@ const Novels: React.FC = () => {
 
         }
 
-        const fetchGenders = async () => {
+
+        novelCardsPages();
+    }, [page, size, novelName]);
+
+    useEffect(() => {
+        const findNovelCards = async () => {
+
             try {
-                const response = await axios.get(`${API_URL}/genres`)
-                setGendersBackend(response.data);
+                const response = await axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`);
+                const pageData: Page<NovelCard> = response.data;
+                setCards(pageData.content);
+                setTolalPages(pageData.totalPages);
             } catch (error) {
-                console.log("Error ao buscar gêneros: ", error)
+                console.log("Error ao buscar Card por Username: ", error);
             }
-        };
+
+        }
+
+        findNovelCards();
+    }, [novelName, page]);
+
+    useEffect(() => {
 
         const novelByGenders = async () => {
 
@@ -87,11 +101,8 @@ const Novels: React.FC = () => {
             }
         }
 
-        fetchGenders();
-        novelCardsPages();
-        findNovelCards();
         novelByGenders();
-    }, [novelName, page, genders]);
+    }, [genders, page]);
 
     useEffect(() => {
 
