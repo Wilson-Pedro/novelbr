@@ -5,8 +5,6 @@ import styles from './Comments.module.css';
 
 import { CommentsProps } from '../../interfaces/CommentInterfaces';
 
-const API_URL = process.env.REACT_APP_API;
-
 const Comments: React.FC<CommentsProps> = ({ 
     currentUserId, 
     comments,
@@ -63,23 +61,21 @@ const Comments: React.FC<CommentsProps> = ({
                 </>
             )}
             <div className={styles.commentsContainer}>
-                {rootComments.map((rootComment) => (
-                    <>
-                        <Comment 
-                            key={rootComment.id}
-                            comment={rootComment}
-                            replies={getReplies(rootComment.id)}
-                            currentUserId={currentUserId}
-                            deleteComment={deleteThisComment}
-                            updateComment={updateComment}
-                            activeComment={activeComment}
-                            setActiveComment={setActiveComment}
-                            parentId={rootComment.id}
-                            addComment={addComment}
-                            replyComment={replyComment}
-                            token={token}
-                        />
-                    </>
+                {rootComments.map((rootComment, index) => (
+                    <Comment 
+                        key={index}
+                        comment={rootComment}
+                        replies={getReplies(rootComment.id)}
+                        currentUserId={currentUserId}
+                        deleteComment={deleteThisComment}
+                        updateComment={updateComment}
+                        activeComment={activeComment}
+                        setActiveComment={setActiveComment}
+                        parentId={rootComment.id}
+                        addComment={addComment}
+                        replyComment={replyComment}
+                        token={token}
+                    />
                 ))}
             </div>
         </div>

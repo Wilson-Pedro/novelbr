@@ -33,7 +33,8 @@ const Search: React.FC = () => {
                 const pageData: Page<NovelsFinded> = response.data;
                 setNovelsFinded(pageData.content);
             } catch(error) {
-                console.log('Error ao tentar buscar novels ', error);
+                let err = error as Error;
+                console.log('Error ao tentar buscar novels ', err.message);
             }
         };
 
@@ -50,9 +51,9 @@ const Search: React.FC = () => {
 
     function goToNovels() {
         if(novelName.replace(/\s+/g, '') !== '') {
+            navigate(`/novels/${novelName}`);
             setNovelName('');
             setNovelsFinded([]);
-            navigate(`/novels/${novelName}`);
         }
     }
 
@@ -68,11 +69,11 @@ const Search: React.FC = () => {
             </span>
             {novelsFinded.length > 0 && (
                 <ul className={styles.ul}>
-                    {novelsFinded.map((novel) => (
+                    {novelsFinded.map((novel, index) => (
                         <li 
                         className={styles.li} 
                         onClick={() => goToNovel(novel.novelName)} 
-                        key={novel.id}>{novel.novelName}</li>
+                        key={index}>{novel.novelName}</li>
                     ))}
                 </ul>
             )

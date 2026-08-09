@@ -136,7 +136,6 @@ const Novel: React.FC = () => {
 
                 if (infoRes.status === "fulfilled") {
                     setNovelInfo(infoRes.value.data);
-                    console.log(infoRes.value.data)
                 }
 
                 if (gendersRes.status === "fulfilled") {
@@ -239,7 +238,8 @@ const Novel: React.FC = () => {
     }
 
     function goToNovel() {
-        navigate(`/novel/${novelId}`);
+        window.location.reload();
+        navigate(`/novel/${novelName}`);
     }
 
     function goToAuthorNovels(username: string) {
@@ -295,7 +295,7 @@ const Novel: React.FC = () => {
                             </span>
                             : (<>'---'</>)}</p>
                         <p><strong>Gêneros:</strong> {genrers.map((genre, index) => (
-                            <span>{genre.genreType}{(index + 1) < genrers.length ? <>, </> : <>.</>} </span>
+                            <span key={index}>{genre.genreType}{(index + 1) < genrers.length ? <>, </> : <>.</>} </span>
                         ))}</p>
                         <p><strong>Ano:</strong> {novelInfo.year || '---'}</p>
 
@@ -352,7 +352,7 @@ const Novel: React.FC = () => {
                                             <div>
                                                 <ul className={styles.cursorDefault}>
                                                     {chapterTiles.map((data, index) => (
-                                                        <li >{data.chapterNumber}º <span></span>
+                                                        <li key={index}>{data.chapterNumber}º
                                                             <span
                                                                 className={styles.cursorPointer}
                                                                 onClick={() => goToChapter(data.chapterNumber)}>

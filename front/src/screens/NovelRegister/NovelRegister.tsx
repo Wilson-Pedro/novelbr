@@ -63,7 +63,6 @@ export default function NovelRegister() {
 
     const submitNovel = async (e:any) => {
         e.preventDefault();
-        console.log("Enviando novel...");
 
         const token = localStorage.getItem('token');
         try {

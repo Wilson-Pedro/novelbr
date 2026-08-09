@@ -48,8 +48,8 @@ const Table: React.FC = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {lastChapters.map((chapter) => (
-                            <tr onClick={() => goToChapter(chapter.novelName, chapter.chapterNumber)}>
+                        {lastChapters.map((chapter, index) => (
+                            <tr key={index} onClick={() => goToChapter(chapter.novelName, chapter.chapterNumber)}>
                                 <th>{chapter.novelName}</th>
                                 <th>{chapter.title}</th>
                                 <th className={styles.chapterNumber}>{chapter.chapterNumber}</th>

@@ -72,7 +72,7 @@ public class NovelController implements NovelAPI {
 			@RequestParam(defaultValue = "10") int size) {
 		if(genders.isEmpty() || genders == null) {
 			return ResponseEntity.ok(novelService.findAll(page, size)
-					.map(x -> new CardNovelDTO(x)));
+					.map(CardNovelDTO::new));
 		}
 		Page<CardNovelDTO> cardNovels = novelService.findNovelCardsByGenders(genders, page, size);
 		return ResponseEntity.ok(cardNovels);
@@ -85,7 +85,7 @@ public class NovelController implements NovelAPI {
 			@RequestParam(defaultValue = "10") int size) {
 		
 		Page<CardNovelDTO> novlesDTO = novelService.searchNovel(novelName, page, size)
-				.map(x -> new CardNovelDTO(x));
+				.map(CardNovelDTO::new);
 		return ResponseEntity.ok(new PageResponseDTO<>(novlesDTO));
 	}
 	

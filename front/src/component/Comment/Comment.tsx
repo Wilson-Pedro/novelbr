@@ -101,9 +101,9 @@ const Comment: React.FC<CommentProps> =
                 )}
                 {replies.length > 0 && (
                     <div className={styles.replies}>
-                        {replies.map(reply => (
+                        {replies.map((reply, index) => (
                             <Comment 
-                                key={reply.id}
+                                key={index}
                                 comment={reply} 
                                 replies={[]} 
                                 currentUserId={currentUserId}

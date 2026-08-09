@@ -37,22 +37,27 @@ public class SecurityConfig {
 						.requestMatchers(HttpMethod.POST, "/novels/").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.GET, "/novels").permitAll()
 						.requestMatchers(HttpMethod.GET, "/novels/{novelName}").permitAll()
-						.requestMatchers(HttpMethod.GET, "/novels/search/{novelName}").permitAll()
+						.requestMatchers(HttpMethod.GET, "/novels/search/**").permitAll()
 						.requestMatchers(HttpMethod.GET, "/novels/novelCards/**").permitAll()	
 						.requestMatchers(HttpMethod.PATCH, "/novels/changeNovelStatus").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.PATCH, "/novels/changeNovelImageUri").hasRole("AUTHOR")
-						.requestMatchers(HttpMethod.POST, "/upload/image").hasRole("AUTHOR")
+
+						//.requestMatchers(HttpMethod.POST, "/upload/image").hasRole("AUTHOR")
+
 						.requestMatchers(HttpMethod.POST, "/authors/").permitAll()
 						.requestMatchers(HttpMethod.GET, "/authors").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.GET, "/authors/username/{username}").permitAll()
+
 						.requestMatchers(HttpMethod.GET, "/genres").permitAll()
 						.requestMatchers(HttpMethod.GET, "/genres/novel/{novelId}").permitAll()
+
 						.requestMatchers(HttpMethod.POST, "/chapters/").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.GET, "/chapters/novelsTitle/novel/{novelId}").permitAll()
 						.requestMatchers(HttpMethod.GET, "/chapters/pages/novelsTitle/{novelId}").permitAll()
 						.requestMatchers(HttpMethod.GET, "/chapters/{novelName}/{chapterNumber}").permitAll()
 						.requestMatchers(HttpMethod.GET, "/chapters/chapterNumber/novel/{novelId}").permitAll()
 						.requestMatchers(HttpMethod.GET, "/chapters/lastChapters").permitAll()
+
 						.requestMatchers(HttpMethod.POST, "/comments/").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.PUT, "/comments/{id}").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.DELETE, "/comments/{id}").hasRole("AUTHOR")

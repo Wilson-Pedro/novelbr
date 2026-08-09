@@ -77,7 +77,7 @@ const Novels: React.FC = () => {
                 setCards(pageData.content);
                 setTolalPages(pageData.totalPages);
             } catch (error) {
-                console.log("Error ao buscar Card por Username: ", error);
+                console.log("Error ao buscar Card por Username");
             }
 
         }
@@ -115,7 +115,7 @@ const Novels: React.FC = () => {
 
         }, 500);
         return () => clearTimeout(findNovelCardsByNovelName);
-    }, [novelNameSearch]);
+    }, [novelNameSearch, page]);
 
     function pageSearchValid(pag: number, max: number) {
         if (pag >= 0 && pag <= max) {
@@ -133,6 +133,13 @@ const Novels: React.FC = () => {
             setGenders(genders.filter(item => item !== gender));
         }
     }
+
+    
+    // function getNovelNameByUrl(): string {
+    //     const ulrCompleta: string = window.location.href;
+    //     const novelNameByUrl = ulrCompleta.split('/').at(-1);
+    //     return novelNameByUrl || '';
+    // }
 
     return (
         <div className={styles.container}>
@@ -172,7 +179,7 @@ const Novels: React.FC = () => {
                                     <div className={styles.cardContainer}>
                                         {cards.map((card, index) => (
                                             <Card
-                                                index={index}
+                                                key={index}
                                                 authorId={card.authorId}
                                                 novelId={card.novelId}
                                                 imagePath={card.imageUri}
@@ -221,7 +228,7 @@ const Novels: React.FC = () => {
                                     <div className={styles.cardContainer}>
                                         {cardsPages.map((card, index) => (
                                             <Card
-                                                index={index}
+                                                key={index}
                                                 authorId={card.authorId}
                                                 novelId={card.novelId}
                                                 imagePath={card.imageUri}

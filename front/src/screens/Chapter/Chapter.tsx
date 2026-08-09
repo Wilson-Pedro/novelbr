@@ -3,7 +3,7 @@ import styles from './Chapter.module.css';
 import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { ChapterInfo } from '../../interfaces/ChapterInterfaces';
 import Comments from '../../component/Comments/Comments';
 import { BackendCommentsI } from '../../interfaces/CommentInterfaces';
@@ -22,14 +22,12 @@ export default function Chapter() {
 
     const [backendComments, setBackendComments] = useState<BackendCommentsI[]>([]);
     const [authorId, setAuthorId] = useState<number>(0);
-    const [commentByCode, setCommentByCode] = useState<number>(2);
-
-    const location = useLocation();
-    const { isAuth } = location.state || {};
 
     const params = useParams();
     const novelName = params.novelName;
     const chapterNumber = parseInt(params.chapterNumber || '');
+
+    const commentByCode:number = 2;
 
     const navigate = useNavigate();
 
@@ -45,11 +43,11 @@ export default function Chapter() {
                 bodyText
 
             },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            });
             const newComment = response.data;
             onAddComment(newComment);
 
@@ -134,7 +132,6 @@ export default function Chapter() {
                 try {
                     const response = await axios.get(`${API_URL}/chapters/chapterNumber/novel/${novelId}`);
                     setMaxChapterNumber(response.data.chapterNumber)
-                    console.log(response)
                 } catch (error) {
                     console.log('Error ao buscar o último capítulo da Novel ', error)
                 }

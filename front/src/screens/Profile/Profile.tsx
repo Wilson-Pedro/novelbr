@@ -106,7 +106,7 @@ export default function Profile() {
                         <div className={styles.cardContainer}>
                             {cards.map((card, index) => (
                                 <Card
-                                    index={index}
+                                    key={index}
                                     authorId={card.authorId}
                                     novelId={card.novelId}
                                     imagePath={card.imageUri}

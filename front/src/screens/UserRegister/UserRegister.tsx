@@ -20,13 +20,12 @@ export default function UserRegister() {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`${API_URL}/authors/`, {
+            await axios.post(`${API_URL}/authors/`, {
                 name,
                 username,
                 email,
                 password,
             });
-            //console.log(response)
             navigate('/login');
         } catch(error) {
             console.error(error)

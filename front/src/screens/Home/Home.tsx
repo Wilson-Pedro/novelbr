@@ -47,7 +47,7 @@ export default function Home() {
                 <div className={styles.cardContainer}>
                     {novelCards.map((novelCard, index) => (
                         <Card
-                            index={index}
+                            key={index}
                             authorId={novelCard.authorId}
                             novelId={novelCard.novelId}
                             imagePath={novelCard.imageUri}
