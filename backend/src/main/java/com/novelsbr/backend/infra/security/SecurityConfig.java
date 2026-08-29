@@ -32,7 +32,11 @@ public class SecurityConfig {
 				.sessionManagement(session -> 
 							session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 				.authorizeHttpRequests(authorize -> authorize
+
 						.requestMatchers("/h2-console/**").permitAll()
+						.requestMatchers("/swagger-ui/**").permitAll()
+						.requestMatchers("/v3/**").permitAll()
+
 						.requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
 						.requestMatchers(HttpMethod.POST, "/novels/").hasRole("AUTHOR")
 						.requestMatchers(HttpMethod.GET, "/novels").permitAll()

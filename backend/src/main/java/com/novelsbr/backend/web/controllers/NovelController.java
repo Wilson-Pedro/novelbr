@@ -2,6 +2,9 @@ package com.novelsbr.backend.web.controllers;
 
 import java.util.List;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +41,14 @@ public class NovelController implements NovelAPI {
 		return ResponseEntity.ok(novlesDTO);
 	}
 
+	@Operation(
+			summary = "Cadastrar Novel"
+	)
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", description = "Novel cadastrado com sucesso"),
+			@ApiResponse(responseCode = "400", description = "Error ao cadastrar novel"),
+			@ApiResponse(responseCode = "500", description = "Error ao cadastrar novel"),
+	})
 	@PostMapping("/")
 	public ResponseEntity<NovelDTO> save(@RequestBody NovelDTO novelDTO) {
 		Novel novel = novelService.save(novelDTO);

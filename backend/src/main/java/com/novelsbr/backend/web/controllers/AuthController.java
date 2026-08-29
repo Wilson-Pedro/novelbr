@@ -1,19 +1,17 @@
 package com.novelsbr.backend.web.controllers;
 
+import com.novelsbr.backend.services.AuthService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.novelsbr.backend.domain.dto.LoginRequest;
-import com.novelsbr.backend.domain.dto.LoginResponseDTO;
-import com.novelsbr.backend.domain.entities.Author;
-import com.novelsbr.backend.infra.security.TokenService;
-import com.novelsbr.backend.services.AuthorService;
 import com.novelsbr.backend.web.api.AuthAPI;
 
 @RestController
@@ -21,22 +19,18 @@ import com.novelsbr.backend.web.api.AuthAPI;
 public class AuthController implements AuthAPI {
 	
 	@Autowired
-	AuthenticationManager authenticationManager;
-	
-	@Autowired
-	TokenService tokenService;
-	
-	@Autowired
-	AuthorService authorService;
+	AuthService authService;
 
+	@Operation(
+			summary = "Autenticar usuário"
+	)
+	@ApiResponses({
+			@ApiResponse(responseCode = "200", description = "Autenticado com sucesso"),
+			@ApiResponse(responseCode = "400", description = "Error ao autenticar"),
+			@ApiResponse(responseCode = "500", description = "Error ao autenticar"),
+	})
 	@PostMapping("/login")
 	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-		var usernamePassword = new UsernamePasswordAuthenticationToken(loginRequest.getLogin(), loginRequest.getPassword());
-		var auth = this.authenticationManager.authenticate(usernamePassword);
-		
-		var token = tokenService.generateToken((Author) auth.getPrincipal());
-		Long userId = authorService.findByUsername(loginRequest.getLogin()).getId();
-		
-		return ResponseEntity.ok(new LoginResponseDTO(token, loginRequest.getLogin(), userId));
+		return ResponseEntity.ok(authService.login(loginRequest));
 	}
 }

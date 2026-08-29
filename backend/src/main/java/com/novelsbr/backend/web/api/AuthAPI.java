@@ -11,5 +11,5 @@ import com.novelsbr.backend.domain.dto.LoginRequest;
 public interface AuthAPI {
 
 	@PostMapping("/login")
-	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest);
+	ResponseEntity<?> login(@RequestBody LoginRequest loginRequest);
 }
