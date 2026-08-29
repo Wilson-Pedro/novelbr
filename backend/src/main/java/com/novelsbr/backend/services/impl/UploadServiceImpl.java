@@ -19,10 +19,10 @@ public class UploadServiceImpl implements UploadService {
 		String fileName = "";
 		
 		try {
-			
+
 			fileName = file.getOriginalFilename();
 			Path filePath = Paths.get(FOLDER, fileName);
-			
+
 			Files.createDirectories(filePath.getParent());
 			Files.write(filePath, file.getBytes());
 			

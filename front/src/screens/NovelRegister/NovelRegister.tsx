@@ -64,6 +64,10 @@ export default function NovelRegister() {
     const submitNovel = async (e:any) => {
         e.preventDefault();
 
+        if(novelName === "" || genders.length === 0 || synopsis === "" || imageUri === null) {
+            alert("Preencha todos os campos")
+        }
+
         const token = localStorage.getItem('token');
         try {
             await axios.post(`${API_URL}/novels/`, {
