@@ -31,10 +31,10 @@ public class CommentController implements CommentAPI {
 	private CommentService commentService;
 
 	@Operation(
-			summary = "Buscar comentários"
+			summary = "Listar comentários"
 	)
 	@ApiResponses({
-			@ApiResponse(responseCode = "200", description = "Comentários buscado com sucesso"),
+			@ApiResponse(responseCode = "200", description = "Comentários listado com sucesso"),
 			@ApiResponse(responseCode = "400", description = "Error ao buscar comentários"),
 			@ApiResponse(responseCode = "500", description = "Error ao buscar comentários"),
 	})
