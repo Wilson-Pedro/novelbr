@@ -12,6 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import axios from 'axios';
 
+import { chapterService } from './../../services/chapterService';
+
 const API_URL = process.env.REACT_APP_API;
 
 export default function ChapterRegister() {
@@ -39,8 +41,8 @@ export default function ChapterRegister() {
 
         const fecthNovelName = async () => {
             try {
-                const response = await axios.get(`${API_URL}/novels/${novelName}`);
-                setNovelId(response.data.id);
+                const responseId = await chapterService.getNovelIdByName(novelName);
+                setNovelId(responseId);
             } catch(error) {
                 console.log(error)
             }
@@ -52,16 +54,11 @@ export default function ChapterRegister() {
         e.preventDefault();
         const token = localStorage.getItem('token');
         try {
-            await axios.post(`${API_URL}/chapters/`, {
+            await chapterService.create({
                 title,
                 chapterText,
                 novelId
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            });
+            })
 
             
             setShowModal(true);
