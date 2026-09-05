@@ -5,9 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { LastChapters } from '../../interfaces/ChapterInterfaces';
 
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API;
+import { chapterService } from '../../services/chapterService';
 
 const Table: React.FC = () => {
 
@@ -21,8 +19,8 @@ const Table: React.FC = () => {
     useEffect(() => {
         const fetchLastChapters = async () => {
             try { 
-                const response = await axios.get(`${API_URL}/chapters/lastChapters`);
-                setLastChapters(response.data);
+                const response = await chapterService.fetchLastChapters();
+                setLastChapters(response);
             } catch(error) {
                 console.log('Error ao buscar últimos capítulos: ', error)
             }

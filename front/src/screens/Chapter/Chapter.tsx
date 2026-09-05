@@ -9,6 +9,8 @@ import Comments from '../../component/Comments/Comments';
 import { BackendCommentsI } from '../../interfaces/CommentInterfaces';
 import { Tabs, Tab } from 'react-bootstrap';
 
+import { chapterService } from '../../services/chapterService';
+
 import axios from 'axios';
 
 const API_URL = process.env.REACT_APP_API;
@@ -24,7 +26,7 @@ export default function Chapter() {
     const [authorId, setAuthorId] = useState<number>(0);
 
     const params = useParams();
-    const novelName = params.novelName;
+    const novelName = params.novelName ?? '';
     const chapterNumber = parseInt(params.chapterNumber || '');
 
     const commentByCode:number = 2;
@@ -114,10 +116,10 @@ export default function Chapter() {
 
         const fetchChapter = async () => {
             try {
-                const response = await axios.get(`${API_URL}/chapters/${novelName}/${chapterNumber}`);
-                setChapterInfo(response.data);
-                setNovelId(response.data.novelId);
-                setChapterId(response.data.chapterId)
+                const response = await chapterService.fetchChapter(novelName, chapterNumber);
+                setChapterInfo(response);
+                setNovelId(response.novelId);
+                setChapterId(response.chapterId)
             } catch (error) {
                 console.log("Error ao buscar capítulo: ", error)
             }
@@ -130,8 +132,8 @@ export default function Chapter() {
         if (novelId !== 0) {
             const fetchMaxChapterNumber = async () => {
                 try {
-                    const response = await axios.get(`${API_URL}/chapters/chapterNumber/novel/${novelId}`);
-                    setMaxChapterNumber(response.data.chapterNumber)
+                    const response = await chapterService.fetchMaxChapterNumber(novelId);
+                    setMaxChapterNumber(response.chapterNumber)
                 } catch (error) {
                     console.log('Error ao buscar o último capítulo da Novel ', error)
                 }

@@ -19,6 +19,7 @@ import { ChapterTiles, Page } from '../../interfaces/ChapterInterfaces';
 import NovelConfig from '../../component/NovelConfig/NovelConfig';
 import Pagination from '../../component/Pagination/Pagination';
 
+import { chapterService } from '../../services/chapterService';
 
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
@@ -131,7 +132,7 @@ const Novel: React.FC = () => {
                         axios.get(`${API_URL}/novels/novelCards/${novelId}`),
                         axios.get(`${API_URL}/genres/novel/${novelId}`),
                         axios.get(`${API_URL}/comments/novels/${novelId}`),
-                        axios.get(`${API_URL}/chapters/pages/novelsTitle/${novelId}?page=${page}&size=10`)
+                        chapterService.fetchChapterTitles(novelId, page)
                     ]);
 
                 if (infoRes.status === "fulfilled") {
