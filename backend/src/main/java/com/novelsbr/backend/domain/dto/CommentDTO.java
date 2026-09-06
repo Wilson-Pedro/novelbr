@@ -134,4 +134,19 @@ public class CommentDTO implements Serializable {
 	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
+
+	@Override
+	public String toString() {
+		return "CommentDTO{" +
+				"id=" + id +
+				", authorId=" + authorId +
+				", username='" + username + '\'' +
+				", commentByCode=" + commentByCode +
+				", entityId=" + entityId +
+				", parentId=" + parentId +
+				", bodyText='" + bodyText + '\'' +
+				", createdAt=" + createdAt +
+				", comments=" + comments +
+				'}';
+	}
 }

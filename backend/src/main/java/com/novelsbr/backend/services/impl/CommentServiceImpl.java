@@ -28,6 +28,8 @@ public class CommentServiceImpl implements CommentService {
 
 	@Override
 	public Comment save(CommentDTO commentDTO) {
+		System.out.println("---------------------------------------");
+		System.out.println(commentDTO);
 		Comment comment = preparingCommentToSave(commentDTO);
 		if(comment == null) throw new NullEntityException("Comment cannot be null.");
 		

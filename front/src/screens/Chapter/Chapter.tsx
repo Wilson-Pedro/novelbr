@@ -11,14 +11,12 @@ import { Tabs, Tab } from 'react-bootstrap';
 
 import { chapterService } from '../../services/chapterService';
 
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API;
+import { commentService } from '../../services/commentService';
 
 export default function Chapter() {
 
     const [chapterInfo, setChapterInfo] = useState<ChapterInfo>({} as ChapterInfo);
-    const [chapterId, setChapterId] = useState<number>();
+    const [chapterId, setChapterId] = useState<number>(0);
     const [maxChapterNumber, setMaxChapterNumber] = useState<number>(1);
     const [novelId, setNovelId] = useState<number>(0);
 
@@ -37,18 +35,12 @@ export default function Chapter() {
     const postComment = async (bodyText: string, parentId: number) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.post(`${API_URL}/comments/`, {
+            const response = await commentService.create({
                 authorId,
                 commentByCode,
-                entityId: chapterId,
+                entityId: chapterId || 0,
                 parentId: parentId ? parentId : null,
                 bodyText
-
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
             });
             const newComment = response.data;
             onAddComment(newComment);
@@ -61,14 +53,7 @@ export default function Chapter() {
     const updateComment = async (bodyText: string, commentId: number) => {
         const token = localStorage.getItem('token');
         try {
-            const response = await axios.put(`${API_URL}/comments/${commentId}`, {
-                bodyText
-            },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+            const response = await commentService.updateComment(bodyText, commentId)
 
             const commentUpdated = response.data;
             handleUpdateComment(commentUpdated, commentId);
@@ -81,11 +66,7 @@ export default function Chapter() {
         const token = localStorage.getItem('token');
         try {
             if (window.confirm('Deletar Comentário?')) {
-                axios.delete(`${API_URL}/comments/${commentId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                commentService.deleteComment(commentId);
             }
         } catch (error) {
             console.log(error)
@@ -146,7 +127,7 @@ export default function Chapter() {
         if (novelId !== 0) {
             const fetchCommentsByChapters = async () => {
                 try {
-                    const response = await axios.get(`${API_URL}/comments/chapters/${chapterId}`);
+                    const response = await commentService.fetchCommentsByChapter(chapterId);
                     setBackendComments(response.data);
                 } catch (error) {
                     console.log('Error ao buscar o último capítulo da Novel ', error)

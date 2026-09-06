@@ -20,6 +20,7 @@ import NovelConfig from '../../component/NovelConfig/NovelConfig';
 import Pagination from '../../component/Pagination/Pagination';
 
 import { chapterService } from '../../services/chapterService';
+import { commentService } from '../../services/commentService';
 
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
@@ -131,7 +132,7 @@ const Novel: React.FC = () => {
                     await Promise.allSettled([
                         axios.get(`${API_URL}/novels/novelCards/${novelId}`),
                         axios.get(`${API_URL}/genres/novel/${novelId}`),
-                        axios.get(`${API_URL}/comments/novels/${novelId}`),
+                        commentService.fetchCommentsByNovel(novelId),
                         chapterService.fetchChapterTitles(novelId, page)
                     ]);
 
@@ -166,19 +167,14 @@ const Novel: React.FC = () => {
     // COMMENTS
     const postComment = async (bodyText: string, parentId: number) => {
         try {
-            const response = await axios.post(`${API_URL}/comments/`, {
+            const response = await commentService.create({
                 authorId: authorId,
                 commentByCode,
                 entityId: novelId,
                 parentId: parentId ? parentId : null,
                 bodyText
 
-            },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+            });
             const newComment = response.data;
             onAddComment(newComment);
 
@@ -190,14 +186,7 @@ const Novel: React.FC = () => {
     const updateComment = async (bodyText: string, commentId: number) => {
 
         try {
-            const response = await axios.put(`${API_URL}/comments/${commentId}`, {
-                bodyText
-            },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+            const response = await commentService.updateComment(bodyText, commentId);
 
             const commentUpdated = response.data;
             handleUpdateComment(commentUpdated, commentId);
@@ -209,11 +198,7 @@ const Novel: React.FC = () => {
     const deleteComment = (commentId: number) => {
         try {
             if (window.confirm('Delete this comment?')) {
-                axios.delete(`${API_URL}/comments/${commentId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                commentService.deleteComment(commentId);
             }
         } catch (error) {
             console.log(error)
