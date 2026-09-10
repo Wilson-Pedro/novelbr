@@ -1,12 +1,8 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { useNavigate } from 'react-router-dom';
-
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API;
+import { authService } from '../../services/authService';
 
 export default function Login() {
 
@@ -30,14 +26,9 @@ export default function Login() {
         e.preventDefault();
 
         try {
-            const response = await axios.post(`${API_URL}/auth/login`, {
+            const response = await authService.login({
                 login: username,
                 password: password
-            }, {
-                withCredentials: true,
-                headers: {
-                    'Content-Type': 'application/json'
-                }
             })
 
             if(response != null) {

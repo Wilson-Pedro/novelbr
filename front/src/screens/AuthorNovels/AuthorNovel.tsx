@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { NovelCard } from '../../interfaces/NovelInterfaces';
 import { Author } from '../../interfaces/AuthorInterfaces';
 
-import axios from 'axios';
+import { authorService } from '../../services/authorService';
 
 
 export default function AuthorNovel() {
@@ -19,22 +19,15 @@ export default function AuthorNovel() {
     const [author, setAuthor] = useState<Author>({} as Author);
     const params = useParams();
     const username = params.username;
-    
-    const API_URL = process.env.REACT_APP_API;
-    
+        
     useEffect(() => {
 
         const token = localStorage.getItem('token');
 
-        // if(!token) {
-        //     navigate('/login');
-        //     return;
-        // } 
-
         const fetchNovelCardByUsername = async () => {
 
             try {
-                const response = await axios.get(`${API_URL}/novels/novelCards/author/${username}`);
+                const response = await authorService.fetchNovelCardByUsername(username || '');
                 setCards(response.data);
             } catch(error) {
                 console.log("Error ao buscar Card por Username: ", error);
@@ -45,11 +38,7 @@ export default function AuthorNovel() {
         const fetchAuthorInfo = async () => {
 
             try {
-                const response = await axios.get(`${API_URL}/authors/username/${username}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                const response = await authorService.fetchAuthorInfoByUsername(username || '');
                 setAuthor(response.data);
             } catch(error) {
                 console.log(error);

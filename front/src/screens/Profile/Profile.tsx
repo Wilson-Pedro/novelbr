@@ -10,9 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { NovelCard } from '../../interfaces/NovelInterfaces';
 import { Author } from '../../interfaces/AuthorInterfaces';
 
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API;
+import { authorService } from '../../services/authorService';
 
 export default function Profile() {
 
@@ -35,7 +33,7 @@ export default function Profile() {
         const fetchNovelCardByUsername = async () => {
 
             try {
-                const response = await axios.get(`${API_URL}/novels/novelCards/author/${username}`);
+                const response = await authorService.fetchNovelCardByUsername(username || '');
                 setCards(response.data);
             } catch(error) {
                 console.log("Error ao buscar Card por Username: ", error);
@@ -46,11 +44,7 @@ export default function Profile() {
         const fetchAuthorInfo = async () => {
 
             try {
-                const response = await axios.get(`${API_URL}/authors/username/${username}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                const response = await authorService.fetchAuthorInfoByUsername(username || '');
                 setAuthor(response.data);
             } catch(error) {
                 console.log(error);

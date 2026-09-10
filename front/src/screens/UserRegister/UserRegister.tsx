@@ -4,8 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
-const API_URL = process.env.REACT_APP_API;
+import { authorService } from '../../services/authorService';
 
 export default function UserRegister() {
 
@@ -20,7 +19,7 @@ export default function UserRegister() {
         e.preventDefault();
 
         try {
-            await axios.post(`${API_URL}/authors/`, {
+            await authorService.registerAuthor({
                 name,
                 username,
                 email,

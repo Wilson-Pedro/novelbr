@@ -10,6 +10,7 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import  { useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
+import { authorService } from '../../services/authorService';
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -24,19 +25,15 @@ const Navbar: React.FC = () => {
         const userId = parseInt(localStorage.getItem('userId') || '');
 
         if(token) {
-            const fetchGenders = async () => {
+            const fetchAuthorInfo = async () => {
                 try {
-                    const response = await axios.get(`${API_URL}/authors/${userId}`, {
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        }
-                    })
+                    const response = await authorService.fetchAuthorInfoById(userId);
                     setUsername(response.data.username);
                 } catch(error) {
                     console.log("Error ao dados do author por id ", error)
                 }
             }
-            fetchGenders();
+            fetchAuthorInfo();
         }
     }, [navigate]); 
     
