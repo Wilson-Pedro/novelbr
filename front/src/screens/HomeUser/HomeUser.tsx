@@ -5,13 +5,10 @@ import Card from '../../component/cards/Card';
 import styles from './../Home/Home.module.css';
 import Table from '../../layout/table/Table';
 
-import axios from 'axios';
-
 import { NovelCard } from '../../interfaces/NovelInterfaces';
 
 import { Navigate } from 'react-router-dom';
-
-const API_URL = process.env.REACT_APP_API;
+import { novelService } from '../../services/novelService';
 
 export default function HomeUser() {
 
@@ -20,7 +17,7 @@ export default function HomeUser() {
     useEffect(() => {
         const fetchNovelCards = async () => {
             try {
-                const response = await axios.get(`${API_URL}/novels/novelCards`);
+                const response = await novelService.fetchNovelCards();
                 setNovelCards(response.data);
             } catch(error) {
                 console.log(error)

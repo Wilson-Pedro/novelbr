@@ -12,6 +12,7 @@ import axios from 'axios';
 import { GendersBackend } from '../../interfaces/NovelInterfaces';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { novelService } from '../../services/novelService';
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -70,17 +71,12 @@ export default function NovelRegister() {
 
         const token = localStorage.getItem('token');
         try {
-            await axios.post(`${API_URL}/novels/`, {
+            await novelService.registerNovel({
                 novelName,
                 authorId,
                 genders,
                 synopsis,
                 imageUri
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
             })
 
             await uploadImage();

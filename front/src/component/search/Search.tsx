@@ -3,12 +3,9 @@ import styles from './Search.module.css';
 import { FaSearch as FaSearchIcon } from "react-icons/fa";
 import { useNavigate } from 'react-router-dom';
 
-import axios from 'axios';
-
 import  { NovelsFinded } from '../../interfaces/NovelInterfaces';
 import { Page } from '../../interfaces/ChapterInterfaces';
-
-const API_URL = process.env.REACT_APP_API;
+import { novelService } from '../../services/novelService';
 
 const SearchIcon = FaSearchIcon as React.FC<{ className?: string }>;
 
@@ -29,7 +26,7 @@ const Search: React.FC = () => {
             }
 
             try {
-                const response = await axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`);
+                const response = await novelService.searchNovel(novelName, page, size);
                 const pageData: Page<NovelsFinded> = response.data;
                 setNovelsFinded(pageData.content);
             } catch(error) {

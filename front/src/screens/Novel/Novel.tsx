@@ -21,6 +21,7 @@ import Pagination from '../../component/Pagination/Pagination';
 
 import { chapterService } from '../../services/chapterService';
 import { commentService } from '../../services/commentService';
+import { novelService } from '../../services/novelService';
 
 const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
@@ -63,15 +64,10 @@ const Novel: React.FC = () => {
 
     const changeNovelStatusSubmit = async () => {
         try {
-            await axios.patch(`${API_URL}/novels/changeNovelStatus`, {
-                novelId,
-                novelStatusId,
-            },
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+            await novelService.changeNovelStatus({
+                novelId, 
+                novelStatusId
+            })
             handleCloseConfig();
         } catch (error) {
             console.log(error)
@@ -80,17 +76,12 @@ const Novel: React.FC = () => {
 
     const chageNovelImageUri = async (e: any) => {
         e.preventDefault();
-        const formaData = new FormData();
-        formaData.append("file", selectFile);
-        formaData.append("novelId", novelId.toString());
-        formaData.append("imageUri", imageUri);
+        const formData = new FormData();
+        formData.append("file", selectFile);
+        formData.append("novelId", novelId.toString());
+        formData.append("imageUri", imageUri);
         try {
-            await axios.patch(`${API_URL}/novels/changeNovelImageUri`, formaData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+            await novelService.chageNovelImageUri(formData)
             goToNovel();
             handleCloseImage();
         } catch (error) {
@@ -107,7 +98,7 @@ const Novel: React.FC = () => {
 
         const fecthNovelName = async () => {
             try {
-                const response = await axios.get(`${API_URL}/novels/${novelName}`);
+                const response = await novelService.fetchNovelByNovelName(novelName);
                 setNovelId(response.data.id);
             } catch (error) {
                 console.log(error)
@@ -130,7 +121,7 @@ const Novel: React.FC = () => {
             try {
                 const [infoRes, gendersRes, commentsRes, chapterPagesRes] =
                     await Promise.allSettled([
-                        axios.get(`${API_URL}/novels/novelCards/${novelId}`),
+                        novelService.fetchNovelInfoByNovelId(novelId),
                         axios.get(`${API_URL}/genres/novel/${novelId}`),
                         commentService.fetchCommentsByNovel(novelId),
                         chapterService.fetchChapterTitles(novelId, page)

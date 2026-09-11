@@ -9,9 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { NovelCard } from '../../interfaces/NovelInterfaces';
 
-import axios from 'axios';
-
-const API_URL = process.env.REACT_APP_API;
+import { novelService } from '../../services/novelService';
 
 export default function Home() {
 
@@ -22,7 +20,7 @@ export default function Home() {
     useEffect(() => {
         const fetchNovelCards = async () => {
             try {
-                const response = await axios.get(`${API_URL}/novels/novelCards`);
+                const response = await novelService.fetchNovelCards();
                 setNovelCards(response.data);
             } catch(error) {
                 console.log(error)

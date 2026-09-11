@@ -17,6 +17,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import axios from 'axios';
 
 import Pagination from '../../component/Pagination/Pagination';
+import { novelService } from '../../services/novelService';
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -54,7 +55,7 @@ const Novels: React.FC = () => {
         const novelCardsPages = async () => {
 
             try {
-                const response = await axios.get(`${API_URL}/novels/pages?page=${page}&size=${size}`);
+                const response = await novelService.fetchNovelsPages(page, size);
                 const pageData: Page<NovelCard> = response.data;
                 setCardsPages(pageData.content);
                 setTolalPages(pageData.totalPages);
@@ -72,7 +73,7 @@ const Novels: React.FC = () => {
         const findNovelCards = async () => {
 
             try {
-                const response = await axios.get(`${API_URL}/novels/search/${novelName}?page=${page}&size=${size}`);
+                const response = await novelService.searchNovel(novelName, page, size)
                 const pageData: Page<NovelCard> = response.data;
                 setCards(pageData.content);
                 setTolalPages(pageData.totalPages);
@@ -83,16 +84,14 @@ const Novels: React.FC = () => {
         }
 
         findNovelCards();
-    }, [novelName, page]);
+    }, [novelName, page, size]);
 
     useEffect(() => {
 
         const novelByGenders = async () => {
 
             try {
-                const response = await axios.get(
-                    `${API_URL}/novels/genders?genders=${genders.join(",")}&page=${page}&size=${size}`
-                );
+                const response = await novelService.fetchNovelsByGenders(genders, page, size);
                 const pageData: Page<NovelCard> = response.data;
                 setCardsPages(pageData.content);
                 setTolalPages(pageData.totalPages);
@@ -107,7 +106,7 @@ const Novels: React.FC = () => {
     useEffect(() => {
 
         const findNovelCardsByNovelName = setTimeout(() => {
-            axios.get(`${API_URL}/novels/search/${novelNameSearch}?page=${page}&size=${size}`)
+            novelService.searchNovel(novelNameSearch, page, size)
                 .then(response => {
                     const pageData: Page<NovelCard> = response.data;
                     setCards(pageData.content);
