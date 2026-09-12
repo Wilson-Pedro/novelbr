@@ -14,12 +14,9 @@ import { GendersBackend } from '../../interfaces/NovelInterfaces';
 
 import { Tabs, Tab } from 'react-bootstrap';
 
-import axios from 'axios';
-
 import Pagination from '../../component/Pagination/Pagination';
 import { novelService } from '../../services/novelService';
-
-const API_URL = process.env.REACT_APP_API;
+import { genreService } from '../../services/genreService';
 
 const Novels: React.FC = () => {
 
@@ -40,7 +37,7 @@ const Novels: React.FC = () => {
     useEffect(() => {
         const fetchGenders = async () => {
             try {
-                const response = await axios.get(`${API_URL}/genres`)
+                const response = await genreService.searchGenres();
                 setGendersBackend(response.data);
             } catch (error) {
                 console.log("Error ao buscar gêneros: ", error)

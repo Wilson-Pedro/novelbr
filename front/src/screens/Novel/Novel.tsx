@@ -4,7 +4,6 @@ import Navbar from '../../layout/navbar/Navbar';
 import Footer from '../../layout/footer/Rodape';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import imagePath from '../../assets/Jornada para o Além.jpg';
-import axios from 'axios';
 import Comments from '../../component/Comments/Comments';
 import { Tabs, Tab } from 'react-bootstrap';
 
@@ -22,8 +21,8 @@ import Pagination from '../../component/Pagination/Pagination';
 import { chapterService } from '../../services/chapterService';
 import { commentService } from '../../services/commentService';
 import { novelService } from '../../services/novelService';
+import { genreService } from '../../services/genreService';
 
-const API_URL = process.env.REACT_APP_API;
 const IMG_PATH = process.env.REACT_APP_IMG_PATH;
 
 interface Genre {
@@ -122,7 +121,7 @@ const Novel: React.FC = () => {
                 const [infoRes, gendersRes, commentsRes, chapterPagesRes] =
                     await Promise.allSettled([
                         novelService.fetchNovelInfoByNovelId(novelId),
-                        axios.get(`${API_URL}/genres/novel/${novelId}`),
+                        genreService.searchGendersByNovelId(novelId),
                         commentService.fetchCommentsByNovel(novelId),
                         chapterService.fetchChapterTitles(novelId, page)
                     ]);

@@ -13,6 +13,8 @@ import { GendersBackend } from '../../interfaces/NovelInterfaces';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { novelService } from '../../services/novelService';
+import { genreService } from '../../services/genreService';
+import { uploadService } from '../../services/uploadService';
 
 const API_URL = process.env.REACT_APP_API;
 
@@ -49,11 +51,7 @@ export default function NovelRegister() {
 
         const fetchGenders = async () => {
             try {
-                const response = await axios.get(`${API_URL}/genres`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                })
+                const response = await genreService.searchGenres()
                 setGendersBackend(response.data);
             } catch(error) {
                 console.log("Error ao buscar gêneros: ", error)
@@ -95,12 +93,7 @@ export default function NovelRegister() {
         const formData = new FormData();
         formData.append("file", selectFile);
         try {
-            await axios.post(`${API_URL}/upload/image`, formData, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+            await uploadService.uploadImage(formData);
         } catch(error) {
             console.log("Error ao fazer upload da imagem: ", error);
         }
