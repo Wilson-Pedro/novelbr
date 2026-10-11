@@ -14,44 +14,44 @@ import java.net.URI;
 @Configuration
 public class R2Config {
 
-    @Value("${cloudflare.r2.account-id}")
-    private String accountId;
-
-    @Value("${cloudflare.r2.access-key}")
-    private String accessKey;
-
-    @Value("${cloudflare.r2.secret-key}")
-    private String secretKey;
-
-    @Bean
-    public S3Client s3Client() {
-
-        AwsBasicCredentials credentials =
-                AwsBasicCredentials.create(
-                        accessKey,
-                        secretKey
-                );
-
-        S3Configuration configuration =
-                S3Configuration.builder()
-                        .pathStyleAccessEnabled(true)
-                        .chunkedEncodingEnabled(false)
-                        .build();
-
-
-        return S3Client.builder()
-                .endpointOverride(
-                        URI.create(
-                                "https://" +
-                                accountId +
-                                ".r2.cloudflarestorage.com"
-                        )
-                )
-                .credentialsProvider(
-                        StaticCredentialsProvider.create(credentials)
-                )
-                .region(Region.of("auto"))
-                .serviceConfiguration(configuration)
-                .build();
-    }
+//    @Value("${cloudflare.r2.account-id}")
+//    private String accountId;
+//
+//    @Value("${cloudflare.r2.access-key}")
+//    private String accessKey;
+//
+//    @Value("${cloudflare.r2.secret-key}")
+//    private String secretKey;
+//
+//    @Bean
+//    public S3Client s3Client() {
+//
+//        AwsBasicCredentials credentials =
+//                AwsBasicCredentials.create(
+//                        accessKey,
+//                        secretKey
+//                );
+//
+//        S3Configuration configuration =
+//                S3Configuration.builder()
+//                        .pathStyleAccessEnabled(true)
+//                        .chunkedEncodingEnabled(false)
+//                        .build();
+//
+//
+//        return S3Client.builder()
+//                .endpointOverride(
+//                        URI.create(
+//                                "https://" +
+//                                accountId +
+//                                ".r2.cloudflarestorage.com"
+//                        )
+//                )
+//                .credentialsProvider(
+//                        StaticCredentialsProvider.create(credentials)
+//                )
+//                .region(Region.of("auto"))
+//                .serviceConfiguration(configuration)
+//                .build();
+//    }
 }

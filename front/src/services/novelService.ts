@@ -27,7 +27,13 @@ export const novelService = {
     
     async searchNovel(novelName:string, page:number, size:number) {
 
-        const response = await api.get(`/novels/search/${novelName}?page=${page}&size=${size}`);
+        const response = await api.get(`/novels/search/novelName/${novelName}?page=${page}&size=${size}`);
+        return response;
+    },
+    
+    async searchAllNovel(page:number, size:number) {
+
+        const response = await api.get(`/novels/search/all?page=${page}&size=${size}`);
         return response;
     },
 

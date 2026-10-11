@@ -281,7 +281,7 @@ class NovelControllerTest {
 	void searchNovel() throws Exception {
 		String name = "Jornada";
 
-		mockMvc.perform(get(URI + "/search/" + name)
+		mockMvc.perform(get(URI + "/search/novelName/" + name)
 				.header("Authorization", "Bearer " + TOKEN))
 				.andExpect(status().isOk())
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))

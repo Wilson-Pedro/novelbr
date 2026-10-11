@@ -5,7 +5,6 @@ import Card from '../../component/cards/Card';
 import Footer from '../../layout/footer/Rodape';
 import { useParams } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import { NovelCard } from '../../interfaces/NovelInterfaces';
 import { Page } from '../../interfaces/ChapterInterfaces';
@@ -18,17 +17,20 @@ import Pagination from '../../component/Pagination/Pagination';
 import { novelService } from '../../services/novelService';
 import { genreService } from '../../services/genreService';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const Novels: React.FC = () => {
 
     const params = useParams();
 
     const novelName = params.novelName || '';
 
-    const [novelNameSearch, setNovelNameSearch] = useState<string>('');
+    const size = 18;
+
+    const [novelNameSearch, setNovelNameSearch] = useState<string>(novelName);
     const [page, setPage] = useState<number>(0);
     const [pageSeacrh, setPageSeacrh] = useState<number>(0);
     const [totalPages, setTolalPages] = useState<number>(0);
-    const size = 18;
     const [cards, setCards] = useState<NovelCard[]>([]);
     const [cardsPages, setCardsPages] = useState<NovelCard[]>([]);
     const [gendersBackend, setGendersBackend] = useState<GendersBackend[]>([]);
@@ -69,19 +71,40 @@ const Novels: React.FC = () => {
     useEffect(() => {
         const findNovelCards = async () => {
 
+
             try {
-                const response = await novelService.searchNovel(novelName, page, size)
+                const response = await novelService.searchNovel(novelNameSearch, page, size)
                 const pageData: Page<NovelCard> = response.data;
                 setCards(pageData.content);
                 setTolalPages(pageData.totalPages);
+
             } catch (error) {
                 console.log("Error ao buscar Card por Username");
             }
 
         }
+        const findAllNovelCards = async () => {
 
-        findNovelCards();
-    }, [novelName, page, size]);
+
+            try {
+
+                const response = await novelService.searchAllNovel(page, size)
+                const pageData: Page<NovelCard> = response.data;
+                setCards(pageData.content);
+                setTolalPages(pageData.totalPages);
+                
+            } catch (error) {
+                console.log("Error ao buscar todos os Cards");
+            }
+
+        }
+
+        if(novelNameSearch) {
+            findNovelCards();
+        } else {
+            findAllNovelCards();
+        }
+    }, [novelNameSearch, page, size]);
 
     useEffect(() => {
 
@@ -102,6 +125,15 @@ const Novels: React.FC = () => {
 
     useEffect(() => {
 
+        if(novelNameSearch) {
+            novelsByName(novelNameSearch, page, size);
+        } else {
+            allNovels(page, size)
+        }
+    }, [novelNameSearch, page]);
+
+    function novelsByName(novelNameSearch: string, page:number, size:number) {
+        
         const findNovelCardsByNovelName = setTimeout(() => {
             novelService.searchNovel(novelNameSearch, page, size)
                 .then(response => {
@@ -111,7 +143,20 @@ const Novels: React.FC = () => {
 
         }, 500);
         return () => clearTimeout(findNovelCardsByNovelName);
-    }, [novelNameSearch, page]);
+    }
+    
+    function allNovels(page:number, size:number) {
+        
+        const findNovelCardsByNovelName = setTimeout(() => {
+            novelService.searchAllNovel(page, size)
+                .then(response => {
+                    const pageData: Page<NovelCard> = response.data;
+                    setCards(pageData.content);
+                }).catch(error => console.log("Error ao buscar Card por Username: ", error));
+
+        }, 500);
+        return () => clearTimeout(findNovelCardsByNovelName);
+    }
 
     function pageSearchValid(pag: number, max: number) {
         if (pag >= 0 && pag <= max) {

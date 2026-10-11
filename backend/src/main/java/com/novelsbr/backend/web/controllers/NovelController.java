@@ -146,15 +146,25 @@ public class NovelController implements NovelAPI {
 			@ApiResponse(responseCode = "400", description = "Error ao buscar novel cards por nome"),
 			@ApiResponse(responseCode = "500", description = "Error ao buscar novel cards por nome"),
 	})
-	@GetMapping("/search/{novelName}")
+
+    @GetMapping("/search/all")
+    public ResponseEntity<PageResponseDTO<CardNovelDTO>> searchNovel(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+        Page<CardNovelDTO> novelsDTO = novelService.findAll(page, size)
+                .map(CardNovelDTO::new);
+        return ResponseEntity.ok(new PageResponseDTO<>(novelsDTO));
+    }
+
+	@GetMapping("/search/novelName/{novelName}")
 	public ResponseEntity<PageResponseDTO<CardNovelDTO>> searchNovel(
 			@PathVariable String novelName,
 			@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size) {
-		
-		Page<CardNovelDTO> novlesDTO = novelService.searchNovel(novelName, page, size)
+
+		Page<CardNovelDTO> novelsDTO = novelService.searchNovel(novelName, page, size)
 				.map(CardNovelDTO::new);
-		return ResponseEntity.ok(new PageResponseDTO<>(novlesDTO));
+		return ResponseEntity.ok(new PageResponseDTO<>(novelsDTO));
 	}
 
 	@Operation(

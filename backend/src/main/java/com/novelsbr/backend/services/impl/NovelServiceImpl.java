@@ -88,6 +88,9 @@ public class NovelServiceImpl implements NovelService {
 	@Override
 	@Transactional(readOnly = true)
 	public Page<Novel> searchNovel(String novelName, int page, int size) {
+        if(novelName.isEmpty()) {
+            return findAll(page, size);
+        }
 		Pageable pageable = PageRequest.of(page, size, Sort.by("novelName").ascending());
 		return novelRepository.findByNovelNameContainingIgnoreCase(novelName, pageable);
 	}
